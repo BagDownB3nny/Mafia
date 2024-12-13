@@ -21,16 +21,19 @@ public class Player : NetworkBehaviour
         PlayerManager.localPlayer = this;
         Debug.Log("Local player set");
 
-        if (SteamManager.Initialized)
-        {
-            steamUsername = SteamFriends.GetPersonaName();
-            CmdUpdateSteamUsername(steamUsername);
-        }
-        else
-        {
-            steamUsername = "Player " + Random.Range(0, 1000);
-            CmdUpdateSteamUsername(steamUsername);
-        }
+        // TODO - Uncomment this when Steamworks.NET is implemented
+        // if (SteamManager.Initialized)
+        // {
+        //     steamUsername = SteamFriends.GetPersonaName();
+        //     CmdUpdateSteamUsername(steamUsername);
+        // }
+        // else
+        // {
+        //     steamUsername = "Player " + Random.Range(0, 1000);
+        //     CmdUpdateSteamUsername(steamUsername);
+        // }
+        steamUsername = "Player " + Random.Range(0, 1000);
+        CmdUpdateSteamUsername(steamUsername);
         playerUIPrefab.text = steamUsername;
     }
 
@@ -44,7 +47,10 @@ public class Player : NetworkBehaviour
     private void CmdUpdateSteamUsername(string newUsername)
     {
         steamUsername = newUsername;
-        PlayerManager.instance.AddPlayer(steamUsername, netId);
+        if (PlayerManager.instance)
+        {
+            PlayerManager.instance.AddPlayer(steamUsername, netId);
+        }
     }
 
     [Client]

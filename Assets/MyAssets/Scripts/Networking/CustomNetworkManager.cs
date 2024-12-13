@@ -15,7 +15,7 @@ public class CustomNetworkManager : NetworkManager
     public void JoinLobby()
     {
         // Start joining a new lobby
-        NetworkManager.singleton.StartClient();
+        singleton.StartClient();
     }
 
     public override void OnStopClient()

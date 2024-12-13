@@ -30,25 +30,13 @@ public class VotingSlip : MonoBehaviour
 
     private void GenerateVotingSlip()
     {
-        playerNames = GetPlayerNames();
+        playerNames = PlayerManager.instance.GetAllPlayerNames();
         for (int i = 0; i < playerNames.Count; i++)
         {
             GameObject votingRow = Instantiate(votingPlayerRow, new Vector3(0, 0, 0), Quaternion.identity);
             votingRow.transform.SetParent(VotingTogglesContainer.transform);
             votingRow.GetComponentInChildren<Text>().text = playerNames[i];
         }
-    }
-
-    private List<String> GetPlayerNames()
-    {
-        playerNames = new List<String>();
-        List<Player> players = PlayerManager.instance.GetAllPlayers();
-        Debug.Log(players);
-        foreach (Player player in players)
-        {
-            playerNames.Add(player.steamUsername);
-        }
-        return playerNames;
     }
 
     public void SubmitVote()

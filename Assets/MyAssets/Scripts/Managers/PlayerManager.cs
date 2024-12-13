@@ -19,17 +19,17 @@ public class PlayerManager : NetworkBehaviour
 
     public static Player localPlayer;
 
-    [SyncVar(hook = nameof(OnPlayerNetIdsChanged))]
     public readonly SyncDictionary<string, uint> playerNetIds = new SyncDictionary<string, uint>();
 
-    public Dictionary<string, uint> playerNetIdsView = new Dictionary<string, uint>();
+    [SyncVar]
+    public int playerCount;
+
 
     public void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -43,18 +43,13 @@ public class PlayerManager : NetworkBehaviour
     public void AddPlayer(string username, uint playerNetId)
     {
         playerNetIds[username] = playerNetId;
-        playerNetIdsView = playerNetIds.ToDictionary(x => x.Key, x => x.Value);
+        playerCount = playerNetIds.Count;
         if (playerNetIds.Count == NetworkServer.connections.Count)
         {
             OnAllPlayersLoaded();
         }
     }
 
-    private void OnPlayerNetIdsChanged(SyncDictionary<string, uint>.Operation op, string key, uint value)
-    {
-        playerNetIdsView = playerNetIds.ToDictionary(x => x.Key, x => x.Value);
-        Debug.Log("Client updated");
-    }
 
     public void HandleNetworkStop()
     {
@@ -120,5 +115,20 @@ public class PlayerManager : NetworkBehaviour
     public List<Player> GetAllPlayers()
     {
         return playerNetIds.Select(x => NetworkServer.spawned[x.Value].GetComponent<Player>()).ToList();
+    }
+
+    public List<string> GetAllPlayerNames()
+    {
+        return playerNetIds.Keys.ToList();
+    }
+
+    public Player GetPlayerByNetId(uint netId)
+    {
+        return NetworkServer.spawned[netId].GetComponent<Player>();
+    }
+
+    public Player GetPlayerByName(string name)
+    {
+        return NetworkServer.spawned[playerNetIds[name]].GetComponent<Player>();
     }
 }

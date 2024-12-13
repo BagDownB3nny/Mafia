@@ -356,9 +356,33 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
+      propertyPath: transport
+      value: 
+      objectReference: {fileID: 614804565}
+    - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
+      propertyPath: playerSpawnMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
       propertyPath: 'spawnPrefabs.Array.data[0]'
       value: 
       objectReference: {fileID: 6108184521754498726, guid: 28cc9cc53015a4337bb827bda77c9cc5, type: 3}
+    - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
+      propertyPath: 'spawnPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7671752895927766357, guid: 19c1964cd796d43e1aabdc3f83bcf721, type: 3}
+    - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
+      propertyPath: 'spawnPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 388301916607145715, guid: 748c4bd52eb5b423a895c21653471db4, type: 3}
+    - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
+      propertyPath: 'spawnPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2765502750121929226, guid: 32255df267e1f4e9189ed09beaca11a0, type: 3}
     - target: {fileID: 3775347956757625069, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
       propertyPath: m_Name
       value: Network Manager
@@ -666,6 +690,17 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!114 &614804565 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1267450619984483737, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
+  m_PrefabInstance: {fileID: 315342638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &635635278
 GameObject:
   m_ObjectHideFlags: 0
