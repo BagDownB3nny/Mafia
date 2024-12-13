@@ -34,12 +34,6 @@ public class Player : NetworkBehaviour
         playerUIPrefab.text = steamUsername;
     }
 
-    public override void OnStartServer()
-    {
-        base.OnStartServer();
-        PlayerManager.instance.AddPlayer(steamUsername, netId);
-    }
-
     [Server]
     public void SetRole(Roles newRole)
     {
@@ -50,6 +44,7 @@ public class Player : NetworkBehaviour
     private void CmdUpdateSteamUsername(string newUsername)
     {
         steamUsername = newUsername;
+        PlayerManager.instance.AddPlayer(steamUsername, netId);
     }
 
     [Client]
