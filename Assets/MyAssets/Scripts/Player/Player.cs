@@ -13,6 +13,14 @@ public class Player : NetworkBehaviour
     public string steamUsername;
     [SerializeField] private TMP_Text playerUIPrefab;
 
+    private Vector3 spawnPoint;
+
+
+    public void Awake()
+    {
+        spawnPoint = transform.position;
+    }
+
     public override void OnStartLocalPlayer()
     {
         Camera.main.transform.GetComponent<MoveCamera>().SetCameraPosition(this.transform);
@@ -65,5 +73,11 @@ public class Player : NetworkBehaviour
         {
             PlayerUIManager.instance.SetRoleText(newRole);
         }
+    }
+
+    public void TeleportToSpawn()
+    {
+        Debug.Log($"Teleporting {netId} to spawn");
+        transform.position = NetworkManager.singleton.GetStartPosition().position;
     }
 }

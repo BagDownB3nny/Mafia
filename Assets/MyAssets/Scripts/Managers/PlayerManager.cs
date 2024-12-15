@@ -114,7 +114,12 @@ public class PlayerManager : NetworkBehaviour
 
     public List<Player> GetAllPlayers()
     {
-        return playerNetIds.Select(x => NetworkServer.spawned[x.Value].GetComponent<Player>()).ToList();
+        List<Player> players = new List<Player>();
+        foreach (uint netId in playerNetIds.Values)
+        {
+            players.Add(NetworkServer.spawned[netId].GetComponent<Player>());
+        }
+        return players;
     }
 
     public List<string> GetAllPlayerNames()
@@ -130,5 +135,13 @@ public class PlayerManager : NetworkBehaviour
     public Player GetPlayerByName(string name)
     {
         return NetworkServer.spawned[playerNetIds[name]].GetComponent<Player>();
+    }
+
+    public void TeleportAllPlayersBackToSpawn()
+    {
+        foreach (Player player in GetAllPlayers())
+        {
+            player.TeleportToSpawn();
+        }
     }
 }
