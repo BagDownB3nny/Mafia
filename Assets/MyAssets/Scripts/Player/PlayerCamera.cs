@@ -28,7 +28,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleLookAtInteractable()
     {
-        GameObject lookingAt = GetLookingAt();
+        GameObject lookingAt = GetLookingAt(5.0f);
         if (lookingAt == null)
         {
             if (lastInteractable != null)
@@ -68,10 +68,9 @@ public class PlayerCamera : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 
-    private GameObject GetLookingAt()
+    public GameObject GetLookingAt(float maxDistance)
     {
         RaycastHit hit;
-        float maxDistance = 5.0f;
         if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance))
         {
             return hit.collider.gameObject;

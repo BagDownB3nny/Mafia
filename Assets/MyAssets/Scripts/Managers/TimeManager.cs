@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -60,11 +61,25 @@ public class TimeManager : MonoBehaviour
         clock.OnTimerEnd += OnNightEnd;
         // Teleport players back to home
         PlayerManager.instance.TeleportAllPlayersBackToSpawn();
+
+        // TODO: Only give guns to mafia
+        List<Player> players = PlayerManager.instance.GetAllPlayers();
+        foreach (Player player in players)
+        {
+            player.EquipGun();
+        }
     }
 
     private void OnNightEnd()
     {
         Debug.Log("Night ended");
+
+
+        List<Player> players = PlayerManager.instance.GetAllPlayers();
+        foreach (Player player in players)
+        {
+            player.UnequipGun();
+        }
         // Bring killers back to house
         // Open doors
         // Remove moon

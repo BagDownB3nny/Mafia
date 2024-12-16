@@ -13,6 +13,16 @@ public class Player : NetworkBehaviour
     public string steamUsername;
     [SerializeField] private TMP_Text playerUIPrefab;
 
+    [SyncVar(hook = nameof(OnGunStatusChanged))]
+    public bool hasGun;
+
+    // When a player equips a gun, the client will see a different gun compared to the other players 
+    // Imagine a game like valorant, where the player is able to see his own gun differently from how he sees 
+    // the guns of other players.
+    // Allows for a better view of the gun for both player and other players
+    [SerializeField] private GameObject localPlayerGun;
+    [SerializeField] private GameObject remotePlayerGun;
+
     private Vector3 spawnPoint;
 
 
@@ -28,6 +38,8 @@ public class Player : NetworkBehaviour
         Camera.main.transform.localPosition = new Vector3(0, 0, 0);
         PlayerManager.localPlayer = this;
         Debug.Log("Local player set");
+
+        localPlayerGun = Camera.main.transform.Find("LocalPlayerGun").gameObject;
 
         // TODO - Uncomment this when Steamworks.NET is implemented
         // if (SteamManager.Initialized)
@@ -79,5 +91,30 @@ public class Player : NetworkBehaviour
     {
         Debug.Log($"Teleporting {netId} to spawn");
         transform.position = NetworkManager.singleton.GetStartPosition().position;
+    }
+
+    [Server]
+
+    public void EquipGun()
+    {
+        hasGun = true;
+    }
+
+    [Server]
+    public void UnequipGun()
+    {
+        hasGun = false;
+    }
+
+    public void OnGunStatusChanged(bool oldStatus, bool newStatus)
+    {
+        if (isLocalPlayer)
+        {
+            localPlayerGun.SetActive(newStatus);
+        }
+        else
+        {
+            remotePlayerGun.SetActive(newStatus);
+        }
     }
 }
