@@ -6,3 +6,4 @@ Setup instructions
 4. Download QuickOutline ([Download link](url): Import package into project)
 5. Download Village Buildings ([Download link](url): Import package into project)
 6. Download TextMeshPro (Popup to auto-download should show upon first run of the game)
+7. Download Pistol ([Link](url))
