@@ -4,17 +4,25 @@ using UnityEngine;
 public class PlayerActions : NetworkBehaviour
 {
     private PlayerCamera playerCamera;
+    private Player player;
 
     public override void OnStartLocalPlayer()
     {
         playerCamera = Camera.main.GetComponent<PlayerCamera>();
+        player = GetComponent<Player>();
     }
 
     void Update()
     {
         if (!isLocalPlayer) return;
 
-        if (EPressed())
+        HandleInteractions();
+        HandleShooting();
+    }
+
+    private void HandleInteractions()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Interactable interactable = playerCamera.GetInteratable();
             if (interactable != null)
@@ -24,8 +32,26 @@ public class PlayerActions : NetworkBehaviour
         }
     }
 
-    private bool EPressed()
+    private void HandleShooting()
     {
-        return Input.GetKeyDown(KeyCode.E);
+        Debug.Log("Runnng");
+        Debug.Log($"Can shoot: {player.isAbleToShoot()}");
+        Debug.Log($"Is shooting: {Input.GetMouseButtonDown(0)}");
+        if (Input.GetMouseButtonDown(0) && player.isAbleToShoot())
+        {
+            Debug.Log("Shots fired!");
+            CmdShoot();
+        }
+    }
+
+    [Command]
+    private void CmdShoot()
+    {
+        GameObject lookingAt = playerCamera.GetLookingAt(40.0f);
+        if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
+        {
+            Shootable shootable = lookingAt.GetComponent<Shootable>();
+            shootable.OnShot();
+        }
     }
 }

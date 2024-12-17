@@ -3,8 +3,9 @@ using UnityEngine;
 
 public abstract class Shootable : NetworkBehaviour
 {
-    [Command]
-    public virtual void CmdOnShot()
+
+    [Server]
+    public virtual void OnShot()
     {
         Debug.Log($"{name} was shot!");
     }

@@ -17,7 +17,7 @@ public class PlayerManager : NetworkBehaviour
     // For example, in a 6 player game, there could be 1 werewolf, 1 seer, 1 medium, and 3 villagers
     public Roles[] playerRoles;
 
-    public static Player localPlayer;
+    public Player localPlayer;
 
     public readonly SyncDictionary<string, uint> playerNetIds = new SyncDictionary<string, uint>();
 

@@ -20,6 +20,16 @@ public class PlayerCamera : MonoBehaviour
         return lastInteractable;
     }
 
+    public Shootable GetShootable()
+    {
+        GameObject lookingAt = GetLookingAt(40.0f);
+        if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
+        {
+            return lookingAt.GetComponent<Shootable>();
+        }
+        return null;
+    }
+
     void Update()
     {
         HandleMoveCamera();
@@ -57,8 +67,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleMoveCamera()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * 100.0f;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * 100.0f;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * 300.0f;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * 300.0f;
 
         yRotation += mouseX;
         xRotation -= mouseY;
