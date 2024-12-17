@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class HouseSpawner : NetworkBehaviour
 
     [SerializeField] private GameObject housePrefab;
     public static HouseSpawner instance;
+
+    private List<House> houses = new List<House>();
 
     public void Awake()
     {
@@ -32,6 +35,14 @@ public class HouseSpawner : NetworkBehaviour
             house.transform.SetParent(transform);
 
             NetworkServer.Spawn(house);
+        }
+    }
+
+    public void SetActiveAllDoors()
+    {
+        foreach (House house in houses)
+        {
+            house.SetDoorsActive();
         }
     }
 }

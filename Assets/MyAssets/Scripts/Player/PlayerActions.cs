@@ -31,7 +31,6 @@ public class PlayerActions : NetworkBehaviour
             }
         }
     }
-
     private void HandleShooting()
     {
         Debug.Log("Runnng");
