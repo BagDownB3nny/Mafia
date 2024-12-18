@@ -167,7 +167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4739805925826268792
 Transform:
   m_ObjectHideFlags: 0
@@ -389,6 +389,10 @@ PrefabInstance:
     - target: {fileID: 7148590724011169151, guid: 2bbd0497ba6164865b1d43659bbd05e2, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148590724011169151, guid: 2bbd0497ba6164865b1d43659bbd05e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

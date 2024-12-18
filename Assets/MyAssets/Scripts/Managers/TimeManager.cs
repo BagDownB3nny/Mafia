@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Mirror;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : NetworkBehaviour
 {
 
     [Header("Duration")]
@@ -55,6 +56,7 @@ public class TimeManager : MonoBehaviour
     {
         Debug.Log("Night started");
         // Close doors
+        HouseManager.instance.SetActiveAllDoors();
         // Set moon
         // Set clock
         clock = new Timer(nightDuration);
@@ -70,6 +72,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    [Server]
     private void OnNightEnd()
     {
         Debug.Log("Night ended");
@@ -82,6 +85,7 @@ public class TimeManager : MonoBehaviour
         }
         // Bring killers back to house
         // Open doors
+        HouseManager.instance.SetInactiveAllDoors();
         // Remove moon
         OnDayStart();
     }

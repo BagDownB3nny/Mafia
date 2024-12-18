@@ -35,7 +35,7 @@ public class House : NetworkBehaviour
     {
         foreach (Door door in doors)
         {
-            if (door.gameObject != null)
+            if (door != null)
             {
                 door.gameObject.SetActive(true);
             }
@@ -46,7 +46,7 @@ public class House : NetworkBehaviour
     {
         foreach (Door door in doors)
         {
-            if (door.gameObject != null)
+            if (door != null)
             {
                 door.gameObject.SetActive(false);
             }

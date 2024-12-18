@@ -45,7 +45,7 @@ public class HouseManager : NetworkBehaviour
                 NetworkServer.Spawn(door.gameObject);
             }
 
-            // houses.Add(house.GetComponent<House>());
+            houses.Add(house.GetComponent<House>());
         }
     }
 
@@ -55,6 +55,15 @@ public class HouseManager : NetworkBehaviour
         foreach (House house in houses)
         {
             house.SetDoorsActive();
+        }
+    }
+
+    [Server]
+    public void SetInactiveAllDoors()
+    {
+        foreach (House house in houses)
+        {
+            house.SetDoorsInactive();
         }
     }
 }
