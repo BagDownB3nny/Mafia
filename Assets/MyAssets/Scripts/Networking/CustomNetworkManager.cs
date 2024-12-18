@@ -42,7 +42,7 @@ public class CustomNetworkManager : NetworkManager
 
     private void OnGameSceneStarted()
     {
-        HouseSpawner.instance.InstantiateHouses();
+        HouseManager.instance.InstantiateHouses();
     }
 
     public override void ServerChangeScene(string newSceneName)
