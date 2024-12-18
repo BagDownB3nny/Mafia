@@ -5,51 +5,68 @@ using UnityEngine;
 
 public class House : NetworkBehaviour
 {
-    [SerializeField] private List<Door> doors;
+    [SerializeField] private List<GameObject> doors;
+    [SerializeField] private GameObject doorPrefab;
+    [SerializeField] private Transform doorPositionsHolder;
 
 
-    // This function sets the parent GameObject of all doors to be "Doors"
-    // Doors cannot be a child of the house because Mirror does not support nested network objects
-    // The house is a network object since it is spawned in by the server, dependent on the number of players
-    // The doors are network objects since they require unique network identities, since they can be shot and destroyed
     [Server]
-    public void SetupDoorsNetwork(Transform doorsParent)
+    public void SpawnDoors(Transform doorsParent)
     {
-        foreach (Door door in doors)
+        foreach (Transform doorPosition in doorPositionsHolder)
         {
-            door.AddComponent<NetworkIdentity>();
-            door.AddComponent<NetworkTransformUnreliable>();
+            GameObject door = Instantiate(doorPrefab, doorPosition.position, doorPosition.rotation);
+            door.transform.localScale = doorPosition.localScale;
             door.transform.SetParent(doorsParent);
+            NetworkServer.Spawn(door);
+            doors.Add(door);
+            RpcSetDoorParent(door, doorsParent);
         }
     }
 
-    public List<Door> GetAllDoors()
+    [ClientRpc]
+    public void RpcSetDoorParent(GameObject door, Transform doorsParent)
     {
-        return doors;
+        door.transform.SetParent(doorsParent);
+        Debug.Log("Setting parent for door");
     }
-
 
 
     [Server]
     public void SetDoorsActive()
     {
-        foreach (Door door in doors)
+        foreach (GameObject door in doors)
         {
             if (door != null)
             {
-                door.gameObject.SetActive(true);
+                door.SetActive(true);
+                RpcSetDoorActive(door);
             }
         }
     }
 
+    [ClientRpc]
+    public void RpcSetDoorActive(GameObject door)
+    {
+        door.SetActive(true);
+    }
+
+    [Server]
     public void SetDoorsInactive()
     {
-        foreach (Door door in doors)
+        foreach (GameObject door in doors)
         {
             if (door != null)
             {
-                door.gameObject.SetActive(false);
+                door.SetActive(true);
+                RpcSetDoorInactive(door);
             }
         }
+    }
+
+    [ClientRpc]
+    public void RpcSetDoorInactive(GameObject door)
+    {
+        door.SetActive(false);
     }
 }

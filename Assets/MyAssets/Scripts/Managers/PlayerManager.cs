@@ -137,6 +137,7 @@ public class PlayerManager : NetworkBehaviour
         return NetworkServer.spawned[playerNetIds[name]].GetComponent<Player>();
     }
 
+    [Server]
     public void TeleportAllPlayersBackToSpawn()
     {
         foreach (Player player in GetAllPlayers())

@@ -31,22 +31,21 @@ public class PlayerActions : NetworkBehaviour
             }
         }
     }
+
+    [Client]
     private void HandleShooting()
     {
-        Debug.Log("Runnng");
-        Debug.Log($"Can shoot: {player.isAbleToShoot()}");
-        Debug.Log($"Is shooting: {Input.GetMouseButtonDown(0)}");
         if (Input.GetMouseButtonDown(0) && player.isAbleToShoot())
         {
             Debug.Log("Shots fired!");
-            CmdShoot();
+            GameObject lookingAt = playerCamera.GetLookingAt(40.0f);
+            CmdShoot(lookingAt);
         }
     }
 
     [Command]
-    private void CmdShoot()
+    private void CmdShoot(GameObject lookingAt)
     {
-        GameObject lookingAt = playerCamera.GetLookingAt(40.0f);
         if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
         {
             Shootable shootable = lookingAt.GetComponent<Shootable>();

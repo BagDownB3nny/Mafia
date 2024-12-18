@@ -46,12 +46,14 @@ public class TimeManager : NetworkBehaviour
         return clock.GetSecondsLeft();
     }
 
+    [Server]
     private void OnDayEnd()
     {
         Debug.Log("Day ended");
         OnNightStart();
     }
 
+    [Server]
     private void OnNightStart()
     {
         Debug.Log("Night started");
@@ -90,6 +92,7 @@ public class TimeManager : NetworkBehaviour
         OnDayStart();
     }
 
+    [Server]
     private void OnDayStart()
     {
         Debug.Log("Day started");

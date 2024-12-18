@@ -25,10 +25,12 @@ public class Player : NetworkBehaviour
 
     private Vector3 spawnPoint;
 
-
     public void Awake()
     {
-        spawnPoint = transform.position;
+        if (isServer)
+        {
+            spawnPoint = transform.position;
+        }
     }
 
     public override void OnStartLocalPlayer()
@@ -87,10 +89,11 @@ public class Player : NetworkBehaviour
         }
     }
 
+    [Server]
     public void TeleportToSpawn()
     {
         Debug.Log($"Teleporting {netId} to spawn");
-        transform.position = NetworkManager.singleton.GetStartPosition().position;
+        transform.position = spawnPoint;
     }
 
     [Server]

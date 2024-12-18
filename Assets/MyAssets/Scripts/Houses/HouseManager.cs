@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HouseManager : NetworkBehaviour
@@ -33,20 +34,23 @@ public class HouseManager : NetworkBehaviour
         float houseWidth = 12.5f;
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            GameObject house = Instantiate(housePrefab, new Vector3(i * houseWidth, 0, 0), Quaternion.identity);
+            Vector3 housePosition = new Vector3(i * houseWidth, 0, 0);
+            GameObject house = Instantiate(housePrefab, housePosition, Quaternion.identity);
             house.transform.SetParent(houseParent);
             NetworkServer.Spawn(house);
+            houses.Add(house.GetComponent<House>());
+            RpcSetHouseParent(house);
 
             // Setup doors
-            house.GetComponent<House>().SetupDoorsNetwork(doorsParent);
-            List<Door> doors = house.GetComponent<House>().GetAllDoors();
-            foreach (Door door in doors)
-            {
-                NetworkServer.Spawn(door.gameObject);
-            }
-
-            houses.Add(house.GetComponent<House>());
+            house.GetComponent<House>().SpawnDoors(doorsParent);
         }
+    }
+
+    [ClientRpc]
+    public void RpcSetHouseParent(GameObject house)
+    {
+        Debug.Log("Setting parent for house");
+        house.transform.SetParent(houseParent);
     }
 
     [Server]
