@@ -9,13 +9,11 @@ public class MenuNavigator : MonoBehaviour
     {
         if (instance == null)
         {
-            Debug.Log("CREATING NEW INSTANCE");
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Debug.Log("DESTROYING INSTANCE");
             Destroy(gameObject);
         }
     }

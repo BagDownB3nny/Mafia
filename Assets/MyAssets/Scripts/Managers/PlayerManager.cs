@@ -140,6 +140,7 @@ public class PlayerManager : NetworkBehaviour
     [Server]
     public void TeleportAllPlayersBackToSpawn()
     {
+        Debug.Log("Teleporting all players back to spawn");
         foreach (Player player in GetAllPlayers())
         {
             player.TeleportToSpawn();

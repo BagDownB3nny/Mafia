@@ -49,14 +49,14 @@ public class TimeManager : NetworkBehaviour
     [Server]
     private void OnDayEnd()
     {
-        Debug.Log("Day ended");
+        Debug.Log($"Day {dayNumber} ended");
         OnNightStart();
     }
 
     [Server]
     private void OnNightStart()
     {
-        Debug.Log("Night started");
+        Debug.Log($"Night {dayNumber} started");
         // Close doors
         HouseManager.instance.SetActiveAllDoors();
         // Set moon
@@ -77,7 +77,8 @@ public class TimeManager : NetworkBehaviour
     [Server]
     private void OnNightEnd()
     {
-        Debug.Log("Night ended");
+        Debug.Log($"Night {dayNumber} ended");
+        dayNumber += 1;
 
 
         List<Player> players = PlayerManager.instance.GetAllPlayers();
@@ -95,7 +96,8 @@ public class TimeManager : NetworkBehaviour
     [Server]
     private void OnDayStart()
     {
-        Debug.Log("Day started");
+        dayNumber += 1;
+        Debug.Log($"Day {dayNumber} started");
         // Set clock
         // Set sun
         clock = new Timer(dayDuration);

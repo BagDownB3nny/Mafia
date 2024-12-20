@@ -11,7 +11,6 @@ public class PlayerCamera : MonoBehaviour
 
     public void SetOrientation(Transform newOrientation)
     {
-        Debug.Log("Setting orientation");
         orientation = newOrientation;
     }
 
@@ -32,6 +31,7 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
+        if (orientation == null) return;
         HandleMoveCamera();
         HandleLookAtInteractable();
     }

@@ -25,7 +25,7 @@ public class Player : NetworkBehaviour
 
     private Vector3 spawnPoint;
 
-    public void Awake()
+    public void Start()
     {
         if (isServer)
         {
@@ -38,8 +38,11 @@ public class Player : NetworkBehaviour
         Camera.main.transform.GetComponent<MoveCamera>().SetCameraPosition(this.transform);
         Camera.main.transform.GetComponent<PlayerCamera>().SetOrientation(this.transform);
         Camera.main.transform.localPosition = new Vector3(0, 0, 0);
-        PlayerManager.instance.localPlayer = this;
-        Debug.Log("Local player set");
+
+        if (PlayerManager.instance != null)
+        {
+            PlayerManager.instance.localPlayer = this;
+        }
 
         localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
 
@@ -92,7 +95,12 @@ public class Player : NetworkBehaviour
     [Server]
     public void TeleportToSpawn()
     {
-        Debug.Log($"Teleporting {netId} to spawn");
+        RpcTeleportToSpawn(spawnPoint);
+    }
+
+    [ClientRpc]
+    public void RpcTeleportToSpawn(Vector3 spawnPoint)
+    {
         transform.position = spawnPoint;
     }
 
