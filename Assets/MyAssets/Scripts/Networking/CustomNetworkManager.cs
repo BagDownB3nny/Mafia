@@ -43,7 +43,6 @@ public class CustomNetworkManager : NetworkManager
     private void OnGameSceneStarted()
     {
         HouseManager.instance.InstantiateHouses();
-        HouseManager.instance.SetInactiveAllDoors();
     }
 
     public override void ServerChangeScene(string newSceneName)

@@ -39,29 +39,33 @@ public class PlayerCamera : MonoBehaviour
     private void HandleLookAtInteractable()
     {
         GameObject lookingAt = GetLookingAt(5.0f);
-        if (lookingAt == null)
+        if (lookingAt == null || lookingAt.GetComponent<Interactable>() == null)
         {
             if (lastInteractable != null)
             {
-                lastInteractable.Unhighlight();
+                lastInteractable.OnUnhover();
+                // lastInteractable.Unhighlight();
                 lastInteractable = null;
             }
             return;
         }
+        // Is looking at an interactable
         else if (lookingAt != null && lookingAt.GetComponent<Interactable>() != null)
         {
             Interactable currentInteractable = lookingAt.GetComponent<Interactable>();
+
+            // If the current interactable is the same as the last one, do nothing
             if (currentInteractable == lastInteractable) return;
+            Debug.Log("Looking at " + lookingAt.name);
             if (lastInteractable != null)
             {
-                lastInteractable.Unhighlight();
+                lastInteractable.OnUnhover();
+                // lastInteractable.Unhighlight();
             }
-            currentInteractable.Highlight();
+            Debug.Log("Highlighting " + currentInteractable.GetRat());
+            currentInteractable.OnHover();
+            // currentInteractable.Highlight();
             lastInteractable = currentInteractable;
-        }
-        else if (lastInteractable != null)
-        {
-            lastInteractable.Unhighlight();
         }
     }
 

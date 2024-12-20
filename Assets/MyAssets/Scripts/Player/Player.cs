@@ -35,9 +35,8 @@ public class Player : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        Camera.main.transform.GetComponent<MoveCamera>().SetCameraPosition(this.transform);
-        Camera.main.transform.GetComponent<PlayerCamera>().SetOrientation(this.transform);
-        Camera.main.transform.localPosition = new Vector3(0, 0, 0);
+        StartCamera();
+        GetSteamUsername();
 
         if (PlayerManager.instance != null)
         {
@@ -45,7 +44,19 @@ public class Player : NetworkBehaviour
         }
 
         localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
+    }
 
+    [Client]
+    private void StartCamera()
+    {
+        Camera.main.transform.GetComponent<MoveCamera>().SetCameraPosition(this.transform);
+        Camera.main.transform.GetComponent<PlayerCamera>().SetOrientation(this.transform);
+        Camera.main.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    [Client]
+    public void GetSteamUsername()
+    {
         // TODO - Uncomment this when Steamworks.NET is implemented
         // if (SteamManager.Initialized)
         // {
@@ -66,6 +77,33 @@ public class Player : NetworkBehaviour
     public void SetRole(Roles newRole)
     {
         role = newRole;
+        RemoveRoleScript();
+        AddRoleScript(newRole);
+    }
+
+    private void AddRoleScript(Roles newRole)
+    {
+        switch (newRole)
+        {
+            case Roles.Seer:
+                gameObject.AddComponent<Seer>();
+                break;
+            case Roles.Mafia:
+                gameObject.AddComponent<Mafia>();
+                break;
+            case Roles.Guardian:
+                gameObject.AddComponent<Guardian>();
+                break;
+        }
+    }
+
+    private void RemoveRoleScript()
+    {
+        Role roleComponent = GetComponent<Role>();
+        if (roleComponent != null)
+        {
+            Destroy(roleComponent);
+        }
     }
 
     [Command]
@@ -84,12 +122,15 @@ public class Player : NetworkBehaviour
         playerUIPrefab.text = newUsername;
     }
 
+    [Client]
     public void OnRoleChanged(Roles oldRole, Roles newRole)
     {
         if (isLocalPlayer)
         {
             PlayerUIManager.instance.SetRoleText(newRole);
         }
+        RemoveRoleScript();
+        AddRoleScript(newRole);
     }
 
     [Server]

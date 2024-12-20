@@ -17,7 +17,7 @@ public class TimeManager : NetworkBehaviour
     public UnityEvent OnDayStartEvent;
 
     private Timer clock;
-    public int dayNumber { get; private set; } = 1;
+    public int dayNumber { get; private set; } = 0;
     public bool isCurrentlyDay { get; private set; } = true;
 
     public static TimeManager instance;
@@ -27,8 +27,6 @@ public class TimeManager : NetworkBehaviour
         if (instance == null)
         {
             instance = this;
-            // TODO: Start day should be called after all players have loaded in
-            OnDayStart();
         }
         else
         {
@@ -38,7 +36,10 @@ public class TimeManager : NetworkBehaviour
 
     private void Update()
     {
-        clock.Tick(Time.deltaTime);
+        if (clock != null)
+        {
+            clock.Tick(Time.deltaTime);
+        }
     }
 
     public int GetSecondsLeft()
@@ -78,8 +79,6 @@ public class TimeManager : NetworkBehaviour
     private void OnNightEnd()
     {
         Debug.Log($"Night {dayNumber} ended");
-        dayNumber += 1;
-
 
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
@@ -90,6 +89,11 @@ public class TimeManager : NetworkBehaviour
         // Open doors
         HouseManager.instance.SetInactiveAllDoors();
         // Remove moon
+        OnDayStart();
+    }
+
+    public void StartFirstDay()
+    {
         OnDayStart();
     }
 

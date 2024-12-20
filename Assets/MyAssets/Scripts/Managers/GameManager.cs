@@ -1,19 +1,30 @@
 using UnityEngine;
+using Mirror;
 
 
 // Methods:
 // Assign roles to players
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    public static GameManager instance;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    [Server]
+    public void StartGame()
     {
-
+        PlayerManager.instance.AssignRoles();
+        HouseManager.instance.SetInactiveAllDoors();
+        TimeManager.instance.StartFirstDay();
     }
 }

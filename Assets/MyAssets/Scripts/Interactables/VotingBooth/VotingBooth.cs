@@ -11,6 +11,20 @@ public class VotingBooth : Interactable
     [SerializeField] private GameObject votingSlipCanvas;
 
     [Client]
+    public override void OnHover()
+    {
+        Highlight();
+        PlayerUIManager.instance.SetInteractableText("Cast vote");
+    }
+
+    [Client]
+    public override void OnUnhover()
+    {
+        Unhighlight();
+        PlayerUIManager.instance.ClearInteractableText();
+    }
+
+    [Client]
     public override void Interact()
     {
         votingSlipCanvas.SetActive(true);

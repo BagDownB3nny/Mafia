@@ -52,4 +52,17 @@ public class PlayerActions : NetworkBehaviour
             shootable.OnShot();
         }
     }
+
+    [Client]
+    public void InteractWithPlayer(Player playerInteractedWith)
+    {
+        CmdInteractWithPlayer(playerInteractedWith);
+    }
+
+    [Command]
+    private void CmdInteractWithPlayer(Player playerInteractedWith)
+    {
+        Role roleScript = GetComponent<Role>();
+        roleScript.InteractWithPlayer(playerInteractedWith);
+    }
 }

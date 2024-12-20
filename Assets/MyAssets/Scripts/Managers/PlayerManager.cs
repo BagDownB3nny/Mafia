@@ -59,7 +59,7 @@ public class PlayerManager : NetworkBehaviour
     [Server]
     public void OnAllPlayersLoaded()
     {
-        AssignRoles();
+        GameManager.instance.StartGame();
     }
 
     [Client]
@@ -94,7 +94,7 @@ public class PlayerManager : NetworkBehaviour
         {
             if (i == 0)
             {
-                roles[i] = Roles.WereRat;
+                roles[i] = Roles.Mafia;
             }
             else if (i == 1)
             {
@@ -102,7 +102,7 @@ public class PlayerManager : NetworkBehaviour
             }
             else if (i == 2)
             {
-                roles[i] = Roles.Medium;
+                roles[i] = Roles.Guardian;
             }
             else
             {

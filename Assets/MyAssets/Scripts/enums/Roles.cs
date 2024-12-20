@@ -1,7 +1,7 @@
 public enum Roles
 {
     Villager,
-    WereRat,
+    Mafia,
     Seer,
-    Medium
+    Guardian
 }
