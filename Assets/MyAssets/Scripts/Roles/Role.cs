@@ -5,7 +5,7 @@ public abstract class Role : NetworkBehaviour
 {
     public abstract string rolePlayerInteractText { get; }
 
-    public virtual void InteractWithPlayer(Player player)
+    public virtual void InteractWithPlayer(NetworkIdentity player)
     {
         Debug.Log($"Interacting with player {player.name}");
     }

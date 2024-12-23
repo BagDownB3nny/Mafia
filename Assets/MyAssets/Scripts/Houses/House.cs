@@ -9,6 +9,12 @@ public class House : NetworkBehaviour
     [SerializeField] private GameObject doorPrefab;
     [SerializeField] private Transform doorPositionsHolder;
 
+    [SerializeField] public Transform spawnPoint;
+
+    [SyncVar]
+
+    public Player player;
+
 
     [Server]
     public void SpawnDoors(Transform doorsParent)

@@ -506,6 +506,8 @@ MonoBehaviour:
   doors: []
   doorPrefab: {fileID: 7148590724011169151, guid: 2bbd0497ba6164865b1d43659bbd05e2, type: 3}
   doorPositionsHolder: {fileID: 5889868465251422743}
+  spawnPoint: {fileID: 5657907167569537495}
+  player: {fileID: 0}
 --- !u!1 &7013268431225218423
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,7 +33,6 @@ public class TimeManager : NetworkBehaviour
             Destroy(gameObject);
         }
     }
-
     private void Update()
     {
         if (clock != null)

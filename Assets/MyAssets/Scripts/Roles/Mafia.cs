@@ -6,8 +6,9 @@ public class Mafia : Role
     public override string rolePlayerInteractText => "Mark for death";
 
     [Server]
-    public override void InteractWithPlayer(Player player)
+    public override void InteractWithPlayer(NetworkIdentity player)
     {
-        Debug.Log($"Mafia is interacting with player {player.name}");
+        PlayerSigilManager playerSigilManager = player.GetComponent<PlayerSigilManager>();
+        playerSigilManager.MarkWithSigil(Sigils.Death);
     }
 }

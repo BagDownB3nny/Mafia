@@ -5,8 +5,9 @@ public class Guardian : Role
     public override string rolePlayerInteractText => "Protect with Guardian's Sigil";
 
     [Server]
-    public override void InteractWithPlayer(Player player)
+    public override void InteractWithPlayer(NetworkIdentity player)
     {
-        Debug.Log($"Guardian is interacting with player {player.name}");
+        PlayerSigilManager playerSigilManager = player.GetComponent<PlayerSigilManager>();
+        playerSigilManager.MarkWithSigil(Sigils.Protection);
     }
 }

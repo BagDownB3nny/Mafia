@@ -27,7 +27,15 @@ public class PlayerActions : NetworkBehaviour
             Interactable interactable = playerCamera.GetInteratable();
             if (interactable != null)
             {
-                interactable.Interact();
+                if (interactable is InteractablePlayer)
+                {
+                    Debug.Log(interactable.gameObject);
+                    CmdInteractWithPlayer(interactable.gameObject.GetComponentInParent<NetworkIdentity>());
+                }
+                else
+                {
+                    interactable.Interact();
+                }
             }
         }
     }
@@ -53,15 +61,10 @@ public class PlayerActions : NetworkBehaviour
         }
     }
 
-    [Client]
-    public void InteractWithPlayer(Player playerInteractedWith)
-    {
-        CmdInteractWithPlayer(playerInteractedWith);
-    }
-
     [Command]
-    private void CmdInteractWithPlayer(Player playerInteractedWith)
+    private void CmdInteractWithPlayer(NetworkIdentity playerInteractedWith)
     {
+        Debug.Log($"Server command, interacting with {playerInteractedWith.name}");
         Role roleScript = GetComponent<Role>();
         roleScript.InteractWithPlayer(playerInteractedWith);
     }

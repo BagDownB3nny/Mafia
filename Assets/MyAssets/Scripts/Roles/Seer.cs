@@ -3,11 +3,14 @@ using Mirror;
 
 public class Seer : Role
 {
+    private GameObject seeingEyeSigilPrefab;
+
     public override string rolePlayerInteractText => "Mark with Seeing-Eye Sigil";
 
     [Server]
-    public override void InteractWithPlayer(Player player)
+    public override void InteractWithPlayer(NetworkIdentity player)
     {
-        Debug.Log($"Seer is interacting with player {player.name}");
+        PlayerSigilManager playerSigilManager = player.GetComponent<PlayerSigilManager>();
+        playerSigilManager.MarkWithSigil(Sigils.SeeingEye);
     }
 }

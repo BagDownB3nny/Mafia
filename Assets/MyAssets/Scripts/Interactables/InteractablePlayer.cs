@@ -24,9 +24,6 @@ public class InteractablePlayer : Interactable
 
     public override void Interact()
     {
-        PlayerActions localPlayerActions = PlayerManager.instance.localPlayer.GetComponent<PlayerActions>();
-
-        // This lets the server know that the client has interacted with this player
-        localPlayerActions.InteractWithPlayer(GetComponent<Player>());
+        // Shouldnt do anything, since the method to invoke is in the role scripts
     }
 }

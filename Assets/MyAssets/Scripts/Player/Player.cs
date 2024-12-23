@@ -1,7 +1,9 @@
+using System.Collections;
 using Mirror;
 using Mirror.Examples.Basic;
 using Steamworks;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Player : NetworkBehaviour
@@ -23,15 +25,8 @@ public class Player : NetworkBehaviour
     [SerializeField] private GameObject localPlayerGun;
     [SerializeField] private GameObject remotePlayerGun;
 
-    private Vector3 spawnPoint;
-
-    public void Start()
-    {
-        if (isServer)
-        {
-            spawnPoint = transform.position;
-        }
-    }
+    [SyncVar]
+    public House house;
 
     public override void OnStartLocalPlayer()
     {
@@ -68,7 +63,7 @@ public class Player : NetworkBehaviour
         //     steamUsername = "Player " + Random.Range(0, 1000);
         //     CmdUpdateSteamUsername(steamUsername);
         // }
-        steamUsername = "Player " + Random.Range(0, 1000);
+        steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
         CmdUpdateSteamUsername(steamUsername);
         playerUIPrefab.text = steamUsername;
     }
@@ -136,14 +131,43 @@ public class Player : NetworkBehaviour
     [Server]
     public void TeleportToSpawn()
     {
-        RpcTeleportToSpawn(spawnPoint);
+        TeleportPlayer(house.spawnPoint.position);
     }
 
-    [ClientRpc]
-    public void RpcTeleportToSpawn(Vector3 spawnPoint)
+    [Server]
+    public void TeleportPlayer(Vector3 position)
     {
-        transform.position = spawnPoint;
+        NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
+        networkTransform.RpcTeleport(position);
     }
+
+    // [ClientRpc]
+    // private void RpcTeleportPlayer(Vector3 position)
+    // {
+    //     if (!isLocalPlayer) return;
+
+    //     // DisablePlayerMovement();
+    //     NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
+    //     networkTransform.OnTeleport(position);
+    // }
+
+    // private void DisablePlayerMovement()
+    // {
+    //     GetComponent<PlayerMovement>().enabled = false;
+    //     Camera.main.GetComponent<PlayerCamera>().enabled = false;
+    // }
+
+    // private void EnablePlayerMovement()
+    // {
+    //     GetComponent<PlayerMovement>().enabled = true;
+    //     Camera.main.GetComponent<PlayerCamera>().enabled = true;
+    // }
+
+    // IEnumerator EnablePlayerMovementAfterDelay(float delay)
+    // {
+    //     yield return new WaitForSeconds(delay);
+    //     EnablePlayerMovement();
+    // }
 
     [Server]
 

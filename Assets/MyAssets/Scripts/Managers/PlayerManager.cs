@@ -117,7 +117,7 @@ public class PlayerManager : NetworkBehaviour
         List<Player> players = new List<Player>();
         foreach (uint netId in playerNetIds.Values)
         {
-            players.Add(NetworkServer.spawned[netId].GetComponent<Player>());
+            players.Add(GetPlayerByNetId(netId));
         }
         return players;
     }
@@ -143,6 +143,7 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("Teleporting all players back to spawn");
         foreach (Player player in GetAllPlayers())
         {
+            Debug.Log("Teleporting player " + player.steamUsername + " back to spawn");
             player.TeleportToSpawn();
         }
     }

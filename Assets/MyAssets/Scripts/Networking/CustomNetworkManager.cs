@@ -30,6 +30,27 @@ public class CustomNetworkManager : NetworkManager
         base.OnStopHost();
     }
 
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+    {
+        Transform startPos = GetStartPosition();
+        GameObject player = startPos != null
+            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+            : Instantiate(playerPrefab);
+
+        House playerHouse = startPos.GetComponentInParent<House>();
+        Player playerComponent = player.GetComponent<Player>();
+        if (playerHouse != null)
+        {
+            playerComponent.house = playerHouse;
+            playerHouse.player = playerComponent;
+        }
+
+        // instantiating a "Player" prefab gives it the name "Player(clone)"
+        // => appending the connectionId is WAY more useful for debugging!
+        player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
+        NetworkServer.AddPlayerForConnection(conn, player);
+    }
+
     public override void OnServerSceneChanged(string sceneName)
     {
         base.OnServerSceneChanged(sceneName);
@@ -56,11 +77,5 @@ public class CustomNetworkManager : NetworkManager
     {
         Debug.Log("Client finished loading scene");
         base.OnClientSceneChanged();
-    }
-
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
-    {
-        Debug.Log("Server spawning player for connection: " + conn.connectionId);
-        base.OnServerAddPlayer(conn);
     }
 }
