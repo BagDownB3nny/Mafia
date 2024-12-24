@@ -70,4 +70,13 @@ public class HouseManager : NetworkBehaviour
             house.SetDoorsInactive();
         }
     }
+
+    [Server]
+    public void ProtectAllHouses()
+    {
+        foreach (House house in houses)
+        {
+            house.ActivateProtection();
+        }
+    }
 }

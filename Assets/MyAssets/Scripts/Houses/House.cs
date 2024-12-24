@@ -15,6 +15,9 @@ public class House : NetworkBehaviour
 
     public Player player;
 
+    [SyncVar]
+    public bool isProtected;
+
 
     [Server]
     public void SpawnDoors(Transform doorsParent)
@@ -22,6 +25,7 @@ public class House : NetworkBehaviour
         foreach (Transform doorPosition in doorPositionsHolder)
         {
             GameObject door = Instantiate(doorPrefab, doorPosition.position, doorPosition.rotation);
+            door.GetComponent<Door>().house = this;
             door.transform.localScale = doorPosition.localScale;
             door.transform.SetParent(doorsParent);
             NetworkServer.Spawn(door);
@@ -74,5 +78,17 @@ public class House : NetworkBehaviour
     public void RpcSetDoorInactive(GameObject door)
     {
         door.SetActive(false);
+    }
+
+    [Server]
+    public void ActivateProtection()
+    {
+        isProtected = true;
+    }
+
+    [Server]
+    public void DeactivateProtection()
+    {
+        isProtected = false;
     }
 }

@@ -5,42 +5,44 @@ using UnityEngine;
 public class PlayerSigilManager : NetworkBehaviour
 {
 
-    [SerializeField] private GameObject SeeingEyeSigil;
-    [SerializeField] private GameObject ProtectionSigil;
-    [SerializeField] private GameObject DeathSigil;
-
-
-    [SyncVar]
-    public List<Sigils> receivedSigils = new List<Sigils>();
+    [SerializeField] private SeeingEyeSigil seeingEyeSigil;
+    [SerializeField] private ProtectionSigil protectionSigil;
+    [SerializeField] private DeathSigil deathSigil;
 
     [Server]
     public void MarkWithSigil(Sigils sigil)
     {
-        receivedSigils.Add(sigil);
-        activateSigil(sigil);
-        RpcActivateSigil(sigil);
+        switch (sigil)
+        {
+            case Sigils.Death:
+                deathSigil.Mark();
+                break;
+            // case Sigils.SeeingEye:
+            //     seeingEyeSigil.Mark();
+            //     break;
+            // case Sigils.Protection:
+            //     seeingEyeSigil.Mark();
+            //     break;
+            default:
+                break;
+        }
     }
 
-    [ClientRpc]
-    public void RpcActivateSigil(Sigils sigil)
-    {
-        activateSigil(sigil);
-    }
-
-
-    [Client]
-    private void activateSigil(Sigils sigil)
+    [Server]
+    public void UnmarkWithSigil(Sigils sigil)
     {
         switch (sigil)
         {
-            case Sigils.SeeingEye:
-                SeeingEyeSigil.SetActive(true);
-                break;
-            case Sigils.Protection:
-                ProtectionSigil.SetActive(true);
-                break;
             case Sigils.Death:
-                DeathSigil.SetActive(true);
+                deathSigil.Unmark();
+                break;
+            // case Sigils.SeeingEye:
+            //     seeingEyeSigil.Mark();
+            //     break;
+            // case Sigils.Protection:
+            //     seeingEyeSigil.Mark();
+            //     break;
+            default:
                 break;
         }
     }

@@ -57,8 +57,11 @@ public class TimeManager : NetworkBehaviour
     private void OnNightStart()
     {
         Debug.Log($"Night {dayNumber} started");
-        // Close doors
+        // Close doors and protect all houses
         HouseManager.instance.SetActiveAllDoors();
+        HouseManager.instance.ProtectAllHouses();
+        // Unprotect the house marked for death
+        DeathSigil.ActivateAtNight();
         // Set moon
         // Set clock
         clock = new Timer(nightDuration);
@@ -99,6 +102,9 @@ public class TimeManager : NetworkBehaviour
     [Server]
     private void OnDayStart()
     {
+        // Reset all sigils
+        DeathSigil.ResetAllDeathSigils();
+
         dayNumber += 1;
         Debug.Log($"Day {dayNumber} started");
         // Set clock

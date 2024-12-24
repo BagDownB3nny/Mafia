@@ -48,8 +48,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  dayDuration: 10
-  nightDuration: 10
+  dayDuration: 20
+  nightDuration: 20
   OnDayEndEvent:
     m_PersistentCalls:
       m_Calls: []

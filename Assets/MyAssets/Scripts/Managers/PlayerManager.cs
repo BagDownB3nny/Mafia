@@ -147,4 +147,17 @@ public class PlayerManager : NetworkBehaviour
             player.TeleportToSpawn();
         }
     }
+
+    public int GetMafiaCount()
+    {
+        int count = 0;
+        foreach (Player player in GetAllPlayers())
+        {
+            if (player.role == Roles.Mafia)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 }
