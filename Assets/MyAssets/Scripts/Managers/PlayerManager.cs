@@ -73,7 +73,7 @@ public class PlayerManager : NetworkBehaviour
     {
         playerRoles = GenerateRoles();
         // Shuffle the roles
-        playerRoles = playerRoles.OrderBy(x => Random.value).ToArray();
+        // playerRoles = playerRoles.OrderBy(x => Random.value).ToArray();
 
         int index = 0;
         foreach (Player player in GetAllPlayers())
@@ -94,11 +94,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (i == 0)
             {
-                roles[i] = Roles.Mafia;
+                roles[i] = Roles.Seer;
             }
             else if (i == 1)
             {
-                roles[i] = Roles.Seer;
+                roles[i] = Roles.Mafia;
             }
             else if (i == 2)
             {
@@ -129,6 +129,10 @@ public class PlayerManager : NetworkBehaviour
 
     public Player GetPlayerByNetId(uint netId)
     {
+        if (!NetworkServer.spawned.ContainsKey(netId))
+        {
+            return null;
+        }
         return NetworkServer.spawned[netId].GetComponent<Player>();
     }
 
@@ -140,10 +144,8 @@ public class PlayerManager : NetworkBehaviour
     [Server]
     public void TeleportAllPlayersBackToSpawn()
     {
-        Debug.Log("Teleporting all players back to spawn");
         foreach (Player player in GetAllPlayers())
         {
-            Debug.Log("Teleporting player " + player.steamUsername + " back to spawn");
             player.TeleportToSpawn();
         }
     }

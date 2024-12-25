@@ -56,13 +56,11 @@ public class PlayerCamera : MonoBehaviour
 
             // If the current interactable is the same as the last one, do nothing
             if (currentInteractable == lastInteractable) return;
-            Debug.Log("Looking at " + lookingAt.name);
             if (lastInteractable != null)
             {
                 lastInteractable.OnUnhover();
                 // lastInteractable.Unhighlight();
             }
-            Debug.Log("Highlighting " + currentInteractable.GetRat());
             currentInteractable.OnHover();
             // currentInteractable.Highlight();
             lastInteractable = currentInteractable;

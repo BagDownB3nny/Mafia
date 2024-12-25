@@ -8,6 +8,7 @@ public class House : NetworkBehaviour
     [SerializeField] private List<GameObject> doors;
     [SerializeField] private GameObject doorPrefab;
     [SerializeField] private Transform doorPositionsHolder;
+    [SerializeField] private GameObject SeerRoom;
 
     [SerializeField] public Transform spawnPoint;
 
@@ -90,5 +91,24 @@ public class House : NetworkBehaviour
     public void DeactivateProtection()
     {
         isProtected = false;
+    }
+
+    [Server]
+    public void SpawnRoom(Roles role)
+    {
+        if (role == Roles.Seer)
+        {
+            SeerRoom.SetActive(true);
+        }
+        RpcSpawnRoom(role);
+    }
+
+    [ClientRpc]
+    public void RpcSpawnRoom(Roles role)
+    {
+        if (role == Roles.Seer)
+        {
+            SeerRoom.SetActive(true);
+        }
     }
 }

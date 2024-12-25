@@ -5,7 +5,6 @@ public class InteractablePlayer : Interactable
 {
     public override void OnHover()
     {
-        Debug.Log("Hovering over player");
         Player localPlayer = PlayerManager.instance.localPlayer;
         string interactableText = localPlayer.GetComponent<Role>().rolePlayerInteractText;
         if (interactableText != null)
@@ -17,7 +16,6 @@ public class InteractablePlayer : Interactable
 
     public override void OnUnhover()
     {
-        Debug.Log("Unhovering");
         PlayerUIManager.instance.SetInteractableText("");
         Unhighlight();
     }

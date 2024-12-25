@@ -10,13 +10,21 @@ public class Mafia : Role
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
     {
+        // Remove previously placed death sigil since only one death mark can be placed per mafia
         if (markedPlayer != null)
         {
-            PlayerSigilManager markedPlayerSigilManager = markedPlayer.GetComponentInChildren<PlayerSigilManager>();
-            markedPlayerSigilManager.UnmarkWithSigil(Sigils.Death);
+            DeathSigil markedPlayerDeathSigil = markedPlayer.GetComponentInChildren<DeathSigil>(includeInactive: true);
+            markedPlayerDeathSigil.Unmark();
         }
-        PlayerSigilManager playerSigilManager = player.GetComponentInChildren<PlayerSigilManager>();
-        playerSigilManager.MarkWithSigil(Sigils.Death);
-        markedPlayer = player.GetComponent<Player>();
+
+        // Place new death sigil on player
+        DeathSigil playerDeathSigil = player.GetComponentInChildren<DeathSigil>(includeInactive: true);
+        if (playerDeathSigil == null)
+        {
+            Debug.LogError("Player does not have a death sigil");
+            return;
+        }
+        playerDeathSigil.Mark();
+        markedPlayer = player.GetComponentInParent<Player>();
     }
 }

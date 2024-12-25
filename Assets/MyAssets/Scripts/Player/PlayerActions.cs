@@ -45,7 +45,6 @@ public class PlayerActions : NetworkBehaviour
     {
         if (Input.GetMouseButtonDown(0) && player.isAbleToShoot())
         {
-            Debug.Log("Shots fired!");
             GameObject lookingAt = playerCamera.GetLookingAt(40.0f);
             CmdShoot(lookingAt);
         }
@@ -57,7 +56,12 @@ public class PlayerActions : NetworkBehaviour
         if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
         {
             Shootable shootable = lookingAt.GetComponent<Shootable>();
-            shootable.OnShot();
+            if (connectionToClient == null)
+            {
+                Debug.LogError("Connection to client is null");
+                return;
+            }
+            shootable.OnShot(connectionToClient);
         }
     }
 

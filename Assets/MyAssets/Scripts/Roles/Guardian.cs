@@ -7,7 +7,7 @@ public class Guardian : Role
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
     {
-        PlayerSigilManager playerSigilManager = player.GetComponent<PlayerSigilManager>();
-        playerSigilManager.MarkWithSigil(Sigils.Protection);
+        // GuardianSigil playerSigilManager = player.GetComponent<PlayerSigilManager>();
+        // playerSigilManager.MarkWithSigil(Sigils.Protection);
     }
 }

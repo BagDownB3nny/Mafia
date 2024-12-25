@@ -74,6 +74,8 @@ public class Player : NetworkBehaviour
         role = newRole;
         RemoveRoleScript();
         AddRoleScript(newRole);
+
+        house.SpawnRoom(newRole);
     }
 
     private void AddRoleScript(Roles newRole)
@@ -137,37 +139,16 @@ public class Player : NetworkBehaviour
     [Server]
     public void TeleportPlayer(Vector3 position)
     {
-        NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
-        networkTransform.RpcTeleport(position);
+        RpcTeleportPlayer(position);
     }
 
-    // [ClientRpc]
-    // private void RpcTeleportPlayer(Vector3 position)
-    // {
-    //     if (!isLocalPlayer) return;
-
-    //     // DisablePlayerMovement();
-    //     NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
-    //     networkTransform.OnTeleport(position);
-    // }
-
-    // private void DisablePlayerMovement()
-    // {
-    //     GetComponent<PlayerMovement>().enabled = false;
-    //     Camera.main.GetComponent<PlayerCamera>().enabled = false;
-    // }
-
-    // private void EnablePlayerMovement()
-    // {
-    //     GetComponent<PlayerMovement>().enabled = true;
-    //     Camera.main.GetComponent<PlayerCamera>().enabled = true;
-    // }
-
-    // IEnumerator EnablePlayerMovementAfterDelay(float delay)
-    // {
-    //     yield return new WaitForSeconds(delay);
-    //     EnablePlayerMovement();
-    // }
+    [ClientRpc]
+    private void RpcTeleportPlayer(Vector3 position)
+    {
+        NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
+        networkTransform.OnTeleport(position);
+        Physics.SyncTransforms();
+    }
 
     [Server]
 
