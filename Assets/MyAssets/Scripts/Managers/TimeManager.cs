@@ -59,9 +59,10 @@ public class TimeManager : NetworkBehaviour
         Debug.Log($"Night {dayNumber} started");
         // Close doors and protect all houses
         HouseManager.instance.SetActiveAllDoors();
-        HouseManager.instance.ProtectAllHouses();
+        // HouseManager.instance.ProtectAllHouses();
         // Unprotect the house marked for death
         DeathSigil.ActivateAtNight();
+        ProtectionSigil.ActivateAtNight();
         // Set moon
         // Set clock
         clock = new Timer(nightDuration);

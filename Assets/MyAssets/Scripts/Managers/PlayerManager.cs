@@ -80,11 +80,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(Roles.Mafia);
+                player.SetRole(Roles.Guardian);
             }
             else
             {
-                player.SetRole(Roles.Seer);
+                player.SetRole(Roles.Mafia);
             }
             // player.SetRole(playerRoles[index]);
             // index++;
@@ -102,7 +102,7 @@ public class PlayerManager : NetworkBehaviour
         {
             if (i == 0)
             {
-                roles[i] = Roles.Seer;
+                roles[i] = Roles.Guardian;
             }
             else if (i == 1)
             {

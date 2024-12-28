@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeathSigil : NetworkBehaviour
 {
-    [SerializeField] private Player player;
+    private readonly Player player;
 
     [SyncVar]
     private int marksReceived = 0;
