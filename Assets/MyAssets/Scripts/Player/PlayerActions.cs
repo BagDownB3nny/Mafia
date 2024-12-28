@@ -69,7 +69,8 @@ public class PlayerActions : NetworkBehaviour
     private void CmdInteractWithPlayer(NetworkIdentity playerInteractedWith)
     {
         Debug.Log($"Server command, interacting with {playerInteractedWith.name}");
-        Role roleScript = GetComponent<Role>();
+        Player currentPlayer = GetComponent<Player>();
+        Role roleScript = currentPlayer.GetRoleScript();
         roleScript.InteractWithPlayer(playerInteractedWith);
     }
 }

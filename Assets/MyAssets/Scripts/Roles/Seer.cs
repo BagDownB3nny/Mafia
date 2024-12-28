@@ -3,10 +3,15 @@ using Mirror;
 
 public class Seer : Role
 {
-    [SyncVar]
-    private uint markedPlayerNetId;
+    [SyncVar(hook = nameof(OnMarkedPlayerNetIdChanged))]
+    public uint markedPlayerNetId;
 
     public override string rolePlayerInteractText => "Mark with Seeing-Eye Sigil";
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+    }
 
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
@@ -67,8 +72,18 @@ public class Seer : Role
     [Client]
     private void EnablePlayerControllersAndCamera()
     {
-        GetComponent<PlayerMovement>().enabled = false;
-        Camera.main.GetComponent<MoveCamera>().enabled = false;
+        GetComponent<PlayerMovement>().enabled = true;
+        Camera.main.GetComponent<MoveCamera>().enabled = true;
         // Camera.main.GetComponent<PlayerCamera>().enabled = false;
+    }
+
+    private void OnMarkedPlayerNetIdChanged(uint oldMarkedPlayerNetId, uint newMarkedPlayerNetId)
+    {
+        Player markedPlayer = PlayerManager.instance.GetPlayerByNetId(newMarkedPlayerNetId);
+        Debug.Log(newMarkedPlayerNetId);
+        if (markedPlayer != null)
+        {
+            Debug.Log($"Player {markedPlayer.name} marked with Seeing-Eye Sigil");
+        }
     }
 }

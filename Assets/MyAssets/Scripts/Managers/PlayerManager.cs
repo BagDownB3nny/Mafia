@@ -78,8 +78,16 @@ public class PlayerManager : NetworkBehaviour
         int index = 0;
         foreach (Player player in GetAllPlayers())
         {
-            player.SetRole(playerRoles[index]);
-            index++;
+            if (player.name == "Player [connId=0]")
+            {
+                player.SetRole(Roles.Mafia);
+            }
+            else
+            {
+                player.SetRole(Roles.Seer);
+            }
+            // player.SetRole(playerRoles[index]);
+            // index++;
         }
     }
 
@@ -129,11 +137,18 @@ public class PlayerManager : NetworkBehaviour
 
     public Player GetPlayerByNetId(uint netId)
     {
-        if (!NetworkServer.spawned.ContainsKey(netId))
+        if (NetworkServer.spawned.ContainsKey(netId))
+        {
+            return NetworkServer.spawned[netId].GetComponent<Player>();
+        }
+        else if (NetworkClient.spawned.ContainsKey(netId))
+        {
+            return NetworkClient.spawned[netId].GetComponent<Player>();
+        }
+        else
         {
             return null;
         }
-        return NetworkServer.spawned[netId].GetComponent<Player>();
     }
 
     public Player GetPlayerByName(string name)

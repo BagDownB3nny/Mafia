@@ -1,10 +1,11 @@
-using System.Collections;
+using System;
+using System.Collections.Generic;
 using Mirror;
-using Mirror.Examples.Basic;
 using Steamworks;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
+
+
 
 public class Player : NetworkBehaviour
 {
@@ -28,6 +29,13 @@ public class Player : NetworkBehaviour
     [SyncVar]
     public House house;
 
+    Dictionary<Enum, Role> roleScripts;
+
+    public void Start()
+    {
+        GetRoleScripts();
+    }
+
     public override void OnStartLocalPlayer()
     {
         StartCamera();
@@ -39,6 +47,17 @@ public class Player : NetworkBehaviour
         }
 
         localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
+    }
+
+    [Client]
+    private void GetRoleScripts()
+    {
+        roleScripts = new Dictionary<Enum, Role>
+        {
+            {Roles.Seer, gameObject.GetComponentInChildren<Seer>(includeInactive: true)},
+            {Roles.Guardian, gameObject.GetComponentInChildren<Guardian>(includeInactive: true)},
+            {Roles.Mafia, gameObject.GetComponentInChildren<Mafia>(includeInactive: true)}
+        };
     }
 
     [Client]
@@ -68,38 +87,33 @@ public class Player : NetworkBehaviour
         playerUIPrefab.text = steamUsername;
     }
 
+    public Role GetRoleScript()
+    {
+        return roleScripts[role];
+    }
+
     [Server]
     public void SetRole(Roles newRole)
     {
         role = newRole;
-        RemoveRoleScript();
-        AddRoleScript(newRole);
+        EnableRoleScript(newRole);
 
         house.SpawnRoom(newRole);
     }
 
-    private void AddRoleScript(Roles newRole)
+    private void EnableRoleScript(Roles newRole)
     {
-        switch (newRole)
-        {
-            case Roles.Seer:
-                gameObject.AddComponent<Seer>();
-                break;
-            case Roles.Mafia:
-                gameObject.AddComponent<Mafia>();
-                break;
-            case Roles.Guardian:
-                gameObject.AddComponent<Guardian>();
-                break;
-        }
+        roleScripts[newRole].enabled = true;
     }
 
-    private void RemoveRoleScript()
+    private void DisableRoleScriptsExcept(Roles roleToKeep)
     {
-        Role roleComponent = GetComponent<Role>();
-        if (roleComponent != null)
+        foreach (Roles role in Enum.GetValues(typeof(Roles)))
         {
-            Destroy(roleComponent);
+            if (role != roleToKeep)
+            {
+                roleScripts[role].enabled = false;
+            }
         }
     }
 
@@ -126,8 +140,7 @@ public class Player : NetworkBehaviour
         {
             PlayerUIManager.instance.SetRoleText(newRole);
         }
-        RemoveRoleScript();
-        AddRoleScript(newRole);
+        EnableRoleScript(newRole);
     }
 
     [Server]
@@ -151,7 +164,6 @@ public class Player : NetworkBehaviour
     }
 
     [Server]
-
     public void EquipGun()
     {
         hasGun = true;
