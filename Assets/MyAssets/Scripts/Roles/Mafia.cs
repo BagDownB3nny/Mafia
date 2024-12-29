@@ -7,6 +7,22 @@ public class Mafia : Role
 
     private Player markedPlayer;
 
+    public void OnEnable()
+    {
+        if (isLocalPlayer)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigils.DeathSigil);
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (isLocalPlayer)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigils.DeathSigil);
+        }
+    }
+
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
     {

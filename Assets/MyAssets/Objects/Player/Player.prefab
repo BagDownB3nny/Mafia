@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1958562902997450245}
   - component: {fileID: 5634906214475888066}
   - component: {fileID: 8374133042411230162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DeathSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 1789402416173126426}
   - component: {fileID: 1436859229270177558}
   - component: {fileID: 4151963169070145718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ProtectionSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: 2672214546093486181}
   - component: {fileID: 1420555283537082903}
   - component: {fileID: 4922649900959304195}
+  - component: {fileID: 3031720587410625526}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -427,7 +428,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   groundCheckHeight: 0.82
-  rb: {fileID: 5648229677674608265}
+  rb: {fileID: 0}
   capsuleCollider: {fileID: 1050102110948460324}
 --- !u!114 &539002951707911350
 MonoBehaviour:
@@ -561,6 +562,33 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+--- !u!54 &3031720587410625526
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3241956818840615573}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &3368703614637123062
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +687,7 @@ GameObject:
   - component: {fileID: 3668761137275443419}
   - component: {fileID: 3316142902868578739}
   - component: {fileID: 171840707912396424}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SeeingEyeSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1172,6 @@ GameObject:
   - component: {fileID: 6516018283775317088}
   - component: {fileID: 3390034452315252066}
   - component: {fileID: 2907774999324888496}
-  - component: {fileID: 5648229677674608265}
   m_Layer: 0
   m_Name: PlayerVisual
   m_TagString: Untagged
@@ -1292,33 +1319,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   corpsePrefab: {fileID: 8579996662577155270, guid: 0e6a36458ad554a5f830fdee240477b8, type: 3}
---- !u!54 &5648229677674608265
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8320479938080240892}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!1 &8334769822670642127
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 public enum Sigils
 {
-    SeeingEye,
-    Protection,
-    Death,
+    SeeingEyeSigil,
+    ProtectionSigil,
+    DeathSigil,
 }

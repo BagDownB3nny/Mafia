@@ -1,6 +1,7 @@
 using Mirror;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement Settings")]
@@ -13,13 +14,14 @@ public class PlayerMovement : NetworkBehaviour
     public LayerMask groundLayer; // Define which layers are considered ground
     public float groundCheckHeight = 0.5f; // Height of the capsule cast (half of the player collider height)
 
+    private Rigidbody rb;
     private Vector3 moveDirection;
     private bool isGrounded;
-    [SerializeField] private Rigidbody rb;
     [SerializeField] private CapsuleCollider capsuleCollider;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // Prevent the Rigidbody from being affected by physics rotations
     }
 
