@@ -45,14 +45,15 @@ public class PlayerActions : NetworkBehaviour
     {
         if (Input.GetMouseButtonDown(0) && player.isAbleToShoot())
         {
-            GameObject lookingAt = playerCamera.GetLookingAt(40.0f);
-            CmdShoot(lookingAt);
+            Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
+            CmdShoot(currentLookingAtDirection, transform);
         }
     }
 
     [Command]
-    private void CmdShoot(GameObject lookingAt)
+    private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
     {
+        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
         if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
         {
             Shootable shootable = lookingAt.GetComponent<Shootable>();

@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class House : NetworkBehaviour
 {
-    [SerializeField] private List<GameObject> doors;
-    [SerializeField] private GameObject doorPrefab;
-    [SerializeField] private Transform doorPositionsHolder;
+    [SerializeField] private List<Door> doors;
     [SerializeField] private GameObject SeerRoom;
 
     [SerializeField] public Transform spawnPoint;
@@ -19,40 +17,13 @@ public class House : NetworkBehaviour
     [SyncVar]
     public bool isProtected;
 
-
     [Server]
-    public void SpawnDoors(Transform doorsParent)
+    public void CloseAllDoors()
     {
-        foreach (Transform doorPosition in doorPositionsHolder)
+        foreach (Door door in doors)
         {
-            GameObject door = Instantiate(doorPrefab, doorPosition.position, doorPosition.rotation);
-            door.GetComponent<Door>().house = this;
-            door.transform.localScale = doorPosition.localScale;
-            door.transform.SetParent(doorsParent);
-            NetworkServer.Spawn(door);
-            doors.Add(door);
-            RpcSetDoorParent(door, doorsParent);
-        }
-    }
-
-    [ClientRpc]
-    public void RpcSetDoorParent(GameObject door, Transform doorsParent)
-    {
-        door.transform.SetParent(doorsParent);
-        Debug.Log("Setting parent for door");
-    }
-
-
-    [Server]
-    public void SetDoorsActive()
-    {
-        foreach (GameObject door in doors)
-        {
-            if (door != null)
-            {
-                door.SetActive(true);
-                RpcSetDoorActive(door);
-            }
+            InteractableDoor interactableDoor = door.GetComponent<InteractableDoor>();
+            interactableDoor.CloseDoor();
         }
     }
 
@@ -63,15 +34,12 @@ public class House : NetworkBehaviour
     }
 
     [Server]
-    public void SetDoorsInactive()
+    public void OpenAllDoors()
     {
-        foreach (GameObject door in doors)
+        foreach (Door door in doors)
         {
-            if (door != null)
-            {
-                door.SetActive(true);
-                RpcSetDoorInactive(door);
-            }
+            InteractableDoor interactableDoor = door.GetComponent<InteractableDoor>();
+            interactableDoor.OpenDoor();
         }
     }
 

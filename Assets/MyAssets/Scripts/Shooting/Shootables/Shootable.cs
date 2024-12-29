@@ -10,3 +10,4 @@ public abstract class Shootable : NetworkBehaviour
         Debug.Log($"{name} was shot!");
     }
 }
+

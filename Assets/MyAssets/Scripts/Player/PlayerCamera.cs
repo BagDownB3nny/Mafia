@@ -67,6 +67,11 @@ public class PlayerCamera : MonoBehaviour
         }
     }
 
+    public Vector3 GetLookingAtDirection()
+    {
+        return transform.forward;
+    }
+
     private void HandleMoveCamera()
     {
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * 300.0f;
@@ -78,6 +83,16 @@ public class PlayerCamera : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+
+    public static GameObject GetLookingAt(Vector3 lookingAtDirection, Transform origin, float maxDistance)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(origin.position, lookingAtDirection, out hit, maxDistance))
+        {
+            return hit.collider.gameObject;
+        }
+        return null;
     }
 
     public GameObject GetLookingAt(float maxDistance)
