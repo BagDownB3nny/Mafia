@@ -7,6 +7,7 @@ public class InteractableDoor : Interactable
 {
 
     public bool isOpen = false;
+    public bool isBroken = false;
     [SerializeField] private Transform doorOpenPosition;
     [SerializeField] private Transform doorClosedPosition;
 

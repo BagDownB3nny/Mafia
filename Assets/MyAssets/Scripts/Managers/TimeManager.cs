@@ -62,6 +62,7 @@ public class TimeManager : NetworkBehaviour
         HouseManager.instance.ProtectAllHouses();
         // Unprotect the house marked for death
         DeathSigil.ActivateAtNight();
+        ProtectionSigil.ActivateAtNight();
         // Set moon
         // Set clock
         clock = new Timer(nightDuration);

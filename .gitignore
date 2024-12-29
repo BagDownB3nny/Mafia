@@ -36,6 +36,9 @@
 .vs/
 .vscode/
 
+# macOS Finder directory files
+.DS_Store
+
 # Gradle cache directory
 .gradle/
 

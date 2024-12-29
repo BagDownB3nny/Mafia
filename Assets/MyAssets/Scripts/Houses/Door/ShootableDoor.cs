@@ -25,6 +25,8 @@ public class ShootableDoor : Shootable
     [Server]
     private void KnockDoorDown()
     {
+        
+
         // Swing door down to the ground, with the door base as the pivot point
         float animationDuration = 0.7f;
         transform.DOMove(doorKnockedPosition.position, animationDuration).SetEase(Ease.InQuad);
