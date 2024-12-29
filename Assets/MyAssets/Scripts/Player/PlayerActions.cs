@@ -53,20 +53,19 @@ public class PlayerActions : NetworkBehaviour
     [Command]
     private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
     {
-        gameObject.GetComponentInChildren<Shootable>().OnShot(connectionToClient);
-        // GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
-        // Debug.Log("Looking at: " + lookingAt);
-        // if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
-        // {
-        //     Shootable shootable = lookingAt.GetComponent<Shootable>();
-        //     if (connectionToClient == null)
-        //     {
-        //         Debug.LogError("Connection to client is null");
-        //         return;
-        //     }
-        //     shootable.OnShot(connectionToClient);
-        //     Debug.Log("Player was shot" + lookingAt.name);
-        // }
+        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
+        Debug.Log("Looking at: " + lookingAt);
+        if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
+        {
+            Shootable shootable = lookingAt.GetComponent<Shootable>();
+            if (connectionToClient == null)
+            {
+                Debug.LogError("Connection to client is null");
+                return;
+            }
+            shootable.OnShot(connectionToClient);
+            Debug.Log("Player was shot" + lookingAt.name);
+        }
     }
 
     [Command]

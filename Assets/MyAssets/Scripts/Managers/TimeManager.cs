@@ -8,7 +8,7 @@ public class TimeManager : NetworkBehaviour
 {
 
     [Header("Duration")]
-    [SerializeField] private float dayDuration = 60;
+    [SerializeField] private float dayDuration = 20;
     [SerializeField] private float nightDuration = 60;
 
     public UnityEvent OnDayEndEvent;
