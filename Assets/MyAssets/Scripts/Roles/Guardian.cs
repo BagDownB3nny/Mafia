@@ -6,6 +6,22 @@ public class Guardian : Role
     private uint markedPlayerNetId;
     public override string rolePlayerInteractText => "Protect with Guardian's Sigil";
 
+    public void OnEnable()
+    {
+        if (isLocalPlayer)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigils.ProtectionSigil);
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (isLocalPlayer)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigils.ProtectionSigil);
+        }
+    }
+
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
     {

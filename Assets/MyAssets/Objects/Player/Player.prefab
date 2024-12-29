@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1958562902997450245}
   - component: {fileID: 5634906214475888066}
   - component: {fileID: 8374133042411230162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DeathSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  player: {fileID: 6584411875423326777}
 --- !u!1 &1129660375164911286
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +182,7 @@ GameObject:
   - component: {fileID: 1789402416173126426}
   - component: {fileID: 1436859229270177558}
   - component: {fileID: 4151963169070145718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ProtectionSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,6 +269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4db54e6271748f686dcfb92e3c5977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &2834433955952335351
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +686,7 @@ GameObject:
   - component: {fileID: 3668761137275443419}
   - component: {fileID: 3316142902868578739}
   - component: {fileID: 171840707912396424}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SeeingEyeSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
