@@ -58,7 +58,7 @@ public class TimeManager : NetworkBehaviour
     {
         Debug.Log($"Night {dayNumber} started");
         // Close doors and protect all houses
-        HouseManager.instance.SetActiveAllDoors();
+        HouseManager.instance.CloseAllDoors();
         HouseManager.instance.ProtectAllHouses();
         // Unprotect the house marked for death
         DeathSigil.ActivateAtNight();
@@ -89,7 +89,6 @@ public class TimeManager : NetworkBehaviour
         }
         // Bring killers back to house
         // Open doors
-        HouseManager.instance.SetInactiveAllDoors();
         // Remove moon
         OnDayStart();
     }
@@ -111,5 +110,8 @@ public class TimeManager : NetworkBehaviour
         // Set sun
         clock = new Timer(dayDuration);
         clock.OnTimerEnd += OnDayEnd;
+
+        // Open doors
+        HouseManager.instance.OpenAllDoors();
     }
 }

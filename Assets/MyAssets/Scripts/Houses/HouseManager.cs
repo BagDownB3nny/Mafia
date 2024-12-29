@@ -40,9 +40,6 @@ public class HouseManager : NetworkBehaviour
             NetworkServer.Spawn(house);
             houses.Add(house.GetComponent<House>());
             RpcSetHouseParent(house);
-
-            // Setup doors
-            house.GetComponent<House>().SpawnDoors(doorsParent);
         }
     }
 
@@ -54,20 +51,20 @@ public class HouseManager : NetworkBehaviour
     }
 
     [Server]
-    public void SetActiveAllDoors()
+    public void CloseAllDoors()
     {
         foreach (House house in houses)
         {
-            house.SetDoorsActive();
+            house.CloseAllDoors();
         }
     }
 
     [Server]
-    public void SetInactiveAllDoors()
+    public void OpenAllDoors()
     {
         foreach (House house in houses)
         {
-            house.SetDoorsInactive();
+            house.OpenAllDoors();
         }
     }
 

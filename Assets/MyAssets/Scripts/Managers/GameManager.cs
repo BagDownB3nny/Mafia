@@ -24,7 +24,7 @@ public class GameManager : NetworkBehaviour
     public void StartGame()
     {
         PlayerManager.instance.AssignRoles();
-        HouseManager.instance.SetInactiveAllDoors();
+        HouseManager.instance.OpenAllDoors();
         TimeManager.instance.StartFirstDay();
     }
 }
