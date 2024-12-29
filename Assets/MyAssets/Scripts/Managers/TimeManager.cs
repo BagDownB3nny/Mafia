@@ -68,7 +68,7 @@ public class TimeManager : NetworkBehaviour
         clock = new Timer(nightDuration);
         clock.OnTimerEnd += OnNightEnd;
         // Teleport players back to home
-        PlayerManager.instance.TeleportAllPlayersBackToSpawn();
+        PlayerManager.instance.TeleportAllPlayersBackToNightSpawn();
 
         // TODO: Only give guns to mafia
         List<Player> players = PlayerManager.instance.GetAllPlayers();
@@ -88,7 +88,8 @@ public class TimeManager : NetworkBehaviour
         {
             player.UnequipGun();
         }
-        // Bring killers back to house
+        // Bring everyone back to house
+        PlayerManager.instance.TeleportAllPlayersBackToSpawn();
         // Open doors
         // Remove moon
         OnDayStart();
@@ -112,7 +113,7 @@ public class TimeManager : NetworkBehaviour
         clock = new Timer(dayDuration);
         clock.OnTimerEnd += OnDayEnd;
 
-        // Open doors
-        HouseManager.instance.OpenAllDoors();
+        // Close all doors
+        HouseManager.instance.CloseAllDoors();
     }
 }

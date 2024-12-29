@@ -15,6 +15,7 @@ public class Player : NetworkBehaviour
     [SyncVar(hook = nameof(OnUsernameChanged))]
     public string steamUsername;
     [SerializeField] private TMP_Text playerUIPrefab;
+    [SerializeField] private Transform cameraTransform;
 
     [SyncVar(hook = nameof(OnGunStatusChanged))]
     private bool hasGun;
@@ -28,6 +29,8 @@ public class Player : NetworkBehaviour
 
     [SyncVar]
     public House house;
+
+    public Transform nightSpawnPoint;
 
     Dictionary<Enum, Role> roleScripts;
 
@@ -57,14 +60,15 @@ public class Player : NetworkBehaviour
             {Roles.Seer, gameObject.GetComponentInChildren<Seer>(includeInactive: true)},
             {Roles.Guardian, gameObject.GetComponentInChildren<Guardian>(includeInactive: true)},
             {Roles.Mafia, gameObject.GetComponentInChildren<Mafia>(includeInactive: true)},
-            {Roles.SixthSense, gameObject.GetComponentInChildren<SixthSense>(includeInactive: true)}
+            {Roles.SixthSense, gameObject.GetComponentInChildren<SixthSense>(includeInactive: true)},
+            {Roles.Villager, gameObject.GetComponentInChildren<Villager>(includeInactive: true)}
         };
     }
 
     [Client]
     private void StartCamera()
     {
-        Camera.main.transform.GetComponent<MoveCamera>().SetCameraPosition(this.transform);
+        Camera.main.transform.GetComponent<MoveCamera>().SetCameraPosition(cameraTransform);
         Camera.main.transform.GetComponent<PlayerCamera>().SetOrientation(this.transform);
         Camera.main.transform.localPosition = new Vector3(0, 0, 0);
     }
@@ -149,6 +153,20 @@ public class Player : NetworkBehaviour
     {
         TeleportPlayer(house.spawnPoint.position);
     }
+
+    [Server]
+    public void TeleportToNightSpawn()
+    {
+        if (role == Roles.Mafia)
+        {
+            TeleportPlayer(nightSpawnPoint.position);
+        }
+        else
+        {
+            TeleportToSpawn();
+        }
+    }
+
 
     [Server]
     public void TeleportPlayer(Vector3 position)

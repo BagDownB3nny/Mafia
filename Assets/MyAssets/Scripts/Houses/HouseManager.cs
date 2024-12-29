@@ -30,12 +30,38 @@ public class HouseManager : NetworkBehaviour
     [Server]
     public void InstantiateHouses()
     {
-        int numberOfPlayers = NetworkServer.connections.Count;
+        // int numberOfPlayers = NetworkServer.connections.Count;
+        int numberOfPlayers = 16;
         float houseWidth = 12.5f;
+        // for (int i = 0; i < numberOfPlayers; i++)
+        // {
+        //     Vector3 housePosition = new Vector3(i * houseWidth, 0, 0);
+        //     GameObject house = Instantiate(housePrefab, housePosition, Quaternion.identity);
+        //     house.transform.SetParent(houseParent);
+        //     NetworkServer.Spawn(house);
+        //     houses.Add(house.GetComponent<House>());
+        //     RpcSetHouseParent(house);
+        // }
+        float angleStep = 360f / numberOfPlayers;
+        // Different radiuses for different number of players
+        float radius = 35f;
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            Vector3 housePosition = new Vector3(i * houseWidth, 0, 0);
-            GameObject house = Instantiate(housePrefab, housePosition, Quaternion.identity);
+            float angle = i * angleStep; // Angle for the current player
+            float angleInRadians = angle * Mathf.Deg2Rad;
+
+            // houses should be spawned in a circle around the center of the map
+            Vector3 housePosition = new Vector3(
+                Mathf.Cos(angleInRadians) * radius,
+                0,
+                Mathf.Sin(angleInRadians) * radius
+            );
+
+            // Calculate the rotation to face the center
+            Vector3 directionToCenter = (Vector3.zero - housePosition).normalized;
+            Quaternion houseRotation = Quaternion.LookRotation(directionToCenter);
+
+            GameObject house = Instantiate(housePrefab, housePosition, houseRotation);
             house.transform.SetParent(houseParent);
             NetworkServer.Spawn(house);
             houses.Add(house.GetComponent<House>());

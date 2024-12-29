@@ -80,11 +80,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(Roles.SixthSense);
+                player.SetRole(Roles.Mafia);
             }
             else
             {
-                player.SetRole(Roles.Mafia);
+                player.SetRole(Roles.Seer);
             }
             // player.SetRole(playerRoles[index]);
             // index++;
@@ -165,16 +165,30 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
+    [Server]
+    public void TeleportAllPlayersBackToNightSpawn()
+    {
+        foreach (Player player in GetAllPlayers())
+        {
+            player.TeleportToNightSpawn();
+        }
+    }
+
     public int GetMafiaCount()
     {
-        int count = 0;
+        return GetMafiaPlayers().Count;
+    }
+
+    public List<Player> GetMafiaPlayers()
+    {
+        List<Player> mafiaPlayers = new List<Player>();
         foreach (Player player in GetAllPlayers())
         {
             if (player.role == Roles.Mafia)
             {
-                count++;
+                mafiaPlayers.Add(player);
             }
         }
-        return count;
+        return mafiaPlayers;
     }
 }

@@ -24,6 +24,7 @@ public class GameManager : NetworkBehaviour
     public void StartGame()
     {
         PlayerManager.instance.AssignRoles();
+        MafiaHouse.instance.AssignMafiaSpawn();
         HouseManager.instance.OpenAllDoors();
         TimeManager.instance.StartFirstDay();
     }
