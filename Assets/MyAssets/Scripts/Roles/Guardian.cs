@@ -10,6 +10,22 @@ public class Guardian : Role
     public override bool isAbleToInteractWithPlayers => true;
     protected override List<Sigils> sigilsAbleToSee => new List<Sigils> { Sigils.DeathSigil };
 
+    public void OnEnable()
+    {
+        if (isLocalPlayer)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigils.ProtectionSigil);
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (isLocalPlayer)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigils.ProtectionSigil);
+        }
+    }
+
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
     {

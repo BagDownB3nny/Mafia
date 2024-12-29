@@ -16,6 +16,22 @@ public class Seer : Role
         base.OnStartLocalPlayer();
     }
 
+    public void OnEnable()
+    {
+        if (isLocalPlayer)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigils.SeeingEyeSigil);
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (isLocalPlayer)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigils.SeeingEyeSigil);
+        }
+    }
+
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
     {
