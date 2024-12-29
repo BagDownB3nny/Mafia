@@ -1,34 +1,33 @@
 using Mirror;
 using UnityEngine;
 
-public class ShootablePlayer : NetworkBehaviour
+public class ShootablePlayer : Shootable
 {
-    MeshRenderer meshRenderer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        // Get the MeshRenderer component of the GameObject
-        meshRenderer = GetComponent<MeshRenderer>();
-    }
+    [Header("CorpseSettings")]
+    public GameObject corpsePrefab;
+    private GameObject corpse;
 
     [Server]
-    public void OnShot(NetworkConnectionToClient shooter)
+    public override void OnShot(NetworkConnectionToClient shooter)
     {
         Debug.Log($"{name} was shot!");
-        // Set the material of the MeshRenderer to red
-        RpcSetMaterial();
         // Send a message to the player client that shot
         PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "You killed a player!", 1.5f);
         // Send a message to the client that the player was shot
         PlayerUIManager.instance.RpcSetTemporaryInteractableText(connectionToClient, "You were shot!", 1.5f);
         // Mark the player as dead
-        RpcSetMaterial();
+        RpcSetDeath();
+        corpse = Instantiate(corpsePrefab, transform.position, transform.rotation);
+        NetworkServer.Spawn(corpse);
     }
 
     [ClientRpc]
-    public void RpcSetMaterial()
+    public void RpcSetDeath()
     {
-        meshRenderer.material.color = Color.red;
+        // Get the player object which is the parent of the shootable player object
+        var player = gameObject.GetComponentInParent<Player>();
+        // Change player layer to ghost
+        player.gameObject.layer = LayerMask.NameToLayer("Ghost");
     }
 
 }
