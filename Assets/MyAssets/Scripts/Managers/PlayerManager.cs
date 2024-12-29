@@ -80,7 +80,7 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(Roles.Guardian);
+                player.SetRole(Roles.SixthSense);
             }
             else
             {
@@ -102,7 +102,7 @@ public class PlayerManager : NetworkBehaviour
         {
             if (i == 0)
             {
-                roles[i] = Roles.Guardian;
+                roles[i] = Roles.SixthSense;
             }
             else if (i == 1)
             {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using System.Collections.Generic;
 
 public class Seer : Role
 {
@@ -7,26 +8,12 @@ public class Seer : Role
     public uint markedPlayerNetId;
 
     public override string rolePlayerInteractText => "Mark with Seeing-Eye Sigil";
+    public override bool isAbleToInteractWithPlayers => true;
+    protected override List<Sigils> sigilsAbleToSee => new List<Sigils> { Sigils.SeeingEyeSigil };
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-    }
-
-    public void OnEnable()
-    {
-        if (isLocalPlayer)
-        {
-            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigils.SeeingEyeSigil);
-        }
-    }
-
-    public void OnDisable()
-    {
-        if (isLocalPlayer)
-        {
-            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigils.SeeingEyeSigil);
-        }
     }
 
     [Server]

@@ -3,5 +3,6 @@ public enum Roles
     Villager,
     Mafia,
     Seer,
-    Guardian
+    Guardian,
+    SixthSense
 }

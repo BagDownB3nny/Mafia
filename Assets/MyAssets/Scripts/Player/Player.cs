@@ -56,7 +56,8 @@ public class Player : NetworkBehaviour
         {
             {Roles.Seer, gameObject.GetComponentInChildren<Seer>(includeInactive: true)},
             {Roles.Guardian, gameObject.GetComponentInChildren<Guardian>(includeInactive: true)},
-            {Roles.Mafia, gameObject.GetComponentInChildren<Mafia>(includeInactive: true)}
+            {Roles.Mafia, gameObject.GetComponentInChildren<Mafia>(includeInactive: true)},
+            {Roles.SixthSense, gameObject.GetComponentInChildren<SixthSense>(includeInactive: true)}
         };
     }
 
@@ -190,5 +191,10 @@ public class Player : NetworkBehaviour
     public bool isAbleToShoot()
     {
         return hasGun;
+    }
+
+    public bool IsAbleToInteract()
+    {
+        return GetRoleScript().isAbleToInteractWithPlayers;
     }
 }

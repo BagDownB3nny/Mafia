@@ -22,6 +22,7 @@ public class PlayerActions : NetworkBehaviour
 
     private void HandleInteractions()
     {
+        bool isAbleToInteract = GetComponent<Player>().IsAbleToInteract();
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interactable interactable = playerCamera.GetInteratable();
@@ -29,7 +30,6 @@ public class PlayerActions : NetworkBehaviour
             {
                 if (interactable is InteractablePlayer)
                 {
-                    Debug.Log(interactable.gameObject);
                     CmdInteractWithPlayer(interactable.gameObject.GetComponentInParent<NetworkIdentity>());
                 }
                 else

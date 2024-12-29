@@ -1,27 +1,14 @@
 using UnityEngine;
 using Mirror;
+using System.Collections.Generic;
 
 public class Mafia : Role
 {
     public override string rolePlayerInteractText => "Mark for death";
+    public override bool isAbleToInteractWithPlayers => true;
+    protected override List<Sigils> sigilsAbleToSee => new List<Sigils> { Sigils.DeathSigil };
 
     private Player markedPlayer;
-
-    public void OnEnable()
-    {
-        if (isLocalPlayer)
-        {
-            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigils.DeathSigil);
-        }
-    }
-
-    public void OnDisable()
-    {
-        if (isLocalPlayer)
-        {
-            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigils.DeathSigil);
-        }
-    }
 
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
