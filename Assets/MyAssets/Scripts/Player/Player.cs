@@ -211,8 +211,12 @@ public class Player : NetworkBehaviour
         return hasGun;
     }
 
-    public bool IsAbleToInteract()
+    public bool IsAbleToInteractWithPlayers()
     {
+        if (GetRoleScript() == null)
+        {
+            return false;
+        }
         return GetRoleScript().isAbleToInteractWithPlayers;
     }
 }

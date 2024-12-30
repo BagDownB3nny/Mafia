@@ -11,6 +11,11 @@ public class InteractableDoor : Interactable
     [SerializeField] private Transform doorOpenPosition;
     [SerializeField] private Transform doorClosedPosition;
 
+    public void Start()
+    {
+        Unhighlight();
+    }
+
     public override void OnHover()
     {
         Highlight();

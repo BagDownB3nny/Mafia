@@ -22,17 +22,17 @@ public class PlayerActions : NetworkBehaviour
 
     private void HandleInteractions()
     {
-        bool isAbleToInteract = GetComponent<Player>().IsAbleToInteract();
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interactable interactable = playerCamera.GetInteratable();
             if (interactable != null)
             {
-                if (interactable is InteractablePlayer)
+                bool isAbleToInteractWithPlayers = GetComponent<Player>().IsAbleToInteractWithPlayers();
+                if (interactable is InteractablePlayer && isAbleToInteractWithPlayers)
                 {
                     CmdInteractWithPlayer(interactable.gameObject.GetComponentInParent<NetworkIdentity>());
                 }
-                else
+                else if (interactable is Interactable)
                 {
                     interactable.Interact();
                 }

@@ -13,15 +13,7 @@ public class PlayerUIManager : NetworkBehaviour
 
     public void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Debug.LogWarning("More than one instance of PlayerUIManager found!");
-            return;
-        }
+        instance = this;
     }
 
     [Client]
