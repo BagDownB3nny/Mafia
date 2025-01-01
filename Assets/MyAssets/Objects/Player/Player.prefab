@@ -1188,7 +1188,7 @@ GameObject:
   - component: {fileID: 1050102110948460324}
   - component: {fileID: 6516018283775317088}
   - component: {fileID: 3390034452315252066}
-  - component: {fileID: 2907774999324888496}
+  - component: {fileID: 3959052396700487654}
   m_Layer: 0
   m_Name: PlayerVisual
   m_TagString: Untagged
@@ -1320,7 +1320,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
---- !u!114 &2907774999324888496
+--- !u!114 &3959052396700487654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
