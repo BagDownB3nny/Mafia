@@ -1,4 +1,5 @@
 using Mirror;
+using TMPro;
 using UnityEngine;
 
 public class ShootablePlayer : Shootable
@@ -15,6 +16,7 @@ public class ShootablePlayer : Shootable
         PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "You killed a player!", 1.5f);
         // Send a message to the client that the player was shot
         PlayerUIManager.instance.RpcSetTemporaryInteractableText(connectionToClient, "You were shot!", 1.5f);
+        gameObject.GetComponentInParent<Player>().UnequipGun();
         // Mark the player as dead
         RpcSetDeath();
         corpse = Instantiate(corpsePrefab, transform.position, transform.rotation);
@@ -26,8 +28,8 @@ public class ShootablePlayer : Shootable
     {
         // Get the player object which is the parent of the shootable player object
         var player = gameObject.GetComponentInParent<Player>();
-        // Change player layer to ghost
-        player.gameObject.layer = LayerMask.NameToLayer("Ghost");
+        // Recursively change all children layers to ghost
+        Layer.SetLayerChildren(player.gameObject, LayerMask.NameToLayer("Ghost"));
     }
 
 }

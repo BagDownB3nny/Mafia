@@ -43,4 +43,14 @@ public class CameraCullingMaskManager : MonoBehaviour
             SetSigilLayerInvisible((Sigils)i);
         }
     }
+
+    public void SetGhostLayerVisible()
+    {
+        Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("Ghost");
+    }
+
+    public void SetGhostLayerInvisible()
+    {
+        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("Ghost"));
+    }
 }
