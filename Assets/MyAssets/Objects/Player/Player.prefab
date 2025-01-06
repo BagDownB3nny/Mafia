@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1958562902997450245}
   - component: {fileID: 5634906214475888066}
   - component: {fileID: 8374133042411230162}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: DeathSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4607757749379484365}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5554039387279633657}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RemotePlayerGunVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 1789402416173126426}
   - component: {fileID: 1436859229270177558}
   - component: {fileID: 4151963169070145718}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: ProtectionSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 3389008759890142004}
   - component: {fileID: 7014602843291408995}
   - component: {fileID: 1503670691707036906}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 4922649900959304195}
   - component: {fileID: 3031720587410625526}
   - component: {fileID: 4379862696919217180}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 1070793538036987503}
   - component: {fileID: 55249412551075447}
   - component: {fileID: 2800291218652164540}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 3668761137275443419}
   - component: {fileID: 3316142902868578739}
   - component: {fileID: 171840707912396424}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: SeeingEyeSigil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +805,7 @@ GameObject:
   - component: {fileID: 792195312550758830}
   - component: {fileID: 8332054148818826756}
   - component: {fileID: 1488157308980942899}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 7251406382582147493}
   - component: {fileID: 3510018217500469529}
   - component: {fileID: 2650755192680728816}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1067,7 +1067,7 @@ GameObject:
   - component: {fileID: 7119549480156248143}
   - component: {fileID: 1317876218746262534}
   - component: {fileID: 5460849328468609406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,7 +1151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9082808485209286019}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1189,7 +1189,7 @@ GameObject:
   - component: {fileID: 6516018283775317088}
   - component: {fileID: 3390034452315252066}
   - component: {fileID: 3959052396700487654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1347,7 +1347,7 @@ GameObject:
   - component: {fileID: 6262065023801761719}
   - component: {fileID: 3710170829722790581}
   - component: {fileID: 3834871799847806242}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1435,7 +1435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 576227353377121797}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SigilsHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1471,7 +1471,7 @@ GameObject:
   - component: {fileID: 5524744138678249533}
   - component: {fileID: 1990841984616015519}
   - component: {fileID: 2516750199055682008}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1555,7 +1555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7604805958965446920}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
