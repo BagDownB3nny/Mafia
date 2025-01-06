@@ -1,7 +1,6 @@
 using Mirror;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 public class InteractableDoor : Interactable
 {
@@ -16,13 +15,19 @@ public class InteractableDoor : Interactable
         Unhighlight();
     }
 
+    [Client]
     public override void OnHover()
     {
         Highlight();
-        string interactableText = isOpen ? "Close the door" : "Open the door";
-        PlayerUIManager.instance.SetInteractableText(interactableText);
+        if (isOwned) {
+            string interactableText = isOpen ? "Close the door" : "Open the door";
+            PlayerUIManager.instance.SetInteractableText(interactableText);
+        } else {
+            PlayerUIManager.instance.SetInteractableText("This door is protected");
+        }
     }
 
+    [Client]
     public override void OnUnhover()
     {
         Unhighlight();
@@ -32,10 +37,15 @@ public class InteractableDoor : Interactable
     [Client]
     public override void Interact()
     {
-        CmdInteract();
+        if (isOwned) {
+            CmdInteract();
+        } else {
+            PlayerUIManager.instance.SetInteractableText("You are unable to get past the protection");
+            Debug.Log(netIdentity.connectionToClient);
+        }
     }
 
-    [Command(requiresAuthority = false)]
+    [Command]
     private void CmdInteract()
     {
         if (isOpen)

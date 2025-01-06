@@ -10,7 +10,7 @@ public class House : NetworkBehaviour
 
     [SerializeField] public Transform spawnPoint;
 
-    [SyncVar]
+    [SyncVar(hook = nameof(OnPlayerChanged))]
 
     public Player player;
 
@@ -77,6 +77,14 @@ public class House : NetworkBehaviour
         if (role == Roles.Seer)
         {
             SeerRoom.SetActive(true);
+        }
+    }
+
+    // Re-assign house authority to the new player
+    public void OnPlayerChanged(Player oldPlayer, Player newPlayer)
+    {
+        if (newPlayer && newPlayer.netIdentity) {
+            Authority.AssignAuthority(gameObject.GetComponent<NetworkIdentity>(), newPlayer.netIdentity.connectionToClient);
         }
     }
 }

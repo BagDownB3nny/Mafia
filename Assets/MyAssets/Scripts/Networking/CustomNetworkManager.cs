@@ -37,6 +37,12 @@ public class CustomNetworkManager : NetworkManager
             ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
             : Instantiate(playerPrefab);
 
+        // instantiating a "Player" prefab gives it the name "Player(clone)"
+        // => appending the connectionId is WAY more useful for debugging!
+        player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
+        NetworkServer.AddPlayerForConnection(conn, player);
+
+        // Assign the player to a house after they have been added to the server
         House playerHouse = startPos.GetComponentInParent<House>();
         Player playerComponent = player.GetComponent<Player>();
         if (playerHouse != null)
@@ -44,11 +50,6 @@ public class CustomNetworkManager : NetworkManager
             playerComponent.house = playerHouse;
             playerHouse.player = playerComponent;
         }
-
-        // instantiating a "Player" prefab gives it the name "Player(clone)"
-        // => appending the connectionId is WAY more useful for debugging!
-        player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
-        NetworkServer.AddPlayerForConnection(conn, player);
     }
 
     public override void OnServerSceneChanged(string sceneName)
