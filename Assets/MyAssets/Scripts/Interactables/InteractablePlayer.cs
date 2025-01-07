@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public class InteractablePlayer : Interactable
 {
     public override void OnHover()

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -50,6 +49,7 @@ public class TimeManager : NetworkBehaviour
     private void OnDayEnd()
     {
         Debug.Log($"Day {dayNumber} ended");
+        VotingManager.instance.StopVoting();
         OnNightStart();
     }
 
@@ -115,5 +115,11 @@ public class TimeManager : NetworkBehaviour
 
         // Close all doors
         HouseManager.instance.CloseAllDoors();
+
+        // Spawn voting booth if past first day
+        if (dayNumber > 1)
+        {
+            VotingManager.instance.StartVoting();
+        }
     }
 }

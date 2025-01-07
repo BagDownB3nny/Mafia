@@ -2,8 +2,6 @@ using UnityEngine;
 using Mirror;
 using System.Linq;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class SyncListPlayer : SyncList<NetworkIdentity> { };
 

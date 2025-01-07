@@ -1,4 +1,3 @@
-using UnityEngine;
 using Mirror;
 
 
@@ -26,6 +25,7 @@ public class GameManager : NetworkBehaviour
         PlayerManager.instance.AssignRoles();
         MafiaHouse.instance.AssignMafiaSpawn();
         HouseManager.instance.OpenAllDoors();
+        VotingManager.instance.StopVoting();
         TimeManager.instance.StartFirstDay();
     }
 }
