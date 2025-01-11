@@ -20,7 +20,7 @@ public class SeerCrystalBall : Interactable
     public override void Interact()
     {
         Player localPlayer = PlayerManager.instance.localPlayer;
-        if (localPlayer.role == Roles.Seer)
+        if (localPlayer.role == RoleName.Seer)
         {
             Seer seerScript = localPlayer.GetComponent<Seer>();
             seerScript.LookThroughCrystalBall();

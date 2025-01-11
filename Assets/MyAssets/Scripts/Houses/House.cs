@@ -80,6 +80,7 @@ public class House : NetworkBehaviour
     }
 
     // Re-assign house authority to the new player
+    [Server]
     public void OnPlayerChanged(Player oldPlayer, Player newPlayer)
     {
         if (newPlayer && newPlayer.netIdentity) {

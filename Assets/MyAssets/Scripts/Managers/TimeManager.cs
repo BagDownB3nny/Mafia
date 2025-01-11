@@ -73,7 +73,7 @@ public class TimeManager : NetworkBehaviour
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {
-            if (player.GetRole() == Role.Mafia){
+            if (player.GetRole() == RoleName.Mafia){
                 player.EquipGun();
             }
         }
@@ -87,7 +87,7 @@ public class TimeManager : NetworkBehaviour
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {
-            if (player.GetRole() == Role.Mafia) {
+            if (player.GetRole() == RoleName.Mafia) {
                 player.UnequipGun();
             }
         }
