@@ -9,7 +9,7 @@ public class Seer : Role
 
     public override string rolePlayerInteractText => "Mark with Seeing-Eye Sigil";
     public override bool isAbleToInteractWithPlayers => true;
-    protected override List<Sigils> sigilsAbleToSee => new List<Sigils> { Sigils.SeeingEyeSigil };
+    protected override List<Sigil> sigilsAbleToSee => new List<Sigil> { Sigil.SeeingEyeSigil };
 
     public override void OnStartLocalPlayer()
     {
@@ -20,7 +20,7 @@ public class Seer : Role
     {
         if (isLocalPlayer)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigils.SeeingEyeSigil);
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigil.SeeingEyeSigil);
         }
     }
 
@@ -28,7 +28,7 @@ public class Seer : Role
     {
         if (isLocalPlayer)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigils.SeeingEyeSigil);
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigil.SeeingEyeSigil);
         }
     }
 

@@ -10,7 +10,7 @@ using UnityEngine;
 public class Player : NetworkBehaviour
 {
     [SyncVar(hook = nameof(OnRoleChanged))]
-    public Roles role;
+    public RoleName role;
 
     [SyncVar(hook = nameof(OnUsernameChanged))]
     public string steamUsername;
@@ -57,11 +57,11 @@ public class Player : NetworkBehaviour
     {
         roleScripts = new Dictionary<Enum, Role>
         {
-            {Roles.Seer, gameObject.GetComponentInChildren<Seer>(includeInactive: true)},
-            {Roles.Guardian, gameObject.GetComponentInChildren<Guardian>(includeInactive: true)},
-            {Roles.Mafia, gameObject.GetComponentInChildren<Mafia>(includeInactive: true)},
-            {Roles.SixthSense, gameObject.GetComponentInChildren<SixthSense>(includeInactive: true)},
-            {Roles.Villager, gameObject.GetComponentInChildren<Villager>(includeInactive: true)}
+            {RoleName.Seer, gameObject.GetComponentInChildren<Seer>(includeInactive: true)},
+            {RoleName.Guardian, gameObject.GetComponentInChildren<Guardian>(includeInactive: true)},
+            {RoleName.Mafia, gameObject.GetComponentInChildren<Mafia>(includeInactive: true)},
+            {RoleName.SixthSense, gameObject.GetComponentInChildren<SixthSense>(includeInactive: true)},
+            {RoleName.Villager, gameObject.GetComponentInChildren<Villager>(includeInactive: true)}
         };
     }
 
@@ -98,7 +98,7 @@ public class Player : NetworkBehaviour
     }
 
     [Server]
-    public void SetRole(Roles newRole)
+    public void SetRole(RoleName newRole)
     {
         role = newRole;
         EnableRoleScript(newRole);
@@ -106,14 +106,20 @@ public class Player : NetworkBehaviour
         house.SpawnRoom(newRole);
     }
 
-    private void EnableRoleScript(Roles newRole)
+    [Client]
+    public RoleName GetRole()
+    {
+        return role;
+    }
+
+    private void EnableRoleScript(RoleName newRole)
     {
         roleScripts[newRole].enabled = true;
     }
 
-    private void DisableRoleScriptsExcept(Roles roleToKeep)
+    private void DisableRoleScriptsExcept(RoleName roleToKeep)
     {
-        foreach (Roles role in Enum.GetValues(typeof(Roles)))
+        foreach (RoleName role in Enum.GetValues(typeof(RoleName)))
         {
             if (role != roleToKeep)
             {
@@ -139,7 +145,7 @@ public class Player : NetworkBehaviour
     }
 
     [Client]
-    public void OnRoleChanged(Roles oldRole, Roles newRole)
+    public void OnRoleChanged(RoleName oldRole, RoleName newRole)
     {
         if (isLocalPlayer)
         {
@@ -157,7 +163,7 @@ public class Player : NetworkBehaviour
     [Server]
     public void TeleportToNightSpawn()
     {
-        if (role == Roles.Mafia)
+        if (role == RoleName.Mafia)
         {
             TeleportPlayer(nightSpawnPoint.position);
         }

@@ -1,4 +1,4 @@
-public enum Roles
+public enum RoleName
 {
     Villager,
     Mafia,

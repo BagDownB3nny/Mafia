@@ -6,7 +6,7 @@ public class Mafia : Role
 {
     public override string rolePlayerInteractText => "Mark for death";
     public override bool isAbleToInteractWithPlayers => true;
-    protected override List<Sigils> sigilsAbleToSee => new List<Sigils> { Sigils.DeathSigil };
+    protected override List<Sigil> sigilsAbleToSee => new List<Sigil> { Sigil.DeathSigil };
 
     private Player markedPlayer;
 
@@ -14,7 +14,7 @@ public class Mafia : Role
     {
         if (isLocalPlayer)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigils.DeathSigil);
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigil.DeathSigil);
         }
     }
 
@@ -22,7 +22,7 @@ public class Mafia : Role
     {
         if (isLocalPlayer)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigils.DeathSigil);
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigil.DeathSigil);
         }
     }
 

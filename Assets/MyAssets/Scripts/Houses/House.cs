@@ -61,9 +61,9 @@ public class House : NetworkBehaviour
     }
 
     [Server]
-    public void SpawnRoom(Roles role)
+    public void SpawnRoom(RoleName role)
     {
-        if (role == Roles.Seer)
+        if (role == RoleName.Seer)
         {
             SeerRoom.SetActive(true);
         }
@@ -71,9 +71,9 @@ public class House : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcSpawnRoom(Roles role)
+    public void RpcSpawnRoom(RoleName role)
     {
-        if (role == Roles.Seer)
+        if (role == RoleName.Seer)
         {
             SeerRoom.SetActive(true);
         }

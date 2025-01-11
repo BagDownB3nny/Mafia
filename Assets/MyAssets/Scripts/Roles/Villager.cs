@@ -6,7 +6,7 @@ public class Villager : Role
 {
     public override string rolePlayerInteractText => null;
     public override bool isAbleToInteractWithPlayers => false;
-    protected override List<Sigils> sigilsAbleToSee => new List<Sigils>();
+    protected override List<Sigil> sigilsAbleToSee => new List<Sigil>();
 
     public override void InteractWithPlayer(NetworkIdentity player)
     {

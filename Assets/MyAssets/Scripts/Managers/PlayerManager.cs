@@ -13,7 +13,7 @@ public class PlayerManager : NetworkBehaviour
     // A list containing all the roles for the current lobby
     // This list should be updated everytime a player joins or leaves the lobby
     // For example, in a 6 player game, there could be 1 werewolf, 1 seer, 1 medium, and 3 villagers
-    public Roles[] playerRoles;
+    public RoleName[] playerRoles;
 
     public Player localPlayer;
 
@@ -78,11 +78,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(Roles.Mafia);
+                player.SetRole(RoleName.Mafia);
             }
             else
             {
-                player.SetRole(Roles.Seer);
+                player.SetRole(RoleName.Seer);
             }
             // player.SetRole(playerRoles[index]);
             // index++;
@@ -90,29 +90,29 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Server]
-    public Roles[] GenerateRoles()
+    public RoleName[] GenerateRoles()
     {
         // This is just a placeholder
         // In a real game, you would have a more complex algorithm to generate roles
         // For example, in a 6 player game, there could be 1 werewolf, 1 seer, 1 medium, and 3 villagers
-        Roles[] roles = new Roles[playerNetIds.Count];
+        RoleName[] roles = new RoleName[playerNetIds.Count];
         for (int i = 0; i < roles.Length; i++)
         {
             if (i == 0)
             {
-                roles[i] = Roles.SixthSense;
+                roles[i] = RoleName.SixthSense;
             }
             else if (i == 1)
             {
-                roles[i] = Roles.Mafia;
+                roles[i] = RoleName.Mafia;
             }
             else if (i == 2)
             {
-                roles[i] = Roles.Guardian;
+                roles[i] = RoleName.Guardian;
             }
             else
             {
-                roles[i] = Roles.Villager;
+                roles[i] = RoleName.Villager;
             }
         }
         return roles;
@@ -182,7 +182,7 @@ public class PlayerManager : NetworkBehaviour
         List<Player> mafiaPlayers = new List<Player>();
         foreach (Player player in GetAllPlayers())
         {
-            if (player.role == Roles.Mafia)
+            if (player.role == RoleName.Mafia)
             {
                 mafiaPlayers.Add(player);
             }

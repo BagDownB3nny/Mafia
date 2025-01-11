@@ -2,11 +2,11 @@ using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
 
-public abstract class Role : NetworkBehaviour
+public abstract class Role: NetworkBehaviour
 {
     public abstract string rolePlayerInteractText { get; }
     public abstract bool isAbleToInteractWithPlayers { get; }
-    protected abstract List<Sigils> sigilsAbleToSee { get; }
+    protected abstract List<Sigil> sigilsAbleToSee { get; }
 
     public virtual void InteractWithPlayer(NetworkIdentity player)
     {
@@ -17,7 +17,7 @@ public abstract class Role : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            foreach (Sigils sigil in sigilsAbleToSee)
+            foreach (Sigil sigil in sigilsAbleToSee)
             {
                 CameraCullingMaskManager.instance.SetSigilLayerVisible(sigil);
             }
@@ -28,7 +28,7 @@ public abstract class Role : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            foreach (Sigils sigil in sigilsAbleToSee)
+            foreach (Sigil sigil in sigilsAbleToSee)
             {
                 CameraCullingMaskManager.instance.SetSigilLayerInvisible(sigil);
             }

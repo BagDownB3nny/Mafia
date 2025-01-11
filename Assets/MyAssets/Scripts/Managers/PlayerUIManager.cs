@@ -16,7 +16,7 @@ public class PlayerUIManager : NetworkBehaviour
     }
 
     [Client]
-    public void SetRoleText(Roles role)
+    public void SetRoleText(RoleName role)
     {
         roleText.text = role.ToString();
     }

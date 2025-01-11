@@ -70,11 +70,12 @@ public class TimeManager : NetworkBehaviour
         // Teleport players back to home
         PlayerManager.instance.TeleportAllPlayersBackToNightSpawn();
 
-        // TODO: Only give guns to mafia
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {
-            player.EquipGun();
+            if (player.GetRole() == Role.Mafia){
+                player.EquipGun();
+            }
         }
     }
 
@@ -86,7 +87,9 @@ public class TimeManager : NetworkBehaviour
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {
-            player.UnequipGun();
+            if (player.GetRole() == Role.Mafia) {
+                player.UnequipGun();
+            }
         }
         // Bring everyone back to house
         PlayerManager.instance.TeleportAllPlayersBackToSpawn();
