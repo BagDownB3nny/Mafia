@@ -18,29 +18,29 @@ public class CameraCullingMaskManager : MonoBehaviour
         }
     }
 
-    public void SetSigilLayerVisible(Sigil sigil)
+    public void SetSigilLayerVisible(SigilName sigil)
     {
         Camera.main.cullingMask |= 1 << LayerMask.NameToLayer(sigil.ToString());
     }
 
-    public void SetSigilLayerInvisible(Sigil sigil)
+    public void SetSigilLayerInvisible(SigilName sigil)
     {
         Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer(sigil.ToString()));
     }
 
     public void SetAllSigilsVisible()
     {
-        for (int i = 0; i < System.Enum.GetValues(typeof(Sigil)).Length; i++)
+        for (int i = 0; i < System.Enum.GetValues(typeof(SigilName)).Length; i++)
         {
-            SetSigilLayerVisible((Sigil)i);
+            SetSigilLayerVisible((SigilName)i);
         }
     }
 
     public void SetAllSigilsInvisible()
     {
-        for (int i = 0; i < System.Enum.GetValues(typeof(Sigil)).Length; i++)
+        for (int i = 0; i < System.Enum.GetValues(typeof(SigilName)).Length; i++)
         {
-            SetSigilLayerInvisible((Sigil)i);
+            SetSigilLayerInvisible((SigilName)i);
         }
     }
 

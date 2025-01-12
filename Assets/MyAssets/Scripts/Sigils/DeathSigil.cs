@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class DeathSigil : NetworkBehaviour
+public class DeathSigil : Sigil
 {
     private readonly Player player;
 
@@ -19,7 +19,7 @@ public class DeathSigil : NetworkBehaviour
     }
 
     [Server]
-    public void Mark()
+    public override void Mark(uint markedPlayerNetId)
     {
         marksReceived++;
         if (marksReceived > 0 && !gameObject.activeSelf)
@@ -36,7 +36,7 @@ public class DeathSigil : NetworkBehaviour
     }
 
     [Server]
-    public void Unmark()
+    public override void Unmark()
     {
         marksReceived--;
         if (marksReceived == 0)

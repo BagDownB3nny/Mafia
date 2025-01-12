@@ -2,9 +2,9 @@ using Mirror;
 using UnityEngine;
 using System;
 
-public class SeeingEyeSigil : NetworkBehaviour
+public class SeeingEyeSigil : Sigil
 {
-
+    private static uint markedPlayerNetId = 0;
     public event Action OnDeactivate;
     private bool isActive = false;
     private float timeToDeactivation;
@@ -22,16 +22,18 @@ public class SeeingEyeSigil : NetworkBehaviour
     }
 
     [Server]
-    public void Mark()
+    public override void Mark(uint playerNetId)
     {
+        markedPlayerNetId = playerNetId;
         // Activating visual indicator
         gameObject.SetActive(true);
         RpcSetActive(true);
     }
 
     [Server]
-    public void Unmark()
+    public override void Unmark()
     {
+        markedPlayerNetId = 0;
         gameObject.SetActive(false);
         RpcSetActive(false);
     }
@@ -66,5 +68,22 @@ public class SeeingEyeSigil : NetworkBehaviour
         OnDeactivate = null;
 
         isActive = false;
+    }
+    [Server]
+    public static void ResetSeeingEyeSigil()
+    {
+        Player player = PlayerManager.instance.GetPlayerByNetId(markedPlayerNetId);
+        if (player == null)
+        {
+            Debug.LogError("Player not found");
+            return;
+        }
+        SeeingEyeSigil seeingEyeSigil = player.GetComponentInChildren<SeeingEyeSigil>();
+        if (seeingEyeSigil == null)
+        {
+            Debug.LogError("SeeingEyeSigil not found");
+            return;
+        }
+        seeingEyeSigil.Unmark();
     }
 }

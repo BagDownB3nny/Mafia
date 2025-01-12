@@ -8,13 +8,13 @@ public class Guardian : Role
     private uint markedPlayerNetId;
     public override string rolePlayerInteractText => "Protect with Guardian's Sigil";
     public override bool isAbleToInteractWithPlayers => true;
-    protected override List<Sigil> sigilsAbleToSee => new List<Sigil> { Sigil.DeathSigil };
+    protected override List<SigilName> sigilsAbleToSee => new List<SigilName> { SigilName.DeathSigil };
 
     public void OnEnable()
     {
         if (isLocalPlayer)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerVisible(Sigil.ProtectionSigil);
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(SigilName.ProtectionSigil);
         }
     }
 
@@ -22,7 +22,7 @@ public class Guardian : Role
     {
         if (isLocalPlayer)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerInvisible(Sigil.ProtectionSigil);
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(SigilName.ProtectionSigil);
         }
     }
 

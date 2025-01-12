@@ -6,7 +6,7 @@ public abstract class Role: NetworkBehaviour
 {
     public abstract string rolePlayerInteractText { get; }
     public abstract bool isAbleToInteractWithPlayers { get; }
-    protected abstract List<Sigil> sigilsAbleToSee { get; }
+    protected abstract List<SigilName> sigilsAbleToSee { get; }
 
     public virtual void InteractWithPlayer(NetworkIdentity player)
     {
@@ -17,7 +17,7 @@ public abstract class Role: NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            foreach (Sigil sigil in sigilsAbleToSee)
+            foreach (SigilName sigil in sigilsAbleToSee)
             {
                 CameraCullingMaskManager.instance.SetSigilLayerVisible(sigil);
             }
@@ -28,7 +28,7 @@ public abstract class Role: NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            foreach (Sigil sigil in sigilsAbleToSee)
+            foreach (SigilName sigil in sigilsAbleToSee)
             {
                 CameraCullingMaskManager.instance.SetSigilLayerInvisible(sigil);
             }

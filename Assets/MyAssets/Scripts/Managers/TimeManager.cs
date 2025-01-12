@@ -84,6 +84,7 @@ public class TimeManager : NetworkBehaviour
     {
         Debug.Log($"Night {dayNumber} ended");
 
+        // Unequip all mafia guns
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {
@@ -93,8 +94,12 @@ public class TimeManager : NetworkBehaviour
         }
         // Bring everyone back to house
         PlayerManager.instance.TeleportAllPlayersBackToSpawn();
-        // Open doors
-        // Remove moon
+        // TODO: Open doors
+
+        // Reset all sigils
+        SigilsManager.instance.ResetAllSigils();
+
+        // TODO: Remove moon
         OnDayStart();
     }
 
@@ -106,9 +111,6 @@ public class TimeManager : NetworkBehaviour
     [Server]
     private void OnDayStart()
     {
-        // Reset all sigils
-        DeathSigil.ResetAllDeathSigils();
-
         dayNumber += 1;
         Debug.Log($"Day {dayNumber} started");
         // Set clock
@@ -124,5 +126,6 @@ public class TimeManager : NetworkBehaviour
         {
             VotingManager.instance.StartVoting();
         }
+
     }
 }

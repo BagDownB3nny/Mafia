@@ -8,7 +8,7 @@ public class SixthSense : Role
 {
     public override string rolePlayerInteractText => null;
     public override bool isAbleToInteractWithPlayers => false;
-    protected override List<Sigil> sigilsAbleToSee => Enum.GetValues(typeof(Sigil)).Cast<Sigil>().ToList();
+    protected override List<SigilName> sigilsAbleToSee => Enum.GetValues(typeof(SigilName)).Cast<SigilName>().ToList();
 
     public override void InteractWithPlayer(NetworkIdentity player)
     {

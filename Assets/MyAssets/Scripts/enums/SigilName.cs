@@ -1,4 +1,4 @@
-public enum Sigil
+public enum SigilName
 {
     SeeingEyeSigil,
     ProtectionSigil,
