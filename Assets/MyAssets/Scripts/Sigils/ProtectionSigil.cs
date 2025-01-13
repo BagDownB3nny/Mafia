@@ -47,6 +47,10 @@ public class ProtectionSigil : Sigil
     [Server]
     public static void ResetProtectionSigil()
     {
+        if (markedPlayerNetId == 0) {
+            return;
+        }
+        Debug.Log(markedPlayerNetId);
         Player player = PlayerManager.instance.GetPlayerByNetId(markedPlayerNetId);
         if (player == null)
         {
@@ -60,5 +64,6 @@ public class ProtectionSigil : Sigil
             return;
         }
         protectionSigil.Unmark();
+        Debug.Log("ProtectionSigil reset");
     }
 }

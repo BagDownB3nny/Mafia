@@ -72,6 +72,10 @@ public class SeeingEyeSigil : Sigil
     [Server]
     public static void ResetSeeingEyeSigil()
     {
+        if (markedPlayerNetId == 0) {
+            return;
+        }
+        Debug.Log(markedPlayerNetId);
         Player player = PlayerManager.instance.GetPlayerByNetId(markedPlayerNetId);
         if (player == null)
         {

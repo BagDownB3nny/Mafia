@@ -73,7 +73,6 @@ public class Seer : Role
             Debug.LogError("Player does not have a seeing-eye sigil");
             return;
         }
-        Debug.Log(markedPlayerSeeingEyeSigil);
         DisablePlayerControllersAndCamera();
         markedPlayerSeeingEyeSigil.Activate();
         markedPlayerSeeingEyeSigil.OnDeactivate += EnablePlayerControllersAndCamera;

@@ -41,7 +41,6 @@ public class InteractableDoor : Interactable
             CmdInteract();
         } else {
             PlayerUIManager.instance.SetInteractableText("You are unable to get past the protection");
-            Debug.Log(netIdentity.connectionToClient);
         }
     }
 
