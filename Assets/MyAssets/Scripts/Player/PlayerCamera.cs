@@ -9,6 +9,14 @@ public class PlayerCamera : MonoBehaviour
 
     public Transform orientation = null;
 
+    // Cursor mode is for when the player is in a menu (e.g. settings)
+    public bool isCursorMode = false;
+
+    public void Start()
+    {
+        EnterFPSMode();
+    }
+
     public void SetOrientation(Transform newOrientation)
     {
         orientation = newOrientation;
@@ -32,6 +40,9 @@ public class PlayerCamera : MonoBehaviour
     void Update()
     {
         if (orientation == null) return;
+
+        // If the player is in cursor mode, do nothing
+        if (isCursorMode) return;
         HandleMoveCamera();
         HandleLookAtInteractable();
     }
@@ -109,11 +120,13 @@ public class PlayerCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        isCursorMode = false;
     }
 
     public void EnterCursorMode()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        isCursorMode = true;
     }
 }

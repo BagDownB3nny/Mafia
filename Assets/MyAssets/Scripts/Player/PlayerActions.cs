@@ -16,10 +16,26 @@ public class PlayerActions : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        HandleSettingsPress();
         HandleInteractions();
         HandleShooting();
     }
 
+    private void HandleSettingsPress()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SettingsManager settingsManager = SettingsManager.instance;
+            Debug.Log("Settings manager: " + settingsManager);
+            if (settingsManager != null)
+            {
+                // Toggles the settings menu
+                settingsManager.gameObject.SetActive(!settingsManager.gameObject.activeSelf);
+            }
+        }
+    }
+
+    [Client]
     private void HandleInteractions()
     {
         if (Input.GetKeyDown(KeyCode.E))
