@@ -14,10 +14,28 @@ public class PlayerMovement : NetworkBehaviour
     public LayerMask groundLayer; // Define which layers are considered ground
     public float groundCheckHeight = 0.5f; // Height of the capsule cast (half of the player collider height)
 
+    // Internal movement parameters
+
     private Rigidbody rb;
     private Vector3 moveDirection;
     private bool isGrounded;
+    public static PlayerMovement instance;
+
+    // Players have movement locked (when voting, in settings, etc.)
+    private bool isLocked;
     [SerializeField] private CapsuleCollider capsuleCollider;
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     void Start()
     {
@@ -28,6 +46,7 @@ public class PlayerMovement : NetworkBehaviour
     void Update()
     {
         if (!isLocalPlayer) return;
+        if (isLocked) return;
 
         // Perform a capsule cast to check if the player is grounded
         isGrounded = IsGrounded();
@@ -49,7 +68,30 @@ public class PlayerMovement : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isLocalPlayer) return;
+        if (isLocked) return;
         MovePlayer();
+    }
+
+    public void LockPlayerMovement()
+    {
+        isLocked = true;
+        // Calculate desired velocity
+        Vector3 targetVelocity = Vector3.zero;
+
+        // Calculate velocity change while preserving the Rigidbody's current Y velocity (gravity)
+        Vector3 velocity = rb.linearVelocity;
+        Vector3 velocityChange = targetVelocity - new Vector3(velocity.x, 0, velocity.z);
+
+        // Clamp the velocity change to ensure smooth movement
+        velocityChange = Vector3.ClampMagnitude(velocityChange, maxVelocityChange);
+
+        // Apply the velocity change to the Rigidbody
+        rb.AddForce(velocityChange, ForceMode.VelocityChange);
+    }
+
+    public void UnlockPlayerMovement()
+    {
+        isLocked = false;
     }
 
     private void MovePlayer()

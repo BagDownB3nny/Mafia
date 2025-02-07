@@ -8,13 +8,13 @@ public class GameStartButton : Interactable
     public override void OnHover()
     {
         Highlight();
-        if (isClient)
-        {
-            PlayerUIManager.instance.SetInteractableText("Only lobby host can start the game");
-        }
-        else if (this.isServer)
+        if (isServer)
         {
             PlayerUIManager.instance.SetInteractableText("Start game");
+        }
+        else if (isClient)
+        {
+            PlayerUIManager.instance.SetInteractableText("Only lobby host can start the game");
         }
     }
 

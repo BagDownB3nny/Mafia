@@ -20,11 +20,13 @@ public class SettingsManager : MonoBehaviour
     public void OnEnable()
     {
         Camera.main.gameObject.GetComponent<PlayerCamera>().EnterCursorMode();
+        PlayerMovement.instance.LockPlayerMovement();
     }
 
     public void OnDisable()
     {
         Camera.main.gameObject.GetComponent<PlayerCamera>().EnterFPSMode();
+        PlayerMovement.instance.UnlockPlayerMovement();
     }
 
     public void OnClickBack()
