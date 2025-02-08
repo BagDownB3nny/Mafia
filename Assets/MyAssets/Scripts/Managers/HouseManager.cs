@@ -16,12 +16,10 @@ public class HouseManager : NetworkBehaviour
     {
         if (instance == null)
         {
-            Debug.Log("HouseSpawner instance set");
             instance = this;
         }
         else
         {
-            Debug.LogWarning("More than one instance of HouseSpawner found!");
             return;
         }
     }
@@ -71,7 +69,6 @@ public class HouseManager : NetworkBehaviour
     [ClientRpc]
     public void RpcSetHouseParent(GameObject house)
     {
-        Debug.Log("Setting parent for house");
         house.transform.SetParent(houseParent);
     }
 

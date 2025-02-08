@@ -5,6 +5,8 @@ public class SettingsManager : MonoBehaviour
 
     public static SettingsManager instance;
 
+    [SerializeField] private GameObject settingsPanel;
+
     public void Awake()
     {
         if (instance == null)
@@ -15,22 +17,36 @@ public class SettingsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        gameObject.SetActive(false);
-    }
-    public void OnEnable()
-    {
-        Camera.main.gameObject.GetComponent<PlayerCamera>().EnterCursorMode();
-        PlayerMovement.instance.LockPlayerMovement();
     }
 
-    public void OnDisable()
+    public void ToggleSettings()
     {
-        Camera.main.gameObject.GetComponent<PlayerCamera>().EnterFPSMode();
-        PlayerMovement.instance.UnlockPlayerMovement();
+        if (settingsPanel.activeSelf)
+        {
+            CloseSettings();
+        }
+        else
+        {
+            OpenSettings();
+        }
+    }
+
+    public void OpenSettings()
+    {
+        PlayerCamera.instance.EnterCursorMode();
+        PlayerMovement.localInstance.LockPlayerMovement();
+        settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        PlayerCamera.instance.EnterFPSMode();
+        PlayerMovement.localInstance.UnlockPlayerMovement();
+        settingsPanel.SetActive(false);
     }
 
     public void OnClickBack()
     {
-        gameObject.SetActive(false);
+        CloseSettings();
     }
 }

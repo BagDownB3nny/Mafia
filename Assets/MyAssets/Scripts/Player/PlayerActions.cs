@@ -8,7 +8,7 @@ public class PlayerActions : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        playerCamera = Camera.main.GetComponent<PlayerCamera>();
+        playerCamera = PlayerCamera.instance;
         player = GetComponent<Player>();
     }
 
@@ -26,11 +26,9 @@ public class PlayerActions : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SettingsManager settingsManager = SettingsManager.instance;
-            Debug.Log("Settings manager: " + settingsManager);
             if (settingsManager != null)
             {
-                // Toggles the settings menu
-                settingsManager.gameObject.SetActive(!settingsManager.gameObject.activeSelf);
+                settingsManager.ToggleSettings();
             }
         }
     }

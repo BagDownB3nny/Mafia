@@ -84,7 +84,6 @@ public class Seer : Role
     {
         GetComponent<PlayerMovement>().enabled = false;
         Camera.main.GetComponent<MoveCamera>().enabled = false;
-        // Camera.main.GetComponent<PlayerCamera>().enabled = false;
     }
 
     [Client]
@@ -92,7 +91,6 @@ public class Seer : Role
     {
         GetComponent<PlayerMovement>().enabled = true;
         Camera.main.GetComponent<MoveCamera>().enabled = true;
-        // Camera.main.GetComponent<PlayerCamera>().enabled = false;
     }
 
     private void OnMarkedPlayerNetIdChanged(uint oldMarkedPlayerNetId, uint newMarkedPlayerNetId)

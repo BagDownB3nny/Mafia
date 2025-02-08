@@ -11,6 +11,12 @@ public class PlayerCamera : MonoBehaviour
 
     // Cursor mode is for when the player is in a menu (e.g. settings)
     public bool isCursorMode = false;
+    public static PlayerCamera instance;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     public void Start()
     {
@@ -118,6 +124,7 @@ public class PlayerCamera : MonoBehaviour
 
     public void EnterFPSMode()
     {
+        Debug.Log("Entering fps mode");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isCursorMode = false;

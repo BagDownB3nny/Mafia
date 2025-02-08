@@ -14,6 +14,7 @@ public class VotingSlip : MonoBehaviour
 
     public void ExitVotingSlip()
     {
+        PlayerCamera.instance.EnterFPSMode();
         gameObject.SetActive(false);
     }
 
@@ -23,6 +24,7 @@ public class VotingSlip : MonoBehaviour
         {
             GenerateVotingSlip();
         }
+        PlayerCamera.instance.EnterCursorMode();
     }
 
     private void GenerateVotingSlip()

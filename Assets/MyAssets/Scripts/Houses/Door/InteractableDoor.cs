@@ -19,10 +19,13 @@ public class InteractableDoor : Interactable
     public override void OnHover()
     {
         Highlight();
-        if (isOwned) {
+        if (isOwned)
+        {
             string interactableText = isOpen ? "Close the door" : "Open the door";
             PlayerUIManager.instance.SetInteractableText(interactableText);
-        } else {
+        }
+        else
+        {
             PlayerUIManager.instance.SetInteractableText("This door is protected");
         }
     }
@@ -37,14 +40,17 @@ public class InteractableDoor : Interactable
     [Client]
     public override void Interact()
     {
-        if (isOwned) {
+        if (isOwned)
+        {
             CmdInteract();
-        } else {
+        }
+        else
+        {
             PlayerUIManager.instance.SetInteractableText("You are unable to get past the protection");
         }
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     private void CmdInteract()
     {
         if (isOpen)

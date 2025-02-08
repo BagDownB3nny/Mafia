@@ -1,14 +1,65 @@
 using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
+using System;
 
 public class VotingBooth : Interactable
 {
 
-    private List<string> playersThatHaveVoted = new List<string>();
-    private List<string> playersThatHaveBeenVotedFor = new List<string>();
+
+    // Key is player voting, value is player voted for
+    public Dictionary<string, string> votes = new Dictionary<string, string>();
+
+    // Key is player voted for, value is number of votes
+    public Dictionary<string, int> votesCount = new Dictionary<string, int>();
+
+    // Key is player voted for, value is first player to vote for them
+    public Dictionary<string, string> executioners = new Dictionary<string, string>();
+
+    // Observer
+    public event Action OnVotesChanged;
 
     [SerializeField] private GameObject votingSlipCanvas;
+
+    public static VotingBooth instance;
+
+    public override void OnStartServer()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    [Server]
+    public void ResetVotes()
+    {
+        votes.Clear();
+        votesCount.Clear();
+        executioners.Clear();
+
+        InitialiseDictionaries();
+    }
+
+
+    [Server]
+    public void InitialiseDictionaries()
+    {
+        List<string> playerNames = PlayerManager.instance.GetAllPlayerNames();
+        foreach (string playerName in playerNames)
+        {
+            votesCount.Add(playerName, 0);
+        }
+        foreach (string playerName in playerNames)
+        {
+            executioners.Add(playerName, "");
+        }
+        OnVotesChanged?.Invoke();
+    }
 
     [Client]
     public override void OnHover()
@@ -30,21 +81,45 @@ public class VotingBooth : Interactable
         votingSlipCanvas.SetActive(true);
     }
 
-    [Command]
+    // Dictionary of key: player voting, value: player voted for
+    [Command(requiresAuthority = false)]
     public void CmdVote(string playerVotingName, string playerVotedForName)
     {
-        playersThatHaveBeenVotedFor.Add(playerVotedForName);
-        playersThatHaveVoted.Add(playerVotingName);
-        if (playersThatHaveVoted.Count == PlayerManager.instance.GetAllPlayers().Count)
+        Debug.Log($"{playerVotingName} voted for {playerVotedForName} [Server]");
+        if (votes.ContainsKey(playerVotingName))
         {
-            EndVoting();
+            RemoveVote(playerVotingName);
+        }
+        AddVote(playerVotingName, playerVotedForName);
+        OnVotesChanged?.Invoke();
+    }
+
+    [Server]
+    private void AddVote(string playerVotingName, string playerVotedForName)
+    {
+        votes.Add(playerVotingName, playerVotedForName);
+        votesCount[playerVotedForName]++;
+        if (executioners[playerVotedForName] == "")
+        {
+            executioners[playerVotedForName] = playerVotingName;
         }
     }
 
     [Server]
-    public void EndVoting()
+    private void RemoveVote(string playerVotingName)
     {
-        Debug.Log("Voting has ended");
-        Debug.Log(playersThatHaveBeenVotedFor);
+        string playerVotedForPreviously = votes[playerVotingName];
+        votes.Remove(playerVotingName);
+        votesCount[playerVotedForPreviously]--;
+        if (votesCount[playerVotedForPreviously] == 0)
+        {
+            executioners[playerVotedForPreviously] = "";
+        }
+    }
+
+    [Server]
+    public Dictionary<string, int> GetVotesCount()
+    {
+        return votesCount;
     }
 }

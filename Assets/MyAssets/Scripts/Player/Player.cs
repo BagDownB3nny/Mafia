@@ -69,7 +69,7 @@ public class Player : NetworkBehaviour
     private void StartCamera()
     {
         Camera.main.transform.GetComponent<MoveCamera>().SetCameraPosition(cameraTransform);
-        Camera.main.transform.GetComponent<PlayerCamera>().SetOrientation(this.transform);
+        PlayerCamera.instance.SetOrientation(this.transform);
         Camera.main.transform.localPosition = new Vector3(0, 0, 0);
     }
 

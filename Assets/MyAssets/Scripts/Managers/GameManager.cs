@@ -27,5 +27,6 @@ public class GameManager : NetworkBehaviour
         HouseManager.instance.OpenAllDoors();
         VotingManager.instance.StopVoting();
         TimeManager.instance.StartFirstDay();
+        VotingBooth.instance.InitialiseDictionaries();
     }
 }

@@ -73,7 +73,8 @@ public class TimeManager : NetworkBehaviour
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {
-            if (player.GetRole() == RoleName.Mafia){
+            if (player.GetRole() == RoleName.Mafia)
+            {
                 player.EquipGun();
             }
         }
@@ -88,7 +89,8 @@ public class TimeManager : NetworkBehaviour
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {
-            if (player.GetRole() == RoleName.Mafia) {
+            if (player.GetRole() == RoleName.Mafia)
+            {
                 player.UnequipGun();
             }
         }
@@ -122,7 +124,8 @@ public class TimeManager : NetworkBehaviour
         HouseManager.instance.CloseAllDoors();
 
         // Spawn voting booth if past first day
-        if (dayNumber > 1)
+        // TODO change 0 to 1 when ready
+        if (dayNumber > 0)
         {
             VotingManager.instance.StartVoting();
         }

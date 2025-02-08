@@ -19,26 +19,18 @@ public class PlayerMovement : NetworkBehaviour
     private Rigidbody rb;
     private Vector3 moveDirection;
     private bool isGrounded;
-    public static PlayerMovement instance;
+    public static PlayerMovement localInstance;
 
     // Players have movement locked (when voting, in settings, etc.)
     private bool isLocked;
     [SerializeField] private CapsuleCollider capsuleCollider;
 
-    public void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
-
     void Start()
     {
+        if (isLocalPlayer)
+        {
+            localInstance = this;
+        }
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // Prevent the Rigidbody from being affected by physics rotations
     }
