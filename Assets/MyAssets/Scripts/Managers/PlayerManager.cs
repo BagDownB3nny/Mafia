@@ -17,6 +17,7 @@ public class PlayerManager : NetworkBehaviour
 
     public Player localPlayer;
 
+    // Key: username, Value: playerNetId
     public readonly SyncDictionary<string, uint> playerNetIds = new SyncDictionary<string, uint>();
 
     [SyncVar]
@@ -151,7 +152,18 @@ public class PlayerManager : NetworkBehaviour
 
     public Player GetPlayerByName(string name)
     {
-        return NetworkServer.spawned[playerNetIds[name]].GetComponent<Player>();
+        if (NetworkServer.spawned.ContainsKey(playerNetIds[name]))
+        {
+            return NetworkServer.spawned[playerNetIds[name]].GetComponent<Player>();
+        }
+        else if (NetworkClient.spawned.ContainsKey(playerNetIds[name]))
+        {
+            return NetworkClient.spawned[playerNetIds[name]].GetComponent<Player>();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     [Server]
@@ -159,7 +171,7 @@ public class PlayerManager : NetworkBehaviour
     {
         foreach (Player player in GetAllPlayers())
         {
-            player.TeleportToSpawn();
+            player.GetComponent<PlayerTeleporter>().TeleportToSpawn();
         }
     }
 
@@ -168,7 +180,7 @@ public class PlayerManager : NetworkBehaviour
     {
         foreach (Player player in GetAllPlayers())
         {
-            player.TeleportToNightSpawn();
+            player.GetComponent<PlayerTeleporter>().TeleportToNightSpawn();
         }
     }
 

@@ -50,7 +50,32 @@ public class TimeManager : NetworkBehaviour
     {
         Debug.Log($"Day {dayNumber} ended");
         VotingManager.instance.StopVoting();
-        OnNightStart();
+        OnExecutionStart();
+    }
+
+    [Server]
+    private void OnExecutionStart()
+    {
+        // Teleport the player voted out to the execution spot
+        string votedOutPlayerName = VotingBooth.instance.GetVotedOutPlayer();
+        Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
+        votedOutPlayer.GetComponent<PlayerTeleporter>().TeleportToExecutionSpot();
+
+        // TODO: Restrict that player's movement from 6pm till 11pm (gives chance for them to be spared)
+
+        // Set clock
+        clock = new Timer(5);
+        clock.OnTimerEnd += OnExecutionEnd;
+    }
+
+    [Server]
+    private void OnExecutionEnd()
+    {
+        // TODO: Release the player's movement restriction
+
+        // Set clock
+        clock = new Timer(5);
+        clock.OnTimerEnd += OnNightStart;
     }
 
     [Server]

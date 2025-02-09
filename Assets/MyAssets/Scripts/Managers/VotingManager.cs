@@ -25,15 +25,12 @@ public class VotingManager : NetworkBehaviour
     [ClientRpc]
     public void StartVoting()
     {
-        Debug.Log("Voting started");
-        // Enable voting booth
         votingBooth.gameObject.SetActive(true);
     }
 
     [ClientRpc]
     public void StopVoting()
     {
-        Debug.Log("Voting stopped");
         votingBooth.gameObject.SetActive(false);
     }
 }

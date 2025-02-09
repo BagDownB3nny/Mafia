@@ -122,4 +122,24 @@ public class VotingBooth : Interactable
     {
         return votesCount;
     }
+
+    [Server]
+    public string GetVotedOutPlayer()
+    {
+        int maxVotes = 0;
+        string playerVotedOut = "";
+        foreach (KeyValuePair<string, int> vote in votesCount)
+        {
+            if (vote.Value > maxVotes)
+            {
+                maxVotes = vote.Value;
+                playerVotedOut = vote.Key;
+            }
+            else if (vote.Value == maxVotes)
+            {
+                playerVotedOut = "";
+            }
+        }
+        return playerVotedOut;
+    }
 }

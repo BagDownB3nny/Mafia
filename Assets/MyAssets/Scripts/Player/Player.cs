@@ -30,8 +30,6 @@ public class Player : NetworkBehaviour
     [SyncVar]
     public House house;
 
-    public Transform nightSpawnPoint;
-
     Dictionary<Enum, Role> roleScripts;
 
     public void Start()
@@ -152,40 +150,6 @@ public class Player : NetworkBehaviour
             PlayerUIManager.instance.SetRoleText(newRole);
         }
         EnableRoleScript(newRole);
-    }
-
-    [Server]
-    public void TeleportToSpawn()
-    {
-        TeleportPlayer(house.spawnPoint.position);
-    }
-
-    [Server]
-    public void TeleportToNightSpawn()
-    {
-        if (role == RoleName.Mafia)
-        {
-            TeleportPlayer(nightSpawnPoint.position);
-        }
-        else
-        {
-            TeleportToSpawn();
-        }
-    }
-
-
-    [Server]
-    public void TeleportPlayer(Vector3 position)
-    {
-        RpcTeleportPlayer(position);
-    }
-
-    [ClientRpc]
-    private void RpcTeleportPlayer(Vector3 position)
-    {
-        NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
-        networkTransform.OnTeleport(position);
-        Physics.SyncTransforms();
     }
 
     [Server]

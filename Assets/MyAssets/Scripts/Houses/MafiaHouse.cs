@@ -31,7 +31,7 @@ public class MafiaHouse : MonoBehaviour
         // This assumes that 
         for (int i = 0; i < mafiaPlayers.Count; i++)
         {
-            mafiaPlayers[i].GetComponent<Player>().nightSpawnPoint = mafiaSpawnPoints[i];
+            mafiaPlayers[i].GetComponent<PlayerTeleporter>().mafiaNightSpawnpoint = mafiaSpawnPoints[i];
         }
     }
 }
