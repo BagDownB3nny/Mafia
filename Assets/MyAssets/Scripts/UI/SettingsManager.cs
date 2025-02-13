@@ -34,7 +34,7 @@ public class SettingsManager : MonoBehaviour
     public void OpenSettings()
     {
         PlayerCamera.instance.EnterCursorMode();
-        PlayerMovement.localInstance.LockPlayerMovement();
+        PlayerMovement.localInstance.LockPlayerMovementControls();
         settingsPanel.SetActive(true);
     }
 

@@ -58,11 +58,15 @@ public class TimeManager : NetworkBehaviour
     {
         // Teleport the player voted out to the execution spot
         string votedOutPlayerName = VotingBooth.instance.GetVotedOutPlayer();
-        Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
-        votedOutPlayer.GetComponent<PlayerTeleporter>().TeleportToExecutionSpot();
 
-        // TODO: Restrict that player's movement from 6pm till 11pm (gives chance for them to be spared)
-        votedOutPlayer.GetComponent<PlayerMovement>().LockPlayerMovement();
+        if (votedOutPlayerName != "")
+        {
+            Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
+            votedOutPlayer.GetComponent<PlayerTeleporter>().TeleportToExecutionSpot();
+
+            // TODO: Restrict that player's movement from 6pm till 11pm (gives chance for them to be spared)
+            votedOutPlayer.GetComponent<PlayerMovement>().LockPlayerMovement();
+        }
 
         // Set clock
         clock = new Timer(5);
@@ -74,8 +78,12 @@ public class TimeManager : NetworkBehaviour
     {
         // TODO: Release the player's movement restriction
         string votedOutPlayerName = VotingBooth.instance.GetVotedOutPlayer();
-        Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
-        votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
+
+        if (votedOutPlayerName != "")
+        {
+            Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
+            votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
+        }
 
         // Set clock
         clock = new Timer(5);

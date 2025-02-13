@@ -33,6 +33,7 @@ public class PlayerMovement : NetworkBehaviour
         }
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // Prevent the Rigidbody from being affected by physics rotations
+        rb.maxLinearVelocity = 10f;
     }
 
     void Update()
@@ -64,7 +65,7 @@ public class PlayerMovement : NetworkBehaviour
         MovePlayer();
     }
 
-    public void LockPlayerMovement()
+    public void LockPlayerMovementControls()
     {
         isLocked = true;
         // Calculate desired velocity
@@ -79,6 +80,12 @@ public class PlayerMovement : NetworkBehaviour
 
         // Apply the velocity change to the Rigidbody
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
+    }
+
+    public void LockPlayerMovement()
+    {
+        isLocked = true;
+        rb.linearVelocity = Vector3.zero;
     }
 
     public void UnlockPlayerMovement()
