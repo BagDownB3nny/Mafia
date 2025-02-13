@@ -56,7 +56,7 @@ public class PlayerCamera : MonoBehaviour
     private void HandleLookAtInteractable()
     {
         GameObject lookingAt = GetLookingAt(5.0f);
-        if (lookingAt == null || lookingAt.GetComponent<Interactable>() == null)
+        if (lookingAt == null || lookingAt.GetComponentInParent<Interactable>() == null)
         {
             if (lastInteractable != null)
             {
@@ -67,9 +67,9 @@ public class PlayerCamera : MonoBehaviour
             return;
         }
         // Is looking at an interactable
-        else if (lookingAt != null && lookingAt.GetComponent<Interactable>() != null)
+        else if (lookingAt != null && lookingAt.GetComponentInParent<Interactable>() != null)
         {
-            Interactable currentInteractable = lookingAt.GetComponent<Interactable>();
+            Interactable currentInteractable = lookingAt.GetComponentInParent<Interactable>();
 
             // If the current interactable is the same as the last one, do nothing
             if (currentInteractable == lastInteractable) return;
