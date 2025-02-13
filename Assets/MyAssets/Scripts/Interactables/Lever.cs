@@ -4,24 +4,20 @@ using DG.Tweening;
 
 public class Lever : Interactable
 {
-    public bool isOn = false;
-    public bool isBroken = false;
-
-    public GameObject leverHandle;
-    public Transform leverOpenPosition;
-    public Transform leverClosePosition;
+    public bool isOpenPosition = false;
+    [SerializeField] private GameObject leverHandle;
+    [SerializeField] private Transform leverOpenPosition;
+    [SerializeField] private Transform leverClosePosition;
+    [SerializeField] private Trapdoor trapdoor;
 
     public override void OnHover()
     {
         Highlight();
-        string interactableText = isOn ? "Turn off the lever" : "Turn on the lever";
-        PlayerUIManager.instance.SetInteractableText(interactableText);
     }
 
     public override void OnUnhover()
     {
         Unhighlight();
-        PlayerUIManager.instance.ClearInteractableText();
     }
 
     public override void Interact()
@@ -32,29 +28,31 @@ public class Lever : Interactable
     [Command(requiresAuthority = false)]
     private void CmdInteract()
     {
-        if (isOn)
+        if (isOpenPosition)
         {
-            isOn = false;
-            RpcTurnOff();
+            isOpenPosition = false;
+            RpcMoveToClose();
         }
         else
         {
-            isOn = true;
-            RpcTurnOn();
+            isOpenPosition = true;
+            RpcMoveToOpen();
         }
     }
 
     [ClientRpc]
-    private void RpcTurnOn()
+    private void RpcMoveToOpen()
     {
-        isOn = true;
-        leverHandle.transform.DOLocalRotate(leverOpenPosition.localEulerAngles, 0.5f);
+        isOpenPosition = true;
+        leverHandle.transform.DOLocalRotate(leverOpenPosition.localEulerAngles, 0.6f).SetEase(Ease.OutBounce);
+        trapdoor.OpenTrapdoor();
     }
 
     [ClientRpc]
-    private void RpcTurnOff()
+    private void RpcMoveToClose()
     {
-        isOn = false;
-        leverHandle.transform.DOLocalRotate(leverClosePosition.localEulerAngles, 0.5f);
+        isOpenPosition = false;
+        leverHandle.transform.DOLocalRotate(leverClosePosition.localEulerAngles, 0.5f).SetEase(Ease.Linear);
+        trapdoor.CloseTrapdoor();
     }
 }

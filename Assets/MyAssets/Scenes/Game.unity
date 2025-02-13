@@ -189,6 +189,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2890092493928348049, guid: 8c6bf2bc69176408f9b642586b033c52, type: 3}
   m_PrefabInstance: {fileID: 21182012}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &69578878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69578879}
+  m_Layer: 0
+  m_Name: Left open position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69578879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69578878}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: -0.7071068, z: 0, w: 0}
+  m_LocalPosition: {x: 7.5446067, y: -3.406739, z: -12.861188}
+  m_LocalScale: {x: -89.56871, y: -127.136215, z: -78.59381}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1720695122}
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: -90}
 --- !u!1 &82678969
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +729,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8449807594748255624, guid: 19c1964cd796d43e1aabdc3f83bcf721, type: 3}
   m_PrefabInstance: {fileID: 210743510}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &215624877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 215624878}
+  m_Layer: 0
+  m_Name: Right open position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &215624878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215624877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 7.5446067, y: -3.3179638, z: -14.322911}
+  m_LocalScale: {x: -89.56871, y: -127.136215, z: -78.59381}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1720695122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &319412696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1251,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &410164340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410164341}
+  m_Layer: 0
+  m_Name: Right close position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &410164341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410164340}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: -0.49999997, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: 7.5446067, y: -3.406739, z: -14.327129}
+  m_LocalScale: {x: -89.56871, y: -127.136215, z: -78.59381}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1720695122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &453028976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,6 +1431,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -9189612823058448048, guid: 530973cbe88ec4a2bab9bfbfdd4356e1, type: 3}
+--- !u!1 &574307831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 574307832}
+  m_Layer: 0
+  m_Name: Left close position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &574307832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574307831}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: 0.49999997, z: 0.5, w: -0.5}
+  m_LocalPosition: {x: 7.5446067, y: -3.406739, z: -12.861188}
+  m_LocalScale: {x: -89.56871, y: -127.136215, z: -78.59381}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1720695122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &601241226
 GameObject:
   m_ObjectHideFlags: 0
@@ -3513,6 +3637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1720695122}
+  - component: {fileID: 1720695123}
   m_Layer: 0
   m_Name: Trapdoor
   m_TagString: Untagged
@@ -3534,9 +3659,31 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 135781903416489989}
+  - {fileID: 215624878}
+  - {fileID: 410164341}
   - {fileID: 1356712049639073884}
+  - {fileID: 574307832}
+  - {fileID: 69578879}
   m_Father: {fileID: 517359145}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1720695123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720695121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5fb9c8255284db0b271de67c0adecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftTrapdoor: {fileID: 73604006515953390}
+  rightTrapdoor: {fileID: 7390783382613618554}
+  rightTrapdoorOpenPosition: {fileID: 215624878}
+  rightTrapdoorClosedPosition: {fileID: 410164341}
+  leftTrapdoorOpenPosition: {fileID: 69578879}
+  leftTrapdoorClosedPosition: {fileID: 574307832}
 --- !u!1 &1912296179
 GameObject:
   m_ObjectHideFlags: 0
@@ -3784,11 +3931,11 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  isOn: 0
-  isBroken: 0
+  isOpenPosition: 0
   leverHandle: {fileID: 2717877357023136748}
   leverOpenPosition: {fileID: 1347516657}
   leverClosePosition: {fileID: 1916737636}
+  trapdoor: {fileID: 1720695123}
 --- !u!114 &1946950606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3925,7 +4072,7 @@ GameObject:
   - component: {fileID: 970214779802736858}
   - component: {fileID: 145229687}
   m_Layer: 0
-  m_Name: Trapdoor (2).001
+  m_Name: Left Trapdoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4764,7 +4911,7 @@ GameObject:
   - component: {fileID: 8144388666540006020}
   - component: {fileID: 1098120582}
   m_Layer: 0
-  m_Name: Trapdoor (2)
+  m_Name: Right Trapdoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
