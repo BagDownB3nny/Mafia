@@ -40,16 +40,40 @@ public class Lever : Interactable
         }
     }
 
+    [Server]
+    private void ServerMoveToOpen()
+    {
+        MoveToOpen();
+        RpcMoveToOpen();
+    }
+
     [ClientRpc]
     private void RpcMoveToOpen()
+    {
+        MoveToOpen();
+    }
+
+    private void MoveToOpen()
     {
         isOpenPosition = true;
         leverHandle.transform.DOLocalRotate(leverOpenPosition.localEulerAngles, 0.6f).SetEase(Ease.OutBounce);
         trapdoor.OpenTrapdoor();
     }
 
+    [Server]
+    private void ServerMoveToClose()
+    {
+        MoveToClose();
+        RpcMoveToClose();
+    }
+
     [ClientRpc]
     private void RpcMoveToClose()
+    {
+        MoveToClose();
+    }
+
+    private void MoveToClose()
     {
         isOpenPosition = false;
         leverHandle.transform.DOLocalRotate(leverClosePosition.localEulerAngles, 0.5f).SetEase(Ease.Linear);

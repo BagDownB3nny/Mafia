@@ -18,6 +18,12 @@ public class ShootablePlayer : Shootable
         PlayerUIManager.instance.RpcSetTemporaryInteractableText(connectionToClient, "You were shot!", 1.5f);
         gameObject.GetComponentInParent<Player>().UnequipGun();
         // Mark the player as dead
+        SetDeath();
+    }
+
+    [Server]
+    public void SetDeath()
+    {
         RpcSetDeath();
         corpse = Instantiate(corpsePrefab, transform.position, transform.rotation);
         NetworkServer.Spawn(corpse);
@@ -26,6 +32,7 @@ public class ShootablePlayer : Shootable
     [ClientRpc]
     public void RpcSetDeath()
     {
+        Debug.Log("Player died");
         // Get the player object which is the parent of the shootable player object
         var player = gameObject.GetComponentInParent<Player>();
         // Recursively change all children layers to ghost
