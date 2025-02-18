@@ -2,11 +2,15 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class MafiaHouseTable : MonoBehaviour
+public class MafiaHouseTable : NetworkBehaviour
 {
     [SerializeField] private GameObject houseMiniPrefab;
+    [SerializeField] private Transform houseMiniParent;
+    [SerializeField] private Whiteboard whiteboard;
 
     public static MafiaHouseTable instance;
+
+    [SyncVar(hook = nameof(OnSelectedHouseMiniChanged))]
     public InteractableVillageHouseMini selectedHouseMini;
 
     public void Awake()
@@ -21,6 +25,7 @@ public class MafiaHouseTable : MonoBehaviour
         }
     }
 
+    [Server]
     public void SetSelectedHouseMini(InteractableVillageHouseMini houseMini)
     {
         if (selectedHouseMini)
@@ -55,10 +60,30 @@ public class MafiaHouseTable : MonoBehaviour
                 houseMiniRotation
             );
 
-            houseMini.transform.SetParent(transform);
+            houseMini.transform.SetParent(houseMiniParent);
 
             houseMini.GetComponent<InteractableVillageHouseMini>().linkHouse(house);
             NetworkServer.Spawn(houseMini);
+        }
+    }
+
+    private void OnSelectedHouseMiniChanged(InteractableVillageHouseMini oldHouseMini, InteractableVillageHouseMini newHouseMini)
+    {
+        if (newHouseMini == null)
+        {
+            whiteboard.ClearWhiteboard();
+        }
+        else
+        {
+            if (newHouseMini.playerName == null)
+            {
+                whiteboard.SetNewMarkedPlayer("UNNAMED RAT");
+                return;
+            }
+            else
+            {
+                whiteboard.SetNewMarkedPlayer(newHouseMini.playerName);
+            }
         }
     }
 }

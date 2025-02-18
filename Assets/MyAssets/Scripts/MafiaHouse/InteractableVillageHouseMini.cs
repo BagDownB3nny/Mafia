@@ -4,7 +4,7 @@ using Mirror;
 public class InteractableVillageHouseMini : Interactable
 {
     private House house;
-    private string playerName => house?.player?.steamUsername;
+    public string playerName => house?.player?.steamUsername;
 
     [SyncVar(hook = nameof(OnIsMarkedChanged))]
     private bool isMarked = false;
@@ -39,6 +39,7 @@ public class InteractableVillageHouseMini : Interactable
         }
         else
         {
+            MafiaHouseTable.instance.SetSelectedHouseMini(null);
             CmdUnmarkHouse();
         }
     }
