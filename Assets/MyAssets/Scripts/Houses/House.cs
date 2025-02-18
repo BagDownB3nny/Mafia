@@ -9,6 +9,8 @@ public class House : NetworkBehaviour
 
     [SerializeField] public Transform spawnPoint;
 
+    public Vector3 positionRelativeToVillageCenter;
+
     [SyncVar(hook = nameof(OnPlayerChanged))]
 
     public Player player;
@@ -52,12 +54,14 @@ public class House : NetworkBehaviour
     public void ActivateProtection()
     {
         isProtected = true;
+        Debug.Log($"House {positionRelativeToVillageCenter} is now protected");
     }
 
     [Server]
     public void DeactivateProtection()
     {
         isProtected = false;
+        Debug.Log($"House {positionRelativeToVillageCenter} is no longer protected");
     }
 
     [Server]
@@ -83,7 +87,8 @@ public class House : NetworkBehaviour
     [Server]
     public void OnPlayerChanged(Player oldPlayer, Player newPlayer)
     {
-        if (newPlayer && newPlayer.netIdentity) {
+        if (newPlayer && newPlayer.netIdentity)
+        {
             Authority.AssignAuthority(gameObject.GetComponent<NetworkIdentity>(), newPlayer.netIdentity.connectionToClient);
         }
     }

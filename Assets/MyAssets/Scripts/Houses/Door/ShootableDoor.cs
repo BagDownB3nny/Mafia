@@ -11,11 +11,11 @@ public class ShootableDoor : Shootable
     {
         InteractableDoor interactableDoor = GetComponent<InteractableDoor>();
         House house = GetComponent<Door>().house;
-        // if (house.isProtected)
-        // {
-        //     PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This house is protected!", 1.5f);
-        //     return;
-        // }
+        if (house.isProtected)
+        {
+            PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This house is protected!", 1.5f);
+            return;
+        }
         if (!interactableDoor.isOpen)
         {
             KnockDoorDown();
@@ -25,7 +25,7 @@ public class ShootableDoor : Shootable
     [Server]
     private void KnockDoorDown()
     {
-        
+
 
         // Swing door down to the ground, with the door base as the pivot point
         float animationDuration = 0.7f;

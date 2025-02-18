@@ -368,7 +368,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  house: {fileID: 0}
+  house: {fileID: 7123935444385433813}
 --- !u!114 &4746785157563088212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,7 +676,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  house: {fileID: 0}
+  house: {fileID: 7123935444385433813}
 --- !u!114 &4495887679864694190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,6 +1325,7 @@ MonoBehaviour:
   - {fileID: 2762235120085422579}
   SeerRoom: {fileID: 2553650078456536827}
   spawnPoint: {fileID: 5657907167569537495}
+  positionRelativeToVillageCenter: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   isProtected: 0
 --- !u!1 &6212408298932848512

@@ -65,6 +65,7 @@ public class CustomNetworkManager : NetworkManager
     private void OnGameSceneStarted()
     {
         HouseManager.instance.InstantiateHouses();
+        MafiaHouseTable.instance.InstantiateHouseMinis();
     }
 
     public override void ServerChangeScene(string newSceneName)

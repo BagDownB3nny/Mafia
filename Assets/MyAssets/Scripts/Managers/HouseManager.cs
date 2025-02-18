@@ -8,7 +8,7 @@ public class HouseManager : NetworkBehaviour
     [SerializeField] private GameObject housePrefab;
     public static HouseManager instance;
 
-    private List<House> houses = new List<House>();
+    public List<House> houses = new List<House>();
     [SerializeField] private Transform houseParent;
     [SerializeField] private Transform doorsParent;
 
@@ -29,19 +29,17 @@ public class HouseManager : NetworkBehaviour
     {
         // int numberOfPlayers = NetworkServer.connections.Count;
         int numberOfPlayers = 16;
-        float houseWidth = 12.5f;
-        // for (int i = 0; i < numberOfPlayers; i++)
-        // {
-        //     Vector3 housePosition = new Vector3(i * houseWidth, 0, 0);
-        //     GameObject house = Instantiate(housePrefab, housePosition, Quaternion.identity);
-        //     house.transform.SetParent(houseParent);
-        //     NetworkServer.Spawn(house);
-        //     houses.Add(house.GetComponent<House>());
-        //     RpcSetHouseParent(house);
-        // }
         float angleStep = 360f / numberOfPlayers;
         // Different radiuses for different number of players
-        float radius = 35f;
+        float radius;
+        if (numberOfPlayers <= 12)
+        {
+            radius = 30;
+        }
+        else
+        {
+            radius = 35;
+        }
         for (int i = 0; i < numberOfPlayers; i++)
         {
             float angle = i * angleStep; // Angle for the current player
@@ -60,6 +58,8 @@ public class HouseManager : NetworkBehaviour
 
             GameObject house = Instantiate(housePrefab, housePosition, houseRotation);
             house.transform.SetParent(houseParent);
+            house.GetComponent<House>().positionRelativeToVillageCenter = transform.InverseTransformPoint(house.transform.position);
+
             NetworkServer.Spawn(house);
             houses.Add(house.GetComponent<House>());
             RpcSetHouseParent(house);
@@ -98,4 +98,6 @@ public class HouseManager : NetworkBehaviour
             house.ActivateProtection();
         }
     }
+
+
 }
