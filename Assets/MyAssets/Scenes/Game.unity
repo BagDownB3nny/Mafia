@@ -670,7 +670,7 @@ PrefabInstance:
     - target: {fileID: 3717960851208154315, guid: 19c1964cd796d43e1aabdc3f83bcf721, type: 3}
       propertyPath: housePrefab
       value: 
-      objectReference: {fileID: 6108184521754498726, guid: 28cc9cc53015a4337bb827bda77c9cc5, type: 3}
+      objectReference: {fileID: 7621318876243386588, guid: dc2dc0891f3c5496e82c6dabaf776893, type: 3}
     - target: {fileID: 5455654680006592421, guid: 19c1964cd796d43e1aabdc3f83bcf721, type: 3}
       propertyPath: sceneId
       value: 834770877
@@ -9385,7 +9385,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 530973cbe88ec4a2bab9bfbfdd4356e1, type: 3}
+  - {fileID: 2100000, guid: 796dbcdb49b4d441f8e73775a6adc516, type: 2}
   - {fileID: -7379655107258000080, guid: 530973cbe88ec4a2bab9bfbfdd4356e1, type: 3}
   - {fileID: -9146138765286413695, guid: 530973cbe88ec4a2bab9bfbfdd4356e1, type: 3}
   m_StaticBatchInfo:
@@ -12794,7 +12794,7 @@ GameObject:
   - component: {fileID: 4882086716680418650}
   - component: {fileID: 5447331666092476355}
   - component: {fileID: 1583600867}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
