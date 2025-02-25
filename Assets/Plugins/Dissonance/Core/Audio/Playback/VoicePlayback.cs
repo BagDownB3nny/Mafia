@@ -15,7 +15,7 @@ namespace Dissonance.Audio.Playback
 
         public AudioSource AudioSource { get; private set; }
 
-        private SamplePlaybackComponent _player;
+        protected SamplePlaybackComponent _player;
         private float? _savedSpatialBlend;
 
         public override float Amplitude => _player == null ? 0 : _player.ARV;
