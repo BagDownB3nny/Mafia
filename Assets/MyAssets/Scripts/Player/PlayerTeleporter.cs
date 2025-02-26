@@ -10,7 +10,10 @@ public class PlayerTeleporter : NetworkBehaviour
     private void Start()
     {
         player = GetComponent<Player>();
-        executionSpot = ExecutionSpot.instance.transform;
+        if (ExecutionSpot.instance != null)
+        {
+            executionSpot = ExecutionSpot.instance.transform;
+        }
     }
 
 
