@@ -68,7 +68,6 @@ public class PlayerActions : NetworkBehaviour
     private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
     {
         GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
-        Debug.Log("Looking at: " + lookingAt);
         if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
         {
             Shootable shootable = lookingAt.GetComponent<Shootable>();
@@ -78,14 +77,12 @@ public class PlayerActions : NetworkBehaviour
                 return;
             }
             shootable.OnShot(connectionToClient);
-            Debug.Log("Player was shot" + lookingAt.name);
         }
     }
 
     [Command]
     private void CmdInteractWithPlayer(NetworkIdentity playerInteractedWith)
     {
-        Debug.Log($"Server command, interacting with {playerInteractedWith.name}");
         Player currentPlayer = GetComponent<Player>();
         Role roleScript = currentPlayer.GetRoleScript();
         roleScript.InteractWithPlayer(playerInteractedWith);

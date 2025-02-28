@@ -70,14 +70,12 @@ public class CustomNetworkManager : NetworkManager
 
     public override void ServerChangeScene(string newSceneName)
     {
-        Debug.Log("Server is initiating scene change to: " + newSceneName);
         base.ServerChangeScene(newSceneName);
     }
 
 
     public override void OnClientSceneChanged()
     {
-        Debug.Log("Client finished loading scene");
         base.OnClientSceneChanged();
     }
 }

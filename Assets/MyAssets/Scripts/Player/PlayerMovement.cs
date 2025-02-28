@@ -1,31 +1,41 @@
 using Mirror;
 using UnityEngine;
 
+public enum MovementType
+{
+    Normal,
+    Ladder
+}
+
 // [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : NetworkBehaviour
 {
-    [Header("Movement Settings")]
+    public static PlayerMovement localInstance;
+    [Header("User Input")]
+    float horizontal;
+    float vertical;
+    private bool jumpPressed = false;
+    private float jumpPressedTime;
+
+    [Header("Normal Movement Settings")]
     // public float moveSpeed = 6f; // Player movement speed
     public float maxVelocityChange = 10f; // Limits how fast the Rigidbody can change velocity
     public float jumpForce = 5f; // Jump force
     public Transform orientation; // Reference to the player's orientation transform
 
+    [Header("Ladder Movement Settings")]
+    public float ladderMoveSpeed = 3f; // Ladder movement speed
+
     [Header("Ground Check")]
     public LayerMask groundLayer; // Define which layers are considered ground
     public float groundCheckHeight = 0.5f; // Height of the capsule cast (half of the player collider height)
 
-    // Internal movement parameters
-
-    private Rigidbody rb;
-    private Vector3 moveDirection;
+    [Header("Bunny Hop")]
     public float bunnyHopMultiplier = 1.0f;
     public float bunnyHopThreshold = 0.1f;
     public float bunnyHopMultiplierIncrease = 1.1f;
     public float bunnyHopMultiplierMax = 2.0f;
     // private bool isGrounded;
-    public static PlayerMovement localInstance;
-    private bool jumpPressed = false;
-    private float jumpPressedTime;
 
     [Header("Character controller based movement")]
 
@@ -40,6 +50,8 @@ public class PlayerMovement : NetworkBehaviour
     // Players have movement locked (when voting, in settings, etc.)
     private bool isLocked;
     [SerializeField] private CapsuleCollider capsuleCollider;
+
+    private MovementType movementType;
 
     void Start()
     {
@@ -73,11 +85,9 @@ public class PlayerMovement : NetworkBehaviour
 
     private void GetUserInputMoveDirection()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right
-        float vertical = Input.GetAxisRaw("Vertical"); // W/S or Up/Down
+        horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right
+        vertical = Input.GetAxisRaw("Vertical"); // W/S or Up/Down
 
-        // Calculate movement direction based on the orientation
-        moveDirection = (orientation.forward * vertical + orientation.right * horizontal).normalized;
 
 
         // Jump input
@@ -88,9 +98,35 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+    public void ChangeToLadderMovement()
+    {
+        gravity = 0f;
+        movementType = MovementType.Ladder;
+    }
+
+    public void ChangeToNormalMovement()
+    {
+        gravity = -15f;
+        movementType = MovementType.Normal;
+    }
+
     private void MovePlayer()
     {
+        if (movementType == MovementType.Ladder)
+        {
+            MovePlayerLadder();
+        }
+        else if (movementType == MovementType.Normal)
+        {
+            MovePlayerNormal();
+        }
+    }
+
+    private void MovePlayerNormal()
+    {
         bool isGrounded = IsGrounded();
+        // Calculate movement direction based on the orientation
+        Vector3 moveDirection = (orientation.forward * vertical + orientation.right * horizontal).normalized;
 
         if (isGrounded && velocity.y < 0)
         {
@@ -126,74 +162,20 @@ public class PlayerMovement : NetworkBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    private void GetUserInputMoveDirectionRb()
+    private void MovePlayerLadder()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right
-        float vertical = Input.GetAxisRaw("Vertical"); // W/S or Up/Down
-
-        // Calculate movement direction based on the orientation
-        moveDirection = (orientation.forward * vertical + orientation.right * horizontal).normalized;
-
-        // Jump input
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            jumpPressed = true;
-        }
-    }
-
-    public void LockPlayerMovementControls()
-    {
-        // isLocked = true;
-        // // Calculate desired velocity
-        // Vector3 targetVelocity = Vector3.zero;
-
-        // // Calculate velocity change while preserving the Rigidbody's current Y velocity (gravity)
-        // Vector3 velocity = rb.linearVelocity;
-        // Vector3 velocityChange = targetVelocity - new Vector3(velocity.x, 0, velocity.z);
-
-        // // Clamp the velocity change to ensure smooth movement
-        // velocityChange = Vector3.ClampMagnitude(velocityChange, maxVelocityChange);
-
-        // // Apply the velocity change to the Rigidbody
-        // rb.AddForce(velocityChange, ForceMode.VelocityChange);
+        Vector3 moveVector = new Vector3(0, vertical, 0);
+        controller.Move(moveVector * ladderMoveSpeed * Time.deltaTime);
     }
 
     public void LockPlayerMovement()
     {
         isLocked = true;
-        rb.linearVelocity = Vector3.zero;
     }
 
     public void UnlockPlayerMovement()
     {
         isLocked = false;
-    }
-
-    private void MovePlayerRb()
-    {
-        // Calculate desired velocity
-        Vector3 targetVelocity = moveDirection * moveSpeed;
-
-        // Calculate velocity change while preserving the Rigidbody's current Y velocity (gravity)
-        Vector3 velocity = rb.linearVelocity;
-        Vector3 velocityChange = targetVelocity - new Vector3(velocity.x, 0, velocity.z);
-
-        // Clamp the velocity change to ensure smooth movement
-        velocityChange = Vector3.ClampMagnitude(velocityChange, maxVelocityChange);
-
-        // Apply the velocity change to the Rigidbody
-        rb.AddForce(velocityChange, ForceMode.VelocityChange);
-    }
-
-    private void MovePlayerNew()
-    {
-
-    }
-
-    private void Jump()
-    {
-        // Apply jump force directly to the Rigidbody's Y velocity
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
     }
 
     private bool IsGrounded()

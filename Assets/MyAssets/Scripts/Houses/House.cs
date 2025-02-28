@@ -54,14 +54,12 @@ public class House : NetworkBehaviour
     public void ActivateProtection()
     {
         isProtected = true;
-        Debug.Log($"House {positionRelativeToVillageCenter} is now protected");
     }
 
     [Server]
     public void DeactivateProtection()
     {
         isProtected = false;
-        Debug.Log($"House {positionRelativeToVillageCenter} is no longer protected");
     }
 
     [Server]
