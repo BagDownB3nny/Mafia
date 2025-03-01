@@ -7,7 +7,6 @@ public class LadderCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("OnTriggerExit");
         if (other.CompareTag("Player") && ladder.isLocalPlayerOnLadder)
         {
             Player player = PlayerManager.instance.localPlayer;
