@@ -64,7 +64,7 @@ public class PlayerTeleporter : NetworkBehaviour
     {
         Debug.Log("CLIENT TELERPOT ");
         NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
-        networkTransform.OnTeleport(position, rotation);
+        networkTransform.OnTeleport(position);
         Physics.SyncTransforms();
     }
 }
