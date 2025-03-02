@@ -1,6 +1,5 @@
 using UnityEngine;
 using Mirror;
-using UnityEditor.ShaderGraph.Internal;
 
 public class InteractableLadder : Interactable
 {
