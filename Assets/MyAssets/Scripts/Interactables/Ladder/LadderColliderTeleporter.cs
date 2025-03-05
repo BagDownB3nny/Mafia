@@ -7,7 +7,6 @@ public class LadderColliderTeleporter : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ON TRIGGER ENTER");
         if (Time.time - ladder.timePlayerMountedLadder < 0.05f) return;
         if (other.CompareTag("Player") && ladder.isLocalPlayerOnLadder)
         {

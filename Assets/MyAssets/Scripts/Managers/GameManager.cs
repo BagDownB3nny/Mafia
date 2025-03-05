@@ -25,8 +25,9 @@ public class GameManager : NetworkBehaviour
         PlayerManager.instance.AssignRoles();
         MafiaHouse.instance.AssignMafiaSpawn();
         HouseManager.instance.OpenAllDoors();
-        VotingManager.instance.StopVoting();
-        TimeManager.instance.StartFirstDay();
         VotingBooth.instance.InitialiseDictionaries();
+        VotingManager.instance.StopVoting();
+        // TimeManager.instance.StartFirstDay();
+        TimeManagerV2.instance.StartGame();
     }
 }
