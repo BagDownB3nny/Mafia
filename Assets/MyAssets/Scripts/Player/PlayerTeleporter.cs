@@ -63,7 +63,7 @@ public class PlayerTeleporter : NetworkBehaviour
     public void ClientTeleportPlayer(Vector3 position, Quaternion rotation)
     {
         NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
-        networkTransform.OnTeleport(position, rotation);
+        networkTransform.OnTeleport(position);
         Physics.SyncTransforms();
     }
 }
