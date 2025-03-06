@@ -12,6 +12,7 @@ public class TimeManagerV2 : NetworkBehaviour
 
     [Header("Events")]
     public UnityEvent[] hourlyEvents = new UnityEvent[24];
+    public UnityEvent irlSecondlyEvent = new UnityEvent();
 
     [Header("Internal params")]
     public int currentHour { get; private set; } = 0;
@@ -52,13 +53,15 @@ public class TimeManagerV2 : NetworkBehaviour
     private void TickMinuteHand()
     {
         currentMinute += Convert.ToInt32(Math.Floor(60 / irlSecondsPerGameHour));
-        Debug.Log($"Time: {currentHour}:{currentMinute}");
+        irlSecondlyEvent.Invoke();
+
         if (currentMinute >= 60)
         {
             currentMinute = 0;
             currentHour++;
             TriggerHourlyEvent();
         }
+        Debug.Log($"Time: {currentHour}:{currentMinute}");
     }
 
     [Server]
