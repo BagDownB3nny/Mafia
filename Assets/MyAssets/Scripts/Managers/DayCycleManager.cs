@@ -104,6 +104,8 @@ public class DayCycleManager : MonoBehaviour
     private Dictionary<string, float> previousSettings;
     private Dictionary<string, float> currentSettings;
     private Dictionary<string, float> targetSettings;
+    private float currentSunRotation;
+    private float rotationPerIrlSecond;
 
     public static DayCycleManager instance;
 
@@ -141,6 +143,16 @@ public class DayCycleManager : MonoBehaviour
         }
     }
 
+    public void StartGame()
+    {
+        int currentHour = TimeManagerV2.instance.currentHour;
+        int currentMinute = TimeManagerV2.instance.currentMinute;
+        int rotationPerGameHour = 360 / 24;
+        // 7am = 0, 8am = 15, 6pm = 165, 7pm = 180
+        currentSunRotation = rotationPerGameHour * (currentHour - 7) + (currentMinute / 60f) * rotationPerGameHour;
+        rotationPerIrlSecond = rotationPerGameHour / TimeManagerV2.instance.irlSecondsPerGameHour;
+    }
+
     private IEnumerator TransitionSky(float hoursToNextTransition)
     {
         float elapsed = 0f;
@@ -166,14 +178,7 @@ public class DayCycleManager : MonoBehaviour
 
     private void UpdateSunRotation()
     {
-        int currentHour = TimeManagerV2.instance.currentHour;
-        int currentMinute = TimeManagerV2.instance.currentMinute;
-        // 7am = 0
-        // 8am = 15
-        // 6pm = 165
-        // 7pm = 180
-        float currentSunRotation = 15 * (currentHour - 7) + (currentMinute / 60f) * 15;
-
+        currentSunRotation += rotationPerIrlSecond * Time.deltaTime;
         Light sun = GameObject.Find("Sun").GetComponent<Light>();
         sun.transform.rotation = Quaternion.Euler(currentSunRotation, 0, 0);
         sun.intensity = currentSettings["sunIntensity"];
@@ -191,7 +196,6 @@ public class DayCycleManager : MonoBehaviour
         // Light moon = GameObject.Find("Moon").GetComponent<Light>();
 
         UpdateSunRotation();
-        LogCurrentSettings();
 
         // moon.transform.rotation = Quaternion.Euler(currentSettings["moonRotation"], 0, 0);
         // moon.intensity = currentSettings["moonIntensity"];
