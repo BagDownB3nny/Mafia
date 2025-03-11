@@ -15,7 +15,8 @@ public class DayCycleManager : MonoBehaviour
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.4f},
             {"environmentReflectionsIntensity", 0.5f},
-            {"skyboxExposure", 0.3f}
+            {"skyboxExposure", 0.3f},
+            {"fogDensity", 0f}
         }},
 
         {"2PmSettings", new Dictionary<string, float> {
@@ -23,7 +24,8 @@ public class DayCycleManager : MonoBehaviour
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 1f},
             {"environmentReflectionsIntensity", 1f},
-            {"skyboxExposure", 1.5f}
+            {"skyboxExposure", 1.5f},
+            {"fogDensity", 0f}
         }},
 
         {"6PmSettings", new Dictionary<string, float> {
@@ -31,7 +33,8 @@ public class DayCycleManager : MonoBehaviour
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.4f},
             {"environmentReflectionsIntensity", 0.5f},
-            {"skyboxExposure", 0.3f}
+            {"skyboxExposure", 0.3f},
+            {"fogDensity", 0f}
         }},
 
         {"7PmSettings", new Dictionary<string, float> {
@@ -39,7 +42,8 @@ public class DayCycleManager : MonoBehaviour
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.4f},
             {"environmentReflectionsIntensity", 0.5f},
-            {"skyboxExposure", 0.3f}
+            {"skyboxExposure", 0.3f},
+            {"fogDensity", 0f}
         }},
 
         {"12AmSettings", new Dictionary<string, float> {
@@ -47,7 +51,8 @@ public class DayCycleManager : MonoBehaviour
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.2f},
             {"environmentReflectionsIntensity", 0f},
-            {"skyboxExposure", 0.1f}
+            {"skyboxExposure", 0.1f},
+            {"fogDensity", 0.01f}
         }},
 
         {"7AmSettings", new Dictionary<string, float> {
@@ -55,7 +60,8 @@ public class DayCycleManager : MonoBehaviour
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.2f},
             {"environmentReflectionsIntensity", 0f},
-            {"skyboxExposure", 0.1f}
+            {"skyboxExposure", 0.1f},
+            {"fogDensity", 0.01f}
         }},
     };
 
@@ -196,6 +202,8 @@ public class DayCycleManager : MonoBehaviour
         // Light moon = GameObject.Find("Moon").GetComponent<Light>();
 
         UpdateSunRotation();
+        // change fog density
+        RenderSettings.fogDensity = currentSettings["fogDensity"];
 
         // moon.transform.rotation = Quaternion.Euler(currentSettings["moonRotation"], 0, 0);
         // moon.intensity = currentSettings["moonIntensity"];
