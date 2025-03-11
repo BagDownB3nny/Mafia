@@ -105,8 +105,12 @@ public class TimeManagerV2 : NetworkBehaviour
 
         // Reset all sigils
         SigilsManager.instance.ResetAllSigils();
+
+        // Turn off all lights
+        LightManager.instance.TurnOffAllLights();
     }
 
+    [Server]
     private void SixPmEvent()
     {
         // Deactivate voting booth
@@ -123,6 +127,9 @@ public class TimeManagerV2 : NetworkBehaviour
             // TODO: Restrict that player's movement from 6pm till 11pm (gives chance for them to be spared)
             votedOutPlayer.GetComponent<PlayerMovement>().LockPlayerMovement();
         }
+
+        // Turn on all lights
+        LightManager.instance.TurnOnAllLights();
     }
 
     [Server]
