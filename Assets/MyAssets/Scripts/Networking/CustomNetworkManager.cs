@@ -48,7 +48,7 @@ public class CustomNetworkManager : NetworkManager
         if (playerHouse != null)
         {
             playerComponent.house = playerHouse;
-            playerHouse.player = playerComponent;
+            playerHouse.AssignPlayer(playerComponent);
         }
     }
 

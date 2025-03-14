@@ -19,6 +19,17 @@ public class House : NetworkBehaviour
     public bool isProtected;
 
     [Server]
+    public void AssignPlayer(Player player)
+    {
+        this.player = player;
+        foreach (Door door in doors)
+        {
+            InteractableDoor interactableDoor = door.GetComponent<InteractableDoor>();
+            interactableDoor.AssignAuthority(player);
+        }
+    }
+
+    [Server]
     public void CloseAllDoors()
     {
         foreach (Door door in doors)

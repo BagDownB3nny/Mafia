@@ -1,12 +1,15 @@
 using Mirror;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
 
 public class InteractableDoor : Interactable
 {
 
     public bool isOpen = false;
     public bool isBroken = false;
+
+    public readonly SyncList<uint> authorisedPlayers = new SyncList<uint>();
     [SerializeField] private Transform doorOpenPosition;
     [SerializeField] private Transform doorClosedPosition;
 
@@ -15,11 +18,23 @@ public class InteractableDoor : Interactable
         Unhighlight();
     }
 
+    [Server]
+    public void AssignAuthority(Player player)
+    {
+        if (player == null)
+        {
+            Debug.LogError("Player is null");
+            return;
+        }
+        authorisedPlayers.Add(player.netId);
+    }
+
     [Client]
     public override void OnHover()
     {
         Highlight();
-        if (isOwned)
+        uint playerNetId = PlayerManager.instance.localPlayer.netId;
+        if (authorisedPlayers.Contains(playerNetId))
         {
             string interactableText = isOpen ? "Close the door" : "Open the door";
             PlayerUIManager.instance.SetInteractableText(interactableText);
@@ -40,7 +55,8 @@ public class InteractableDoor : Interactable
     [Client]
     public override void Interact()
     {
-        if (isOwned)
+        uint playerNetId = PlayerManager.instance.localPlayer.netId;
+        if (authorisedPlayers.Contains(playerNetId))
         {
             CmdInteract();
         }

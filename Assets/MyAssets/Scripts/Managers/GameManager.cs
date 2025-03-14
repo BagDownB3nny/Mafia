@@ -23,8 +23,7 @@ public class GameManager : NetworkBehaviour
     public void StartGame()
     {
         PlayerManager.instance.AssignRoles();
-        MafiaHouse.instance.AssignMafiaSpawn();
-        HouseManager.instance.OpenAllDoors();
+        MafiaHouse.instance.AssignMafiaDoorAuthority();
         VotingBooth.instance.InitialiseDictionaries();
         VotingManager.instance.StopVoting();
         TimeManagerV2.instance.StartGame();

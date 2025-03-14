@@ -4,7 +4,8 @@ using UnityEngine;
 public class MafiaHouse : MonoBehaviour
 {
 
-    [SerializeField] private List<Transform> mafiaSpawnPoints;
+    // [SerializeField] private List<Transform> mafiaSpawnPoints;
+    [SerializeField] private List<Door> doors;
 
     public static MafiaHouse instance;
 
@@ -20,18 +21,31 @@ public class MafiaHouse : MonoBehaviour
         }
     }
 
-    public List<Transform> GetMafiaSpawnPoints()
-    {
-        return mafiaSpawnPoints;
-    }
-
-    public void AssignMafiaSpawn()
+    public void AssignMafiaDoorAuthority()
     {
         List<Player> mafiaPlayers = PlayerManager.instance.GetMafiaPlayers();
-        // This assumes that 
-        for (int i = 0; i < mafiaPlayers.Count; i++)
+        foreach (Player player in mafiaPlayers)
         {
-            mafiaPlayers[i].GetComponent<PlayerTeleporter>().mafiaNightSpawnpoint = mafiaSpawnPoints[i];
+            foreach (Door door in doors)
+            {
+                InteractableDoor interactableDoor = door.GetComponent<InteractableDoor>();
+                interactableDoor.AssignAuthority(player);
+            }
         }
     }
+
+    // public List<Transform> GetMafiaSpawnPoints()
+    // {
+    //     return mafiaSpawnPoints;
+    // }
+
+    // public void AssignMafiaSpawn()
+    // {
+    //     List<Player> mafiaPlayers = PlayerManager.instance.GetMafiaPlayers();
+    //     // This assumes that 
+    //     for (int i = 0; i < mafiaPlayers.Count; i++)
+    //     {
+    //         mafiaPlayers[i].GetComponent<PlayerTeleporter>().mafiaNightSpawnpoint = mafiaSpawnPoints[i];
+    //     }
+    // }
 }
