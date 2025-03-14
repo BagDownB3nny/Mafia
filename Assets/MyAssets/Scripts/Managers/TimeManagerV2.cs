@@ -10,13 +10,30 @@ public class TimeManagerV2 : NetworkBehaviour
     [Header("Time settings")]
     [SerializeField] public float irlSecondsPerGameHour = 3;
 
-    [Header("Events")]
-    public UnityEvent[] hourlyEvents = new UnityEvent[24];
-    public UnityEvent irlSecondlyEvent = new UnityEvent();
+    [Header("ServerEvents")]
+
+    // These events are invoked by the server
+    public UnityEvent[] hourlyServerEvents = new UnityEvent[24];
+    public UnityEvent irlSecondlyServerEvent = new UnityEvent();
+
+    [Header("ClientEvents")]
+
+    // These events are invoked by the client
+    // Client events should only affect the appearance of the game on the client (eg. clock, lights)
+    public UnityEvent[] hourlyClientEvents = new UnityEvent[24];
+    public UnityEvent irlSecondlyClientEvent = new UnityEvent();
+
+
 
     [Header("Internal params")]
-    public int currentHour { get; private set; } = 0;
-    public int currentMinute { get; private set; } = 0;
+
+    // The syncvar hooks will allow for clients to update their game based on time changes
+
+    [SyncVar(hook = nameof(TriggerClientHourlyEvent))]
+    public int currentHour = 0;
+
+    [SyncVar(hook = nameof(TriggerClientMinutelyEvent))]
+    public int currentMinute = 0;
 
     public static TimeManagerV2 instance;
 
@@ -34,10 +51,10 @@ public class TimeManagerV2 : NetworkBehaviour
 
     public override void OnStartServer()
     {
-        hourlyEvents[0].AddListener(TwelveAmEvent);
-        hourlyEvents[8].AddListener(EightAmEvent);
-        hourlyEvents[18].AddListener(SixPmEvent);
-        hourlyEvents[23].AddListener(ElevenPmEvent);
+        hourlyServerEvents[0].AddListener(TwelveAmEvent);
+        hourlyServerEvents[8].AddListener(EightAmEvent);
+        hourlyServerEvents[18].AddListener(SixPmEvent);
+        hourlyServerEvents[23].AddListener(ElevenPmEvent);
     }
 
     [Server]
@@ -52,28 +69,59 @@ public class TimeManagerV2 : NetworkBehaviour
     [Server]
     private void TickMinuteHand()
     {
-        currentMinute += Convert.ToInt32(Math.Floor(60 / irlSecondsPerGameHour));
-        irlSecondlyEvent.Invoke();
-
-        if (currentMinute >= 60)
+        int newMinute = currentMinute + Convert.ToInt32(Math.Floor(60 / irlSecondsPerGameHour));
+        int newHour = currentHour;
+        if (newMinute >= 60)
         {
-            currentMinute = 0;
-            currentHour++;
+            newMinute = 0;
+            newHour++;
+            if (newHour >= 24)
+            {
+                newHour = 0;
+            }
+        }
+
+        SetNewTime(newHour, newMinute);
+    }
+
+    [Server]
+    private void SetNewTime(int newHour, int newMinute)
+    {
+        bool triggerHourlyEvent = newHour != currentHour;
+        currentHour = newHour;
+        currentMinute = newMinute;
+        Debug.Log($"Time: {currentHour}:{currentMinute}");
+
+        irlSecondlyServerEvent.Invoke();
+        if (triggerHourlyEvent)
+        {
             TriggerHourlyEvent();
         }
-        Debug.Log($"Time: {currentHour}:{currentMinute}");
+    }
+
+    private void TriggerClientHourlyEvent(int oldHour, int newHour)
+    {
+        if (isClient)
+        {
+            Debug.Log($"Triggering client hourly event {newHour}");
+            hourlyClientEvents[newHour].Invoke();
+        }
+    }
+
+    private void TriggerClientMinutelyEvent(int oldMinute, int newMinute)
+    {
+        if (isClient)
+        {
+            irlSecondlyClientEvent.Invoke();
+        }
     }
 
     [Server]
     private void TriggerHourlyEvent()
     {
-        if (currentHour >= 24)
+        if (hourlyServerEvents[currentHour] != null)
         {
-            currentHour = 0;
-        }
-        if (hourlyEvents[currentHour] != null)
-        {
-            hourlyEvents[currentHour].Invoke();
+            hourlyServerEvents[currentHour].Invoke();
         }
     }
 

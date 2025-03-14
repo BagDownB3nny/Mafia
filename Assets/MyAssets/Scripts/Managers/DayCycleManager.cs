@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Dissonance;
-using Unity.VisualScripting;
 using UnityEngine;
+using Mirror;
 
-public class DayCycleManager : MonoBehaviour
+public class DayCycleManager : NetworkBehaviour
 {
     [Header("Time settings")]
     private static Dictionary<string, Dictionary<string, float>> timeSettings = new Dictionary<string, Dictionary<string, float>>
@@ -127,7 +126,12 @@ public class DayCycleManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public override void OnStartClient()
+    {
+        InitialiseTransitions();
+    }
+
+    private void InitialiseTransitions()
     {
         for (int i = 0; i < transitionSettings.Count; i++)
         {
@@ -139,7 +143,7 @@ public class DayCycleManager : MonoBehaviour
             string nextTransition = (string)value["nextTransition"];
             Dictionary<string, float> settings = (Dictionary<string, float>)value["settings"];
 
-            TimeManagerV2.instance.hourlyEvents[hour].AddListener(() =>
+            TimeManagerV2.instance.hourlyClientEvents[hour].AddListener(() =>
             {
                 previousSettings = new Dictionary<string, float>(settings);
                 currentSettings = new Dictionary<string, float>(settings);
@@ -147,10 +151,13 @@ public class DayCycleManager : MonoBehaviour
                 StartCoroutine(TransitionSky((int)value["durationToNextTransition"]));
             });
         }
+        Debugger.instance.Log("DayCycleManager initialised transitions");
     }
 
+    [Server]
     public void StartGame()
     {
+        Debugger.instance.Log("DayCycleManager started game");
         int currentHour = TimeManagerV2.instance.currentHour;
         int currentMinute = TimeManagerV2.instance.currentMinute;
         int rotationPerGameHour = 360 / 24;
@@ -159,6 +166,7 @@ public class DayCycleManager : MonoBehaviour
         rotationPerIrlSecond = rotationPerGameHour / TimeManagerV2.instance.irlSecondsPerGameHour;
     }
 
+    [Client]
     private IEnumerator TransitionSky(float hoursToNextTransition)
     {
         float elapsed = 0f;
@@ -188,8 +196,10 @@ public class DayCycleManager : MonoBehaviour
         Light sun = GameObject.Find("Sun").GetComponent<Light>();
         sun.transform.rotation = Quaternion.Euler(currentSunRotation, 0, 0);
         sun.intensity = currentSettings["sunIntensity"];
+        // Debugger.instance.Log($"Sun rotation: {currentSunRotation}");
     }
 
+    [Client]
     private void ApplySkySettings()
     {
         // Apply currentSettings to your skybox, sun, moon, etc.

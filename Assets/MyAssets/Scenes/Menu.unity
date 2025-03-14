@@ -382,11 +382,11 @@ PrefabInstance:
     - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
       propertyPath: 'spawnPrefabs.Array.data[4]'
       value: 
-      objectReference: {fileID: 6108184521754498726, guid: 28cc9cc53015a4337bb827bda77c9cc5, type: 3}
+      objectReference: {fileID: 7621318876243386588, guid: dc2dc0891f3c5496e82c6dabaf776893, type: 3}
     - target: {fileID: 2031218691577075018, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
       propertyPath: 'spawnPrefabs.Array.data[5]'
       value: 
-      objectReference: {fileID: 7621318876243386588, guid: dc2dc0891f3c5496e82c6dabaf776893, type: 3}
+      objectReference: {fileID: 6108184521754498726, guid: 28cc9cc53015a4337bb827bda77c9cc5, type: 3}
     - target: {fileID: 3775347956757625069, guid: 99850268fa57e4b208d019253a1fac8c, type: 3}
       propertyPath: m_Name
       value: Network Manager

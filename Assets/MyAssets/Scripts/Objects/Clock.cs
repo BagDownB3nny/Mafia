@@ -1,14 +1,14 @@
 using UnityEngine;
 using Mirror;
 
-public class Clock : MonoBehaviour
+public class Clock : NetworkBehaviour
 {
     [SerializeField] private GameObject hourHand;
     [SerializeField] private GameObject minuteHand;
 
-    public void Start()
+    public override void OnStartClient()
     {
-        TimeManagerV2.instance.irlSecondlyEvent.AddListener(UpdateClock);
+        TimeManagerV2.instance.irlSecondlyClientEvent.AddListener(UpdateClock);
     }
 
     [Client]
