@@ -4,15 +4,16 @@ using System.Collections.Generic;
 
 public abstract class Role : NetworkBehaviour
 {
-    public abstract string rolePlayerInteractText { get; }
-    public abstract bool isAbleToInteractWithPlayers { get; }
-    protected abstract List<SigilName> sigilsAbleToSee { get; }
+    public abstract string RolePlayerInteractText { get; }
+    public abstract bool IsAbleToInteractWithPlayers { get; }
+    protected abstract List<SigilName> SigilsAbleToSee { get; }
 
     public virtual void InteractWithPlayer(NetworkIdentity player)
     {
         Debug.Log($"Interacting with player {player.name}");
     }
 
+    [Client]
     protected virtual void OnEnable()
     {
         if (isLocalPlayer)
@@ -22,6 +23,7 @@ public abstract class Role : NetworkBehaviour
         }
     }
 
+    [Client]
     protected virtual void OnDisable()
     {
         if (isLocalPlayer)
@@ -31,9 +33,10 @@ public abstract class Role : NetworkBehaviour
         }
     }
 
+    [Client]
     private void EnableSigils()
     {
-        foreach (SigilName sigil in sigilsAbleToSee)
+        foreach (SigilName sigil in SigilsAbleToSee)
         {
             CameraCullingMaskManager.instance.SetSigilLayerVisible(sigil);
         }
@@ -41,12 +44,13 @@ public abstract class Role : NetworkBehaviour
 
     private void DisableSigils()
     {
-        foreach (SigilName sigil in sigilsAbleToSee)
+        foreach (SigilName sigil in SigilsAbleToSee)
         {
             CameraCullingMaskManager.instance.SetSigilLayerInvisible(sigil);
         }
     }
 
-    protected abstract void SetNameTags();
-    protected abstract void ResetNameTags();
+    protected virtual void SetNameTags() {}
+
+    protected virtual void ResetNameTags() {}
 }

@@ -3,7 +3,7 @@ public class InteractablePlayer : Interactable
     public override void OnHover()
     {
         Player localPlayer = PlayerManager.instance.localPlayer;
-        string interactableText = localPlayer.GetComponent<Role>().rolePlayerInteractText;
+        string interactableText = localPlayer.GetComponent<Role>().RolePlayerInteractText;
         if (interactableText != null)
         {
             PlayerUIManager.instance.SetInteractableText(interactableText);

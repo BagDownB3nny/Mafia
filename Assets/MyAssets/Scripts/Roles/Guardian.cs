@@ -6,17 +6,8 @@ public class Guardian : Role
 {
     [SyncVar]
     private uint markedPlayerNetId;
-    public override string rolePlayerInteractText => "Protect with Guardian's Sigil";
-    public override bool isAbleToInteractWithPlayers => true;
-    protected override List<SigilName> sigilsAbleToSee => new List<SigilName> { SigilName.DeathSigil };
+    public override string RolePlayerInteractText => "Protect with Guardian's Sigil";
+    public override bool IsAbleToInteractWithPlayers => true;
+    protected override List<SigilName> SigilsAbleToSee => new() { SigilName.DeathSigil };
 
-    protected override void SetNameTags()
-    {
-        // No change in name tags
-    }
-
-    protected override void ResetNameTags()
-    {
-        // No change in name tags
-    }
 }

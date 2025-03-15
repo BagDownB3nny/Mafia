@@ -57,7 +57,7 @@ public class PlayerActions : NetworkBehaviour
     [Client]
     private void HandleShooting()
     {
-        if (Input.GetMouseButtonDown(0) && player.isAbleToShoot())
+        if (Input.GetMouseButtonDown(0) && player.IsAbleToShoot())
         {
             Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
             CmdShoot(currentLookingAtDirection, transform);

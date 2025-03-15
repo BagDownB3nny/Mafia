@@ -7,19 +7,9 @@ public class Seer : Role
     [SyncVar(hook = nameof(OnMarkedPlayerNetIdChanged))]
     public uint markedPlayerNetId;
 
-    public override string rolePlayerInteractText => "Mark with Seeing-Eye Sigil";
-    public override bool isAbleToInteractWithPlayers => true;
-    protected override List<SigilName> sigilsAbleToSee => new List<SigilName> { SigilName.SeeingEyeSigil };
-
-    protected override void SetNameTags()
-    {
-        // No change in name tags
-    }
-
-    protected override void ResetNameTags()
-    {
-        // No change in name tags
-    }
+    public override string RolePlayerInteractText => "Mark with Seeing-Eye Sigil";
+    public override bool IsAbleToInteractWithPlayers => true;
+    protected override List<SigilName> SigilsAbleToSee => new() { SigilName.SeeingEyeSigil };
 
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class Mafia : Role
 {
-    public override string rolePlayerInteractText => "Mark for death";
-    public override bool isAbleToInteractWithPlayers => true;
-    protected override List<SigilName> sigilsAbleToSee => new() { SigilName.DeathSigil };
+    public override string RolePlayerInteractText => "Mark for death";
+    public override bool IsAbleToInteractWithPlayers => true;
+    protected override List<SigilName> SigilsAbleToSee => new() { SigilName.DeathSigil };
 
     private Player markedPlayer;
 
