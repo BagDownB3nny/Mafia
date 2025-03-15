@@ -11,25 +11,14 @@ public class Seer : Role
     public override bool isAbleToInteractWithPlayers => true;
     protected override List<SigilName> sigilsAbleToSee => new List<SigilName> { SigilName.SeeingEyeSigil };
 
-    public override void OnStartLocalPlayer()
+    protected override void SetNameTags()
     {
-        base.OnStartLocalPlayer();
+        // No change in name tags
     }
 
-    public void OnEnable()
+    protected override void ResetNameTags()
     {
-        if (isLocalPlayer)
-        {
-            CameraCullingMaskManager.instance.SetSigilLayerVisible(SigilName.SeeingEyeSigil);
-        }
-    }
-
-    public void OnDisable()
-    {
-        if (isLocalPlayer)
-        {
-            CameraCullingMaskManager.instance.SetSigilLayerInvisible(SigilName.SeeingEyeSigil);
-        }
+        // No change in name tags
     }
 
     [Server]

@@ -14,4 +14,14 @@ public class SixthSense : Role
     {
         Debug.LogError("Sixth sense cannot interact with players");
     }
+
+    protected override void SetNameTags()
+    {
+        // No change in name tags
+    }
+
+    protected override void ResetNameTags()
+    {
+        // No change in name tags
+    }
 }

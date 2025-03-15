@@ -2,7 +2,7 @@ using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
 
-public abstract class Role: NetworkBehaviour
+public abstract class Role : NetworkBehaviour
 {
     public abstract string rolePlayerInteractText { get; }
     public abstract bool isAbleToInteractWithPlayers { get; }
@@ -13,25 +13,40 @@ public abstract class Role: NetworkBehaviour
         Debug.Log($"Interacting with player {player.name}");
     }
 
-    public virtual void OnEnable()
+    protected virtual void OnEnable()
     {
         if (isLocalPlayer)
         {
-            foreach (SigilName sigil in sigilsAbleToSee)
-            {
-                CameraCullingMaskManager.instance.SetSigilLayerVisible(sigil);
-            }
+            EnableSigils();
+            SetNameTags();
         }
     }
 
-    public virtual void OnDisable()
+    protected virtual void OnDisable()
     {
         if (isLocalPlayer)
         {
-            foreach (SigilName sigil in sigilsAbleToSee)
-            {
-                CameraCullingMaskManager.instance.SetSigilLayerInvisible(sigil);
-            }
+            DisableSigils();
+            ResetNameTags();
         }
     }
+
+    private void EnableSigils()
+    {
+        foreach (SigilName sigil in sigilsAbleToSee)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(sigil);
+        }
+    }
+
+    private void DisableSigils()
+    {
+        foreach (SigilName sigil in sigilsAbleToSee)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(sigil);
+        }
+    }
+
+    protected abstract void SetNameTags();
+    protected abstract void ResetNameTags();
 }

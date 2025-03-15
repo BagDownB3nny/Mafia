@@ -149,7 +149,14 @@ public class Player : NetworkBehaviour
         {
             PlayerUIManager.instance.SetRoleText(newRole);
         }
+        DisableRoleScriptsExcept(newRole);
         EnableRoleScript(newRole);
+    }
+
+    [Client]
+    public void SetNameTagColor(Color color)
+    {
+        playerUIPrefab.color = color;
     }
 
     [Server]
