@@ -4,25 +4,30 @@ using System.Collections.Generic;
 
 public class Mafia : Role
 {
-    public override string rolePlayerInteractText => "Mark for death";
-    public override bool isAbleToInteractWithPlayers => true;
-    protected override List<SigilName> sigilsAbleToSee => new List<SigilName> { SigilName.DeathSigil };
+    public override string RolePlayerInteractText => "Mark for death";
+    public override bool IsAbleToInteractWithPlayers => true;
+    protected override List<SigilName> SigilsAbleToSee => new() { SigilName.DeathSigil };
 
     private Player markedPlayer;
 
-    public void OnEnable()
+    protected override void SetNameTags()
     {
-        if (isLocalPlayer)
+        List<Player> players = PlayerManager.instance.GetAllPlayers();
+        foreach (Player player in players)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerVisible(SigilName.DeathSigil);
+            if (player.GetRole() == RoleName.Mafia)
+            {
+                player.SetNameTagColor(Color.red);
+            }
         }
     }
 
-    public void OnDisable()
+    protected override void ResetNameTags()
     {
-        if (isLocalPlayer)
+        List<Player> players = PlayerManager.instance.GetAllPlayers();
+        foreach (Player player in players)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerInvisible(SigilName.DeathSigil);
+            player.SetNameTagColor(Color.white);
         }
     }
 

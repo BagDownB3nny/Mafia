@@ -2,36 +2,55 @@ using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
 
-public abstract class Role: NetworkBehaviour
+public abstract class Role : NetworkBehaviour
 {
-    public abstract string rolePlayerInteractText { get; }
-    public abstract bool isAbleToInteractWithPlayers { get; }
-    protected abstract List<SigilName> sigilsAbleToSee { get; }
+    public abstract string RolePlayerInteractText { get; }
+    public abstract bool IsAbleToInteractWithPlayers { get; }
+    protected abstract List<SigilName> SigilsAbleToSee { get; }
 
     public virtual void InteractWithPlayer(NetworkIdentity player)
     {
         Debug.Log($"Interacting with player {player.name}");
     }
 
-    public virtual void OnEnable()
+    [Client]
+    protected virtual void OnEnable()
     {
         if (isLocalPlayer)
         {
-            foreach (SigilName sigil in sigilsAbleToSee)
-            {
-                CameraCullingMaskManager.instance.SetSigilLayerVisible(sigil);
-            }
+            EnableSigils();
+            SetNameTags();
         }
     }
 
-    public virtual void OnDisable()
+    [Client]
+    protected virtual void OnDisable()
     {
         if (isLocalPlayer)
         {
-            foreach (SigilName sigil in sigilsAbleToSee)
-            {
-                CameraCullingMaskManager.instance.SetSigilLayerInvisible(sigil);
-            }
+            DisableSigils();
+            ResetNameTags();
         }
     }
+
+    [Client]
+    private void EnableSigils()
+    {
+        foreach (SigilName sigil in SigilsAbleToSee)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerVisible(sigil);
+        }
+    }
+
+    private void DisableSigils()
+    {
+        foreach (SigilName sigil in SigilsAbleToSee)
+        {
+            CameraCullingMaskManager.instance.SetSigilLayerInvisible(sigil);
+        }
+    }
+
+    protected virtual void SetNameTags() {}
+
+    protected virtual void ResetNameTags() {}
 }

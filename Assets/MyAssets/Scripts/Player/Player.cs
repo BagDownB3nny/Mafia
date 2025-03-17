@@ -148,8 +148,14 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
         {
             PlayerUIManager.instance.SetRoleText(newRole);
+            DisableRoleScriptsExcept(newRole);
+            EnableRoleScript(newRole);
         }
-        EnableRoleScript(newRole);
+    }
+
+    public void SetNameTagColor(Color color)
+    {
+        playerUIPrefab.color = color;
     }
 
     [Server]
@@ -176,7 +182,7 @@ public class Player : NetworkBehaviour
         }
     }
 
-    public bool isAbleToShoot()
+    public bool IsAbleToShoot()
     {
         return hasGun;
     }
@@ -187,6 +193,6 @@ public class Player : NetworkBehaviour
         {
             return false;
         }
-        return GetRoleScript().isAbleToInteractWithPlayers;
+        return GetRoleScript().IsAbleToInteractWithPlayers;
     }
 }

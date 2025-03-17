@@ -1,16 +1,21 @@
 using UnityEngine;
+using Mirror;
 
-public class HouseTunnelTeleporter : MonoBehaviour
+public class HouseTunnelTeleporter : NetworkBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Transform exitPoint;
+    public HouseTunnelTeleporter target;
+
+    [Server]
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
