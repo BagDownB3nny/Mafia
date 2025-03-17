@@ -10,6 +10,7 @@ public class VotingSlip : MonoBehaviour
     private List<String> deadPlayerNames;
     [SerializeField] private GameObject votingPlayerRow;
     [SerializeField] private VotingBooth votingBooth;
+    private VotingRow currentlySelectedRow;
 
 
     public void ExitVotingSlip()
@@ -52,5 +53,15 @@ public class VotingSlip : MonoBehaviour
                 ExitVotingSlip();
             }
         }
+    }
+
+    public void SetSelectedRow(VotingRow row)
+    {
+        if (currentlySelectedRow != null)
+        {
+            currentlySelectedRow.Deselect();
+        }
+        currentlySelectedRow = row;
+        Debug.Log("Setting selected row");
     }
 }

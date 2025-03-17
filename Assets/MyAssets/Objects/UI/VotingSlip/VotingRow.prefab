@@ -161,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6667766497839974438}
   - component: {fileID: 9185389385487116618}
+  - component: {fileID: 2078510356507797149}
   m_Layer: 5
   m_Name: VotingRow
   m_TagString: Untagged
@@ -235,8 +236,33 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2078510356507797149}
+        m_TargetAssemblyTypeName: VotingRow, Assembly-CSharp
+        m_MethodName: OnToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &2078510356507797149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686779812715610606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36bb634b59e74109bccb1e91c17d273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: 9185389385487116618}
 --- !u!1 &6215881740227257971
 GameObject:
   m_ObjectHideFlags: 0

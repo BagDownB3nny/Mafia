@@ -86,4 +86,9 @@ public class MafiaHouseTable : NetworkBehaviour
             }
         }
     }
+
+    public void RemoveHouseMini()
+    {
+        
+    }
 }

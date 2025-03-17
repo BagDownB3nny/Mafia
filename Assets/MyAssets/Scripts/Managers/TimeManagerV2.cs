@@ -8,7 +8,7 @@ public class TimeManagerV2 : NetworkBehaviour
 {
 
     [Header("Time settings")]
-    [SerializeField] public float irlSecondsPerGameHour = 3;
+    [SerializeField] public float irlSecondsPerGameHour = 1f;
 
     [Header("ServerEvents")]
 

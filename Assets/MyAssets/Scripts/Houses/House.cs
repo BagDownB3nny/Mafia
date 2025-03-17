@@ -29,6 +29,7 @@ public class House : NetworkBehaviour
         }
     }
 
+
     [Server]
     public void CloseAllDoors()
     {

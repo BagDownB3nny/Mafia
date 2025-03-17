@@ -1259,7 +1259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 319412697}
   m_Layer: 5
-  m_Name: ScreenOverlays
+  m_Name: OpenableUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
