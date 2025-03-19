@@ -4400,6 +4400,37 @@ Transform:
   - {fileID: 1213749715}
   m_Father: {fileID: 543450652275453869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1331009402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1331009403}
+  m_Layer: 0
+  m_Name: HouseMiniParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1331009403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331009402}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2735718561575060383}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1347516656
 GameObject:
   m_ObjectHideFlags: 0
@@ -10304,6 +10335,7 @@ Transform:
   - {fileID: 6304195027501579735}
   - {fileID: 7750026152015132511}
   - {fileID: 6504473659614080130}
+  - {fileID: 1331009403}
   m_Father: {fileID: 7225952972531643838}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!1 &2753694568508760065
@@ -16587,7 +16619,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   houseMiniPrefab: {fileID: 5553602909193787467, guid: a4568c9a7e9ad4eb09db57aa37600fa6, type: 3}
-  houseMiniParent: {fileID: 2993580268510785561, guid: a4568c9a7e9ad4eb09db57aa37600fa6, type: 3}
+  houseMiniParent: {fileID: 1331009403}
   whiteboard: {fileID: 354904730}
   selectedHouseMini: {fileID: 0}
 --- !u!114 &7409319176509846171

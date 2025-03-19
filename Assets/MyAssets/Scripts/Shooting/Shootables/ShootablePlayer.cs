@@ -33,7 +33,7 @@ public class ShootablePlayer : Shootable
         RpcSetDeath();
         corpse = Instantiate(corpsePrefab, transform.position, transform.rotation);
         NetworkServer.Spawn(corpse);
-        PubSub.Publish(PubSubEvent.PlayerDeath, player);
+        PubSub.Publish<Player>(PubSubEvent.PlayerDeath, player);
     }
 
     [ClientRpc]

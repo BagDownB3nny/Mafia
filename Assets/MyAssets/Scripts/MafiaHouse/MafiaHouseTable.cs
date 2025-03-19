@@ -109,7 +109,7 @@ public class MafiaHouseTable : NetworkBehaviour
     {
         foreach (InteractableVillageHouseMini houseMini in houseMiniParent.GetComponentsInChildren<InteractableVillageHouseMini>())
         {
-            if (houseMini.house.player == player)
+            if (houseMini.house && houseMini.house.player && houseMini.house.player.netId == player.netId)
             {
                 return houseMini;
             }
@@ -122,7 +122,7 @@ public class MafiaHouseTable : NetworkBehaviour
     {
         foreach (InteractableVillageHouseMini houseMini in houseMiniParent.GetComponentsInChildren<InteractableVillageHouseMini>())
         {
-            if (houseMini.house == house)
+            if (houseMini.house && houseMini.house.netId == house.netId)
             {
                 return houseMini;
             }
