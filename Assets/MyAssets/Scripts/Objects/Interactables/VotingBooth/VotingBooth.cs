@@ -19,7 +19,7 @@ public class VotingBooth : Interactable
     // Observer
     public event Action OnVotesChanged;
 
-    [SerializeField] private GameObject votingSlipCanvas;
+    [SerializeField] private VotingSlip votingSlip;
 
     public static VotingBooth instance;
 
@@ -78,7 +78,7 @@ public class VotingBooth : Interactable
     [Client]
     public override void Interact()
     {
-        votingSlipCanvas.SetActive(true);
+        votingSlip.Enable();
     }
 
     // Dictionary of key: player voting, value: player voted for

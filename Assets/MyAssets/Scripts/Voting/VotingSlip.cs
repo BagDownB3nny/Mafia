@@ -1,17 +1,61 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class VotingSlip : MonoBehaviour
 {
     [SerializeField] private GameObject VotingTogglesContainer;
+    [SerializeField] private GameObject VotingSlipUI;
     private List<String> playerNames;
-    private List<String> deadPlayerNames;
     [SerializeField] private GameObject votingPlayerRow;
     [SerializeField] private VotingBooth votingBooth;
     private VotingRow currentlySelectedRow;
 
+    public static VotingSlip instance;
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void Start()
+    {
+        PubSub.Subscribe<PlayerDeathEventHandler>(PubSubEvent.PlayerDeath, OnPlayerDeath);
+    }
+
+    private void OnPlayerDeath(Player killedPlayer)
+    {
+        foreach (Transform child in VotingTogglesContainer.transform)
+        {
+            Debug.Log(killedPlayer.steamUsername);
+            TMP_Text textComponent = child.GetComponentInChildren<TMP_Text>();
+            Debug.Log(textComponent.text);
+            if (textComponent.text == killedPlayer.steamUsername)
+            {
+                string strikedText = $"<s>{killedPlayer.steamUsername}</s>";
+                textComponent.text = strikedText;
+            }
+        }
+    }
+
+    public void Enable()
+    {
+        if (playerNames == null)
+        {
+            GenerateVotingSlip();
+        }
+        PlayerCamera.instance.EnterCursorMode();
+        VotingSlipUI.SetActive(true);
+    }
 
     public void ExitVotingSlip()
     {
@@ -19,23 +63,14 @@ public class VotingSlip : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void OnEnable()
-    {
-        if (playerNames == null)
-        {
-            GenerateVotingSlip();
-        }
-        PlayerCamera.instance.EnterCursorMode();
-    }
-
-    private void GenerateVotingSlip()
+    public void GenerateVotingSlip()
     {
         playerNames = PlayerManager.instance.GetAllPlayerNames();
         for (int i = 0; i < playerNames.Count; i++)
         {
             GameObject votingRow = Instantiate(votingPlayerRow, new Vector3(0, 0, 0), Quaternion.identity);
             votingRow.transform.SetParent(VotingTogglesContainer.transform);
-            votingRow.GetComponentInChildren<Text>().text = playerNames[i];
+            votingRow.GetComponentInChildren<TMP_Text>().text = playerNames[i];
         }
     }
 
