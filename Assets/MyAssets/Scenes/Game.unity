@@ -2085,7 +2085,7 @@ Transform:
   m_GameObject: {fileID: 563996465}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.000082998275, y: -0.000006, z: 0.003605}
+  m_LocalPosition: {x: -0.000082998275, y: -0.00001, z: 0.00603}
   m_LocalScale: {x: 0.03234702, y: 0.005585239, z: 0.032424625}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15917,7 +15917,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  irlSecondsPerGameHour: 3
+  irlSecondsPerGameHour: 1
   hourlyServerEvents:
   - m_PersistentCalls:
       m_Calls: []

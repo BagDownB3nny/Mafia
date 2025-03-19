@@ -5,7 +5,8 @@ using UnityEditor;
 using FillefranzTools;
 
 
-namespace PropMaker {
+namespace PropMaker
+{
 
     [CustomEditor(typeof(Ladder))]
     public class LadderEditor : Editor

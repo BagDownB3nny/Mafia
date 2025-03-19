@@ -30,6 +30,8 @@ public class Player : NetworkBehaviour
     [SyncVar]
     public House house;
 
+    public bool isDead = false;
+
     Dictionary<Enum, Role> roleScripts;
 
     public void Start()
@@ -148,7 +150,7 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
         {
             PlayerUIManager.instance.SetRoleText(newRole);
-            DisableRoleScriptsExcept(newRole);
+            // DisableRoleScriptsExcept(newRole);
             EnableRoleScript(newRole);
         }
     }

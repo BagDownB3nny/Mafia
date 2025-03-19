@@ -3,7 +3,7 @@ using Mirror;
 
 public class InteractableVillageHouseMini : Interactable
 {
-    private House house;
+    public House house;
     public string playerName => house?.player?.steamUsername;
 
     [SyncVar(hook = nameof(OnIsMarkedChanged))]
@@ -66,4 +66,11 @@ public class InteractableVillageHouseMini : Interactable
         // Enable visual effect for marked house
         // Disable visual effect for unmarked house
     }
+
+    [Server]
+    public void Remove()
+    {
+        NetworkServer.Destroy(gameObject);
+    }
+
 }
