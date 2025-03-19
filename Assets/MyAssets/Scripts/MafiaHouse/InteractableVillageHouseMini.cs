@@ -9,6 +9,9 @@ public class InteractableVillageHouseMini : Interactable
     [SyncVar(hook = nameof(OnIsMarkedChanged))]
     private bool isMarked = false;
 
+    [SyncVar]
+    public bool isOccupantDead = false;
+
     public void linkHouse(House house)
     {
         this.house = house;
@@ -18,6 +21,11 @@ public class InteractableVillageHouseMini : Interactable
     public override void OnHover()
     {
         Highlight();
+        if (isOccupantDead)
+        {
+            PlayerUIManager.instance.SetInteractableText($"{playerName} is dead");
+            return;
+        }
         string interactableText = $"Mark {playerName}'s house";
         PlayerUIManager.instance.SetInteractableText(interactableText);
     }
@@ -32,6 +40,10 @@ public class InteractableVillageHouseMini : Interactable
     [Client]
     public override void Interact()
     {
+        if (isOccupantDead)
+        {
+            return;
+        }
         if (!isMarked)
         {
             MafiaHouseTable.instance.SetSelectedHouseMini(this);

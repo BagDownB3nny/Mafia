@@ -37,9 +37,8 @@ public class MafiaHouseTable : NetworkBehaviour
     [Server]
     private void OnPlayerDeath(Player player)
     {
-        Debug.Log("PUB SUB SENT DEATH EVENT");
         InteractableVillageHouseMini houseMini = GetHouseMiniFromPlayer(player);
-        houseMini.Remove();
+        houseMini.isOccupantDead = true;
     }
 
     [Server]
