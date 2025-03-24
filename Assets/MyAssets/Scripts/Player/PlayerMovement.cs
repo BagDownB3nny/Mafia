@@ -53,6 +53,30 @@ public class PlayerMovement : NetworkBehaviour
 
     private MovementType movementType;
 
+    [Header("Ghost Movement Settings")]
+    [SerializeField] private GhostMovement ghostMovement;
+
+    public override void OnStartServer()
+    {
+        PubSub.Subscribe<PlayerDeathEventHandler>(PubSubEvent.PlayerDeath, OnDeath);
+    }
+
+    [Server]
+    public void OnDeath(Player player)
+    {
+        RpcOnDeath(player);
+    }
+
+    [ClientRpc]
+    private void RpcOnDeath(Player player)
+    {
+        if (isLocalPlayer)
+        {
+            ghostMovement.enabled = true;
+            localInstance.enabled = false;
+        }
+    }
+
     void Start()
     {
         if (isLocalPlayer)

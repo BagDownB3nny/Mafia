@@ -7,6 +7,9 @@ public class ShootablePlayer : Shootable
     [Header("CorpseSettings")]
     public GameObject corpsePrefab;
     private GameObject corpse;
+
+    [Header("GhostSetting")]
+    public GameObject ghostPrefab;
     [SerializeField] private Player player;
 
     [Server]

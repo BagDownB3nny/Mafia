@@ -188,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1651967339786504796
 Transform:
   m_ObjectHideFlags: 0
@@ -484,6 +484,7 @@ GameObject:
   - component: {fileID: 4845826101640786323}
   - component: {fileID: 2221621943105555544}
   - component: {fileID: 7710177438006953709}
+  - component: {fileID: 3354859831561668301}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -542,6 +543,7 @@ MonoBehaviour:
   gravity: -15
   jumpHeight: 1
   capsuleCollider: {fileID: 1050102110948460324}
+  ghostMovement: {fileID: 3354859831561668301}
 --- !u!114 &539002951707911350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,6 +750,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3354859831561668301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3241956818840615573}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9b95e98e65e4262bd9a360c068bfea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  moveSpeed: 5
 --- !u!1 &3368703614637123062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1407,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   corpsePrefab: {fileID: 8579996662577155270, guid: 0e6a36458ad554a5f830fdee240477b8, type: 3}
+  ghostPrefab: {fileID: 0}
   player: {fileID: 6584411875423326777}
 --- !u!1 &8334769822670642127
 GameObject:
