@@ -64,16 +64,16 @@ public class PlayerMovement : NetworkBehaviour
     [Server]
     public void OnDeath(Player player)
     {
-        RpcOnDeath(player);
+        RpcOnDeath(player.netId);
     }
 
-    [ClientRpc]
-    private void RpcOnDeath(Player player)
+    [TargetRpc]
+    private void RpcOnDeath(uint deadPlayerNetId)
     {
-        if (isLocalPlayer)
+        if (isLocalPlayer && netId == deadPlayerNetId)
         {
             ghostMovement.enabled = true;
-            localInstance.enabled = false;
+            this.enabled = false;
         }
     }
 

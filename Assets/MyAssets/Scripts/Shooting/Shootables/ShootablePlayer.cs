@@ -8,9 +8,12 @@ public class ShootablePlayer : Shootable
     public GameObject corpsePrefab;
     private GameObject corpse;
 
-    [Header("GhostSetting")]
-    public GameObject ghostPrefab;
     [SerializeField] private Player player;
+
+
+    [Header("Player visuals")]
+    public GameObject ghostVisual;
+    public GameObject aliveVisual;
 
     [Server]
     public override void OnShot(NetworkConnectionToClient shooter)
@@ -46,6 +49,8 @@ public class ShootablePlayer : Shootable
         var player = gameObject.GetComponentInParent<Player>();
         // Recursively change all children layers to ghost
         Layer.SetLayerChildren(player.gameObject, LayerMask.NameToLayer("Ghost"));
+        ghostVisual.SetActive(true);
+        aliveVisual.SetActive(false);
     }
 
 }

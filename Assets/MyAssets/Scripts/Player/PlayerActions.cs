@@ -68,9 +68,9 @@ public class PlayerActions : NetworkBehaviour
     private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
     {
         GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
-        if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
+        if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
         {
-            Shootable shootable = lookingAt.GetComponent<Shootable>();
+            Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
             if (connectionToClient == null)
             {
                 Debug.LogError("Connection to client is null");
