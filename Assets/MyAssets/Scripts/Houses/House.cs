@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class House : NetworkBehaviour
 {
+
     [SerializeField] private List<Door> doors;
     [SerializeField] private GameObject SeerRoom;
 
     [SerializeField] public Transform spawnPoint;
+    [SerializeField] public Transform tunnelTeleporterPosition;
 
     public Vector3 positionRelativeToVillageCenter;
 
@@ -21,6 +23,10 @@ public class House : NetworkBehaviour
     [Server]
     public void AssignPlayer(Player player)
     {
+        if (player.isLocalPlayer)
+        {
+            MafiaHouseTeleporter.instance.SetLocalPlayerDefaultTeleportPoint(tunnelTeleporterPosition);
+        }
         this.player = player;
         foreach (Door door in doors)
         {

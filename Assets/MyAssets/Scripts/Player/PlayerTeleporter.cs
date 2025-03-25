@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerTeleporter : NetworkBehaviour
 {
     public Transform mafiaNightSpawnpoint;
+    private Transform mafiaHouseTunnel;
     public Transform executionSpot;
     private Player player;
 
@@ -14,6 +15,7 @@ public class PlayerTeleporter : NetworkBehaviour
         {
             executionSpot = ExecutionSpot.instance.transform;
         }
+        mafiaHouseTunnel = MafiaHouseTeleporter.instance.destination;
     }
 
 
@@ -62,8 +64,16 @@ public class PlayerTeleporter : NetworkBehaviour
     [Client]
     public void ClientTeleportPlayer(Vector3 position, Quaternion rotation)
     {
+        Debug.Log("TELEPORTING");
+        Debug.Log(position);
         NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
         networkTransform.OnTeleport(position);
         Physics.SyncTransforms();
+    }
+
+    [Client]
+    public void TeleportToMafiaHouseTunnel()
+    {
+        ClientTeleportPlayer(mafiaHouseTunnel.position, mafiaHouseTunnel.transform.rotation);
     }
 }
