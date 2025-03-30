@@ -22,6 +22,36 @@ public class PlayerUIManager : NetworkBehaviour
     }
 
     [Client]
+    public void SetRolePromptText(RoleName role)
+    {
+        string text = "";
+
+        switch (role)
+        {
+            case RoleName.Villager:
+                text = "Find the Mafia!";
+                break;
+            case RoleName.Mafia:
+                text = "Kill the Villagers!";
+                break;
+            case RoleName.Seer:
+                text = "Find the Mafia!";
+                break;
+            case RoleName.Guardian:
+                text = "Protect the Villagers!";
+                break;
+            case RoleName.SixthSense:
+                text = "Find the Mafia!";
+                break;
+            default:
+                text = "Unknown Role!";
+                break;
+        }
+
+        SetTemporaryInteractableText(text, 10f);
+    }
+
+    [Client]
     public void SetInteractableText(string text)
     {
         interactableText.text = text;

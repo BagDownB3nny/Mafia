@@ -150,6 +150,7 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
         {
             PlayerUIManager.instance.SetRoleText(newRole);
+            PlayerUIManager.instance.SetRolePromptText(newRole);
             // DisableRoleScriptsExcept(newRole);
             EnableRoleScript(newRole);
         }
