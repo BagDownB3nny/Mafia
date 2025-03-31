@@ -28,7 +28,7 @@ public class PlayerCamera : MonoBehaviour
         orientation = newOrientation;
     }
 
-    public Interactable GetInteratable()
+    public Interactable GetInteractable()
     {
         return lastInteractable;
     }
