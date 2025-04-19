@@ -128,24 +128,22 @@ public class TimeManagerV2 : NetworkBehaviour
     [Server]
     private void TwelveAmEvent()
     {
-        // TODO: Unlock and open all mafia hatches
-
         // Give mafia members guns
         PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
         {
             player.EquipGun();
+            player.house.UnlockTrapDoor();
         });
     }
 
     [Server]
     private void EightAmEvent()
     {
-        // TODO: Lock all mafia hatches
-
         // Take away mafia members' guns
         PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
         {
             player.UnequipGun();
+            player.house.LockTrapDoor();
         });
 
         // Activate voting booth

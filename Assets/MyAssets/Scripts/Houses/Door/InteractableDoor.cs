@@ -29,6 +29,17 @@ public class InteractableDoor : Interactable
         authorisedPlayers.Add(player.netId);
     }
 
+    [Server]
+    public void RemoveAuthority(Player player)
+    {
+        if (player == null)
+        {
+            Debug.LogError("Player is null");
+            return;
+        }
+        authorisedPlayers.Remove(player.netId);
+    }
+
     [Client]
     public override void OnHover()
     {

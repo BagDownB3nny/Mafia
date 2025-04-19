@@ -6,6 +6,7 @@ public class House : NetworkBehaviour
 {
 
     [SerializeField] private List<Door> doors;
+    [SerializeField] private InteractableDoor trapDoor;
     [SerializeField] private GameObject SeerRoom;
 
     [SerializeField] public Transform spawnPoint;
@@ -78,6 +79,18 @@ public class House : NetworkBehaviour
     public void DeactivateProtection()
     {
         isProtected = false;
+    }
+
+    [Server]
+    public void LockTrapDoor()
+    {
+        trapDoor.RemoveAuthority(player);
+    }
+
+    [Server]
+    public void UnlockTrapDoor()
+    {
+        trapDoor.AssignAuthority(player);
     }
 
     [Server]

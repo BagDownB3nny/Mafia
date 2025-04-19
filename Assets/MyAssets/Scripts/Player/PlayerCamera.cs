@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -28,14 +29,14 @@ public class PlayerCamera : MonoBehaviour
         orientation = newOrientation;
     }
 
-    public Interactable GetInteratable()
+    public Interactable GetInteractable()
     {
         return lastInteractable;
     }
 
     public Shootable GetShootable()
     {
-        GameObject lookingAt = GetLookingAt(40.0f);
+        GameObject lookingAt = GetFilteredLookingAt<Shootable>(40.0f);
         if (lookingAt != null && lookingAt.GetComponent<Shootable>() != null)
         {
             return lookingAt.GetComponent<Shootable>();
@@ -55,7 +56,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleLookAtInteractable()
     {
-        GameObject lookingAt = GetLookingAt(5.0f);
+        GameObject lookingAt = GetFilteredLookingAt<Interactable>(5.0f);
         if (lookingAt == null || lookingAt.GetComponentInParent<Interactable>() == null)
         {
             if (lastInteractable != null)
@@ -119,6 +120,18 @@ public class PlayerCamera : MonoBehaviour
         {
             return hit.collider.gameObject;
         }
+        return null;
+    }
+
+    public GameObject GetFilteredLookingAt<T>(float maxDistance)
+    {
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxDistance);
+        hits = hits.Where(h => h.collider.gameObject.GetComponent<T>() != null).OrderBy(h => h.distance).ToArray();
+        if (hits.Length > 0)
+        {
+            return hits[0].collider.gameObject;
+        }
+
         return null;
     }
 
