@@ -9,7 +9,7 @@ public class Killzone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponentInChildren<ShootablePlayer>().SetDeath();
+            other.GetComponentInChildren<PlayerDeath>().KillPlayer();
         }
     }
 }

@@ -29,6 +29,7 @@ public class GameManager : NetworkBehaviour
         VotingManager.instance.StopVoting();
         TimeManagerV2.instance.StartGame();
         DayCycleManager.instance.StartGame();
+        GameEndManager.instance.StartGame();
         // TimeManager.instance.StartFirstDay();
     }
 }
