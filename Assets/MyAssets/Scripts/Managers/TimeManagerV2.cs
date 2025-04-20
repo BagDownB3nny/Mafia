@@ -148,6 +148,7 @@ public class TimeManagerV2 : NetworkBehaviour
 
         // Activate voting booth
         VotingManager.instance.StartVoting();
+        VotingBooth.instance.ResetVotes();
 
         // Reset all sigils
         SigilsManager.instance.ResetAllSigils();
