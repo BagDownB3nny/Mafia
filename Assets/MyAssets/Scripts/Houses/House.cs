@@ -12,6 +12,10 @@ public class House : NetworkBehaviour
     [SerializeField] public Transform spawnPoint;
     [SerializeField] public Transform tunnelTeleporterPosition;
 
+
+    [Header("Highlighting")]
+    [SerializeField] private GameObject highlightableHouse;
+
     public Vector3 positionRelativeToVillageCenter;
 
     [SyncVar(hook = nameof(OnPlayerChanged))]
@@ -35,7 +39,6 @@ public class House : NetworkBehaviour
             interactableDoor.AssignAuthority(player);
         }
     }
-
 
     [Server]
     public void CloseAllDoors()
@@ -73,12 +76,59 @@ public class House : NetworkBehaviour
     public void ActivateProtection()
     {
         isProtected = true;
+        UnhighlightForMafia();
     }
 
     [Server]
     public void DeactivateProtection()
     {
         isProtected = false;
+        HighlightForMafia();
+    }
+
+    [Server]
+    public void HighlightForMafia()
+    {
+        RpcHighlightForMafia();
+    }
+
+    [ClientRpc]
+    public void RpcHighlightForMafia()
+    {
+        Player player = PlayerManager.instance.localPlayer;
+        if (player.role == RoleName.Mafia)
+        {
+            SetHighlight(true);
+        }
+    }
+
+    [Server]
+    public void UnhighlightForMafia()
+    {
+        RpcUnhighlightForMafia();
+    }
+
+    [ClientRpc]
+    public void RpcUnhighlightForMafia()
+    {
+        Player player = PlayerManager.instance.localPlayer;
+        if (player.role == RoleName.Mafia)
+        {
+            SetHighlight(false);
+        }
+    }
+
+    [Client]
+    public void SetHighlight(bool highlight)
+    {
+        if (highlight)
+        {
+            highlightableHouse.GetComponent<Outline>().enabled = true;
+        }
+        else
+        {
+            highlightableHouse.GetComponent<Outline>().enabled = false;
+        }
     }
 
     [Server]

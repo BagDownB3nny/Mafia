@@ -16,6 +16,7 @@ public class Player : NetworkBehaviour
     public string steamUsername;
     [SerializeField] private TMP_Text playerUIPrefab;
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private GameObject playerVisual;
 
     [SyncVar(hook = nameof(OnGunStatusChanged))]
     private bool hasGun;
@@ -50,6 +51,7 @@ public class Player : NetworkBehaviour
         }
 
         localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
+        playerVisual.SetActive(false);
     }
 
     [Client]

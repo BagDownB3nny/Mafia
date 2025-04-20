@@ -49,7 +49,7 @@ public class DayCycleManager : NetworkBehaviour
             {"sunIntensity", 0f},
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.2f},
-            {"environmentReflectionsIntensity", 0f},
+            {"environmentReflectionsIntensity", 0.5f},
             {"skyboxExposure", 0.1f},
             {"fogDensity", 0.01f}
         }},
@@ -58,7 +58,7 @@ public class DayCycleManager : NetworkBehaviour
             {"sunIntensity", 0f},
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.2f},
-            {"environmentReflectionsIntensity", 0f},
+            {"environmentReflectionsIntensity", 0.5f},
             {"skyboxExposure", 0.1f},
             {"fogDensity", 0.01f}
         }},

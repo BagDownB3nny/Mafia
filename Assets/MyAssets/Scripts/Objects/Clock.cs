@@ -6,9 +6,12 @@ public class Clock : NetworkBehaviour
     [SerializeField] private GameObject hourHand;
     [SerializeField] private GameObject minuteHand;
 
-    public override void OnStartClient()
+    public void Start()
     {
-        TimeManagerV2.instance.irlSecondlyClientEvent.AddListener(UpdateClock);
+        if (isClient)
+        {
+            TimeManagerV2.instance.irlSecondlyClientEvent.AddListener(UpdateClock);
+        }
     }
 
     [Client]

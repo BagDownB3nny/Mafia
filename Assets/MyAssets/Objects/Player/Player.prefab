@@ -581,6 +581,7 @@ MonoBehaviour:
   steamUsername: 
   playerUIPrefab: {fileID: 1488157308980942899}
   cameraTransform: {fileID: 4607757749379484365}
+  playerVisual: {fileID: 8636581749400225338}
   localPlayerGun: {fileID: 0}
   remotePlayerGun: {fileID: 1149247657629456572}
   house: {fileID: 0}
@@ -1491,10 +1492,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  corpsePrefab: {fileID: 8579996662577155270, guid: 0e6a36458ad554a5f830fdee240477b8, type: 3}
   player: {fileID: 6584411875423326777}
-  ghostVisual: {fileID: 7622600152990933505}
-  aliveVisual: {fileID: 8636581749400225338}
 --- !u!1 &8334769822670642127
 GameObject:
   m_ObjectHideFlags: 0

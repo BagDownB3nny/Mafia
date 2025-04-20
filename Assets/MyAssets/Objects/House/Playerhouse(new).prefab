@@ -712,7 +712,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6970583469962112445}
+  m_Father: {fileID: 6027101135172954262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2389237229034985201
 MeshFilter:
@@ -1574,7 +1574,7 @@ Transform:
   - {fileID: 7846331483840077709}
   - {fileID: 5579899902477501421}
   - {fileID: 4812167124800290437}
-  m_Father: {fileID: 6970583469962112445}
+  m_Father: {fileID: 6027101135172954262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2427491061191081207
 GameObject:
@@ -2890,7 +2890,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6970583469962112445}
+  m_Father: {fileID: 6027101135172954262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5761272340723444473
 MeshFilter:
@@ -4111,7 +4111,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6970583469962112445}
+  m_Father: {fileID: 6027101135172954262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7849102922931187031
 MeshFilter:
@@ -4196,14 +4196,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7183618464568053643}
-  - {fileID: 4399611781752429938}
-  - {fileID: 4947665000909772377}
-  - {fileID: 6752362023229203904}
-  - {fileID: 3173909320248861851}
-  - {fileID: 4531057382861002117}
   - {fileID: 7545983224504817366}
   - {fileID: 423262500276708356}
   - {fileID: 1555190348757903708}
+  - {fileID: 6027101135172954262}
   m_Father: {fileID: 3656151661485807562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4686573373943258826
@@ -4863,6 +4859,61 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -839769989397184841, guid: b2e9ef0f0b3b76049b8c8c20af4cc797, type: 3}
+--- !u!1 &5292941990640968259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6027101135172954262}
+  - component: {fileID: 5687950523706107860}
+  m_Layer: 0
+  m_Name: Highlightable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6027101135172954262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292941990640968259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4399611781752429938}
+  - {fileID: 4947665000909772377}
+  - {fileID: 6752362023229203904}
+  - {fileID: 3173909320248861851}
+  - {fileID: 4531057382861002117}
+  m_Father: {fileID: 6970583469962112445}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5687950523706107860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292941990640968259}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5579130914375701350
 GameObject:
   m_ObjectHideFlags: 0
@@ -5755,7 +5806,7 @@ Transform:
   m_Children:
   - {fileID: 2348744808298241633}
   - {fileID: 9112077911447363048}
-  m_Father: {fileID: 6970583469962112445}
+  m_Father: {fileID: 6027101135172954262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6203044855702722975
 GameObject:
@@ -10717,6 +10768,7 @@ MonoBehaviour:
   SeerRoom: {fileID: 7938526211625574111}
   spawnPoint: {fileID: 0}
   tunnelTeleporterPosition: {fileID: 7689810402323035432}
+  highlightableHouse: {fileID: 5292941990640968259}
   positionRelativeToVillageCenter: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   isProtected: 0

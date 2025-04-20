@@ -126,9 +126,10 @@ public class PlayerCamera : MonoBehaviour
     public GameObject GetFilteredLookingAt<T>(float maxDistance)
     {
         RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxDistance);
-        hits = hits.Where(h => h.collider.gameObject.GetComponent<T>() != null).OrderBy(h => h.distance).ToArray();
+        hits = hits.Where(h => h.collider.gameObject.GetComponentInParent<T>() != null).OrderBy(h => h.distance).ToArray();
         if (hits.Length > 0)
         {
+            Debug.Log($"Looking at {hits[0].collider.gameObject.name}");
             return hits[0].collider.gameObject;
         }
 
