@@ -15,6 +15,6 @@ public class ShootablePlayer : Shootable
         PlayerUIManager.instance.RpcSetTemporaryInteractableText(connectionToClient, "You were shot!", 1.5f);
         gameObject.GetComponentInParent<Player>().UnequipGun();
         // Mark the player as dead
-        GetComponent<PlayerDeath>().KillPlayer();
+        GetComponentInParent<PlayerDeath>().KillPlayer();
     }
 }

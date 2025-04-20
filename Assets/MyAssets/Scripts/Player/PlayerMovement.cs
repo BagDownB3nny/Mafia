@@ -56,6 +56,11 @@ public class PlayerMovement : NetworkBehaviour
     [Header("Ghost Movement Settings")]
     [SerializeField] private GhostMovement ghostMovement;
 
+
+    [Header("Sigils")]
+    [SerializeField] private GameObject lockSigil;
+    [SerializeField] private GameObject unlockSigil;
+
     public override void OnStartServer()
     {
         PubSub.Subscribe<PlayerDeathEventHandler>(PubSubEvent.PlayerDeath, OnDeath);
@@ -195,11 +200,20 @@ public class PlayerMovement : NetworkBehaviour
     public void LockPlayerMovement()
     {
         isLocked = true;
+        lockSigil.SetActive(true);
     }
 
     public void UnlockPlayerMovement()
     {
         isLocked = false;
+        lockSigil.SetActive(false);
+        unlockSigil.SetActive(true);
+        Invoke(nameof(DisableUnlockSigil), 1.5f);
+    }
+
+    private void DisableUnlockSigil()
+    {
+        unlockSigil.SetActive(false);
     }
 
     private bool IsGrounded()

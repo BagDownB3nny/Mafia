@@ -60,7 +60,8 @@ public class TimeManagerV2 : NetworkBehaviour
     [Server]
     public void StartGame()
     {
-        currentHour = 19;
+        currentHour = 7;
+        // currentHour = 19;
         currentMinute = 0;
         TriggerHourlyEvent();
         InvokeRepeating("TickMinuteHand", 1f, 1f);
@@ -90,7 +91,6 @@ public class TimeManagerV2 : NetworkBehaviour
         bool triggerHourlyEvent = newHour != currentHour;
         currentHour = newHour;
         currentMinute = newMinute;
-        Debug.Log($"Time: {currentHour}:{currentMinute}");
 
         irlSecondlyServerEvent.Invoke();
         if (triggerHourlyEvent)
@@ -103,7 +103,6 @@ public class TimeManagerV2 : NetworkBehaviour
     {
         if (isClient)
         {
-            Debug.Log($"Triggering client hourly event {newHour}");
             hourlyClientEvents[newHour].Invoke();
         }
     }

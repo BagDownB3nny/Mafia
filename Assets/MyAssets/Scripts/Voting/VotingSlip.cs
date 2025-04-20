@@ -60,7 +60,7 @@ public class VotingSlip : MonoBehaviour
     public void ExitVotingSlip()
     {
         PlayerCamera.instance.EnterFPSMode();
-        gameObject.SetActive(false);
+        VotingSlipUI.SetActive(false);
     }
 
     public void GenerateVotingSlip()
@@ -81,7 +81,7 @@ public class VotingSlip : MonoBehaviour
         {
             if (toggle.isOn)
             {
-                string playerVotedForName = toggle.GetComponentInChildren<Text>().text;
+                string playerVotedForName = currentlySelectedRow.GetComponentInChildren<TMP_Text>().text;
                 string playerVotingName = PlayerManager.instance.GetLocalPlayerName();
                 Debug.Log($"{playerVotingName} voted for {playerVotedForName}");
                 votingBooth.CmdVote(playerVotingName, playerVotedForName);
@@ -97,6 +97,5 @@ public class VotingSlip : MonoBehaviour
             currentlySelectedRow.Deselect();
         }
         currentlySelectedRow = row;
-        Debug.Log("Setting selected row");
     }
 }
