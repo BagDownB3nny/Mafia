@@ -54,13 +54,14 @@ public class TimeManagerV2 : NetworkBehaviour
         hourlyServerEvents[0].AddListener(TwelveAmEvent);
         hourlyServerEvents[8].AddListener(EightAmEvent);
         hourlyServerEvents[18].AddListener(SixPmEvent);
+        hourlyServerEvents[22].AddListener(TenPmEvent);
         hourlyServerEvents[23].AddListener(ElevenPmEvent);
     }
 
     [Server]
     public void StartGame()
     {
-        currentHour = 7;
+        currentHour = 19;
         // currentHour = 19;
         currentMinute = 0;
         TriggerHourlyEvent();
@@ -127,6 +128,8 @@ public class TimeManagerV2 : NetworkBehaviour
     [Server]
     private void TwelveAmEvent()
     {
+        HouseManager.instance.UnhighlightHousesForOwners();
+
         // Give mafia members guns
         PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
         {
@@ -178,8 +181,9 @@ public class TimeManagerV2 : NetworkBehaviour
         LightManager.instance.TurnOnAllLights();
     }
 
+
     [Server]
-    private void ElevenPmEvent()
+    private void TenPmEvent()
     {
         // End execution
         string votedOutPlayerName = VotingBooth.instance.GetVotedOutPlayer();
@@ -189,5 +193,20 @@ public class TimeManagerV2 : NetworkBehaviour
             Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
             votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
         }
+
+        HouseManager.instance.HighlightHousesForOwners();
+    }
+
+    [Server]
+    private void ElevenPmEvent()
+    {
+        // End execution
+        // string votedOutPlayerName = VotingBooth.instance.GetVotedOutPlayer();
+
+        // if (votedOutPlayerName != "")
+        // {
+        //     Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
+        //     votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
+        // }
     }
 }

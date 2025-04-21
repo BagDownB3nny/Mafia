@@ -118,6 +118,38 @@ public class House : NetworkBehaviour
         }
     }
 
+    [Server]
+    public void HighlightForOwner()
+    {
+        RpcHighlightForOwner();
+    }
+
+    [ClientRpc]
+    public void RpcHighlightForOwner()
+    {
+        Player player = PlayerManager.instance.localPlayer;
+        if (player == this.player)
+        {
+            SetHighlight(true);
+        }
+    }
+
+    [Server]
+    public void UnhighlightForOwner()
+    {
+        RpcUnhighlightForOwner();
+    }
+
+    [ClientRpc]
+    public void RpcUnhighlightForOwner()
+    {
+        Player player = PlayerManager.instance.localPlayer;
+        if (player == this.player)
+        {
+            SetHighlight(false);
+        }
+    }
+
     [Client]
     public void SetHighlight(bool highlight)
     {

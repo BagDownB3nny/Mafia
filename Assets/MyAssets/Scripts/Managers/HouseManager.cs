@@ -99,5 +99,21 @@ public class HouseManager : NetworkBehaviour
         }
     }
 
+    [Server]
+    public void HighlightHousesForOwners()
+    {
+        foreach (House house in houses)
+        {
+            house.HighlightForOwner();
+        }
+    }
 
+    [Server]
+    public void UnhighlightHousesForOwners()
+    {
+        foreach (House house in houses)
+        {
+            house.HighlightForOwner();
+        }
+    }
 }
