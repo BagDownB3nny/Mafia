@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: ChatRoomSettings
   m_EditorClassIdentifier: 
   Names:
-  - Global
-  - Red Team
-  - Blue Team
-  - Room A
-  - Room B
-  - Proximity
+  - ProximityGlobal
+  - ProximityGhost

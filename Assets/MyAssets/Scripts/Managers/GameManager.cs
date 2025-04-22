@@ -1,3 +1,4 @@
+using UnityEngine;
 using Mirror;
 
 
@@ -30,6 +31,5 @@ public class GameManager : NetworkBehaviour
         TimeManagerV2.instance.StartGame();
         DayCycleManager.instance.StartGame();
         GameEndManager.instance.StartGame();
-        // TimeManager.instance.StartFirstDay();
     }
 }

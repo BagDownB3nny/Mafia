@@ -20,7 +20,6 @@ public class InteractableVillageHouseMini : Interactable
     [Client]
     public override void OnHover()
     {
-        Debug.Log("Hovering over house mini");
         Highlight();
         if (isOccupantDead)
         {

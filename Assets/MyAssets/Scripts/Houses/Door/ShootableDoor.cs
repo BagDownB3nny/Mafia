@@ -25,13 +25,16 @@ public class ShootableDoor : Shootable
     [Server]
     private void KnockDoorDown()
     {
-
-
         // Swing door down to the ground, with the door base as the pivot point
         float animationDuration = 0.7f;
         transform.DOMove(doorKnockedPosition.position, animationDuration).SetEase(Ease.InQuad);
         transform.DORotateQuaternion(doorKnockedPosition.rotation, animationDuration).SetEase(Ease.InQuad);
         RpcKnockDoorDown();
+
+        // Tell house that a door has been knocked down
+        Door door = GetComponent<Door>();
+        House house = door.house;
+        house.DoorDestroyed(door);
     }
 
     [ClientRpc]

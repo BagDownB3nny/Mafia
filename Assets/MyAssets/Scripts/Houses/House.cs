@@ -203,4 +203,15 @@ public class House : NetworkBehaviour
             Authority.AssignAuthority(gameObject.GetComponent<NetworkIdentity>(), newPlayer.netIdentity.connectionToClient);
         }
     }
+
+    [Server]
+    public void DoorDestroyed(Door door)
+    {
+        doors.Remove(door);
+        if (doors.Count == 0)
+        {
+            // Publish event to notify that the house is destroyed
+            Debug.Log("House destroyed");
+        }
+    }
 }
