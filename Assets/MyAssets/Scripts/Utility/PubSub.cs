@@ -56,7 +56,6 @@ public static class PubSub
     {
         if (_subscribers.ContainsKey(eventType))
         {
-
             var handler = _subscribers[eventType];
             handler?.DynamicInvoke(data);
         }

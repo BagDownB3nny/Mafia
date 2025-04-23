@@ -46,11 +46,30 @@ public class PlayerActions : NetworkBehaviour
                 {
                     CmdInteractWithPlayer(interactable.gameObject.GetComponentInParent<NetworkIdentity>());
                 }
+                else if (interactable is InteractableDoor)
+                {
+                    InteractableDoor interactableDoor = interactable as InteractableDoor;
+                    HandleDoorInteraction(interactableDoor);
+                }
                 else if (interactable is Interactable)
                 {
                     interactable.Interact();
                 }
             }
+        }
+    }
+
+    [Client]
+    private void HandleDoorInteraction(InteractableDoor door)
+    {
+        bool isAbleToInteractWithDoors = GetComponent<Player>().IsAbleToInteractWithDoors();
+        if (door.authorisedPlayers.Contains(player.netId) || !isAbleToInteractWithDoors)
+        {
+            door.Interact();
+        }
+        else if (isAbleToInteractWithDoors)
+        {
+            CmdInteractWithDoor(door.GetComponentInParent<NetworkIdentity>());
         }
     }
 
@@ -86,5 +105,13 @@ public class PlayerActions : NetworkBehaviour
         Player currentPlayer = GetComponent<Player>();
         Role roleScript = currentPlayer.GetRoleScript();
         roleScript.InteractWithPlayer(playerInteractedWith);
+    }
+
+    [Command]
+    private void CmdInteractWithDoor(NetworkIdentity door)
+    {
+        Player currentPlayer = GetComponent<Player>();
+        Role roleScript = currentPlayer.GetRoleScript();
+        roleScript.InteractWithDoor(door);
     }
 }

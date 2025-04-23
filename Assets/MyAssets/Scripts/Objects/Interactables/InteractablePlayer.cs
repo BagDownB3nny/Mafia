@@ -1,9 +1,10 @@
+using UnityEngine;
 public class InteractablePlayer : Interactable
 {
     public override void OnHover()
     {
         Player localPlayer = PlayerManager.instance.localPlayer;
-        string interactableText = localPlayer.GetComponent<Role>().RolePlayerInteractText;
+        string interactableText = localPlayer.GetRoleScript().RolePlayerInteractText;
         if (interactableText != null)
         {
             PlayerUIManager.instance.SetInteractableText(interactableText);

@@ -4,13 +4,24 @@ using System.Collections.Generic;
 
 public abstract class Role : NetworkBehaviour
 {
+
+    [Header("Role Settings")]
     public abstract string RolePlayerInteractText { get; }
     public abstract bool IsAbleToInteractWithPlayers { get; }
+
+    public abstract string InteractWithDoorText { get; }
+    public abstract bool IsAbleToInteractWithDoors { get; }
     protected abstract List<SigilName> SigilsAbleToSee { get; }
 
     public virtual void InteractWithPlayer(NetworkIdentity player)
     {
         Debug.Log($"Interacting with player {player.name}");
+        
+    }
+
+    public virtual void InteractWithDoor(NetworkIdentity door)
+    {
+        Debug.Log($"Interacting with door {door.name}");
     }
 
     [Client]
@@ -50,7 +61,7 @@ public abstract class Role : NetworkBehaviour
         }
     }
 
-    protected virtual void SetNameTags() {}
+    protected virtual void SetNameTags() { }
 
-    protected virtual void ResetNameTags() {}
+    protected virtual void ResetNameTags() { }
 }

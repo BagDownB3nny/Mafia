@@ -21,6 +21,6 @@ public class SigilsManager : NetworkBehaviour
     {
         DeathSigil.ResetAllDeathSigils();
         SeeingEyeSigil.ResetSeeingEyeSigil();
-        ProtectionSigil.ResetProtectionSigil();
-    } 
+        PlayerProtectionSigil.ResetProtectionSigils();
+    }
 }

@@ -9,8 +9,11 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour
 {
+
     [SyncVar(hook = nameof(OnRoleChanged))]
     public RoleName role;
+
+
 
     [SyncVar(hook = nameof(OnUsernameChanged))]
     public string steamUsername;
@@ -34,6 +37,9 @@ public class Player : NetworkBehaviour
     public bool isDead = false;
 
     Dictionary<Enum, Role> roleScripts;
+
+    [Header("Guardian params")]
+    public bool isProtected = false;
 
     public void Start()
     {
@@ -199,5 +205,14 @@ public class Player : NetworkBehaviour
             return false;
         }
         return GetRoleScript().IsAbleToInteractWithPlayers;
+    }
+
+    public bool IsAbleToInteractWithDoors()
+    {
+        if (GetRoleScript() == null)
+        {
+            return false;
+        }
+        return GetRoleScript().IsAbleToInteractWithDoors;
     }
 }

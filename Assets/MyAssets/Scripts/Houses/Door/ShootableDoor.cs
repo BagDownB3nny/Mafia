@@ -9,14 +9,14 @@ public class ShootableDoor : Shootable
     [Server]
     public override void OnShot(NetworkConnectionToClient shooter)
     {
-        InteractableDoor interactableDoor = GetComponent<InteractableDoor>();
         House house = GetComponent<Door>().house;
-        if (house.isProtected)
+        HouseProtectionSigil houseProtectionSigil = house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true);
+        if (houseProtectionSigil.isMarked)
         {
-            PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This house is protected!", 1.5f);
-            return;
+            // Door is protected, not knocked down
+            PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This door is protected!", 1.5f);
         }
-        if (!interactableDoor.isOpen)
+        else
         {
             KnockDoorDown();
         }
@@ -25,10 +25,6 @@ public class ShootableDoor : Shootable
     [Server]
     private void KnockDoorDown()
     {
-        // Swing door down to the ground, with the door base as the pivot point
-        float animationDuration = 0.7f;
-        transform.DOMove(doorKnockedPosition.position, animationDuration).SetEase(Ease.InQuad);
-        transform.DORotateQuaternion(doorKnockedPosition.rotation, animationDuration).SetEase(Ease.InQuad);
         RpcKnockDoorDown();
 
         // Tell house that a door has been knocked down

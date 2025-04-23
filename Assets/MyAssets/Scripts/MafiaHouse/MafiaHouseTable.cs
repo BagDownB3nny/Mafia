@@ -31,6 +31,7 @@ public class MafiaHouseTable : NetworkBehaviour
         if (isServer)
         {
             PubSub.Subscribe<PlayerDeathEventHandler>(PubSubEvent.PlayerDeath, OnPlayerDeath);
+            PubSub.Subscribe<HouseDestroyedEventHandler>(PubSubEvent.HouseDestroyed, OnHouseDestroyed);
         }
     }
 
@@ -39,6 +40,18 @@ public class MafiaHouseTable : NetworkBehaviour
     {
         InteractableVillageHouseMini houseMini = GetHouseMiniFromPlayer(player);
         houseMini.isOccupantDead = true;
+    }
+
+    [Server]
+    public void OnHouseDestroyed(House house)
+    {
+        InteractableVillageHouseMini houseMini = GetHouseMiniFromHouse(house);
+        houseMini.isHouseDestroyed = true;
+
+        if (selectedHouseMini == houseMini)
+        {
+            SetSelectedHouseMini(null);
+        }
     }
 
     [Server]

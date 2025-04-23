@@ -12,6 +12,9 @@ public class InteractableVillageHouseMini : Interactable
     [SyncVar]
     public bool isOccupantDead = false;
 
+    [SyncVar]
+    public bool isHouseDestroyed = false;
+
     public void linkHouse(House house)
     {
         this.house = house;
@@ -24,6 +27,12 @@ public class InteractableVillageHouseMini : Interactable
         if (isOccupantDead)
         {
             PlayerUIManager.instance.SetInteractableText($"{playerName} is dead");
+            return;
+        }
+
+        if (isHouseDestroyed)
+        {
+            PlayerUIManager.instance.SetInteractableText($"{playerName}'s house is destroyed. {playerName} must be hiding somewhere...");
             return;
         }
         string interactableText = $"Mark {playerName}'s house";

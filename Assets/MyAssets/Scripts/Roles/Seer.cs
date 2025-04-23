@@ -9,6 +9,9 @@ public class Seer : Role
 
     public override string RolePlayerInteractText => "Mark with Seeing-Eye Sigil";
     public override bool IsAbleToInteractWithPlayers => true;
+
+    public override string InteractWithDoorText => null;
+    public override bool IsAbleToInteractWithDoors => false;
     protected override List<SigilName> SigilsAbleToSee => new() { SigilName.SeeingEyeSigil };
 
     [Server]
