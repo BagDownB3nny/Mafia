@@ -14,6 +14,12 @@ public class Seer : Role
     public override bool IsAbleToInteractWithDoors => false;
     protected override List<SigilName> SigilsAbleToSee => new() { SigilName.SeeingEyeSigil };
 
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+        roleActions = gameObject.AddComponent<VillagerActions>();
+    }
+
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
     {

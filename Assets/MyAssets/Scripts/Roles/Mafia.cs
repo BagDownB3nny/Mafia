@@ -15,13 +15,14 @@ public class Mafia : Role
     private bool hasGun = true;
 
     private GameObject localPlayerGun;
-    private GameObject remotePlayerGun;
+    private readonly GameObject remotePlayerGun;
 
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
         // Get reference to gun objects
         localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
+        roleActions = gameObject.AddComponent<MafiaActions>();
     }
 
     public bool HasGun()

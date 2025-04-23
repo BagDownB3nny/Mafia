@@ -5,7 +5,7 @@ public class MafiaActions : RoleActions
 {
     private readonly KeyCode equipGunKey = KeyCode.Q;
     
-    protected override void HandleRoleSpecificActions()
+    public override void HandleRoleSpecificActions()
     {
         HandleGunActions();
     }
@@ -23,18 +23,19 @@ public class MafiaActions : RoleActions
         // Toggle gun equip state
         if (Input.GetKeyDown(equipGunKey))
         {
-            ToggleGun();
+            CmdToggleGun();
         }
 
         // Handle shooting
-        if (Input.GetMouseButtonDown(0) && player.IsAbleToShoot())
+        if (Input.GetMouseButtonDown(0) && player.GetRoleScript() is Mafia mafiaRole && mafiaRole.HasGun())
         {
             Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
-            player.CmdShoot(currentLookingAtDirection, transform);
+            CmdShoot(currentLookingAtDirection, transform);
         }
     }
 
-    private void ToggleGun()
+    [Command]
+    private void CmdToggleGun()
     {
         // Double check on server side that it's night time
         int currentHour = TimeManagerV2.instance.currentHour;
@@ -58,18 +59,19 @@ public class MafiaActions : RoleActions
         }
     }
 
-    // private void Shoot(Vector3 lookingAtDirection, Transform playerTransform)
-    // {
-    //     GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
-    //     if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
-    //     {
-    //         Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
-    //         if (connectionToClient == null)
-    //         {
-    //             Debug.LogError("Connection to client is null");
-    //             return;
-    //         }
-    //         shootable.OnShot(connectionToClient);
-    //     }
-    // }
+    [Command]
+    private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
+    {
+        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
+        if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
+        {
+            Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
+            if (connectionToClient == null)
+            {
+                Debug.LogError("Connection to client is null");
+                return;
+            }
+            shootable.OnShot(connectionToClient);
+        }
+    }
 }

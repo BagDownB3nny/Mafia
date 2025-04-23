@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Mirror;
-using Steamworks;
 using TMPro;
 using UnityEngine;
 
@@ -19,7 +18,6 @@ public class Player : NetworkBehaviour
     [SyncVar]
     public House house;
 
-    PlayerActions actions;
     Dictionary<Enum, Role> roleScripts;
     public bool isDead = false;
 
@@ -29,11 +27,6 @@ public class Player : NetworkBehaviour
     public void Start()
     {
         GetRoleScripts();
-        this.actions = GetComponent<PlayerActions>();
-        if (actions == null)
-        {
-            Debug.LogError("PlayerActions component not found on player object.");
-        }
     }
 
     public override void OnStartLocalPlayer()
@@ -148,39 +141,13 @@ public class Player : NetworkBehaviour
             PlayerUIManager.instance.SetRoleText(newRole);
             PlayerUIManager.instance.SetRolePromptText(newRole);
             EnableRoleScript(newRole);
-            this.actions.OnRoleChanged(newRole);
-        }
-    }
-
-    [Command]
-    public void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
-    {
-        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
-        if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
-        {
-            Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
-            if (connectionToClient == null)
-            {
-                Debug.LogError("Connection to client is null");
-                return;
-            }
-            shootable.OnShot(connectionToClient);
+            DisableRoleScriptsExcept(newRole);
         }
     }
 
     public void SetNameTagColor(Color color)
     {
         playerUIPrefab.color = color;
-    }
-
-    public bool IsAbleToShoot()
-    {
-        Role roleScript = GetRoleScript();
-        if (roleScript is Mafia mafiaRole)
-        {
-            return mafiaRole.HasGun();
-        }
-        return false;
     }
 
     public bool IsAbleToInteractWithPlayers()

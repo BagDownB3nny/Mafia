@@ -27,6 +27,12 @@ public class Guardian : Role
     private Player protectedPlayer;
     private House protectedHouse;
 
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+        roleActions = gameObject.AddComponent<VillagerActions>();
+    }
+
     [Server]
     public override void InteractWithPlayer(NetworkIdentity playerNetworkIdentity)
     {

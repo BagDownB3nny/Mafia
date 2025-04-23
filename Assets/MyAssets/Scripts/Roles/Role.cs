@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public abstract class Role : NetworkBehaviour
 {
+    public RoleActions roleActions;
 
     [Header("Role Settings")]
     public abstract string RolePlayerInteractText { get; }

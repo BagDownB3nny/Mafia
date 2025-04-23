@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerActions : NetworkBehaviour
 {
-    private RoleActions currentRoleActions;
     private PlayerCamera playerCamera;
     private Player player;
 
@@ -11,38 +10,64 @@ public class PlayerActions : NetworkBehaviour
     {
         playerCamera = PlayerCamera.instance;
         player = GetComponent<Player>();
-        InitializeRoleActions();
     }
 
     void Update()
     {
         if (!isLocalPlayer) return;
         HandleSettingsPress();
-        if (currentRoleActions != null)
+        HandleInteractions();
+        player.GetRoleScript().roleActions.HandleRoleSpecificActions();
+    }
+    protected void HandleInteractions()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            currentRoleActions.HandleUpdate();
+            Interactable interactable = playerCamera.GetInteractable();
+            if (interactable != null)
+            {
+                bool isAbleToInteractWithPlayers = player.IsAbleToInteractWithPlayers();
+                if (interactable is InteractablePlayer && isAbleToInteractWithPlayers)
+                {
+                    CmdInteractWithPlayer(interactable.gameObject.GetComponentInParent<NetworkIdentity>());
+                }
+                else if (interactable is InteractableDoor)
+                {
+                    InteractableDoor interactableDoor = interactable as InteractableDoor;
+                    HandleDoorInteraction(interactableDoor);
+                }
+                else if (interactable is Interactable)
+                {
+                    interactable.Interact();
+                }
+            }
+        }
+    }
+    protected void HandleDoorInteraction(InteractableDoor door)
+    {
+        bool isAbleToInteractWithDoors = player.IsAbleToInteractWithDoors();
+        if (door.authorisedPlayers.Contains(player.netId) || !isAbleToInteractWithDoors)
+        {
+            door.Interact();
+        }
+        else if (isAbleToInteractWithDoors)
+        {
+            CmdInteractWithDoor(door.GetComponentInParent<NetworkIdentity>());
         }
     }
 
-    private void InitializeRoleActions()
+    [Command]
+    protected virtual void CmdInteractWithPlayer(NetworkIdentity playerInteractedWith)
     {
-        // Create the appropriate role actions based on player's role
-        currentRoleActions = player.GetRole() switch
-        {
-            RoleName.Mafia => gameObject.AddComponent<MafiaActions>(),
-            _ => gameObject.AddComponent<VillagerActions>(),
-        };
-        currentRoleActions.Initialize(player, playerCamera);
+        Role roleScript = player.GetRoleScript();
+        roleScript.InteractWithPlayer(playerInteractedWith);
     }
 
-    // Called when player's role changes
-    public void OnRoleChanged(RoleName newRole)
+    [Command]
+    protected virtual void CmdInteractWithDoor(NetworkIdentity door)
     {
-        if (currentRoleActions != null)
-        {
-            Destroy(currentRoleActions);
-        }
-        InitializeRoleActions();
+        Role roleScript = player.GetRoleScript();
+        roleScript.InteractWithDoor(door);
     }
     protected void HandleSettingsPress()
     {

@@ -35,7 +35,7 @@ public class PlayerDeath : NetworkBehaviour
         isDead = true;
         GameObject corpse = Instantiate(corpsePrefab, transform.position, transform.rotation);
         NetworkServer.Spawn(corpse);
-        PubSub.Publish<Player>(PubSubEvent.PlayerDeath, player);
+        PubSub.Publish(PubSubEvent.PlayerDeath, player);
     }
 
     [Client]
