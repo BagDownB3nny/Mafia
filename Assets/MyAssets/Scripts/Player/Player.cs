@@ -98,7 +98,6 @@ public class Player : NetworkBehaviour
     public void SetRole(RoleName newRole)
     {
         role = newRole;
-        EnableRoleScript(newRole);
 
         house.SpawnRoom(newRole);
     }

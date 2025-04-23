@@ -40,7 +40,7 @@ public class PlayerActions : NetworkBehaviour
     {
         if (currentRoleActions != null)
         {
-            Destroy(currentRoleActions as MonoBehaviour);
+            Destroy(currentRoleActions);
         }
         InitializeRoleActions();
     }

@@ -30,7 +30,7 @@ public class MafiaActions : RoleActions
         if (Input.GetMouseButtonDown(0) && player.IsAbleToShoot())
         {
             Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
-            CmdShoot(currentLookingAtDirection, transform);
+            Shoot(currentLookingAtDirection, transform);
         }
     }
 
@@ -58,7 +58,7 @@ public class MafiaActions : RoleActions
         }
     }
 
-    private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
+    private void Shoot(Vector3 lookingAtDirection, Transform playerTransform)
     {
         // Verify it's night time before allowing shooting
         int currentHour = TimeManagerV2.instance.currentHour;
