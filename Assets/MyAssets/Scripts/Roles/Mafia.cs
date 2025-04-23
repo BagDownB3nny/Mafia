@@ -44,12 +44,14 @@ public class Mafia : Role
     [Server]
     public void EquipGun()
     {
+        Debug.Log("Equipping gun");
         hasGun = true;
     }
 
     [Server]
     public void UnequipGun()
     {
+        Debug.Log("Unequipping gun");
         hasGun = false;
     }
 

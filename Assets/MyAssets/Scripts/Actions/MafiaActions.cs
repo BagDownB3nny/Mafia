@@ -3,7 +3,7 @@ using Mirror;
 
 public class MafiaActions : RoleActions
 {
-    private readonly KeyCode equipGunKey = KeyCode.G;
+    private readonly KeyCode equipGunKey = KeyCode.Q;
     
     protected override void HandleRoleSpecificActions()
     {
@@ -23,7 +23,7 @@ public class MafiaActions : RoleActions
         // Toggle gun equip state
         if (Input.GetKeyDown(equipGunKey))
         {
-            CmdToggleGun();
+            ToggleGun();
         }
 
         // Handle shooting
@@ -34,8 +34,7 @@ public class MafiaActions : RoleActions
         }
     }
 
-    [Command]
-    private void CmdToggleGun()
+    private void ToggleGun()
     {
         // Double check on server side that it's night time
         int currentHour = TimeManagerV2.instance.currentHour;
@@ -59,7 +58,6 @@ public class MafiaActions : RoleActions
         }
     }
 
-    [Command]
     private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
     {
         // Verify it's night time before allowing shooting
