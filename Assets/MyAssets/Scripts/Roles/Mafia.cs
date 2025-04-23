@@ -9,9 +9,82 @@ public class Mafia : Role
 
     public override string InteractWithDoorText => null;
     public override bool IsAbleToInteractWithDoors => false;
-    protected override List<SigilName> SigilsAbleToSee => new List<SigilName>();
+    protected override List<SigilName> SigilsAbleToSee => new();
 
-    // private Player markedPlayer;
+    [SyncVar]
+    private bool hasGun = true;
+
+    private GameObject localPlayerGun;
+    private GameObject remotePlayerGun;
+
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+        // Get reference to gun objects
+        localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
+        
+        if (isLocalPlayer)
+        {
+            EnableGun();
+        }
+    }
+
+    public bool HasGun()
+    {
+        return hasGun;
+    }
+
+    [Client]
+    public void EnableGun()
+    {
+        if (isLocalPlayer && localPlayerGun != null)
+        {
+            localPlayerGun.SetActive(true);
+        }
+        else if (remotePlayerGun != null)
+        {
+            remotePlayerGun.SetActive(true);
+        }
+    }
+
+    [Server]
+    public void EquipGun()
+    {
+        hasGun = true;
+        RpcEnableGun();
+    }
+
+    [ClientRpc]
+    private void RpcEnableGun()
+    {
+        EnableGun();
+    }
+
+    [Client]
+    public void DisableGun()
+    {
+        if (isLocalPlayer && localPlayerGun != null)
+        {
+            localPlayerGun.SetActive(false);
+        }
+        else if (remotePlayerGun != null)
+        {
+            remotePlayerGun.SetActive(false);
+        }
+    }
+
+    [Server]
+    public void UnequipGun()
+    {
+        hasGun = false;
+        RpcDisableGun();
+    }
+
+    [ClientRpc]
+    private void RpcDisableGun()
+    {
+        DisableGun();
+    }
 
     protected override void SetNameTags()
     {
@@ -33,25 +106,4 @@ public class Mafia : Role
             player.SetNameTagColor(Color.white);
         }
     }
-
-    // [Server]
-    // public override void InteractWithPlayer(NetworkIdentity player)
-    // {
-    //     // Remove previously placed death sigil since only one death mark can be placed per mafia
-    //     if (markedPlayer != null)
-    //     {
-    //         DeathSigil markedPlayerDeathSigil = markedPlayer.GetComponentInChildren<DeathSigil>(includeInactive: true);
-    //         markedPlayerDeathSigil.Unmark();
-    //     }
-
-    //     // Place new death sigil on player
-    //     DeathSigil playerDeathSigil = player.GetComponentInChildren<DeathSigil>(includeInactive: true);
-    //     if (playerDeathSigil == null)
-    //     {
-    //         Debug.LogError("Player does not have a death sigil");
-    //         return;
-    //     }
-    //     playerDeathSigil.Mark(player.netId);
-    //     markedPlayer = player.GetComponentInParent<Player>();
-    // }
 }

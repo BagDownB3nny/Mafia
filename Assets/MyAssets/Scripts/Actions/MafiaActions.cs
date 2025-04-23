@@ -1,0 +1,85 @@
+using UnityEngine;
+using Mirror;
+
+public class MafiaActions : RoleActions
+{
+    private readonly KeyCode equipGunKey = KeyCode.G;
+    
+    protected override void HandleRoleSpecificActions()
+    {
+        HandleGunActions();
+    }
+
+    private void HandleGunActions()
+    {
+        // Only allow gun actions during night time (between 12 AM and 8 AM)
+        int currentHour = TimeManagerV2.instance.currentHour;
+        if (currentHour >= 8 && currentHour < 24)
+        {
+            // It's daytime, no gun actions allowed
+            return;
+        }
+
+        // Toggle gun equip state
+        if (Input.GetKeyDown(equipGunKey))
+        {
+            CmdToggleGun();
+        }
+
+        // Handle shooting
+        if (Input.GetMouseButtonDown(0) && player.IsAbleToShoot())
+        {
+            Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
+            CmdShoot(currentLookingAtDirection, transform);
+        }
+    }
+
+    [Command]
+    private void CmdToggleGun()
+    {
+        // Double check on server side that it's night time
+        int currentHour = TimeManagerV2.instance.currentHour;
+        if (currentHour >= 8 && currentHour < 24)
+        {
+            // It's daytime, don't allow gun toggling
+            return;
+        }
+
+        Role roleScript = player.GetRoleScript();
+        if (roleScript is Mafia mafiaRole)
+        {
+            if (mafiaRole.HasGun())
+            {
+                mafiaRole.UnequipGun();
+            }
+            else
+            {
+                mafiaRole.EquipGun();
+            }
+        }
+    }
+
+    [Command]
+    private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
+    {
+        // Verify it's night time before allowing shooting
+        int currentHour = TimeManagerV2.instance.currentHour;
+        if (currentHour >= 8 && currentHour < 24)
+        {
+            // It's daytime, don't allow shooting
+            return;
+        }
+
+        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
+        if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
+        {
+            Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
+            if (connectionToClient == null)
+            {
+                Debug.LogError("Connection to client is null");
+                return;
+            }
+            shootable.OnShot(connectionToClient);
+        }
+    }
+}
