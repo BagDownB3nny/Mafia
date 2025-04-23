@@ -79,7 +79,7 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(RoleName.Guardian);
+                player.SetRole(RoleName.Mafia);
             }
             else
             {

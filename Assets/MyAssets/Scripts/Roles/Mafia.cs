@@ -11,7 +11,7 @@ public class Mafia : Role
     public override bool IsAbleToInteractWithDoors => false;
     protected override List<SigilName> SigilsAbleToSee => new();
 
-    [SyncVar]
+    [SyncVar(hook = nameof(OnGunStatusChanged))]
     private bool hasGun = true;
 
     private GameObject localPlayerGun;
@@ -22,11 +22,6 @@ public class Mafia : Role
         base.OnStartAuthority();
         // Get reference to gun objects
         localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
-        
-        if (isLocalPlayer)
-        {
-            EnableGun();
-        }
     }
 
     public bool HasGun()
@@ -34,16 +29,15 @@ public class Mafia : Role
         return hasGun;
     }
 
-    [Client]
-    public void EnableGun()
+    public void OnGunStatusChanged(bool oldStatus, bool newStatus)
     {
-        if (isLocalPlayer && localPlayerGun != null)
+        if (isLocalPlayer)
         {
-            localPlayerGun.SetActive(true);
+            localPlayerGun.SetActive(newStatus);
         }
-        else if (remotePlayerGun != null)
+        else
         {
-            remotePlayerGun.SetActive(true);
+            remotePlayerGun.SetActive(newStatus);
         }
     }
 
@@ -51,40 +45,14 @@ public class Mafia : Role
     public void EquipGun()
     {
         hasGun = true;
-        RpcEnableGun();
-    }
-
-    [ClientRpc]
-    private void RpcEnableGun()
-    {
-        EnableGun();
-    }
-
-    [Client]
-    public void DisableGun()
-    {
-        if (isLocalPlayer && localPlayerGun != null)
-        {
-            localPlayerGun.SetActive(false);
-        }
-        else if (remotePlayerGun != null)
-        {
-            remotePlayerGun.SetActive(false);
-        }
     }
 
     [Server]
     public void UnequipGun()
     {
         hasGun = false;
-        RpcDisableGun();
     }
 
-    [ClientRpc]
-    private void RpcDisableGun()
-    {
-        DisableGun();
-    }
 
     protected override void SetNameTags()
     {
