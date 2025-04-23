@@ -9,8 +9,8 @@ public class House : NetworkBehaviour
     [SerializeField] private InteractableDoor trapDoor;
     [SerializeField] private GameObject SeerRoom;
 
-    [SerializeField] public Transform spawnPoint;
-    [SerializeField] public Transform tunnelTeleporterPosition;
+    public Transform spawnPoint;
+    public Transform tunnelTeleporterPosition;
 
 
     [Header("Highlighting")]
@@ -215,7 +215,7 @@ public class House : NetworkBehaviour
         if (doors.Count == 1)
         {
             // Publish event to notify that the house is destroyed
-            PubSub.Publish<House>(PubSubEvent.HouseDestroyed, this);
+            PubSub.Publish(PubSubEvent.HouseDestroyed, this);
         }
     }
 }

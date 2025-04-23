@@ -163,6 +163,9 @@ public class TimeManagerV2 : NetworkBehaviour
         // Reset all sigils
         SigilsManager.instance.ResetAllSigils();
 
+        // Clear mafia target selection
+        MafiaHouseTable.instance.ClearSelection();
+
         // Turn off all lights
         LightManager.instance.TurnOffAllLights();
     }

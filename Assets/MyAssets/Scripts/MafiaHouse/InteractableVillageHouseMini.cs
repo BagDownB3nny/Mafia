@@ -4,7 +4,7 @@ using Mirror;
 public class InteractableVillageHouseMini : Interactable
 {
     public House house;
-    public string playerName => house?.player?.steamUsername;
+    public string PlayerName => house?.player?.steamUsername;
 
     [SyncVar(hook = nameof(OnIsMarkedChanged))]
     private bool isMarked = false;
@@ -26,16 +26,16 @@ public class InteractableVillageHouseMini : Interactable
         Highlight();
         if (isOccupantDead)
         {
-            PlayerUIManager.instance.SetInteractableText($"{playerName} is dead");
+            PlayerUIManager.instance.SetInteractableText($"{PlayerName} is dead");
             return;
         }
 
         if (isHouseDestroyed)
         {
-            PlayerUIManager.instance.SetInteractableText($"{playerName}'s house is destroyed. {playerName} must be hiding somewhere...");
+            PlayerUIManager.instance.SetInteractableText($"{PlayerName}'s house is destroyed. {PlayerName} must be hiding somewhere...");
             return;
         }
-        string interactableText = $"Mark {playerName}'s house";
+        string interactableText = $"Mark {PlayerName}'s house";
         PlayerUIManager.instance.SetInteractableText(interactableText);
     }
 
@@ -56,12 +56,10 @@ public class InteractableVillageHouseMini : Interactable
         if (!isMarked)
         {
             MafiaHouseTable.instance.SetSelectedHouseMini(this);
-            CmdMarkHouse();
         }
         else
         {
             MafiaHouseTable.instance.SetSelectedHouseMini(null);
-            CmdUnmarkHouse();
         }
     }
 

@@ -10,7 +10,7 @@ public class Villager : Role
     public override string InteractWithDoorText => null;
 
     public override bool IsAbleToInteractWithDoors => false;
-    protected override List<SigilName> SigilsAbleToSee => new List<SigilName>();
+    protected override List<SigilName> SigilsAbleToSee => new();
 
     public override void OnStartAuthority()
     {
