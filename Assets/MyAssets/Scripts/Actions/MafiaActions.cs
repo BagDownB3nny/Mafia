@@ -30,7 +30,7 @@ public class MafiaActions : RoleActions
         if (Input.GetMouseButtonDown(0) && player.IsAbleToShoot())
         {
             Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
-            Shoot(currentLookingAtDirection, transform);
+            player.CmdShoot(currentLookingAtDirection, transform);
         }
     }
 
@@ -58,26 +58,18 @@ public class MafiaActions : RoleActions
         }
     }
 
-    private void Shoot(Vector3 lookingAtDirection, Transform playerTransform)
-    {
-        // Verify it's night time before allowing shooting
-        int currentHour = TimeManagerV2.instance.currentHour;
-        if (currentHour >= 8 && currentHour < 24)
-        {
-            // It's daytime, don't allow shooting
-            return;
-        }
-
-        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
-        if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
-        {
-            Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
-            if (connectionToClient == null)
-            {
-                Debug.LogError("Connection to client is null");
-                return;
-            }
-            shootable.OnShot(connectionToClient);
-        }
-    }
+    // private void Shoot(Vector3 lookingAtDirection, Transform playerTransform)
+    // {
+    //     GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
+    //     if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
+    //     {
+    //         Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
+    //         if (connectionToClient == null)
+    //         {
+    //             Debug.LogError("Connection to client is null");
+    //             return;
+    //         }
+    //         shootable.OnShot(connectionToClient);
+    //     }
+    // }
 }

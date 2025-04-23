@@ -152,6 +152,22 @@ public class Player : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
+    {
+        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
+        if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
+        {
+            Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
+            if (connectionToClient == null)
+            {
+                Debug.LogError("Connection to client is null");
+                return;
+            }
+            shootable.OnShot(connectionToClient);
+        }
+    }
+
     public void SetNameTagColor(Color color)
     {
         playerUIPrefab.color = color;
