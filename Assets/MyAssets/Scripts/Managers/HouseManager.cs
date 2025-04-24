@@ -24,6 +24,22 @@ public class HouseManager : NetworkBehaviour
         }
     }
 
+    public House GetHouseByNetId(uint netId)
+    {
+        if (NetworkServer.spawned.ContainsKey(netId))
+        {
+            return NetworkServer.spawned[netId].GetComponent<House>();
+        }
+        else if (NetworkClient.spawned.ContainsKey(netId))
+        {
+            return NetworkClient.spawned[netId].GetComponent<House>();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     [Server]
     public void InstantiateHouses()
     {
@@ -62,14 +78,7 @@ public class HouseManager : NetworkBehaviour
 
             NetworkServer.Spawn(house);
             houses.Add(house.GetComponent<House>());
-            RpcSetHouseParent(house);
         }
-    }
-
-    [ClientRpc]
-    public void RpcSetHouseParent(GameObject house)
-    {
-        house.transform.SetParent(houseParent);
     }
 
     [Server]
@@ -95,7 +104,7 @@ public class HouseManager : NetworkBehaviour
     {
         foreach (House house in houses)
         {
-            house.ActivateProtection();
+            house.Mark();
         }
     }
 
@@ -113,7 +122,7 @@ public class HouseManager : NetworkBehaviour
     {
         foreach (House house in houses)
         {
-            house.HighlightForOwner();
+            house.UnhighlightForOwner();
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class House : NetworkBehaviour
 {
 
+    [Header("House object references")]
     [SerializeField] private List<Door> doors;
     [SerializeField] private InteractableDoor trapDoor;
     [SerializeField] private GameObject SeerRoom;
@@ -18,12 +19,24 @@ public class House : NetworkBehaviour
 
     public Vector3 positionRelativeToVillageCenter;
 
-    [SyncVar(hook = nameof(OnPlayerChanged))]
 
-    public Player player;
+    [Header("Player")]
 
     [SyncVar]
-    public bool isProtected;
+    public Player player;
+
+    [Header("Internal params")]
+
+    [SyncVar]
+    public bool isMarked;
+
+    public void OnDestroy()
+    {
+        if (HouseManager.instance != null)
+        {
+            HouseManager.instance.houses.Remove(this);
+        }
+    }
 
     [Server]
     public void AssignPlayer(Player player)
@@ -73,17 +86,17 @@ public class House : NetworkBehaviour
     }
 
     [Server]
-    public void ActivateProtection()
+    public void Mark()
     {
-        isProtected = true;
-        UnhighlightForMafia();
+        isMarked = true;
+        HighlightForMafia();
     }
 
     [Server]
-    public void DeactivateProtection()
+    public void Unmark()
     {
-        isProtected = false;
-        HighlightForMafia();
+        isMarked = false;
+        UnhighlightForMafia();
     }
 
     [Server]
@@ -95,8 +108,8 @@ public class House : NetworkBehaviour
     [ClientRpc]
     public void RpcHighlightForMafia()
     {
-        Player player = PlayerManager.instance.localPlayer;
-        if (player.role == RoleName.Mafia)
+        Player localPlayer = PlayerManager.instance.localPlayer;
+        if (localPlayer.role == RoleName.Mafia)
         {
             SetHighlight(true);
         }
@@ -111,8 +124,8 @@ public class House : NetworkBehaviour
     [ClientRpc]
     public void RpcUnhighlightForMafia()
     {
-        Player player = PlayerManager.instance.localPlayer;
-        if (player.role == RoleName.Mafia)
+        Player localPlayer = PlayerManager.instance.localPlayer;
+        if (localPlayer.role == RoleName.Mafia)
         {
             SetHighlight(false);
         }
@@ -127,8 +140,8 @@ public class House : NetworkBehaviour
     [ClientRpc]
     public void RpcHighlightForOwner()
     {
-        Player player = PlayerManager.instance.localPlayer;
-        if (player == this.player)
+        Player localPlayer = PlayerManager.instance.localPlayer;
+        if (localPlayer == this.player)
         {
             SetHighlight(true);
         }
@@ -143,8 +156,8 @@ public class House : NetworkBehaviour
     [ClientRpc]
     public void RpcUnhighlightForOwner()
     {
-        Player player = PlayerManager.instance.localPlayer;
-        if (player == this.player)
+        Player localPlayer = PlayerManager.instance.localPlayer;
+        if (localPlayer == this.player)
         {
             SetHighlight(false);
         }
@@ -191,16 +204,6 @@ public class House : NetworkBehaviour
         if (role == RoleName.Seer)
         {
             SeerRoom.SetActive(true);
-        }
-    }
-
-    // Re-assign house authority to the new player
-    [Server]
-    public void OnPlayerChanged(Player oldPlayer, Player newPlayer)
-    {
-        if (newPlayer && newPlayer.netIdentity)
-        {
-            Authority.AssignAuthority(gameObject.GetComponent<NetworkIdentity>(), newPlayer.netIdentity.connectionToClient);
         }
     }
 

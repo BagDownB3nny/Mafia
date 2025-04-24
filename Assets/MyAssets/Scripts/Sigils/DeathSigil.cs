@@ -105,7 +105,7 @@ public class DeathSigil : Sigil
         if (playerMarkedForDeath != null)
         {
             Debug.Log(playerMarkedForDeath.steamUsername + " is marked for death");
-            playerMarkedForDeath.house.DeactivateProtection();
+            playerMarkedForDeath.house.Unmark();
         }
     }
 }

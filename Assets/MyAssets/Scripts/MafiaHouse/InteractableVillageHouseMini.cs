@@ -3,11 +3,19 @@ using Mirror;
 
 public class InteractableVillageHouseMini : Interactable
 {
+
+    [Header("House")]
+
+
+    [SyncVar]
     public House house;
+
     public string playerName => house?.player?.steamUsername;
 
     [SyncVar(hook = nameof(OnIsMarkedChanged))]
     private bool isMarked = false;
+
+    [Header("House status")]
 
     [SyncVar]
     public bool isOccupantDead = false;
@@ -15,7 +23,8 @@ public class InteractableVillageHouseMini : Interactable
     [SyncVar]
     public bool isHouseDestroyed = false;
 
-    public void linkHouse(House house)
+    [Server]
+    public void LinkHouse(House house)
     {
         this.house = house;
     }
@@ -55,28 +64,12 @@ public class InteractableVillageHouseMini : Interactable
         }
         if (!isMarked)
         {
-            MafiaHouseTable.instance.SetSelectedHouseMini(this);
-            CmdMarkHouse();
+            MafiaHouseTable.instance.CmdSetSelectedHouseMini(this);
         }
         else
         {
-            MafiaHouseTable.instance.SetSelectedHouseMini(null);
-            CmdUnmarkHouse();
+            MafiaHouseTable.instance.CmdSetSelectedHouseMini(null);
         }
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdMarkHouse()
-    {
-        isMarked = true;
-        house.DeactivateProtection();
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdUnmarkHouse()
-    {
-        isMarked = false;
-        house.ActivateProtection();
     }
 
     [Client]
@@ -86,6 +79,20 @@ public class InteractableVillageHouseMini : Interactable
         // TODO:
         // Enable visual effect for marked house
         // Disable visual effect for unmarked house
+    }
+
+    [Server]
+    public void MarkHouse()
+    {
+        isMarked = true;
+        house.Mark();
+    }
+
+    [Server]
+    public void UnmarkHouse()
+    {
+        isMarked = false;
+        house.Unmark();
     }
 
     [Server]

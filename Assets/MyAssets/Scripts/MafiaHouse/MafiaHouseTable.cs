@@ -54,16 +54,22 @@ public class MafiaHouseTable : NetworkBehaviour
         }
     }
 
+    [Command(requiresAuthority = false)]
+    public void CmdSetSelectedHouseMini(InteractableVillageHouseMini houseMini)
+    {
+        SetSelectedHouseMini(houseMini);
+    }
+
     [Server]
     public void SetSelectedHouseMini(InteractableVillageHouseMini houseMini)
     {
         if (selectedHouseMini)
         {
-            selectedHouseMini.CmdUnmarkHouse();
+            selectedHouseMini.UnmarkHouse();
         }
 
         selectedHouseMini = houseMini;
-        // Set whiteboard to show selected house
+        selectedHouseMini?.MarkHouse();
     }
 
 
@@ -75,11 +81,9 @@ public class MafiaHouseTable : NetworkBehaviour
         foreach (House house in houses)
         {
             Vector3 housePosition = house.positionRelativeToVillageCenter;
-
-
             Vector3 houseMiniPositionRelativeToTableCenter = housePosition * 0.02f;
 
-            Vector3 lookAtDirection = (Vector3.zero - housePosition);
+            Vector3 lookAtDirection = Vector3.zero - housePosition;
             Quaternion houseMiniRotation = Quaternion.LookRotation(lookAtDirection);
 
 
@@ -89,15 +93,15 @@ public class MafiaHouseTable : NetworkBehaviour
                 houseMiniRotation
             );
 
-            houseMini.transform.SetParent(houseMiniParent);
-
-            houseMini.GetComponent<InteractableVillageHouseMini>().linkHouse(house);
             NetworkServer.Spawn(houseMini);
+            houseMini.GetComponent<InteractableVillageHouseMini>().LinkHouse(house);
         }
     }
 
+    [Client]
     private void OnSelectedHouseMiniChanged(InteractableVillageHouseMini oldHouseMini, InteractableVillageHouseMini newHouseMini)
     {
+        Debug.Log($"Selected house mini changed: {oldHouseMini} -> {newHouseMini}");
         if (newHouseMini == null)
         {
             whiteboard.ClearWhiteboard();
