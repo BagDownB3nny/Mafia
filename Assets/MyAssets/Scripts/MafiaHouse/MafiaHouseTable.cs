@@ -13,6 +13,7 @@ public class MafiaHouseTable : NetworkBehaviour
 
     [SyncVar(hook = nameof(OnSelectedHouseMiniChanged))]
     public InteractableVillageHouseMini selectedHouseMini;
+    private bool isShot = false;
 
     public void Awake()
     {
@@ -36,6 +37,13 @@ public class MafiaHouseTable : NetworkBehaviour
     }
 
     [Server]
+    public void ClearSelection()
+    {
+        isShot = false;
+        selectedHouseMini = null;
+    }
+
+    [Server]
     private void OnPlayerDeath(Player player)
     {
         InteractableVillageHouseMini houseMini = GetHouseMiniFromPlayer(player);
@@ -51,19 +59,24 @@ public class MafiaHouseTable : NetworkBehaviour
         if (selectedHouseMini == houseMini)
         {
             SetSelectedHouseMini(null);
+            isShot = true;
         }
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSetSelectedHouseMini(InteractableVillageHouseMini houseMini)
+    public void CmdSetSelectedHouseMini(NetworkConnectionToClient conn, InteractableVillageHouseMini houseMini)
     {
+        if (isShot)
+        {
+            PlayerUIManager.instance.RpcSetTemporaryInteractableText(conn, "The mafia have already launched an attack tonight", 1.5f);
+        }
         SetSelectedHouseMini(houseMini);
     }
 
     [Server]
     public void SetSelectedHouseMini(InteractableVillageHouseMini houseMini)
     {
-        if (selectedHouseMini)
+        if (selectedHouseMini != null && isShot)
         {
             selectedHouseMini.UnmarkHouse();
         }
@@ -101,13 +114,19 @@ public class MafiaHouseTable : NetworkBehaviour
     [Client]
     private void OnSelectedHouseMiniChanged(InteractableVillageHouseMini oldHouseMini, InteractableVillageHouseMini newHouseMini)
     {
-        Debug.Log($"Selected house mini changed: {oldHouseMini} -> {newHouseMini}");
+        if (oldHouseMini != null)
+        {
+            // Unmark the old house
+            oldHouseMini.UnmarkHouse();
+        }
+        // Set whiteboard to show selected house
         if (newHouseMini == null)
         {
             whiteboard.ClearWhiteboard();
         }
         else
         {
+            newHouseMini.MarkHouse();
             if (newHouseMini.playerName == null)
             {
                 whiteboard.SetNewMarkedPlayer("UNNAMED RAT");

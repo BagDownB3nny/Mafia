@@ -133,7 +133,11 @@ public class TimeManagerV2 : NetworkBehaviour
         // Give mafia members guns
         PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
         {
-            player.EquipGun();
+            Role roleScript = player.GetRoleScript();
+            if (roleScript is Mafia mafiaRole)
+            {
+                mafiaRole.EquipGun();
+            }
             player.house.UnlockTrapDoor();
         });
     }
@@ -144,7 +148,11 @@ public class TimeManagerV2 : NetworkBehaviour
         // Take away mafia members' guns
         PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
         {
-            player.UnequipGun();
+            Role roleScript = player.GetRoleScript();
+            if (roleScript is Mafia mafiaRole)
+            {
+                mafiaRole.UnequipGun();
+            }
             player.house.LockTrapDoor();
         });
 
@@ -154,6 +162,9 @@ public class TimeManagerV2 : NetworkBehaviour
 
         // Reset all sigils
         SigilsManager.instance.ResetAllSigils();
+
+        // Clear mafia target selection
+        MafiaHouseTable.instance.ClearSelection();
 
         // Turn off all lights
         LightManager.instance.TurnOffAllLights();

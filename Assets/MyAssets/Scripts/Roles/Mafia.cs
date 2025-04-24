@@ -9,9 +9,53 @@ public class Mafia : Role
 
     public override string InteractWithDoorText => null;
     public override bool IsAbleToInteractWithDoors => false;
-    protected override List<SigilName> SigilsAbleToSee => new List<SigilName>();
+    protected override List<SigilName> SigilsAbleToSee => new();
 
-    // private Player markedPlayer;
+    [SyncVar(hook = nameof(OnGunStatusChanged))]
+    private bool hasGun = true;
+
+    private GameObject localPlayerGun;
+    private readonly GameObject remotePlayerGun;
+
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+        // Get reference to gun objects
+        localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
+        roleActions = gameObject.AddComponent<MafiaActions>();
+    }
+
+    public bool HasGun()
+    {
+        return hasGun;
+    }
+
+    public void OnGunStatusChanged(bool oldStatus, bool newStatus)
+    {
+        if (isLocalPlayer)
+        {
+            localPlayerGun.SetActive(newStatus);
+        }
+        else
+        {
+            remotePlayerGun.SetActive(newStatus);
+        }
+    }
+
+    [Server]
+    public void EquipGun()
+    {
+        Debug.Log("Equipping gun");
+        hasGun = true;
+    }
+
+    [Server]
+    public void UnequipGun()
+    {
+        Debug.Log("Unequipping gun");
+        hasGun = false;
+    }
+
 
     protected override void SetNameTags()
     {
@@ -33,25 +77,4 @@ public class Mafia : Role
             player.SetNameTagColor(Color.white);
         }
     }
-
-    // [Server]
-    // public override void InteractWithPlayer(NetworkIdentity player)
-    // {
-    //     // Remove previously placed death sigil since only one death mark can be placed per mafia
-    //     if (markedPlayer != null)
-    //     {
-    //         DeathSigil markedPlayerDeathSigil = markedPlayer.GetComponentInChildren<DeathSigil>(includeInactive: true);
-    //         markedPlayerDeathSigil.Unmark();
-    //     }
-
-    //     // Place new death sigil on player
-    //     DeathSigil playerDeathSigil = player.GetComponentInChildren<DeathSigil>(includeInactive: true);
-    //     if (playerDeathSigil == null)
-    //     {
-    //         Debug.LogError("Player does not have a death sigil");
-    //         return;
-    //     }
-    //     playerDeathSigil.Mark(player.netId);
-    //     markedPlayer = player.GetComponentInParent<Player>();
-    // }
 }

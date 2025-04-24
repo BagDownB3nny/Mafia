@@ -1,19 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Mirror;
-using Steamworks;
 using TMPro;
 using UnityEngine;
 
-
-
 public class Player : NetworkBehaviour
 {
-
     [SyncVar(hook = nameof(OnRoleChanged))]
     public RoleName role;
-
-
 
     [SyncVar(hook = nameof(OnUsernameChanged))]
     public string steamUsername;
@@ -21,22 +15,11 @@ public class Player : NetworkBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private GameObject playerVisual;
 
-    [SyncVar(hook = nameof(OnGunStatusChanged))]
-    private bool hasGun;
-
-    // When a player equips a gun, the client will see a different gun compared to the other players 
-    // Imagine a game like valorant, where the player is able to see his own gun differently from how he sees 
-    // the guns of other players.
-    // Allows for a better view of the gun for both player and other players
-    [SerializeField] private GameObject localPlayerGun;
-    [SerializeField] private GameObject remotePlayerGun;
-
     [SyncVar]
     public House house;
 
-    public bool isDead = false;
-
     Dictionary<Enum, Role> roleScripts;
+    public bool isDead = false;
 
     [Header("Guardian params")]
     public bool isProtected = false;
@@ -56,7 +39,6 @@ public class Player : NetworkBehaviour
             PlayerManager.instance.localPlayer = this;
         }
 
-        localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
         playerVisual.SetActive(false);
     }
 
@@ -109,7 +91,6 @@ public class Player : NetworkBehaviour
     public void SetRole(RoleName newRole)
     {
         role = newRole;
-        EnableRoleScript(newRole);
 
         house.SpawnRoom(newRole);
     }
@@ -159,43 +140,14 @@ public class Player : NetworkBehaviour
         {
             PlayerUIManager.instance.SetRoleText(newRole);
             PlayerUIManager.instance.SetRolePromptText(newRole);
-            // DisableRoleScriptsExcept(newRole);
             EnableRoleScript(newRole);
+            DisableRoleScriptsExcept(newRole);
         }
     }
 
     public void SetNameTagColor(Color color)
     {
         playerUIPrefab.color = color;
-    }
-
-    [Server]
-    public void EquipGun()
-    {
-        hasGun = true;
-    }
-
-    [Server]
-    public void UnequipGun()
-    {
-        hasGun = false;
-    }
-
-    public void OnGunStatusChanged(bool oldStatus, bool newStatus)
-    {
-        if (isLocalPlayer)
-        {
-            localPlayerGun.SetActive(newStatus);
-        }
-        else
-        {
-            remotePlayerGun.SetActive(newStatus);
-        }
-    }
-
-    public bool IsAbleToShoot()
-    {
-        return hasGun;
     }
 
     public bool IsAbleToInteractWithPlayers()

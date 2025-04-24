@@ -64,11 +64,11 @@ public class InteractableVillageHouseMini : Interactable
         }
         if (!isMarked)
         {
-            MafiaHouseTable.instance.CmdSetSelectedHouseMini(this);
+            MafiaHouseTable.instance.CmdSetSelectedHouseMini(connectionToClient, this);
         }
         else
         {
-            MafiaHouseTable.instance.CmdSetSelectedHouseMini(null);
+            MafiaHouseTable.instance.CmdSetSelectedHouseMini(connectionToClient, null);
         }
     }
 
