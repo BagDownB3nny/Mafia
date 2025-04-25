@@ -320,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 5714231732760972372, guid: 0be942305469a460194dfcd2094751bc, type: 3}
       propertyPath: transport
       value: 
-      objectReference: {fileID: 2121766812}
+      objectReference: {fileID: 2121766817}
     - target: {fileID: 5714231732760972372, guid: 0be942305469a460194dfcd2094751bc, type: 3}
       propertyPath: onlineScene
       value: Assets/MyAssets/Scenes/Lobby.unity
@@ -412,7 +412,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3775347956757625069, guid: 0be942305469a460194dfcd2094751bc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2121766812}
+      addedObject: {fileID: 2121766817}
   m_SourcePrefab: {fileID: 100100000, guid: 0be942305469a460194dfcd2094751bc, type: 3}
 --- !u!1001 &315342638
 PrefabInstance:
@@ -1152,7 +1152,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3775347956757625069, guid: 0be942305469a460194dfcd2094751bc, type: 3}
   m_PrefabInstance: {fileID: 111725977}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2121766812
+--- !u!114 &2121766817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1161,26 +1161,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2121766807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: 7777
-  DualMode: 1
-  NoDelay: 1
-  Interval: 10
-  Timeout: 10000
-  RecvBufferSize: 7361536
-  SendBufferSize: 7361536
-  FastResend: 2
-  ReceiveWindowSize: 4096
-  SendWindowSize: 4096
-  MaxRetransmit: 40
-  MaximizeSocketBuffers: 1
-  ReliableMaxMessageSize: 297433
-  UnreliableMaxMessageSize: 1194
-  debugLog: 0
-  statisticsGUI: 0
-  statisticsLog: 0
+  Channels: 0200000001000000
+  Timeout: 25
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
 --- !u!1001 &5005562242316038624
 PrefabInstance:
   m_ObjectHideFlags: 0
