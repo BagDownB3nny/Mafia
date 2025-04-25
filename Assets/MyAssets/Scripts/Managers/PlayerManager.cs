@@ -230,4 +230,28 @@ public class PlayerManager : NetworkBehaviour
         }
         return nonMafiaPlayers;
     }
+
+    [Server]
+    public void EnableMediumInteractions() {
+        foreach (Player player in GetAllPlayers())
+        {
+            if (player.role == RoleName.Medium)
+            {
+                Medium role = player.GetRoleScript() as Medium;
+                role.ActivateMediumAbility();
+            } 
+        }
+    }
+
+    [Server]
+    public void DisableMediumInteractions() {
+        foreach (Player player in GetAllPlayers())
+        {
+            if (player.role == RoleName.Medium)
+            {
+                Medium role = player.GetRoleScript() as Medium;
+                role.DeactivateMediumAbility();
+            } 
+        }
+    }
 }

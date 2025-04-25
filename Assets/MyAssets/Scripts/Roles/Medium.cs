@@ -17,4 +17,28 @@ public class Medium : Role
         // Implement the interaction logic for Medium with players
         Debug.Log("Medium interacting with player: " + player.name);
     }
+
+    [Server]
+    public void ActivateMediumAbility()
+    {
+        RpcActivateMediumAbility(connectionToClient);
+    }
+
+    [TargetRpc]
+    public void RpcActivateMediumAbility(NetworkConnection target)
+    {
+        DissonanceRoomManager.instance.OnMediumActivation();
+    }
+
+    [Server]
+    public void DeactivateMediumAbility()
+    {
+        RpcDeactivateMediumAbility(connectionToClient);
+    }
+
+    [TargetRpc]
+    public void RpcDeactivateMediumAbility(NetworkConnection target)
+    {
+        DissonanceRoomManager.instance.OnMediumDeactivation();
+    }
 }

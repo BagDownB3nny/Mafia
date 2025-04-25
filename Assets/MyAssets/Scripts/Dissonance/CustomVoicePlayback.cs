@@ -29,12 +29,12 @@ public class CustomVoicePlayback : VoicePlayback
         {
             if (hit.collider.CompareTag("Wall"))  // Adjust tag as needed
             {
-                _lowPassFilter.cutoffFrequency = 500f; // Muffled effect when occluded
+                _lowPassFilter.enabled = true;
             }
         }
         else
         {
-            _lowPassFilter.cutoffFrequency = 22000f; // Normal speech when clear
+            _lowPassFilter.enabled = false;
         }
     } 
 }
