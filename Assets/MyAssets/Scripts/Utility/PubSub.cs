@@ -60,4 +60,9 @@ public static class PubSub
             handler?.DynamicInvoke(data);
         }
     }
+
+    public static void ClearAll()
+    {
+        _subscribers.Clear();
+    }
 }
