@@ -135,6 +135,8 @@ public class TimeManagerV2 : NetworkBehaviour
         {
             player.house.UnlockTrapDoor();
         });
+
+        PlayerManager.instance.RemoveAllNametagsForNonMafia();
     }
 
     [Server]
@@ -163,6 +165,9 @@ public class TimeManagerV2 : NetworkBehaviour
 
         // Turn off all lights
         LightManager.instance.TurnOffAllLights();
+
+        // Add all nametags
+        PlayerManager.instance.AddAllNametagsForNonMafia();
     }
 
     [Server]

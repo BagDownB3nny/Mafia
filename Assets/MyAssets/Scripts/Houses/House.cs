@@ -9,6 +9,7 @@ public class House : NetworkBehaviour
     [SerializeField] private List<Door> doors;
     [SerializeField] private InteractableDoor trapDoor;
     [SerializeField] private GameObject SeerRoom;
+    [SerializeField] public TMPro.TextMeshProUGUI namePlateText;
 
     public Transform spawnPoint;
     public Transform tunnelTeleporterPosition;
@@ -22,7 +23,7 @@ public class House : NetworkBehaviour
 
     [Header("Player")]
 
-    [SyncVar]
+    [SyncVar(hook = nameof(OnPlayerChanged))]
     public Player player;
 
     [Header("Internal params")]
@@ -46,11 +47,18 @@ public class House : NetworkBehaviour
             MafiaHouseTeleporter.instance.SetLocalPlayerDefaultTeleportPoint(tunnelTeleporterPosition);
         }
         this.player = player;
+        Debug.Log($"Assigned player {player.steamUsername} to house {netId}");
         foreach (Door door in doors)
         {
             InteractableDoor interactableDoor = door.GetComponent<InteractableDoor>();
             interactableDoor.AssignAuthority(player);
         }
+    }
+
+    [Client]
+    public void OnPlayerChanged(Player oldValue, Player newValue)
+    {
+        namePlateText.text = newValue.steamUsername;
     }
 
     [Server]

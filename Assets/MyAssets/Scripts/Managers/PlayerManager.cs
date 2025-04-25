@@ -65,6 +65,22 @@ public class PlayerManager : NetworkBehaviour
         return localPlayer.steamUsername;
     }
 
+    public void RemoveAllNametagsForNonMafia()
+    {
+        foreach (Player player in GetNonMafiaPlayers())
+        {
+            player.RemoveNametag();
+        }
+    }
+
+    public void AddAllNametagsForNonMafia()
+    {
+        foreach (Player player in GetNonMafiaPlayers())
+        {
+            player.AddNametag();
+        }
+    }
+
     [Server]
     public void AssignRoles()
     {
@@ -81,7 +97,7 @@ public class PlayerManager : NetworkBehaviour
             }
             else
             {
-                player.SetRole(RoleName.Mafia);
+                player.SetRole(RoleName.Villager);
             }
             // player.SetRole(playerRoles[index]);
             // index++;
@@ -198,5 +214,19 @@ public class PlayerManager : NetworkBehaviour
             }
         }
         return mafiaPlayers;
+    }
+
+    public List<Player> GetNonMafiaPlayers()
+    {
+        List<Player> nonMafiaPlayers = new List<Player>();
+        foreach (Player player in GetAllPlayers())
+        {
+            if (player.role != RoleName.Mafia)
+            {
+                Debug.Log($"Non-mafia player: {player.steamUsername}");
+                nonMafiaPlayers.Add(player);
+            }
+        }
+        return nonMafiaPlayers;
     }
 }

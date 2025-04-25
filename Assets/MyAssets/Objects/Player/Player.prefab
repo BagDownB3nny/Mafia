@@ -625,10 +625,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   role: 0
-  steamUsername: 
   playerUIPrefab: {fileID: 1488157308980942899}
   cameraTransform: {fileID: 4607757749379484365}
   playerVisual: {fileID: 8636581749400225338}
+  steamUsername: 
+  playerNameTag: {fileID: 7884871931344284223}
   house: {fileID: 0}
   mafiaScripts: {fileID: 1778379576338248991}
   seerScripts: {fileID: 5610600952356056363}

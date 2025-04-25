@@ -8,12 +8,16 @@ public class Player : NetworkBehaviour
 {
     [SyncVar(hook = nameof(OnRoleChanged))]
     public RoleName role;
-
-    [SyncVar(hook = nameof(OnUsernameChanged))]
-    public string steamUsername;
     [SerializeField] private TMP_Text playerUIPrefab;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private GameObject playerVisual;
+
+    [Header("Name")]
+    [SyncVar(hook = nameof(OnUsernameChanged))]
+
+    public string steamUsername;
+    [SerializeField] private Billboard playerNameTag;
+
 
     [SyncVar]
     public House house;
@@ -63,6 +67,30 @@ public class Player : NetworkBehaviour
             { RoleName.Seer, seerScripts },
             { RoleName.Mafia, mafiaScripts }
         };
+    }
+
+    [Server]
+    public void RemoveNametag()
+    {
+        RpcRemoveNametag();
+    }
+
+    [ClientRpc]
+    public void RpcRemoveNametag()
+    {
+        playerNameTag.gameObject.SetActive(false);
+    }
+
+    [Server]
+    public void AddNametag()
+    {
+        RpcAddNametag();
+    }
+
+    [ClientRpc]
+    public void RpcAddNametag()
+    {
+        playerNameTag.gameObject.SetActive(true);
     }
 
     [Client]
@@ -146,6 +174,7 @@ public class Player : NetworkBehaviour
     private void OnUsernameChanged(string oldUsername, string newUsername)
     {
         playerUIPrefab.text = newUsername;
+        house.namePlateText.text = newUsername;
     }
 
     [Client]
