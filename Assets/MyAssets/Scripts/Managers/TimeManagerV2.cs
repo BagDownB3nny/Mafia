@@ -133,11 +133,6 @@ public class TimeManagerV2 : NetworkBehaviour
         // Give mafia members guns
         PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
         {
-            Role roleScript = player.GetRoleScript();
-            if (roleScript is Mafia mafiaRole)
-            {
-                mafiaRole.EquipGun();
-            }
             player.house.UnlockTrapDoor();
         });
     }

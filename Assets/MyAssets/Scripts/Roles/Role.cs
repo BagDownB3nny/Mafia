@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public abstract class Role : NetworkBehaviour
 {
-    public RoleActions roleActions;
-
     [Header("Role Settings")]
     public abstract string RolePlayerInteractText { get; }
     public abstract bool IsAbleToInteractWithPlayers { get; }
@@ -17,7 +15,7 @@ public abstract class Role : NetworkBehaviour
     public virtual void InteractWithPlayer(NetworkIdentity player)
     {
         Debug.Log($"Interacting with player {player.name}");
-        
+
     }
 
     public virtual void InteractWithDoor(NetworkIdentity door)

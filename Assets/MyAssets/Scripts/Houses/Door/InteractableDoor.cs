@@ -1,10 +1,11 @@
 using Mirror;
 using UnityEngine;
 using DG.Tweening;
-using System.Collections.Generic;
 
 public class InteractableDoor : Interactable
 {
+
+    [SerializeField] private Door door;
 
     public bool isOpen = false;
     public bool isBroken = false;
@@ -51,14 +52,14 @@ public class InteractableDoor : Interactable
             string interactableText = isOpen ? "Close the door" : "Open the door";
             PlayerUIManager.instance.SetInteractableText(interactableText);
         }
-        else if (playerRoleScript.IsAbleToInteractWithDoors)
+        else if (playerRoleScript.IsAbleToInteractWithDoors && door.isOutsideDoor)
         {
             string interactableText = playerRoleScript.InteractWithDoorText;
             PlayerUIManager.instance.SetInteractableText(interactableText);
         }
         else
         {
-            PlayerUIManager.instance.SetInteractableText("This door is protected");
+            PlayerUIManager.instance.SetInteractableText("Door is locked");
         }
     }
 
@@ -79,7 +80,7 @@ public class InteractableDoor : Interactable
         }
         else
         {
-            PlayerUIManager.instance.SetInteractableText("You are unable to get past the protection");
+            PlayerUIManager.instance.SetInteractableText("Door is locked");
         }
     }
 

@@ -27,12 +27,6 @@ public class Guardian : Role
     private Player protectedPlayer;
     private House protectedHouse;
 
-    public override void OnStartAuthority()
-    {
-        base.OnStartAuthority();
-        roleActions = gameObject.AddComponent<VillagerActions>();
-    }
-
     [Server]
     public override void InteractWithPlayer(NetworkIdentity playerNetworkIdentity)
     {
@@ -45,6 +39,13 @@ public class Guardian : Role
     [Server]
     public override void InteractWithDoor(NetworkIdentity door)
     {
+        Door doorComponent = door.GetComponent<Door>();
+        if (doorComponent.isOutsideDoor)
+        {
+            // Cannot interact with inside door
+            return;
+        }
+
         RemovePreviouslyPlacedSigils();
         House house = door.GetComponentInParent<House>();
         house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true).Mark(house.netId);

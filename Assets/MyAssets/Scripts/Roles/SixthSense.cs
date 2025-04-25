@@ -12,12 +12,6 @@ public class SixthSense : Role
     public override bool IsAbleToInteractWithDoors => false;
     protected override List<SigilName> SigilsAbleToSee => Enum.GetValues(typeof(SigilName)).Cast<SigilName>().ToList();
 
-    public override void OnStartAuthority()
-    {
-        base.OnStartAuthority();
-        roleActions = gameObject.AddComponent<VillagerActions>();
-    }
-
     public override void InteractWithPlayer(NetworkIdentity player)
     {
         Debug.LogError("Sixth sense cannot interact with players");

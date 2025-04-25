@@ -8,7 +8,7 @@ public abstract class RoleActions : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        player = GetComponent<Player>();
+        player = GetComponentInParent<Player>();
         playerCamera = PlayerCamera.instance;
     }
 

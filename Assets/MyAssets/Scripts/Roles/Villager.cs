@@ -12,12 +12,7 @@ public class Villager : Role
     public override bool IsAbleToInteractWithDoors => false;
     protected override List<SigilName> SigilsAbleToSee => new();
 
-    public override void OnStartAuthority()
-    {
-        base.OnStartAuthority();
-        roleActions = gameObject.AddComponent<VillagerActions>();
-    }
-        public override void InteractWithPlayer(NetworkIdentity player)
+    public override void InteractWithPlayer(NetworkIdentity player)
     {
         Debug.LogError("Villager cannot interact with players");
     }

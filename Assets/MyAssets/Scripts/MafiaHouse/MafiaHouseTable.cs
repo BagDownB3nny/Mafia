@@ -64,11 +64,12 @@ public class MafiaHouseTable : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSetSelectedHouseMini(NetworkConnectionToClient conn, InteractableVillageHouseMini houseMini)
+    public void CmdSetSelectedHouseMini(InteractableVillageHouseMini houseMini, NetworkConnectionToClient connection)
     {
         if (isShot)
         {
-            PlayerUIManager.instance.RpcSetTemporaryInteractableText(conn, "The mafia have already launched an attack tonight", 1.5f);
+            PlayerUIManager.instance.RpcSetTemporaryInteractableText(connection, "The mafia have already launched an attack tonight", 1.5f);
+            return;
         }
         SetSelectedHouseMini(houseMini);
     }
@@ -76,7 +77,9 @@ public class MafiaHouseTable : NetworkBehaviour
     [Server]
     public void SetSelectedHouseMini(InteractableVillageHouseMini houseMini)
     {
-        if (selectedHouseMini != null && isShot)
+        Debug.Log("Setting selected house mini");
+        Debug.Log(houseMini);
+        if (selectedHouseMini != null)
         {
             selectedHouseMini.UnmarkHouse();
         }

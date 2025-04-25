@@ -58,17 +58,19 @@ public class InteractableVillageHouseMini : Interactable
     [Client]
     public override void Interact()
     {
+        Debug.Log($"Interacting with {playerName}'s house");
         if (isOccupantDead)
         {
+            Debug.Log("House occupant is dead");
             return;
         }
         if (!isMarked)
         {
-            MafiaHouseTable.instance.CmdSetSelectedHouseMini(connectionToClient, this);
+            MafiaHouseTable.instance.CmdSetSelectedHouseMini(this, connectionToClient);
         }
         else
         {
-            MafiaHouseTable.instance.CmdSetSelectedHouseMini(connectionToClient, null);
+            MafiaHouseTable.instance.CmdSetSelectedHouseMini(null, connectionToClient);
         }
     }
 

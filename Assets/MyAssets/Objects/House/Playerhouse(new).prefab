@@ -2804,6 +2804,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 4697583065704764444}
   doorKnockedPosition: {fileID: 1697964685844009947}
 --- !u!114 &7648226449040171736
 MonoBehaviour:
@@ -2838,6 +2839,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 4697583065704764444}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 2995793535048226464}
@@ -2857,6 +2859,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 1
   house: {fileID: 2610861947467362568}
 --- !u!1 &3284044811296106451
 GameObject:
@@ -3601,6 +3604,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 828046701533220865}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 2751652691059123924}
@@ -3620,6 +3624,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 2610861947467362568}
 --- !u!1 &3907735765192806546
 GameObject:
@@ -6915,6 +6920,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 2610861947467362568}
 --- !u!114 &8805312559921296511
 MonoBehaviour:
@@ -6949,6 +6955,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 5906264006165740239}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 5414213344068438719}
@@ -6968,6 +6975,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 5906264006165740239}
   doorKnockedPosition: {fileID: 387846712544346187}
 --- !u!1 &7143920122214972038
 GameObject:
@@ -10910,6 +10918,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 2151663045346168646}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1465004086023684853}
@@ -10929,6 +10938,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 0}
 --- !u!1 &7621318876243386588
 GameObject:
@@ -11015,7 +11025,7 @@ MonoBehaviour:
   highlightableHouse: {fileID: 5292941990640968259}
   positionRelativeToVillageCenter: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!1 &7646862414062973905
 GameObject:
   m_ObjectHideFlags: 0

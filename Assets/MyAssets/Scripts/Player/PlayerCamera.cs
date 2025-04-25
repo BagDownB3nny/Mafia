@@ -77,10 +77,8 @@ public class PlayerCamera : MonoBehaviour
             if (lastInteractable != null)
             {
                 lastInteractable.OnUnhover();
-                // lastInteractable.Unhighlight();
             }
             currentInteractable.OnHover();
-            // currentInteractable.Highlight();
             lastInteractable = currentInteractable;
         }
     }
@@ -107,6 +105,16 @@ public class PlayerCamera : MonoBehaviour
     {
         RaycastHit hit;
         if (Physics.Raycast(origin.position, lookingAtDirection, out hit, maxDistance))
+        {
+            return hit.collider.gameObject;
+        }
+        return null;
+    }
+
+    public static GameObject GetLookingAt(Vector3 lookingAtDirection, Vector3 originPosition, float maxDistance)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance))
         {
             return hit.collider.gameObject;
         }

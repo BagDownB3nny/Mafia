@@ -4,12 +4,13 @@ using Mirror;
 public class MafiaActions : RoleActions
 {
     private readonly KeyCode equipGunKey = KeyCode.Q;
-    
+
     public override void HandleRoleSpecificActions()
     {
         HandleGunActions();
     }
 
+    [Client]
     private void HandleGunActions()
     {
         // Only allow gun actions during night time (between 12 AM and 8 AM)
@@ -30,12 +31,12 @@ public class MafiaActions : RoleActions
         if (Input.GetMouseButtonDown(0) && player.GetRoleScript() is Mafia mafiaRole && mafiaRole.HasGun())
         {
             Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
-            CmdShoot(currentLookingAtDirection, transform);
+            CmdShoot(currentLookingAtDirection, transform.position);
         }
     }
 
     [Command]
-    private void CmdToggleGun()
+    public void CmdToggleGun()
     {
         // Double check on server side that it's night time
         int currentHour = TimeManagerV2.instance.currentHour;
@@ -60,9 +61,9 @@ public class MafiaActions : RoleActions
     }
 
     [Command]
-    private void CmdShoot(Vector3 lookingAtDirection, Transform playerTransform)
+    private void CmdShoot(Vector3 lookingAtDirection, Vector3 playerPosition)
     {
-        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerTransform, 40.0f);
+        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerPosition, 40.0f);
         if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
         {
             Shootable shootable = lookingAt.GetComponentInParent<Shootable>();

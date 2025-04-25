@@ -18,7 +18,17 @@ public class Player : NetworkBehaviour
     [SyncVar]
     public House house;
 
-    Dictionary<Enum, Role> roleScripts;
+    [Header("Role scripts")]
+
+    [SerializeField] private GameObject mafiaScripts;
+    [SerializeField] private GameObject seerScripts;
+    [SerializeField] private GameObject guardianScripts;
+    [SerializeField] private GameObject sixthSenseScripts;
+    [SerializeField] private GameObject villagerScripts;
+
+    Dictionary<Enum, GameObject> roleScripts;
+
+    [Header("Internal status")]
     public bool isDead = false;
 
     [Header("Guardian params")]
@@ -45,13 +55,13 @@ public class Player : NetworkBehaviour
     [Client]
     private void GetRoleScripts()
     {
-        roleScripts = new Dictionary<Enum, Role>
+        roleScripts = new Dictionary<Enum, GameObject>
         {
-            {RoleName.Seer, gameObject.GetComponentInChildren<Seer>(includeInactive: true)},
-            {RoleName.Guardian, gameObject.GetComponentInChildren<Guardian>(includeInactive: true)},
-            {RoleName.Mafia, gameObject.GetComponentInChildren<Mafia>(includeInactive: true)},
-            {RoleName.SixthSense, gameObject.GetComponentInChildren<SixthSense>(includeInactive: true)},
-            {RoleName.Villager, gameObject.GetComponentInChildren<Villager>(includeInactive: true)}
+            { RoleName.Villager, villagerScripts },
+            { RoleName.SixthSense, sixthSenseScripts },
+            { RoleName.Guardian, guardianScripts },
+            { RoleName.Seer, seerScripts },
+            { RoleName.Mafia, mafiaScripts }
         };
     }
 
@@ -84,7 +94,12 @@ public class Player : NetworkBehaviour
 
     public Role GetRoleScript()
     {
-        return roleScripts[role];
+        return roleScripts[role].GetComponent<Role>();
+    }
+
+    public RoleActions GetRoleActions()
+    {
+        return roleScripts[role].GetComponent<RoleActions>();
     }
 
     [Server]
@@ -103,7 +118,7 @@ public class Player : NetworkBehaviour
 
     private void EnableRoleScript(RoleName newRole)
     {
-        roleScripts[newRole].enabled = true;
+        roleScripts[newRole].SetActive(true);
     }
 
     private void DisableRoleScriptsExcept(RoleName roleToKeep)
@@ -112,7 +127,7 @@ public class Player : NetworkBehaviour
         {
             if (role != roleToKeep)
             {
-                roleScripts[role].enabled = false;
+                roleScripts[role].SetActive(true);
             }
         }
     }

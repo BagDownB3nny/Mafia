@@ -12,18 +12,11 @@ public class Mafia : Role
     protected override List<SigilName> SigilsAbleToSee => new();
 
     [SyncVar(hook = nameof(OnGunStatusChanged))]
-    private bool hasGun = true;
+    private bool hasGun = false;
 
-    private GameObject localPlayerGun;
-    private readonly GameObject remotePlayerGun;
+    [Header("Gun")]
 
-    public override void OnStartAuthority()
-    {
-        base.OnStartAuthority();
-        // Get reference to gun objects
-        localPlayerGun = Camera.main.transform.Find("Gun").gameObject;
-        roleActions = gameObject.AddComponent<MafiaActions>();
-    }
+    [SerializeField] private GameObject gunVisual;
 
     public bool HasGun()
     {
@@ -32,14 +25,7 @@ public class Mafia : Role
 
     public void OnGunStatusChanged(bool oldStatus, bool newStatus)
     {
-        if (isLocalPlayer)
-        {
-            localPlayerGun.SetActive(newStatus);
-        }
-        else
-        {
-            remotePlayerGun.SetActive(newStatus);
-        }
+        gunVisual.SetActive(newStatus);
     }
 
     [Server]

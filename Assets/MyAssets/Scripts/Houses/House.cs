@@ -215,8 +215,9 @@ public class House : NetworkBehaviour
         // Because the basement door doesnt count, we need the lvl 1
         // doors to be destroyed for the house to be considered destroyed
         // since the basement door cannot be accessed by non-mafia
-        if (doors.Count == 1)
+        if (doors.Count == 2)
         {
+            Debug.Log("House destroyed");
             // Publish event to notify that the house is destroyed
             PubSub.Publish(PubSubEvent.HouseDestroyed, this);
         }

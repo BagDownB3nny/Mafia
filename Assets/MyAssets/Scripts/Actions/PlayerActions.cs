@@ -17,13 +17,14 @@ public class PlayerActions : NetworkBehaviour
         if (!isLocalPlayer) return;
         HandleSettingsPress();
         HandleInteractions();
-        player.GetRoleScript().roleActions.HandleRoleSpecificActions();
+        player.GetRoleActions()?.HandleRoleSpecificActions();
     }
     protected void HandleInteractions()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interactable interactable = playerCamera.GetInteractable();
+            Debug.Log("Interactable: " + interactable);
             if (interactable != null)
             {
                 bool isAbleToInteractWithPlayers = player.IsAbleToInteractWithPlayers();
