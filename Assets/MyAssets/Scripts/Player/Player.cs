@@ -122,6 +122,10 @@ public class Player : NetworkBehaviour
 
     public Role GetRoleScript()
     {
+        GameObject roleObject = roleScripts[role];
+        Role roleScript = roleObject.GetComponentInChildren<Role>(includeInactive: true);
+        Debug.Log(roleObject);
+        Debug.Log($"Role script: {roleScript}");
         return roleScripts[role].GetComponent<Role>();
     }
 
@@ -134,7 +138,8 @@ public class Player : NetworkBehaviour
     public void SetRole(RoleName newRole)
     {
         role = newRole;
-
+        EnableRoleScript(newRole);
+        DisableRoleScriptsExcept(newRole);
         house.SpawnRoom(newRole);
     }
 
@@ -153,9 +158,13 @@ public class Player : NetworkBehaviour
     {
         foreach (RoleName role in Enum.GetValues(typeof(RoleName)))
         {
-            if (role != roleToKeep)
+            if (role == roleToKeep)
             {
                 roleScripts[role].SetActive(true);
+            }
+            else
+            {
+                roleScripts[role].SetActive(false);
             }
         }
     }
@@ -192,6 +201,7 @@ public class Player : NetworkBehaviour
         }
     }
 
+    [Client]
     public void SetNameTagColor(Color color)
     {
         playerUIPrefab.color = color;
@@ -213,5 +223,27 @@ public class Player : NetworkBehaviour
             return false;
         }
         return GetRoleScript().IsAbleToInteractWithDoors;
+    }
+
+
+    [Server]
+    public void SetAbleToSeeNametags(bool ableToSee)
+    {
+        RpcSetAbleToSeeNametags(ableToSee);
+    }
+
+    [ClientRpc]
+    public void RpcSetAbleToSeeNametags(bool ableToSee)
+    {
+        if (!isLocalPlayer || !isOwned) return;
+
+        if (ableToSee)
+        {
+            CameraCullingMaskManager.instance.SetNameTagLayerVisible();
+        }
+        else
+        {
+            CameraCullingMaskManager.instance.SetNameTagLayerInvisible();
+        }
     }
 }

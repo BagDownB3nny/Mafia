@@ -69,7 +69,8 @@ public class PlayerManager : NetworkBehaviour
     {
         foreach (Player player in GetNonMafiaPlayers())
         {
-            player.RemoveNametag();
+            player.SetAbleToSeeNametags(false);
+
         }
     }
 
@@ -77,7 +78,7 @@ public class PlayerManager : NetworkBehaviour
     {
         foreach (Player player in GetNonMafiaPlayers())
         {
-            player.AddNametag();
+            player.SetAbleToSeeNametags(true);
         }
     }
 
@@ -93,11 +94,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(RoleName.Guardian);
+                player.SetRole(RoleName.Mafia);
             }
             else
             {
-                player.SetRole(RoleName.SixthSense);
+                player.SetRole(RoleName.Mafia);
             }
             // player.SetRole(playerRoles[index]);
             // index++;

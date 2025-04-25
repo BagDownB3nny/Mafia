@@ -30,8 +30,9 @@ public class MafiaActions : RoleActions
         // Handle shooting
         if (Input.GetMouseButtonDown(0) && player.GetRoleScript() is Mafia mafiaRole && mafiaRole.HasGun())
         {
+            Debug.Log("Shooting with gun");
             Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
-            CmdShoot(currentLookingAtDirection, transform.position);
+            CmdShoot(currentLookingAtDirection, playerCamera.transform.position);
         }
     }
 
@@ -47,6 +48,11 @@ public class MafiaActions : RoleActions
         }
 
         Role roleScript = player.GetRoleScript();
+        if (roleScript == null)
+        {
+            Debug.LogError("Role script is null");
+            return;
+        }
         if (roleScript is Mafia mafiaRole)
         {
             if (mafiaRole.HasGun())
@@ -64,9 +70,9 @@ public class MafiaActions : RoleActions
     private void CmdShoot(Vector3 lookingAtDirection, Vector3 playerPosition)
     {
         GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerPosition, 40.0f);
-        if (lookingAt != null && lookingAt.GetComponentInParent<Shootable>() != null)
+        Shootable shootable = GetShootable(lookingAt);
+        if (lookingAt != null && shootable != null)
         {
-            Shootable shootable = lookingAt.GetComponentInParent<Shootable>();
             if (connectionToClient == null)
             {
                 Debug.LogError("Connection to client is null");
@@ -74,5 +80,20 @@ public class MafiaActions : RoleActions
             }
             shootable.OnShot(connectionToClient);
         }
+    }
+
+    private Shootable GetShootable(GameObject containsShootable)
+    {
+        if (containsShootable == null)
+        {
+            Debug.LogError("Contains shootable is null");
+            return null;
+        }
+        Shootable shootable = containsShootable.GetComponentInParent<Shootable>();
+        if (shootable == null)
+        {
+            shootable = containsShootable.GetComponentInChildren<Shootable>();
+        }
+        return shootable;
     }
 }

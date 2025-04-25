@@ -16,7 +16,13 @@ public class Mafia : Role
 
     [Header("Gun")]
 
-    [SerializeField] private GameObject gunVisual;
+    [SerializeField] private GameObject remoteGunVisual;
+    private GameObject localGunVisual;
+
+    private void Start()
+    {
+        localGunVisual = Camera.main.transform.Find("Gun").gameObject;
+    }
 
     public bool HasGun()
     {
@@ -25,7 +31,14 @@ public class Mafia : Role
 
     public void OnGunStatusChanged(bool oldStatus, bool newStatus)
     {
-        gunVisual.SetActive(newStatus);
+        if (isLocalPlayer)
+        {
+            localGunVisual.SetActive(newStatus);
+        }
+        else
+        {
+            remoteGunVisual.SetActive(newStatus);
+        }
     }
 
     [Server]
@@ -43,8 +56,10 @@ public class Mafia : Role
     }
 
 
+    [Client]
     protected override void SetNameTags()
     {
+        Debug.Log("setting name tags as mafia");
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {

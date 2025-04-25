@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class MafiaHouseTable : NetworkBehaviour
 {
+
+    [Header("House mini ref")]
     [SerializeField] private GameObject houseMiniPrefab;
-    [SerializeField] private Transform houseMiniParent;
+    [SyncVar(hook = nameof(OnSelectedHouseMiniChanged))]
+    public InteractableVillageHouseMini selectedHouseMini;
+
+    public SyncList<uint> houseMinis = new SyncList<uint>();
+
+
     [SerializeField] private Whiteboard whiteboard;
 
     public static MafiaHouseTable instance;
 
-    [SyncVar(hook = nameof(OnSelectedHouseMiniChanged))]
-    public InteractableVillageHouseMini selectedHouseMini;
     private bool isShot = false;
 
     public void Awake()
@@ -111,6 +116,7 @@ public class MafiaHouseTable : NetworkBehaviour
 
             NetworkServer.Spawn(houseMini);
             houseMini.GetComponent<InteractableVillageHouseMini>().LinkHouse(house);
+            houseMinis.Add(houseMini.GetComponent<InteractableVillageHouseMini>().netId);
         }
     }
 
@@ -142,12 +148,26 @@ public class MafiaHouseTable : NetworkBehaviour
         }
     }
 
+    public InteractableVillageHouseMini GetHouseMiniFromNetId(uint netId)
+    {
+        if (NetworkServer.spawned.ContainsKey(netId))
+        {
+            return NetworkServer.spawned[netId].GetComponent<InteractableVillageHouseMini>();
+        }
+        else if (NetworkClient.spawned.ContainsKey(netId))
+        {
+            return NetworkClient.spawned[netId].GetComponent<InteractableVillageHouseMini>();
+        }
+        return null;
+    }
+
     [Server]
     private InteractableVillageHouseMini GetHouseMiniFromPlayer(Player player)
     {
-        foreach (InteractableVillageHouseMini houseMini in houseMiniParent.GetComponentsInChildren<InteractableVillageHouseMini>())
+        foreach (uint houseMiniNetId in houseMinis)
         {
-            if (houseMini.house && houseMini.house.player && houseMini.house.player.netId == player.netId)
+            InteractableVillageHouseMini houseMini = GetHouseMiniFromNetId(houseMiniNetId);
+            if (houseMini && houseMini.house && houseMini.house.player && houseMini.house.player.netId == player.netId)
             {
                 return houseMini;
             }
@@ -158,9 +178,10 @@ public class MafiaHouseTable : NetworkBehaviour
     [Server]
     private InteractableVillageHouseMini GetHouseMiniFromHouse(House house)
     {
-        foreach (InteractableVillageHouseMini houseMini in houseMiniParent.GetComponentsInChildren<InteractableVillageHouseMini>())
+        foreach (uint houseMiniNetId in houseMinis)
         {
-            if (houseMini.house && houseMini.house.netId == house.netId)
+            InteractableVillageHouseMini houseMini = GetHouseMiniFromNetId(houseMiniNetId);
+            if (houseMini && houseMini.house && houseMini.house.netId == house.netId)
             {
                 return houseMini;
             }

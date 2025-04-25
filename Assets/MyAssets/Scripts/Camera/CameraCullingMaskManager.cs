@@ -53,4 +53,15 @@ public class CameraCullingMaskManager : MonoBehaviour
     {
         Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("Ghost"));
     }
+
+    public void SetNameTagLayerVisible()
+    {
+        Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("NameTag");
+        Debug.Log("NameTag layer visible");
+    }
+
+    public void SetNameTagLayerInvisible()
+    {
+        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("NameTag"));
+    }
 }

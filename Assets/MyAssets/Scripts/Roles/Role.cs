@@ -26,8 +26,9 @@ public abstract class Role : NetworkBehaviour
     [Client]
     protected virtual void OnEnable()
     {
-        if (isLocalPlayer)
+        if (isLocalPlayer && isOwned)
         {
+            Debug.Log($"Enabling sigils for role {this.name}");
             EnableSigils();
             SetNameTags();
         }

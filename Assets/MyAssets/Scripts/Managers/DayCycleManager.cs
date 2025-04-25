@@ -151,13 +151,11 @@ public class DayCycleManager : NetworkBehaviour
                 StartCoroutine(TransitionSky((int)value["durationToNextTransition"]));
             });
         }
-        Debugger.instance.Log("DayCycleManager initialised transitions");
     }
 
     [Server]
     public void StartGame()
     {
-        Debugger.instance.Log("DayCycleManager started game");
         int currentHour = TimeManagerV2.instance.currentHour;
         int currentMinute = TimeManagerV2.instance.currentMinute;
         int rotationPerGameHour = 360 / 24;

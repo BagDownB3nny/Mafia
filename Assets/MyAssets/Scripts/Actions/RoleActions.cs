@@ -6,7 +6,7 @@ public abstract class RoleActions : NetworkBehaviour
     protected PlayerCamera playerCamera;
 
 
-    public override void OnStartLocalPlayer()
+    public void Start()
     {
         player = GetComponentInParent<Player>();
         playerCamera = PlayerCamera.instance;

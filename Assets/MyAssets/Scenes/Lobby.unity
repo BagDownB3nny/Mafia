@@ -346,6 +346,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 792463219}
@@ -579,6 +580,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1150220048}
@@ -744,6 +746,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1328683007}
@@ -909,6 +912,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1432260549}
@@ -1581,6 +1585,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 382131205}
@@ -2136,6 +2141,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 189298346}
@@ -2394,6 +2400,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1860213296}
@@ -2559,6 +2566,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 407162935}
@@ -2724,6 +2732,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 381093173}
@@ -3924,6 +3933,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 976536367}
@@ -5261,6 +5271,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 733290468}
@@ -5552,6 +5563,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1906416310}
@@ -5814,6 +5826,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 173365812}
@@ -6248,6 +6261,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 281264262}
@@ -6746,6 +6760,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1742123775}
@@ -7150,6 +7165,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 183933370}
@@ -7614,6 +7630,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 173866301}
@@ -8689,6 +8706,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 386789237}
@@ -8885,6 +8903,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 914571059}
@@ -9226,6 +9245,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 238389581}
@@ -10504,6 +10524,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 353053789}
@@ -11534,6 +11555,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 334007007}
@@ -11699,6 +11721,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 555518303}
@@ -11932,6 +11955,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 126375029}
@@ -12261,6 +12285,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1467322960}
@@ -12883,6 +12908,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1648150307}
@@ -13351,6 +13377,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 615554731}
@@ -13648,6 +13675,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1669736968}
@@ -13984,6 +14012,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1771142319}
@@ -14359,6 +14388,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 362202892}
@@ -15582,6 +15612,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 242530965}
@@ -16464,6 +16495,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 1672672049}
@@ -17580,6 +17612,10 @@ PrefabInstance:
     - target: {fileID: 4367162018259524446, guid: 1daa513304da14aa5bebc3894e4daa6b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526863642271765073, guid: 1daa513304da14aa5bebc3894e4daa6b, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 32255
       objectReference: {fileID: 0}
     - target: {fileID: 6491380398840456971, guid: 1daa513304da14aa5bebc3894e4daa6b, type: 3}
       propertyPath: m_Name
