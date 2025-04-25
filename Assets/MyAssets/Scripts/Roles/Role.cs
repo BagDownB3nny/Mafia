@@ -12,11 +12,7 @@ public abstract class Role : NetworkBehaviour
     public abstract bool IsAbleToInteractWithDoors { get; }
     protected abstract List<SigilName> SigilsAbleToSee { get; }
 
-    public virtual void InteractWithPlayer(NetworkIdentity player)
-    {
-        Debug.Log($"Interacting with player {player.name}");
-
-    }
+    public abstract void InteractWithPlayer(NetworkIdentity player);
 
     public virtual void InteractWithDoor(NetworkIdentity door)
     {

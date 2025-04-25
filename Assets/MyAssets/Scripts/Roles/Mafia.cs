@@ -24,6 +24,12 @@ public class Mafia : Role
         localGunVisual = Camera.main.transform.Find("Gun").gameObject;
     }
 
+    public override void InteractWithPlayer(NetworkIdentity player)
+    {
+        // Implement the interaction logic for Mafia with players
+        Debug.Log("Mafia interacting with player: " + player.name);
+    }
+
     public bool HasGun()
     {
         return hasGun;

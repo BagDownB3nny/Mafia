@@ -133,7 +133,39 @@ public class House : NetworkBehaviour
     public void RpcUnhighlightForMafia()
     {
         Player localPlayer = PlayerManager.instance.localPlayer;
-        if (localPlayer.role == RoleName.Mafia)
+        if (localPlayer.role == RoleName.Mafia && !localPlayer.isDead)
+        {
+            SetHighlight(false);
+        }
+    }
+
+    [Server]
+    public void HighlightForGhosts()
+    {
+        RpcHighlightForGhosts();
+    }
+
+    [ClientRpc]
+    public void RpcHighlightForGhosts()
+    {
+        Player localPlayer = PlayerManager.instance.localPlayer;
+        if (localPlayer.isDead)
+        {
+            SetHighlight(true);
+        }
+    }
+
+    [Server]
+    public void UnhighlightForGhosts()
+    {
+        RpcUnhighlightForGhosts();
+    }
+
+    [ClientRpc]
+    public void RpcUnhighlightForGhosts()
+    {
+        Player localPlayer = PlayerManager.instance.localPlayer;
+        if (localPlayer.isDead)
         {
             SetHighlight(false);
         }

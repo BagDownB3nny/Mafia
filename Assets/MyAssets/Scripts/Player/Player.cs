@@ -29,6 +29,7 @@ public class Player : NetworkBehaviour
     [SerializeField] private GameObject guardianScripts;
     [SerializeField] private GameObject sixthSenseScripts;
     [SerializeField] private GameObject villagerScripts;
+    [SerializeField] private GameObject mediumScripts;
 
     Dictionary<Enum, GameObject> roleScripts;
 
@@ -65,7 +66,8 @@ public class Player : NetworkBehaviour
             { RoleName.SixthSense, sixthSenseScripts },
             { RoleName.Guardian, guardianScripts },
             { RoleName.Seer, seerScripts },
-            { RoleName.Mafia, mafiaScripts }
+            { RoleName.Mafia, mafiaScripts },
+            { RoleName.Medium, mediumScripts}
         };
     }
 

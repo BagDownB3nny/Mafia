@@ -130,6 +130,10 @@ public class TimeManagerV2 : NetworkBehaviour
     {
         HouseManager.instance.UnhighlightHousesForOwners();
 
+        // Medium and ghost interactions
+        HouseManager.instance.HighlightMediumHouseForGhosts();
+        DissonanceRoomManager.instance.OnMediumActivation();
+
         // Give mafia members guns
         PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
         {
@@ -152,6 +156,10 @@ public class TimeManagerV2 : NetworkBehaviour
             }
             player.house.LockTrapDoor();
         });
+
+        // Medium and ghost interactions
+        HouseManager.instance.UnhighlightMediumHouseForGhosts();
+        DissonanceRoomManager.instance.OnMediumDeactivation();
 
         // Activate voting booth
         VotingManager.instance.StartVoting();

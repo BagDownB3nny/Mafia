@@ -653,6 +653,7 @@ MonoBehaviour:
   guardianScripts: {fileID: 5957186964196364939}
   sixthSenseScripts: {fileID: 8819594467271852619}
   villagerScripts: {fileID: 7875627590365855866}
+  mediumScripts: {fileID: 4074201730496499720}
   isDead: 0
   isProtected: 0
 --- !u!114 &2115578426813260989
@@ -967,7 +968,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5555342329334523277
+--- !u!1 &4074201730496499720
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -975,7 +976,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9114502034101413875}
+  - component: {fileID: 8223099623579789666}
+  - component: {fileID: 7549502525377261560}
   m_Layer: 10
   m_Name: MediumScripts
   m_TagString: Untagged
@@ -983,13 +985,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &9114502034101413875
+--- !u!4 &8223099623579789666
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555342329334523277}
+  m_GameObject: {fileID: 4074201730496499720}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -998,6 +1000,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8588066934447493574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7549502525377261560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074201730496499720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea11080c61db407ba0b6afd720f1b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &5610600952356056363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,11 +1282,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4345099149907081262}
+  - {fileID: 8223099623579789666}
   - {fileID: 6906925903717376290}
   - {fileID: 6879346083100994513}
   - {fileID: 60098244249305459}
   - {fileID: 5106085884163312799}
-  - {fileID: 9114502034101413875}
   m_Father: {fileID: 8455823079000443030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5957186964196364939

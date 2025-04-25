@@ -124,4 +124,30 @@ public class HouseManager : NetworkBehaviour
             house.UnhighlightForOwner();
         }
     }
+
+    [Server]
+    public void HighlightMediumHouseForGhosts()
+    {
+        foreach (House house in houses)
+        {
+            Player owner = house.player;
+            if (owner != null && owner.GetRole() == RoleName.Medium)
+            {
+                house.HighlightForGhosts();
+            }
+        }
+    }
+
+    [Server]
+    public void UnhighlightMediumHouseForGhosts()
+    {
+        foreach (House house in houses)
+        {
+            Player owner = house.player;
+            if (owner != null && owner.GetRole() == RoleName.Medium)
+            {
+                house.UnhighlightForGhosts();
+            }
+        }
+    }
 }

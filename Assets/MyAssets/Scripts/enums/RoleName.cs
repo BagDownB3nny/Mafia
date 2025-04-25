@@ -4,5 +4,7 @@ public enum RoleName
     Mafia,
     Seer,
     Guardian,
-    SixthSense
+    SixthSense,
+
+    Medium,
 }
