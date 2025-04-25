@@ -64,14 +64,14 @@ public class Seer : Role
     [Client]
     private void DisablePlayerControllersAndCamera()
     {
-        GetComponent<PlayerMovement>().enabled = false;
+        GetComponentInParent<PlayerMovement>().enabled = false;
         Camera.main.GetComponent<MoveCamera>().enabled = false;
     }
 
     [Client]
     private void EnablePlayerControllersAndCamera()
     {
-        GetComponent<PlayerMovement>().enabled = true;
+        GetComponentInParent<PlayerMovement>().enabled = true;
         Camera.main.GetComponent<MoveCamera>().enabled = true;
     }
 

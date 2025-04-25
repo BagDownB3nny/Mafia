@@ -51,6 +51,7 @@ public class PlayerDeath : NetworkBehaviour
     private void OnLocalPlayerDeath()
     {
         CameraCullingMaskManager.instance.SetGhostLayerVisible();
+        DissonanceRoomManager.instance.OnPlayerDeath();
     }
 
     [Client]
@@ -60,10 +61,7 @@ public class PlayerDeath : NetworkBehaviour
         Layer.SetLayerChildren(player.gameObject, LayerMask.NameToLayer("Ghost"));
         ghostVisual.SetActive(true);
         aliveVisual.SetActive(false);
-
-        DissonanceRoomManager.instance.OnPlayerDeath();
     }
-
 
     // These revive methods are not implemented yet because there's no revive mechanic yet
     [Client]

@@ -11,7 +11,7 @@ public class Medium : Role
     public override string InteractWithDoorText => "";
     public override bool IsAbleToInteractWithDoors => true;
 
-    protected override List<SigilName> SigilsAbleToSee => new() {};
+    protected override List<SigilName> SigilsAbleToSee => new() { };
     public override void InteractWithPlayer(NetworkIdentity player)
     {
         // Implement the interaction logic for Medium with players
@@ -28,12 +28,15 @@ public class Medium : Role
     public void RpcActivateMediumAbility(NetworkConnection target)
     {
         DissonanceRoomManager.instance.OnMediumActivation();
+        CameraCullingMaskManager.instance.SetGhostLayerVisible();
+
     }
 
     [Server]
     public void DeactivateMediumAbility()
     {
         RpcDeactivateMediumAbility(connectionToClient);
+        CameraCullingMaskManager.instance.SetGhostLayerInvisible();
     }
 
     [TargetRpc]
