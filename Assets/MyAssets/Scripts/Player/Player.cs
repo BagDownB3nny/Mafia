@@ -201,6 +201,10 @@ public class Player : NetworkBehaviour
             EnableRoleScript(newRole);
             DisableRoleScriptsExcept(newRole);
         }
+        else if (newRole == RoleName.Mafia && PlayerManager.instance.localPlayer.role == RoleName.Mafia)
+        {
+            SetNameTagColor(Color.red);
+        }
     }
 
     [Client]
