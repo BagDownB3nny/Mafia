@@ -277,6 +277,10 @@ PrefabInstance:
       propertyPath: hostIndicator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5252190566562114792, guid: 0be942305469a460194dfcd2094751bc, type: 3}
+      propertyPath: networkManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5291562722491003879, guid: 0be942305469a460194dfcd2094751bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -407,12 +411,16 @@ PrefabInstance:
       objectReference: {fileID: 3241956818840615573, guid: b8b10a9d1ac104467afac986ff172a9e, type: 3}
     m_RemovedComponents:
     - {fileID: 5859627670528093224, guid: 0be942305469a460194dfcd2094751bc, type: 3}
+    - {fileID: 5714231732760972372, guid: 0be942305469a460194dfcd2094751bc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3775347956757625069, guid: 0be942305469a460194dfcd2094751bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2121766817}
+    - targetCorrespondingSourceObject: {fileID: 3775347956757625069, guid: 0be942305469a460194dfcd2094751bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2121766818}
   m_SourcePrefab: {fileID: 100100000, guid: 0be942305469a460194dfcd2094751bc, type: 3}
 --- !u!1001 &315342638
 PrefabInstance:
@@ -1168,6 +1176,66 @@ MonoBehaviour:
   Timeout: 25
   AllowSteamRelay: 1
   UseNextGenSteamNetworking: 1
+--- !u!114 &2121766818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121766807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfc8c99e6ce94187ad6ad3a2b3f8d80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  runInBackground: 1
+  headlessStartMode: 0
+  editorAutoStart: 0
+  sendRate: 60
+  offlineScene: Assets/MyAssets/Scenes/Menu.unity
+  onlineScene: Assets/MyAssets/Scenes/Lobby.unity
+  offlineSceneLoadDelay: 0
+  transport: {fileID: 2121766817}
+  networkAddress: localhost
+  maxConnections: 100
+  disconnectInactiveConnections: 0
+  disconnectInactiveTimeout: 60
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 3241956818840615573, guid: b8b10a9d1ac104467afac986ff172a9e, type: 3}
+  autoCreatePlayer: 1
+  playerSpawnMethod: 0
+  spawnPrefabs:
+  - {fileID: 1655079380008410107, guid: edb8eba3e00a1415dbf795f7e5853a94, type: 3}
+  - {fileID: 249911691911155586, guid: 2dd0fe6763c9d4c3ca392148348c1e1d, type: 3}
+  - {fileID: 7671752895927766357, guid: 19c1964cd796d43e1aabdc3f83bcf721, type: 3}
+  - {fileID: 9149044308484955323, guid: 3519e509a21564cb8a5da64a2117b793, type: 3}
+  - {fileID: 2656014559244967092, guid: 5b201fb42eb9d40e0bc65b62076f6c16, type: 3}
+  - {fileID: 1950425283195206134, guid: 0529da7f9d3e04cb18f62502467b5147, type: 3}
+  - {fileID: 6108184521754498726, guid: 28cc9cc53015a4337bb827bda77c9cc5, type: 3}
+  - {fileID: 7621318876243386588, guid: dc2dc0891f3c5496e82c6dabaf776893, type: 3}
+  - {fileID: 2765502750121929226, guid: 32255df267e1f4e9189ed09beaca11a0, type: 3}
+  - {fileID: 8579996662577155270, guid: 0e6a36458ad554a5f830fdee240477b8, type: 3}
+  - {fileID: 6065315908288039879, guid: 57d08d0e28416443597ec08cc66249e8, type: 3}
+  - {fileID: 6138324316807589159, guid: 597df852ab7f5422eaebd9f0ed5a8c28, type: 3}
+  - {fileID: 5553602909193787467, guid: a4568c9a7e9ad4eb09db57aa37600fa6, type: 3}
+  - {fileID: 388301916607145715, guid: 748c4bd52eb5b423a895c21653471db4, type: 3}
+  - {fileID: 5567773045208951478, guid: 8c6bf2bc69176408f9b642586b033c52, type: 3}
+  exceptionsDisconnect: 1
+  snapshotSettings:
+    bufferTimeMultiplier: 2
+    bufferLimit: 32
+    catchupNegativeThreshold: -1
+    catchupPositiveThreshold: 1
+    catchupSpeed: 0.019999999552965164
+    slowdownSpeed: 0.03999999910593033
+    driftEmaDuration: 1
+    dynamicAdjustment: 1
+    dynamicAdjustmentTolerance: 1
+    deliveryTimeEmaDuration: 2
+  evaluationMethod: 0
+  evaluationInterval: 3
+  timeInterpolationGui: 0
 --- !u!1001 &5005562242316038624
 PrefabInstance:
   m_ObjectHideFlags: 0
