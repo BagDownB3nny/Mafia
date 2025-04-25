@@ -52,6 +52,7 @@ public class GameEndManager : NetworkBehaviour
 
     private void EndGame()
     {
+        PubSub.ClearAllSubscriptions();
         NetworkManager.singleton.ServerChangeScene("Lobby");
     }
 

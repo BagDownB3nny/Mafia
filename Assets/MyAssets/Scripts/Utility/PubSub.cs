@@ -61,7 +61,7 @@ public static class PubSub
         }
     }
 
-    public static void ClearAll()
+    public static void ClearAllSubscriptions()
     {
         _subscribers.Clear();
     }
