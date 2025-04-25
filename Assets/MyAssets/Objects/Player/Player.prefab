@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 894523533519368905}
   - component: {fileID: 1789402416173126426}
   - component: {fileID: 1436859229270177558}
+  - component: {fileID: 7908581543671708277}
   m_Layer: 10
   m_Name: ProtectionSigil
   m_TagString: Untagged
@@ -423,6 +424,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7908581543671708277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2184973063737604252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4db54e6271748f686dcfb92e3c5977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  isMarked: 0
 --- !u!1 &2834433955952335351
 GameObject:
   m_ObjectHideFlags: 0

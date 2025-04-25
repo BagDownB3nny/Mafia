@@ -9,11 +9,18 @@ public class ShootablePlayer : Shootable
     [Server]
     public override void OnShot(NetworkConnectionToClient shooter)
     {
+        if (player.GetComponentInChildren<PlayerProtectionSigil>(includeInactive: true).isMarked)
+        {
+            // If the player is protected, do not shoot
+            PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "Player is protected by the guardian!", 1.5f);
+            return;
+        }
+
         // Send a message to the player client that shot
         PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "You killed a player!", 1.5f);
         // Send a message to the client that the player was shot
         PlayerUIManager.instance.RpcSetTemporaryInteractableText(connectionToClient, "You were shot!", 1.5f);
-        
+
         // Get the player's Mafia role component and remove gun if they are Mafia
         Player shotPlayer = gameObject.GetComponentInParent<Player>();
         Role roleScript = shotPlayer.GetRoleScript();
@@ -21,7 +28,7 @@ public class ShootablePlayer : Shootable
         {
             mafiaRole.UnequipGun();
         }
-        
+
         // Mark the player as dead
         GetComponentInParent<PlayerDeath>().KillPlayer();
     }

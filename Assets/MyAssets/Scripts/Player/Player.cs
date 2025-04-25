@@ -174,7 +174,10 @@ public class Player : NetworkBehaviour
     private void OnUsernameChanged(string oldUsername, string newUsername)
     {
         playerUIPrefab.text = newUsername;
-        house.namePlateText.text = newUsername;
+        if (house)
+        {
+            house.namePlateText.text = newUsername;
+        }
     }
 
     [Client]

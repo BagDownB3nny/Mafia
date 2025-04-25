@@ -2386,7 +2386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5526863642271765073, guid: 1daa513304da14aa5bebc3894e4daa6b, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 1087
+      value: 15423
       objectReference: {fileID: 0}
     - target: {fileID: 6491380398840456971, guid: 1daa513304da14aa5bebc3894e4daa6b, type: 3}
       propertyPath: m_Name
@@ -13570,6 +13570,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 8130451887124006048}
@@ -14742,6 +14743,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 0}
 --- !u!114 &1738785854344566176
 MonoBehaviour:
@@ -21336,6 +21338,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 0}
 --- !u!33 &6741652639043036762
 MeshFilter:
@@ -23385,6 +23388,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
   isBroken: 0
   doorOpenPosition: {fileID: 9181094956784940244}
