@@ -43,6 +43,9 @@ public class PlayerUIManager : NetworkBehaviour
             case RoleName.SixthSense:
                 text = "Find the Mafia!";
                 break;
+            case RoleName.Medium:
+                text = "Find the Mafia!";
+                break;
             default:
                 text = "Unknown Role!";
                 break;

@@ -94,11 +94,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(RoleName.Mafia);
+                player.SetRole(RoleName.Seer);
             }
             else
             {
-                player.SetRole(RoleName.Mafia);
+                player.SetRole(RoleName.Medium);
             }
             // player.SetRole(playerRoles[index]);
             // index++;
@@ -232,26 +232,28 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Server]
-    public void EnableMediumInteractions() {
+    public void EnableMediumInteractions()
+    {
         foreach (Player player in GetAllPlayers())
         {
             if (player.role == RoleName.Medium)
             {
                 Medium role = player.GetRoleScript() as Medium;
                 role.ActivateMediumAbility();
-            } 
+            }
         }
     }
 
     [Server]
-    public void DisableMediumInteractions() {
+    public void DisableMediumInteractions()
+    {
         foreach (Player player in GetAllPlayers())
         {
             if (player.role == RoleName.Medium)
             {
                 Medium role = player.GetRoleScript() as Medium;
                 role.DeactivateMediumAbility();
-            } 
+            }
         }
     }
 }

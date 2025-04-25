@@ -147,15 +147,23 @@ public class TimeManagerV2 : NetworkBehaviour
     private void EightAmEvent()
     {
         // Take away mafia members' guns
-        PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
+        List<Player> mafiaPlayers = PlayerManager.instance.GetMafiaPlayers();
+        if (mafiaPlayers.Count == 0)
         {
-            Role roleScript = player.GetRoleScript();
-            if (roleScript is Mafia mafiaRole)
+            Debug.Log("No mafia players found");
+        }
+        else
+        {
+            mafiaPlayers.ForEach(player =>
             {
-                mafiaRole.UnequipGun();
-            }
-            player.house.LockTrapDoor();
-        });
+                Role roleScript = player.GetRoleScript();
+                if (roleScript is Mafia mafiaRole)
+                {
+                    mafiaRole.UnequipGun();
+                }
+                player.house.LockTrapDoor();
+            });
+        }
 
         // Medium and ghost interactions
         HouseManager.instance.UnhighlightMediumHouseForGhosts();
