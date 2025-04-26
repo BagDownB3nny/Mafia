@@ -5,21 +5,6 @@ using System;
 public class SeeingEyeSigil : Sigil
 {
     private static uint markedPlayerNetId = 0;
-    public event Action OnDeactivate;
-    private bool isActive = false;
-    private float timeToDeactivation;
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && timeToDeactivation <= 0 && isActive)
-        {
-            Deactivate();
-        }
-        if (timeToDeactivation > 0 && isActive)
-        {
-            timeToDeactivation -= Time.deltaTime;
-        }
-    }
 
     [Server]
     public override void Mark(uint playerNetId)
@@ -55,24 +40,12 @@ public class SeeingEyeSigil : Sigil
         }
         followSeeingEyeSigil.seeingEyeSigil = transform;
         followSeeingEyeSigil.enabled = true;
-        timeToDeactivation = 0.5f;
-
-        isActive = true;
-    }
-
-    [Client]
-    public void Deactivate()
-    {
-        Camera.main.GetComponentInChildren<FollowSeeingEyeSigil>(includeInactive: true).enabled = false;
-        OnDeactivate?.Invoke();
-        OnDeactivate = null;
-
-        isActive = false;
     }
     [Server]
     public static void ResetSeeingEyeSigil()
     {
-        if (markedPlayerNetId == 0) {
+        if (markedPlayerNetId == 0)
+        {
             return;
         }
         Debug.Log(markedPlayerNetId);

@@ -94,11 +94,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(RoleName.Seer);
+                player.SetRole(RoleName.SixthSense);
             }
             else
             {
-                player.SetRole(RoleName.Medium);
+                player.SetRole(RoleName.Seer);
             }
             // player.SetRole(playerRoles[index]);
             // index++;

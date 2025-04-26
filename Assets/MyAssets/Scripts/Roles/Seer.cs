@@ -14,6 +14,22 @@ public class Seer : Role
     public override bool IsAbleToInteractWithDoors => false;
     protected override List<SigilName> SigilsAbleToSee => new() { SigilName.SeeingEyeSigil };
 
+    [Header("Seer internal params")]
+    private bool isLookingThroughCrystalBall = false;
+    private float timeToDeactivation;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && timeToDeactivation <= 0 && isLookingThroughCrystalBall)
+        {
+            StopLookingThroughCrystalBall();
+        }
+        else if (timeToDeactivation > 0 && isLookingThroughCrystalBall)
+        {
+            timeToDeactivation -= Time.deltaTime;
+        }
+    }
+
     [Server]
     public override void InteractWithPlayer(NetworkIdentity player)
     {
@@ -57,9 +73,16 @@ public class Seer : Role
         }
         DisablePlayerControllersAndCamera();
         markedPlayerSeeingEyeSigil.Activate();
-        markedPlayerSeeingEyeSigil.OnDeactivate += EnablePlayerControllersAndCamera;
-        Debug.Log("Looking through crystal ball");
+        isLookingThroughCrystalBall = true;
+        timeToDeactivation = 0.5f;
     }
+
+    private void StopLookingThroughCrystalBall()
+    {
+        Camera.main.GetComponentInChildren<FollowSeeingEyeSigil>(includeInactive: true).enabled = false;
+        isLookingThroughCrystalBall = false;
+    }
+
 
     [Client]
     private void DisablePlayerControllersAndCamera()
