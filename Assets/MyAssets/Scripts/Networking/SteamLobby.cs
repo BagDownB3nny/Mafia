@@ -11,8 +11,6 @@ public class SteamLobby : MonoBehaviour
     protected Callback<LobbyEnter_t> lobbyEntered;
     public static SteamLobby instance;
 
-    [SerializeField] public TMPro.TextMeshProUGUI lobbyCodeText;
-
     public string LobbyCode = "";
 
     private void Awake()
@@ -57,7 +55,6 @@ public class SteamLobby : MonoBehaviour
         CSteamID lobbyId = new CSteamID(callback.m_ulSteamIDLobby);
         LobbyCode = lobbyId.ToString();
         Debug.Log(lobbyId);
-        lobbyCodeText.text = lobbyId.ToString();
         networkManager.StartHost();
         SteamMatchmaking.SetLobbyData(lobbyId, "HostAddress", SteamUser.GetSteamID().ToString());
     }
