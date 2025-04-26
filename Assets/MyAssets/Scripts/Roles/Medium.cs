@@ -36,12 +36,12 @@ public class Medium : Role
     public void DeactivateMediumAbility()
     {
         RpcDeactivateMediumAbility(connectionToClient);
-        CameraCullingMaskManager.instance.SetGhostLayerInvisible();
     }
 
     [TargetRpc]
     public void RpcDeactivateMediumAbility(NetworkConnection target)
     {
         DissonanceRoomManager.instance.OnMediumDeactivation();
+        CameraCullingMaskManager.instance.SetGhostLayerInvisible();
     }
 }
