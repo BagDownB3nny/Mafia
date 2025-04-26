@@ -81,6 +81,7 @@ public class Seer : Role
     {
         Camera.main.GetComponentInChildren<FollowSeeingEyeSigil>(includeInactive: true).enabled = false;
         isLookingThroughCrystalBall = false;
+        EnablePlayerControllersAndCamera();
     }
 
 
