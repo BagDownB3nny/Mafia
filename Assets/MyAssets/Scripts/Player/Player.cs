@@ -54,8 +54,6 @@ public class Player : NetworkBehaviour
         {
             PlayerManager.instance.localPlayer = this;
         }
-
-        playerVisual.SetActive(false);
     }
 
     [Client]

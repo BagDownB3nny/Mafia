@@ -1692,6 +1692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5106085884163312799}
+  - component: {fileID: 980020009376191571}
   m_Layer: 10
   m_Name: VillagerScripts
   m_TagString: Untagged
@@ -1714,6 +1715,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8588066934447493574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &980020009376191571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7875627590365855866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35cbcecdd5df84953afc75d3f66b3a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &8320479938080240892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,6 +2231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 60098244249305459}
+  - component: {fileID: 6824242270422126127}
   m_Layer: 10
   m_Name: SixthSenseScripts
   m_TagString: Untagged
@@ -2237,6 +2254,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8588066934447493574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6824242270422126127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8819594467271852619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33c21d0a987f4979afa3eb1178dcda8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &9002547167125199476
 GameObject:
   m_ObjectHideFlags: 0

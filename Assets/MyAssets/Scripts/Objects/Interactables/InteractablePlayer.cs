@@ -3,7 +3,12 @@ public class InteractablePlayer : Interactable
 {
     public override void OnHover()
     {
+        Player currentPlayer = GetComponentInParent<Player>();
         Player localPlayer = PlayerManager.instance.localPlayer;
+        if (currentPlayer == localPlayer)
+        {
+            return;
+        }
         string interactableText = localPlayer.GetRoleScript().RolePlayerInteractText;
         if (interactableText != null)
         {
