@@ -9,7 +9,6 @@ public class FollowSeeingEyeSigil : MonoBehaviour
         if (seeingEyeSigil != null)
         {
             transform.position = seeingEyeSigil.position;
-            transform.rotation = seeingEyeSigil.rotation;
         }
     }
 }

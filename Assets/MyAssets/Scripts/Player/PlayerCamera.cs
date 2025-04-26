@@ -12,6 +12,10 @@ public class PlayerCamera : MonoBehaviour
 
     // Cursor mode is for when the player is in a menu (e.g. settings)
     public bool isCursorMode = false;
+
+    // Spectator mode is for when the player is spectating
+    public bool isSpectatorMode = false;
+
     public static PlayerCamera instance;
 
     public void Awake()
@@ -51,6 +55,7 @@ public class PlayerCamera : MonoBehaviour
         // If the player is in cursor mode, do nothing
         if (isCursorMode) return;
         HandleMoveCamera();
+        if (isSpectatorMode) return;
         HandleLookAtInteractable();
     }
 
@@ -149,6 +154,7 @@ public class PlayerCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isCursorMode = false;
+        isSpectatorMode = false;
     }
 
     public void EnterCursorMode()
@@ -156,5 +162,21 @@ public class PlayerCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         isCursorMode = true;
+        isSpectatorMode = false;
+    }
+
+    public void EnterSpectatorMode()
+    {
+        Debug.Log("Entering spectator mode");
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isCursorMode = false;
+        isSpectatorMode = true;
+        if (lastInteractable != null)
+        {
+            lastInteractable.OnUnhover();
+            // lastInteractable.Unhighlight();
+            lastInteractable = null;
+        }
     }
 }

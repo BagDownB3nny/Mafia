@@ -66,6 +66,7 @@ public class Seer : Role
     {
         GetComponentInParent<PlayerMovement>().enabled = false;
         Camera.main.GetComponent<MoveCamera>().enabled = false;
+        Camera.main.GetComponent<PlayerCamera>().EnterFPSMode();
     }
 
     [Client]
@@ -73,6 +74,7 @@ public class Seer : Role
     {
         GetComponentInParent<PlayerMovement>().enabled = true;
         Camera.main.GetComponent<MoveCamera>().enabled = true;
+        Camera.main.GetComponent<PlayerCamera>().EnterSpectatorMode();
     }
 
     private void OnMarkedPlayerNetIdChanged(uint oldMarkedPlayerNetId, uint newMarkedPlayerNetId)
