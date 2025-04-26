@@ -9,6 +9,10 @@ public class PlayerActions : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         playerCamera = PlayerCamera.instance;
+    }
+
+    public void Start()
+    {
         player = GetComponent<Player>();
     }
 
