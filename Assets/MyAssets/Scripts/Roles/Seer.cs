@@ -71,13 +71,14 @@ public class Seer : Role
             Debug.LogError("Player does not have a seeing-eye sigil");
             return;
         }
-        DisablePlayerControllersAndCamera();
         markedPlayerSeeingEyeSigil.Activate();
+        DisablePlayerControllersAndCamera();
         isLookingThroughCrystalBall = true;
         timeToDeactivation = 0.5f;
         PlayerUIManager.instance.SetControlsText("[E] Exit Crystal Ball");
     }
 
+    [Client]
     private void StopLookingThroughCrystalBall()
     {
         Camera.main.GetComponentInChildren<FollowSeeingEyeSigil>(includeInactive: true).enabled = false;
@@ -85,7 +86,6 @@ public class Seer : Role
         EnablePlayerControllersAndCamera();
         PlayerUIManager.instance.ClearControlsText();
     }
-
 
     [Client]
     private void DisablePlayerControllersAndCamera()
