@@ -61,6 +61,17 @@ public class House : NetworkBehaviour
         namePlateText.text = newValue.steamUsername;
     }
 
+    [Client]
+    public void SetDoorToGhostLayer()
+    {
+        foreach (Door door in doors)
+        {
+            door.gameObject.layer = LayerMask.NameToLayer("GhostPassable");
+        }
+    }
+
+
+
     [Server]
     public void CloseAllDoors()
     {
