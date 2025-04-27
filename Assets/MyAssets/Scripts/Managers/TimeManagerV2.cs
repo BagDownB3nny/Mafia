@@ -160,8 +160,8 @@ public class TimeManagerV2 : NetworkBehaviour
                 if (roleScript is Mafia mafiaRole)
                 {
                     mafiaRole.UnequipGun();
+                    player.house.LockTrapDoor();
                 }
-                player.house.LockTrapDoor();
             });
         }
 
