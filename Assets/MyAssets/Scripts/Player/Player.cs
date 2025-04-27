@@ -122,6 +122,17 @@ public class Player : NetworkBehaviour
         playerUIPrefab.text = steamUsername;
     }
 
+    [Command]
+    private void CmdUpdateSteamUsername(string newUsername)
+    {
+        steamUsername = newUsername;
+        Debug.Log($"Updated steam username: {steamUsername}");
+        if (PlayerManager.instance)
+        {
+            PlayerManager.instance.AddPlayer(steamUsername, netId);
+        }
+    }
+    
     public Role GetRoleScript()
     {
         GameObject roleObject = roleScripts[role];
