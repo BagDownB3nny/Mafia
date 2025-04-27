@@ -45,8 +45,8 @@ public class GameEndManager : NetworkBehaviour
         }
         if (isGameEnd())
         {
-            ShowGameEndScreen();
-            Invoke("EndGame", 3f); // 3 second delay
+            // ShowGameEndScreen();
+            // Invoke("EndGame", 3f); // 3 second delay
         }
     }
 
@@ -76,7 +76,7 @@ public class GameEndManager : NetworkBehaviour
 
     private bool IsMafiaWin()
     {
-        return aliveMafiaPlayers.Count >= alivePlayers.Count / 2;
+        return aliveMafiaPlayers.Count >= (alivePlayers.Count - aliveMafiaPlayers.Count);
     }
 
     private bool IsVillagerWin()

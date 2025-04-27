@@ -52,6 +52,7 @@ public class PlayerDeath : NetworkBehaviour
     {
         CameraCullingMaskManager.instance.SetGhostLayerVisible();
         DissonanceRoomManager.instance.OnPlayerDeath();
+        PlayerCamera.instance.isSpectatorMode = true;
     }
 
     [Client]

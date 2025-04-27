@@ -40,7 +40,7 @@ public class SettingsManager : MonoBehaviour
 
     public void CloseSettings()
     {
-        PlayerCamera.instance.EnterFPSMode();
+        PlayerCamera.instance.ExitCursorMode();
         PlayerMovement.localInstance.UnlockPlayerMovement();
         settingsPanel.SetActive(false);
     }

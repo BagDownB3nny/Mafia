@@ -162,7 +162,13 @@ public class PlayerCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         isCursorMode = true;
-        isSpectatorMode = false;
+    }
+
+    public void ExitCursorMode()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isCursorMode = false;
     }
 
     public void EnterSpectatorMode()
