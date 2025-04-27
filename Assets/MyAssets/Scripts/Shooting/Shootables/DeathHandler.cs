@@ -1,7 +1,15 @@
+using Mirror;
+using TMPro;
 using UnityEngine;
 
-public class DeathHandler : MonoBehaviour
+public class DeathHandler : NetworkBehaviour
 {
+
+    [SyncVar(hook = nameof(OnNameChanged))]
+    public string playerName;
+
+    [SerializeField] private TMP_Text playerNameText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,5 +20,12 @@ public class DeathHandler : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(Vector3.back * 3, ForceMode.Impulse);
         // Set material color to red
         GetComponent<MeshRenderer>().material.color = Color.red;
+        playerNameText.text = name;
+    }
+
+    [Client]
+    public void OnNameChanged(string oldName, string newName)
+    {
+        playerNameText.text = newName;
     }
 }
