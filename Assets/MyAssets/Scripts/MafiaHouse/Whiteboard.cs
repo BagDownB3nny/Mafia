@@ -13,7 +13,6 @@ public class Whiteboard : MonoBehaviour
 
     public void ClearWhiteboard()
     {
-        text.text = "Marked house: \n\n None";
-        Debug.Log("Whiteboard change");
+        text.text = "Mark a house using the table miniatures";
     }
 }

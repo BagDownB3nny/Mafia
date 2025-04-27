@@ -49,7 +49,7 @@ public class InteractableDoor : Interactable
         Role playerRoleScript = PlayerManager.instance.localPlayer.GetRoleScript();
         if (authorisedPlayers.Contains(playerNetId))
         {
-            string interactableText = isOpen ? "Close the door" : "Open the door";
+            string interactableText = isOpen ? "[E] Close" : "[E] Open";
             PlayerUIManager.instance.SetInteractableText(interactableText);
         }
         else if (playerRoleScript.IsAbleToInteractWithDoors && door.isOutsideDoor)

@@ -6,7 +6,7 @@ public class SeerCrystalBall : Interactable
     public override void OnHover()
     {
         Highlight();
-        PlayerUIManager.instance.SetInteractableText("Look through the Seeing-Eye");
+        PlayerUIManager.instance.SetInteractableText("[E] Use crystal ball");
     }
 
     [Client]

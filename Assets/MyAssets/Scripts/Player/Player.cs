@@ -202,10 +202,20 @@ public class Player : NetworkBehaviour
             PlayerUIManager.instance.SetRolePromptText(newRole);
             EnableRoleScript(newRole);
             DisableRoleScriptsExcept(newRole);
+            PlayerUIManager.instance.SetAllPlayerTexts();
         }
         else if (newRole == RoleName.Mafia && PlayerManager.instance.localPlayer.role == RoleName.Mafia)
         {
             SetNameTagColor(Color.red);
+        }
+
+        if (isLocalPlayer && newRole != RoleName.Mafia)
+        {
+            PlayerUIManager.instance.SetVillagerTexts();
+        }
+        else if (isLocalPlayer && newRole == RoleName.Mafia)
+        {
+            PlayerUIManager.instance.SetMafiaTexts();
         }
     }
 

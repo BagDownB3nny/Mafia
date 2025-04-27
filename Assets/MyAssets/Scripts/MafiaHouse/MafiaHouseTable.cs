@@ -102,7 +102,7 @@ public class MafiaHouseTable : NetworkBehaviour
         foreach (House house in houses)
         {
             Vector3 housePosition = house.positionRelativeToVillageCenter;
-            Vector3 houseMiniPositionRelativeToTableCenter = housePosition * 0.02f;
+            Vector3 houseMiniPositionRelativeToTableCenter = housePosition * 0.03f;
 
             Vector3 lookAtDirection = Vector3.zero - housePosition;
             Quaternion houseMiniRotation = Quaternion.LookRotation(lookAtDirection);
@@ -144,6 +144,15 @@ public class MafiaHouseTable : NetworkBehaviour
             else
             {
                 whiteboard.SetNewMarkedPlayer(newHouseMini.playerName);
+            }
+        }
+
+        if (PlayerManager.instance.localPlayer != null)
+        {
+            Player localPlayer = PlayerManager.instance.localPlayer;
+            if (localPlayer.role == RoleName.Mafia)
+            {
+                PlayerUIManager.instance.SetInformativeText($"Attack {newHouseMini.playerName}'s house!");
             }
         }
     }

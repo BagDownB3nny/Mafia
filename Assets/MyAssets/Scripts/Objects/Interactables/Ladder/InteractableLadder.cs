@@ -11,7 +11,7 @@ public class InteractableLadder : Interactable
     [Client]
     public override void OnHover()
     {
-        PlayerUIManager.instance.SetInteractableText("Climb the ladder");
+        PlayerUIManager.instance.SetInteractableText("[E] Climb");
     }
 
     [Client]

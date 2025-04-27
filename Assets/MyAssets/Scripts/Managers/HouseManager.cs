@@ -44,8 +44,6 @@ public class HouseManager : NetworkBehaviour
     public void InstantiateHouses()
     {
         int numberOfPlayers = NetworkServer.connections.Count;
-        Debug.Log("SPAWNING HOUSES");
-        Debug.Log($"Number of players: {numberOfPlayers}");
         float angleStep = 360f / numberOfPlayers;
         // Different radiuses for different number of players
         float radius;

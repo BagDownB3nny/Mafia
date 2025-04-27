@@ -59,8 +59,8 @@ public class Seer : Role
         if (markedPlayer == null)
         {
             // PlayerUIManager.instance.SetTemporaryInteractableText("No player marked with Seeing-Eye Sigil", 1.5f);
-            string debugText = $"markedPlayerNetId: {markedPlayerNetId}, markedPlayer: {markedPlayer}";
-            PlayerUIManager.instance.SetTemporaryInteractableText(debugText, 1.5f);
+            string text = "No player marked with Seeing-Eye Sigil";
+            PlayerUIManager.instance.SetTemporaryInteractableText(text, 2f);
             return;
         }
 
@@ -75,6 +75,7 @@ public class Seer : Role
         markedPlayerSeeingEyeSigil.Activate();
         isLookingThroughCrystalBall = true;
         timeToDeactivation = 0.5f;
+        PlayerUIManager.instance.SetControlsText("[E] Exit Crystal Ball");
     }
 
     private void StopLookingThroughCrystalBall()
@@ -82,6 +83,7 @@ public class Seer : Role
         Camera.main.GetComponentInChildren<FollowSeeingEyeSigil>(includeInactive: true).enabled = false;
         isLookingThroughCrystalBall = false;
         EnablePlayerControllersAndCamera();
+        PlayerUIManager.instance.ClearControlsText();
     }
 
 
