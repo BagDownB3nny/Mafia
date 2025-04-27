@@ -107,19 +107,19 @@ public class Player : NetworkBehaviour
     public void GetSteamUsername()
     {
         // TODO - Uncomment this when Steamworks.NET is implemented
-        if (SteamManager.Initialized)
-        {
-            string retrievedSteamUsername = SteamFriends.GetPersonaName();
-            Debug.Log($"Steam username: {retrievedSteamUsername}");
-            CmdUpdateSteamUsername(retrievedSteamUsername);
-        }
-        else
-        {
-            string retrievedSteamUsernamee = "Player " + UnityEngine.Random.Range(0, 1000);
-            CmdUpdateSteamUsername(retrievedSteamUsernamee);
-        }
-        // string retrievedSteamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
-        // CmdUpdateSteamUsername(steamUsername);
+        // if (SteamManager.Initialized)
+        // {
+        //     steamUsername = SteamFriends.GetPersonaName();
+        //     CmdUpdateSteamUsername(steamUsername);
+        // }
+        // else
+        // {
+        //     steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
+        //     CmdUpdateSteamUsername(steamUsername);
+        // }
+        steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
+        CmdUpdateSteamUsername(steamUsername);
+        playerUIPrefab.text = steamUsername;
     }
 
     [Command]
@@ -132,7 +132,7 @@ public class Player : NetworkBehaviour
             PlayerManager.instance.AddPlayer(steamUsername, netId);
         }
     }
-
+    
     public Role GetRoleScript()
     {
         GameObject roleObject = roleScripts[role];
