@@ -45,8 +45,8 @@ public class GameEndManager : NetworkBehaviour
         }
         if (isGameEnd())
         {
-            // ShowGameEndScreen();
-            // Invoke("EndGame", 3f); // 3 second delay
+            ShowGameEndScreen();
+            Invoke("EndGame", 3f); // 3 second delay
         }
     }
 

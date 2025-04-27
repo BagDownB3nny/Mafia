@@ -87,21 +87,21 @@ public class PlayerManager : NetworkBehaviour
     {
         playerRoles = GenerateRoles();
         // Shuffle the roles
-        // playerRoles = playerRoles.OrderBy(x => Random.value).ToArray();
+        playerRoles = playerRoles.OrderBy(x => Random.value).ToArray();
 
         int index = 0;
         foreach (Player player in GetAllPlayers())
         {
-            if (player.name == "Player [connId=0]")
-            {
-                player.SetRole(RoleName.SixthSense);
-            }
-            else
-            {
-                player.SetRole(RoleName.Seer);
-            }
-            // player.SetRole(playerRoles[index]);
-            // index++;
+            // if (player.name == "Player [connId=0]")
+            // {
+            //     player.SetRole(RoleName.SixthSense);
+            // }
+            // else
+            // {
+            //     player.SetRole(RoleName.Seer);
+            // }
+            player.SetRole(playerRoles[index]);
+            index++;
         }
     }
 
@@ -128,7 +128,7 @@ public class PlayerManager : NetworkBehaviour
             }
             else
             {
-                roles[i] = RoleName.Villager;
+                roles[i] = RoleName.Seer;
             }
         }
         return roles;
