@@ -34,9 +34,6 @@ public class Player : NetworkBehaviour
 
     Dictionary<Enum, GameObject> roleScripts;
 
-    [Header("Internal status")]
-    public bool isDead = false;
-
     [Header("Guardian params")]
     public bool isProtected = false;
 
@@ -132,7 +129,7 @@ public class Player : NetworkBehaviour
             PlayerManager.instance.AddPlayer(steamUsername, netId);
         }
     }
-    
+
     public Role GetRoleScript()
     {
         GameObject roleObject = roleScripts[role];

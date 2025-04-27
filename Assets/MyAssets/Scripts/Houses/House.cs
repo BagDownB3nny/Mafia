@@ -144,7 +144,8 @@ public class House : NetworkBehaviour
     public void RpcUnhighlightForMafia()
     {
         Player localPlayer = PlayerManager.instance.localPlayer;
-        if (localPlayer.role == RoleName.Mafia && !localPlayer.isDead)
+        bool isDead = localPlayer.GetComponent<PlayerDeath>().isDead;
+        if (localPlayer.role == RoleName.Mafia && !isDead)
         {
             SetHighlight(false);
         }
@@ -159,8 +160,10 @@ public class House : NetworkBehaviour
     [ClientRpc]
     public void RpcHighlightForGhosts()
     {
+        Debug.Log("Received rpc highlight for ghosts");
         Player localPlayer = PlayerManager.instance.localPlayer;
-        if (localPlayer.isDead)
+        bool isDead = localPlayer.GetComponent<PlayerDeath>().isDead;
+        if (isDead)
         {
             SetHighlight(true);
         }
@@ -176,7 +179,8 @@ public class House : NetworkBehaviour
     public void RpcUnhighlightForGhosts()
     {
         Player localPlayer = PlayerManager.instance.localPlayer;
-        if (localPlayer.isDead)
+        bool isDead = localPlayer.GetComponent<PlayerDeath>().isDead;
+        if (isDead)
         {
             SetHighlight(false);
         }

@@ -178,4 +178,17 @@ public class PlayerUIManager : NetworkBehaviour
         string sixPmText = "[6PM] A player has been voted out! Decide on their fate!";
         TimeManagerV2.instance.hourlyClientEvents[18].AddListener(() => SetInformativeText(sixPmText, 10f));
     }
+
+    [Client]
+    public void SetGhostTexts()
+    {
+        TimeManagerV2.instance.hourlyClientEvents[22].RemoveAllListeners();
+        TimeManagerV2.instance.hourlyClientEvents[0].RemoveAllListeners();
+
+        string twelveAmText = "[12AM] The medium is calling for you in his house... Talk to him...";
+        TimeManagerV2.instance.hourlyClientEvents[0].AddListener(() => SetInformativeText(twelveAmText, 10f));
+
+        string controlsText = "You are dead! But you can still help your team by talking to the medium at nigth...";
+        SetControlsText(controlsText);
+    }
 }

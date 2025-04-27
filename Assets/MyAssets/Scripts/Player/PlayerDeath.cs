@@ -9,7 +9,7 @@ public class PlayerDeath : NetworkBehaviour
     [Header("Internal Parameters")]
 
     [SyncVar(hook = nameof(OnDeathChange))]
-    bool isDead = false;
+    public bool isDead = false;
 
     [Header("Corpse Settings")]
     [SerializeField] private GameObject corpsePrefab;
@@ -54,6 +54,7 @@ public class PlayerDeath : NetworkBehaviour
         CameraCullingMaskManager.instance.SetGhostLayerVisible();
         DissonanceRoomManager.instance.OnPlayerDeath();
         PlayerCamera.instance.isSpectatorMode = true;
+        PlayerUIManager.instance.SetGhostTexts();
     }
 
     [Client]
