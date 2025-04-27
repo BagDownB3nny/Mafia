@@ -112,23 +112,32 @@ public class PlayerManager : NetworkBehaviour
         // In a real game, you would have a more complex algorithm to generate roles
         // For example, in a 6 player game, there could be 1 werewolf, 1 seer, 1 medium, and 3 villagers
         RoleName[] roles = new RoleName[playerNetIds.Count];
+
         for (int i = 0; i < roles.Length; i++)
         {
-            if (i == 0)
-            {
-                roles[i] = RoleName.SixthSense;
-            }
-            else if (i == 1)
+            if (i == 0 || i == 7 || i == 10)
             {
                 roles[i] = RoleName.Mafia;
+            }
+            else if (i == 1 || i == 9)
+            {
+                roles[i] = RoleName.Seer;
             }
             else if (i == 2)
             {
                 roles[i] = RoleName.Guardian;
             }
-            else
+            else if (i == 3)
             {
-                roles[i] = RoleName.Seer;
+                roles[i] = RoleName.Medium;
+            }
+            else if (i == 4)
+            {
+                roles[i] = RoleName.SixthSense;
+            }
+            else if (i == 5 || i == 6 || i == 8)
+            {
+                roles[i] = RoleName.Villager;
             }
         }
         return roles;
