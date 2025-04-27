@@ -54,6 +54,7 @@ public class Player : NetworkBehaviour
         {
             PlayerManager.instance.localPlayer = this;
         }
+
     }
 
     [Client]
@@ -108,17 +109,28 @@ public class Player : NetworkBehaviour
         // TODO - Uncomment this when Steamworks.NET is implemented
         if (SteamManager.Initialized)
         {
-            steamUsername = SteamFriends.GetPersonaName();
-            CmdUpdateSteamUsername(steamUsername);
+            string retrievedSteamUsername = SteamFriends.GetPersonaName();
+            Debug.Log($"Steam username: {retrievedSteamUsername}");
+            CmdUpdateSteamUsername(retrievedSteamUsername);
         }
         else
         {
-            steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
-            CmdUpdateSteamUsername(steamUsername);
+            string retrievedSteamUsernamee = "Player " + UnityEngine.Random.Range(0, 1000);
+            CmdUpdateSteamUsername(retrievedSteamUsernamee);
         }
-        // steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
+        // string retrievedSteamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
         // CmdUpdateSteamUsername(steamUsername);
-        // playerUIPrefab.text = steamUsername;
+    }
+
+    [Command]
+    private void CmdUpdateSteamUsername(string newUsername)
+    {
+        steamUsername = newUsername;
+        Debug.Log($"Updated steam username: {steamUsername}");
+        if (PlayerManager.instance)
+        {
+            PlayerManager.instance.AddPlayer(steamUsername, netId);
+        }
     }
 
     public Role GetRoleScript()
@@ -170,20 +182,11 @@ public class Player : NetworkBehaviour
         }
     }
 
-    [Command]
-    private void CmdUpdateSteamUsername(string newUsername)
-    {
-        steamUsername = newUsername;
-        if (PlayerManager.instance)
-        {
-            PlayerManager.instance.AddPlayer(steamUsername, netId);
-        }
-    }
-
     [Client]
     private void OnUsernameChanged(string oldUsername, string newUsername)
     {
         playerUIPrefab.text = newUsername;
+        Debug.Log($"{gameObject.name} updated username text: {newUsername}");
         if (house)
         {
             house.namePlateText.text = newUsername;

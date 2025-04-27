@@ -202,6 +202,7 @@ public class TimeManagerV2 : NetworkBehaviour
 
             // TODO: Restrict that player's movement from 6pm till 11pm (gives chance for them to be spared)
             votedOutPlayer.GetComponent<PlayerMovement>().LockPlayerMovement();
+            votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(true);
         }
 
         // Turn on all lights
@@ -219,6 +220,7 @@ public class TimeManagerV2 : NetworkBehaviour
         {
             Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
             votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
+            votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(false);
         }
 
         HouseManager.instance.HighlightHousesForOwners();

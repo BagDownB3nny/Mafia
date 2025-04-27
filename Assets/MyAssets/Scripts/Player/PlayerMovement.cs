@@ -105,8 +105,6 @@ public class PlayerMovement : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isLocalPlayer) return;
-        if (isLocked) return;
-
         // MovePlayerRb();
         MovePlayer();
     }
@@ -200,15 +198,27 @@ public class PlayerMovement : NetworkBehaviour
     public void LockPlayerMovement()
     {
         isLocked = true;
-        lockSigil.SetActive(true);
+        horizontal = 0;
+        vertical = 0;
+    }
+
+    public void SetLockSigilActive(bool isActive)
+    {
+        if (isActive)
+        {
+            lockSigil.SetActive(true);
+        }
+        else
+        {
+            lockSigil.SetActive(false);
+            unlockSigil.SetActive(true);
+            Invoke(nameof(DisableUnlockSigil), 1.5f);
+        }
     }
 
     public void UnlockPlayerMovement()
     {
         isLocked = false;
-        lockSigil.SetActive(false);
-        unlockSigil.SetActive(true);
-        Invoke(nameof(DisableUnlockSigil), 1.5f);
     }
 
     private void DisableUnlockSigil()
