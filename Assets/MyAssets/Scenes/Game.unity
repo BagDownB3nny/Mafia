@@ -7046,6 +7046,10 @@ PrefabInstance:
       value: globalReceiptToken
       objectReference: {fileID: 0}
     - target: {fileID: 8433568131369725704, guid: c1b52430c61e0497dba9315d1bbeace1, type: 3}
+      propertyPath: _range
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8433568131369725704, guid: c1b52430c61e0497dba9315d1bbeace1, type: 3}
       propertyPath: _roomName
       value: ProximityGlobal
       objectReference: {fileID: 0}
@@ -7144,7 +7148,7 @@ MonoBehaviour:
   _tokens:
     _tokens:
     - ghostReceiptToken
-  _range: 10
+  _range: 25
   _roomName: ProximityGhost
   _useTrigger: 0
   _roomExpanded: 1
@@ -7165,7 +7169,7 @@ MonoBehaviour:
   _tokens:
     _tokens:
     - ghostBroadcastToken
-  _range: 10
+  _range: 25
   _roomName: ProximityGhost
   _useTrigger: 0
   _roomExpanded: 1
@@ -7286,10 +7290,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Marked house:
-
-
-    None'
+  m_text: Mark a house using the table miniatures
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12630,7 +12631,7 @@ Transform:
   m_GameObject: {fileID: 2116697277}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000081460335, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.08, y: -0.33860004, z: 0.0014991208}
+  m_LocalPosition: {x: 3.64, y: -0.34, z: -1.08}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16943,7 +16944,7 @@ Transform:
   m_GameObject: {fileID: 2418852472603796217}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0.07099987, y: -2.07, z: -2.4700005}
+  m_LocalPosition: {x: -0.809, y: -1.9, z: -1.603}
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_ConstrainProportionsScale: 0
   m_Children:
