@@ -20,7 +20,7 @@ public abstract class Role : NetworkBehaviour
     }
 
     [Client]
-    protected virtual void OnEnable()
+    public virtual void OnEnable()
     {
         if (isLocalPlayer && isOwned)
         {

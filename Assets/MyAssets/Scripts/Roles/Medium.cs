@@ -17,7 +17,7 @@ public class Medium : Role
         // Implement the interaction logic for Medium with players
         Debug.Log("Medium interacting with player: " + player.name);
     }
-
+    
     [Server]
     public void ActivateMediumAbility()
     {

@@ -214,7 +214,14 @@ public class Player : NetworkBehaviour
         {
             PlayerUIManager.instance.SetMafiaTexts();
         }
+
+        if (newRole == RoleName.Medium)
+        {
+            house.SetDoorToGhostLayer();
+        }
     }
+
+
 
     [Client]
     public void SetNameTagColor(Color color)
