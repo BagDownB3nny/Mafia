@@ -10,6 +10,9 @@ public class InteractableDoor : Interactable
     public bool isOpen = false;
     public bool isBroken = false;
 
+    [SyncVar]
+    public bool isEnabled = true;
+
     public readonly SyncList<uint> authorisedPlayers = new SyncList<uint>();
     [SerializeField] private Transform doorOpenPosition;
     [SerializeField] private Transform doorClosedPosition;
@@ -44,6 +47,7 @@ public class InteractableDoor : Interactable
     [Client]
     public override void OnHover()
     {
+        if (!isEnabled) return;
         Highlight();
         uint playerNetId = PlayerManager.instance.localPlayer.netId;
         Role playerRoleScript = PlayerManager.instance.localPlayer.GetRoleScript();
@@ -73,6 +77,7 @@ public class InteractableDoor : Interactable
     [Client]
     public override void Interact()
     {
+        if (!isEnabled) return;
         uint playerNetId = PlayerManager.instance.localPlayer.netId;
         if (authorisedPlayers.Contains(playerNetId))
         {

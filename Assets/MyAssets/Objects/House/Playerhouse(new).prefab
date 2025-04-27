@@ -2951,6 +2951,7 @@ MonoBehaviour:
   door: {fileID: 4697583065704764444}
   isOpen: 0
   isBroken: 0
+  isEnabled: 1
   doorOpenPosition: {fileID: 2995793535048226464}
   doorClosedPosition: {fileID: 7577986680265450031}
 --- !u!114 &4697583065704764444
@@ -3716,6 +3717,7 @@ MonoBehaviour:
   door: {fileID: 828046701533220865}
   isOpen: 0
   isBroken: 0
+  isEnabled: 1
   doorOpenPosition: {fileID: 2751652691059123924}
   doorClosedPosition: {fileID: 1653012185324137340}
 --- !u!114 &828046701533220865
@@ -7203,6 +7205,7 @@ MonoBehaviour:
   door: {fileID: 5906264006165740239}
   isOpen: 0
   isBroken: 0
+  isEnabled: 1
   doorOpenPosition: {fileID: 5414213344068438719}
   doorClosedPosition: {fileID: 8811399090403518925}
 --- !u!114 &3866053911542351963
@@ -7368,6 +7371,7 @@ MonoBehaviour:
   isLocalPlayerOnLadder: 0
   timePlayerMountedLadder: 0
   ladderTeleportPosition: {fileID: 7190037740834517588}
+  isEnabled: 0
 --- !u!114 &8066087314563712693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11166,6 +11170,7 @@ MonoBehaviour:
   door: {fileID: 2151663045346168646}
   isOpen: 0
   isBroken: 0
+  isEnabled: 0
   doorOpenPosition: {fileID: 1465004086023684853}
   doorClosedPosition: {fileID: 48836196764343234}
 --- !u!114 &2151663045346168646
@@ -11265,6 +11270,7 @@ MonoBehaviour:
   - {fileID: 828046701533220865}
   - {fileID: 5906264006165740239}
   trapDoor: {fileID: 5774249190178995708}
+  ladder: {fileID: 1702468945338641811}
   SeerRoom: {fileID: 7938526211625574111}
   namePlateText: {fileID: 6634924007354509649}
   spawnPoint: {fileID: 0}

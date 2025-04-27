@@ -8,9 +8,13 @@ public class InteractableLadder : Interactable
     public float timePlayerMountedLadder;
     [SerializeField] Transform ladderTeleportPosition;
 
+    [SyncVar]
+    public bool isEnabled = true;
+
     [Client]
     public override void OnHover()
     {
+        if (!isEnabled) return;
         PlayerUIManager.instance.SetInteractableText("[E] Climb");
     }
 
@@ -23,6 +27,7 @@ public class InteractableLadder : Interactable
     [Client]
     public override void Interact()
     {
+        if (!isEnabled) return;
         if (!isLocalPlayerOnLadder)
         {
             PlayerMountLadder();

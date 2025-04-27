@@ -212,6 +212,7 @@ public class Player : NetworkBehaviour
         }
         else if (isLocalPlayer && newRole == RoleName.Mafia)
         {
+            house.EnableTrapdoor();
             PlayerUIManager.instance.SetMafiaTexts();
         }
 

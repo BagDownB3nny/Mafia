@@ -8,6 +8,7 @@ public class House : NetworkBehaviour
     [Header("House object references")]
     [SerializeField] private List<Door> doors;
     [SerializeField] private InteractableDoor trapDoor;
+    [SerializeField] private InteractableLadder ladder;
     [SerializeField] private GameObject SeerRoom;
     [SerializeField] public TMPro.TextMeshProUGUI namePlateText;
 
@@ -37,6 +38,12 @@ public class House : NetworkBehaviour
         {
             HouseManager.instance.houses.Remove(this);
         }
+    }
+
+    public void EnableTrapdoor()
+    {
+        trapDoor.isEnabled = true;
+        ladder.isEnabled = true;
     }
 
     [Server]
@@ -235,12 +242,14 @@ public class House : NetworkBehaviour
     public void LockTrapDoor()
     {
         trapDoor.RemoveAuthority(player);
+        ladder.isEnabled = false;
     }
 
     [Server]
     public void UnlockTrapDoor()
     {
         trapDoor.AssignAuthority(player);
+        ladder.isEnabled = true;
     }
 
     [Server]
