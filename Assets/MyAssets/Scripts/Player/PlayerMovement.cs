@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Mirror;
 using UnityEngine;
 
@@ -193,6 +194,12 @@ public class PlayerMovement : NetworkBehaviour
     {
         Vector3 moveVector = new Vector3(0, vertical, 0);
         controller.Move(moveVector * ladderMoveSpeed * Time.deltaTime);
+    }
+
+    [ClientRpc]
+    public void RpcLockPlayerMovement()
+    {
+        LockPlayerMovement();
     }
 
     public void LockPlayerMovement()

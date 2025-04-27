@@ -201,7 +201,7 @@ public class TimeManagerV2 : NetworkBehaviour
             votedOutPlayer.GetComponent<PlayerTeleporter>().TeleportToExecutionSpot();
 
             // TODO: Restrict that player's movement from 6pm till 11pm (gives chance for them to be spared)
-            votedOutPlayer.GetComponent<PlayerMovement>().LockPlayerMovement();
+            votedOutPlayer.GetComponent<PlayerMovement>().RpcLockPlayerMovement();
             votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(true);
         }
 
