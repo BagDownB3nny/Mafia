@@ -12,6 +12,7 @@ public class ShootableDoor : Shootable
     [Server]
     public override void OnShot(NetworkConnectionToClient shooter)
     {
+        if (door.isKnockedDown) return;
         House house = GetComponent<Door>().house;
         HouseProtectionSigil houseProtectionSigil = house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true);
         if (houseProtectionSigil.isMarked)
@@ -50,6 +51,8 @@ public class ShootableDoor : Shootable
         Door door = GetComponent<Door>();
         House house = door.house;
         house.DoorDestroyed(door);
+
+        door.isKnockedDown = true;
     }
 
     [ClientRpc]

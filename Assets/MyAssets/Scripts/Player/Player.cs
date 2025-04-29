@@ -132,15 +132,15 @@ public class Player : NetworkBehaviour
 
     public Role GetRoleScript()
     {
+        if (!roleScripts.ContainsKey(role)) return null;
         GameObject roleObject = roleScripts[role];
         Role roleScript = roleObject.GetComponentInChildren<Role>(includeInactive: true);
-        Debug.Log(roleObject);
-        Debug.Log($"Role script: {roleScript}");
-        return roleScripts[role].GetComponent<Role>();
+        return roleScript;
     }
 
     public RoleActions GetRoleActions()
     {
+        if (!roleScripts.ContainsKey(role)) return null;
         return roleScripts[role].GetComponent<RoleActions>();
     }
 

@@ -28,7 +28,6 @@ public class PlayerActions : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interactable interactable = playerCamera.GetInteractable();
-            Debug.Log("Interactable: " + interactable);
             if (interactable != null)
             {
                 bool isAbleToInteractWithPlayers = player.IsAbleToInteractWithPlayers();
@@ -48,6 +47,8 @@ public class PlayerActions : NetworkBehaviour
             }
         }
     }
+
+    [Client]
     protected void HandleDoorInteraction(InteractableDoor door)
     {
         bool isAbleToInteractWithDoors = player.IsAbleToInteractWithDoors();
