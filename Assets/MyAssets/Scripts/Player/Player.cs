@@ -258,6 +258,7 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     public void RpcSetAbleToSeeNametags(bool ableToSee)
     {
+        Debug.Log($"Setting able to see nametags: {ableToSee}");
         if (!isLocalPlayer || !isOwned) return;
 
         if (ableToSee)

@@ -14273,6 +14273,7 @@ MonoBehaviour:
   door: {fileID: 0}
   isOpen: 0
   isBroken: 0
+  isEnabled: 1
   doorOpenPosition: {fileID: 8130451887124006048}
   doorClosedPosition: {fileID: 4614591693375588616}
 --- !u!23 &970214779802736858
@@ -14987,6 +14988,7 @@ MonoBehaviour:
   isLocalPlayerOnLadder: 0
   timePlayerMountedLadder: 0
   ladderTeleportPosition: {fileID: 3452053313117193653}
+  isEnabled: 1
 --- !u!4 &1405105197515231705
 Transform:
   m_ObjectHideFlags: 0
@@ -21765,6 +21767,7 @@ MonoBehaviour:
   isLocalPlayerOnLadder: 0
   timePlayerMountedLadder: 0
   ladderTeleportPosition: {fileID: 7376607771275453952}
+  isEnabled: 1
 --- !u!1 &6589438522497420082
 GameObject:
   m_ObjectHideFlags: 0
@@ -22523,7 +22526,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  irlSecondsPerGameHour: 3
+  irlSecondsPerGameHour: 10
   hourlyServerEvents:
   - m_PersistentCalls:
       m_Calls: []
@@ -24090,6 +24093,7 @@ MonoBehaviour:
   door: {fileID: 0}
   isOpen: 0
   isBroken: 0
+  isEnabled: 1
   doorOpenPosition: {fileID: 9181094956784940244}
   doorClosedPosition: {fileID: 4598339997666426971}
 --- !u!23 &7896322860813308362

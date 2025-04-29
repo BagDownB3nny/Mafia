@@ -146,6 +146,7 @@ public class TimeManagerV2 : NetworkBehaviour
     [Server]
     private void EightAmEvent()
     {
+        PlayerManager.instance.AddAllNametagsForNonMafia();
         // Take away mafia members' guns
         List<Player> mafiaPlayers = PlayerManager.instance.GetMafiaPlayers();
         if (mafiaPlayers.Count == 0)
@@ -183,7 +184,6 @@ public class TimeManagerV2 : NetworkBehaviour
         LightManager.instance.TurnOffAllLights();
 
         // Add all nametags
-        PlayerManager.instance.AddAllNametagsForNonMafia();
     }
 
     [Server]

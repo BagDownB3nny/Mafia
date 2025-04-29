@@ -70,7 +70,6 @@ public class PlayerManager : NetworkBehaviour
         foreach (Player player in GetNonMafiaPlayers())
         {
             player.SetAbleToSeeNametags(false);
-
         }
     }
 
@@ -92,16 +91,16 @@ public class PlayerManager : NetworkBehaviour
         int index = 0;
         foreach (Player player in GetAllPlayers())
         {
-            // if (player.name == "Player [connId=0]")
-            // {
-            //     player.SetRole(RoleName.Seer);
-            // }
-            // else
-            // {
-            //     player.SetRole(RoleName.Seer);
-            // }
-            player.SetRole(playerRoles[index]);
-            index++;
+            if (player.name == "Player [connId=0]")
+            {
+                player.SetRole(RoleName.Guardian);
+            }
+            else
+            {
+                player.SetRole(RoleName.Seer);
+            }
+            // player.SetRole(playerRoles[index]);
+            // index++;
         }
     }
 
