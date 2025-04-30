@@ -7,7 +7,10 @@ public class InteractableDoor : Interactable
 
     [SerializeField] private Door door;
 
+    [SyncVar]
     public bool isOpen = false;
+
+    [SyncVar]
     public bool isBroken = false;
 
     [SyncVar]
@@ -17,9 +20,13 @@ public class InteractableDoor : Interactable
     [SerializeField] private Transform doorOpenPosition;
     [SerializeField] private Transform doorClosedPosition;
 
+    [Header("Knock")]
+    private AudioSource knockingAudioSource;
+
     public void Start()
     {
         Unhighlight();
+        knockingAudioSource = GetComponent<AudioSource>();
     }
 
     [Server]
@@ -47,6 +54,7 @@ public class InteractableDoor : Interactable
     [Client]
     public override void OnHover()
     {
+        if (door.isKnockedDown) return;
         if (!isEnabled) return;
         Highlight();
         uint playerNetId = PlayerManager.instance.localPlayer.netId;
@@ -70,34 +78,87 @@ public class InteractableDoor : Interactable
     [Client]
     public override void OnUnhover()
     {
+        if (door.isKnockedDown) return;
+        if (!isEnabled) return;
         Unhighlight();
         PlayerUIManager.instance.ClearInteractableText();
+    }
+
+
+    [Client]
+    public void ClientKnock()
+    {
+        if (knockingAudioSource.isPlaying) return;
+        // Play knock sound effect
+        // Play knock animation
+        knockingAudioSource.Play();
+        CmdKnock();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdKnock()
+    {
+        if (door.isKnockedDown) return;
+        if (!isEnabled) return;
+        RpcKnock();
+    }
+
+    [ClientRpc]
+    public void RpcKnock()
+    {
+        if (door.isKnockedDown) return;
+        if (!isEnabled) return;
+        if (knockingAudioSource.isPlaying) return;
+        // Play knock sound effect
+        // Play knock animation
+        knockingAudioSource.Play();
+    }
+
+    [Client]
+    public void ClientOpen()
+    {
+
+    }
+
+    [Client]
+    public void ClientClose()
+    {
+
     }
 
     [Client]
     public override void Interact()
     {
+        Debug.Log("Interact called on door");
+        if (door.isKnockedDown) return;
         if (!isEnabled) return;
         uint playerNetId = PlayerManager.instance.localPlayer.netId;
         if (authorisedPlayers.Contains(playerNetId))
         {
+            Debug.Log("Player is authorised to open the door");
             CmdInteract();
+            Debug.Log("CmdInteract called on door");
         }
         else
         {
-            PlayerUIManager.instance.SetInteractableText("Door is locked");
+            CmdKnock();
         }
     }
 
     [Command(requiresAuthority = false)]
     private void CmdInteract()
     {
+        Debug.Log("CmdInteract received on door");
+        if (door.isKnockedDown) return;
+        if (!isEnabled) return;
         if (isOpen)
         {
+
             RpcCloseDoor();
         }
         else
         {
+            Debug.Log("Opening door");
             RpcOpenDoor();
         }
     }
@@ -105,10 +166,6 @@ public class InteractableDoor : Interactable
     [Server]
     public void OpenDoor()
     {
-        isOpen = true;
-        float animationDuration = 0.7f;
-        transform.DOMove(doorOpenPosition.position, animationDuration).SetEase(Ease.InQuad);
-        transform.DORotateQuaternion(doorOpenPosition.rotation, animationDuration).SetEase(Ease.InQuad);
         RpcOpenDoor();
     }
 

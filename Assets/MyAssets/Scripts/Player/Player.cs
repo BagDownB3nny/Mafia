@@ -174,7 +174,10 @@ public class Player : NetworkBehaviour
             }
             else
             {
-                roleScripts[role].SetActive(false);
+                if (roleScripts.ContainsKey(role))
+                {
+                    roleScripts[role].SetActive(false);
+                }
             }
         }
     }

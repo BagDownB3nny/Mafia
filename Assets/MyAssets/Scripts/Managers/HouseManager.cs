@@ -43,7 +43,8 @@ public class HouseManager : NetworkBehaviour
     [Server]
     public void InstantiateHouses()
     {
-        int numberOfPlayers = NetworkServer.connections.Count;
+        int numberOfPlayers = 16;
+        // int numberOfPlayers = NetworkServer.connections.Count;
         float angleStep = 360f / numberOfPlayers;
         // Different radiuses for different number of players
         float radius;
