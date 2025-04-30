@@ -71,7 +71,7 @@ public class InteractableDoor : Interactable
         }
         else
         {
-            PlayerUIManager.instance.SetInteractableText("Door is locked");
+            PlayerUIManager.instance.SetInteractableText("[E] Knock");
         }
     }
 
