@@ -4,11 +4,16 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour
 {
 
+    [Header("User input")]
     private float xRotation = 0.0f;
     private float yRotation = 0.0f;
+    public float mouseSensitivity = 2.00f;
     private Interactable lastInteractable;
 
+    [Header("Player info")]
     public Transform orientation = null;
+
+    [Header("Camera modes")]
 
     // Cursor mode is for when the player is in a menu (e.g. settings)
     public bool isCursorMode = false;
@@ -95,8 +100,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleMoveCamera()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * 300.0f;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * 300.0f;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * 150.0f * mouseSensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * 150.0f * mouseSensitivity;
 
         yRotation += mouseX;
         xRotation -= mouseY;
