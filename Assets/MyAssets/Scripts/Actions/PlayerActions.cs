@@ -57,7 +57,7 @@ public class PlayerActions : NetworkBehaviour
         }
         else if (isAbleToInteractWithDoors)
         {
-            CmdInteractWithDoor(door.GetComponentInParent<NetworkIdentity>());
+            RoleInteractWithHouse(door);
         }
     }
 
@@ -68,10 +68,16 @@ public class PlayerActions : NetworkBehaviour
         roleScript.InteractWithPlayer(playerInteractedWith);
     }
 
-    [Command]
-    protected virtual void CmdInteractWithDoor(NetworkIdentity door)
+    protected virtual void RoleInteractWithHouse(InteractableDoor door)
     {
+        Door doorComponent = door.GetComponent<Door>();
+        if (!doorComponent.isOutsideDoor)
+        {
+            // Cannot interact with inside door
+            Debug.Log("Cannot interact with inside door");
+            return;
+        }
         Role roleScript = player.GetRoleScript();
-        roleScript.InteractWithDoor(door);
+        roleScript.InteractWithHouse(door.GetComponentInParent<NetworkIdentity>());
     }
 }

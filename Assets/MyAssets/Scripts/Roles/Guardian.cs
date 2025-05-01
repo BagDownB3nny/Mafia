@@ -37,17 +37,11 @@ public class Guardian : Role
     }
 
     [Server]
-    public override void InteractWithDoor(NetworkIdentity door)
+    public override void InteractWithHouse(NetworkIdentity houseNetId)
     {
-        Door doorComponent = door.GetComponent<Door>();
-        if (doorComponent.isOutsideDoor)
-        {
-            // Cannot interact with inside door
-            return;
-        }
-
+        Debug.Log("DOOR");
         RemovePreviouslyPlacedSigils();
-        House house = door.GetComponentInParent<House>();
+        House house = houseNetId.GetComponent<House>();
         house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true).Mark(house.netId);
         protectedHouse = house;
     }

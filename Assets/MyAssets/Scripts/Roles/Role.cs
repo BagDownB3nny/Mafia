@@ -14,9 +14,9 @@ public abstract class Role : NetworkBehaviour
 
     public abstract void InteractWithPlayer(NetworkIdentity player);
 
-    public virtual void InteractWithDoor(NetworkIdentity door)
+    public virtual void InteractWithHouse(NetworkIdentity houseNetId)
     {
-        Debug.Log($"Interacting with door {door.name}");
+        Debug.Log($"Interacting with house {houseNetId.name}");
     }
 
     [Client]
