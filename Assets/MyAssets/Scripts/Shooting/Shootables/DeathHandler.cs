@@ -20,7 +20,7 @@ public class DeathHandler : NetworkBehaviour
         GetComponent<Rigidbody>().AddForce(Vector3.back * 3, ForceMode.Impulse);
         // Set material color to red
         GetComponent<MeshRenderer>().material.color = Color.red;
-        playerNameText.text = name;
+        playerNameText.text = playerName;
     }
 
     [Client]
