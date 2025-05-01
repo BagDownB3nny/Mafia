@@ -17,10 +17,10 @@ public class ShootableDoor : Shootable
         if (door.isKnockedDown) return true;
         House house = GetComponent<Door>().house;
         HouseProtectionSigil houseProtectionSigil = house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true);
-        if (houseProtectionSigil.isMarked)
+        if (houseProtectionSigil.isMarked && door.isOutsideDoor)
         {
             // Door is protected, not knocked down
-            PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This door is protected!", 1.5f);
+            PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This house is protected by the guardian!", 1.5f);
             return true;
         }
         else if (!house.isMarked && door.isOutsideDoor)

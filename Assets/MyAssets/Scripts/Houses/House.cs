@@ -274,12 +274,8 @@ public class House : NetworkBehaviour
     [Server]
     public void DoorDestroyed(Door door)
     {
-        doors.Remove(door);
-
-        // Because the basement door doesnt count, we need the lvl 1
-        // doors to be destroyed for the house to be considered destroyed
-        // since the basement door cannot be accessed by non-mafia
-        if (doors.Count == 2)
+        // If outside door is destroyed, the rest of the house is accessible with a gun
+        if (door.isOutsideDoor)
         {
             Debug.Log("House destroyed");
             // Publish event to notify that the house is destroyed
