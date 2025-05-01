@@ -19,7 +19,6 @@ public class PlayerActions : NetworkBehaviour
     void Update()
     {
         if (!isLocalPlayer) return;
-        HandleSettingsPress();
         HandleInteractions();
         player.GetRoleActions()?.HandleRoleSpecificActions();
     }
@@ -74,16 +73,5 @@ public class PlayerActions : NetworkBehaviour
     {
         Role roleScript = player.GetRoleScript();
         roleScript.InteractWithDoor(door);
-    }
-    protected void HandleSettingsPress()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SettingsManager settingsManager = SettingsManager.instance;
-            if (settingsManager != null)
-            {
-                settingsManager.ToggleSettings();
-            }
-        }
     }
 }
