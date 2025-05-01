@@ -8,7 +8,7 @@ public class HouseManager : NetworkBehaviour
     [SerializeField] private GameObject housePrefab;
     public static HouseManager instance;
 
-    public List<House> houses = new List<House>();
+    public List<House> houses = new();
     [SerializeField] private Transform houseParent;
     [SerializeField] private Transform doorsParent;
 

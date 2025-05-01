@@ -89,8 +89,8 @@ public class House : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void RpcSetDoorActive(GameObject door)
+    [TargetRpc]
+    public void RpcSetDoorActive(NetworkConnectionToClient target, GameObject door)
     {
         door.SetActive(true);
     }
@@ -105,8 +105,8 @@ public class House : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void RpcSetDoorInactive(GameObject door)
+    [TargetRpc]
+    public void RpcSetDoorInactive(NetworkConnectionToClient target, GameObject door)
     {
         door.SetActive(false);
     }
@@ -167,7 +167,6 @@ public class House : NetworkBehaviour
     [ClientRpc]
     public void RpcHighlightForGhosts()
     {
-        Debug.Log("Received rpc highlight for ghosts");
         Player localPlayer = PlayerManager.instance.localPlayer;
         bool isDead = localPlayer.GetComponent<PlayerDeath>().isDead;
         if (isDead)
@@ -196,33 +195,31 @@ public class House : NetworkBehaviour
     [Server]
     public void HighlightForOwner()
     {
-        RpcHighlightForOwner();
+        if (player != null && player.connectionToClient != null)
+        {
+            RpcHighlightForOwner(player.connectionToClient);
+        }
     }
 
-    [ClientRpc]
-    public void RpcHighlightForOwner()
+    [TargetRpc]
+    public void RpcHighlightForOwner(NetworkConnectionToClient target)
     {
-        Player localPlayer = PlayerManager.instance.localPlayer;
-        if (localPlayer == this.player)
-        {
-            SetHighlight(true);
-        }
+        SetHighlight(true);
     }
 
     [Server]
     public void UnhighlightForOwner()
     {
-        RpcUnhighlightForOwner();
+        if (player != null && player.connectionToClient != null)
+        {
+            RpcUnhighlightForOwner(player.connectionToClient);
+        }
     }
 
-    [ClientRpc]
-    public void RpcUnhighlightForOwner()
+    [TargetRpc]
+    public void RpcUnhighlightForOwner(NetworkConnectionToClient target)
     {
-        Player localPlayer = PlayerManager.instance.localPlayer;
-        if (localPlayer == this.player)
-        {
-            SetHighlight(false);
-        }
+        SetHighlight(false);
     }
 
     [Client]
@@ -259,11 +256,11 @@ public class House : NetworkBehaviour
         {
             SeerRoom.SetActive(true);
         }
-        RpcSpawnRoom(role);
+        RpcSpawnRoleRoom(role);
     }
 
     [ClientRpc]
-    public void RpcSpawnRoom(RoleName role)
+    public void RpcSpawnRoleRoom(RoleName role)
     {
         if (role == RoleName.Seer)
         {

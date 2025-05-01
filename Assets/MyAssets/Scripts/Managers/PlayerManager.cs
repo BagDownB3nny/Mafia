@@ -65,6 +65,7 @@ public class PlayerManager : NetworkBehaviour
         return localPlayer.steamUsername;
     }
 
+    [Server]
     public void RemoveAllNametagsForNonMafia()
     {
         foreach (Player player in GetNonMafiaPlayers())
@@ -73,6 +74,7 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
+    [Server]
     public void AddAllNametagsForNonMafia()
     {
         foreach (Player player in GetNonMafiaPlayers())
@@ -93,11 +95,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(RoleName.Guardian);
+                player.SetRole(RoleName.Mafia);
             }
             else
             {
-                player.SetRole(RoleName.Mafia);
+                player.SetRole(RoleName.Guardian);
             }
             // player.SetRole(playerRoles[index]);
             // index++;
@@ -144,7 +146,7 @@ public class PlayerManager : NetworkBehaviour
 
     public List<Player> GetAllPlayers()
     {
-        List<Player> players = new List<Player>();
+        List<Player> players = new();
         foreach (uint netId in playerNetIds.Values)
         {
             players.Add(GetPlayerByNetId(netId));
@@ -227,12 +229,11 @@ public class PlayerManager : NetworkBehaviour
 
     public List<Player> GetNonMafiaPlayers()
     {
-        List<Player> nonMafiaPlayers = new List<Player>();
+        List<Player> nonMafiaPlayers = new();
         foreach (Player player in GetAllPlayers())
         {
             if (player.role != RoleName.Mafia)
             {
-                Debug.Log($"Non-mafia player: {player.steamUsername}");
                 nonMafiaPlayers.Add(player);
             }
         }

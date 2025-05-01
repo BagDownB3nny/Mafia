@@ -42,7 +42,6 @@ public class Mafia : Role
         {
             localGunVisual.SetActive(newStatus);
             localGunScript.enabled = newStatus;
-            Debug.Log("Local gun status changed: " + newStatus);
         }
         else
         {
@@ -53,14 +52,12 @@ public class Mafia : Role
     [Server]
     public void EquipGun()
     {
-        Debug.Log("Equipping gun");
         hasGun = true;
     }
 
     [Server]
     public void UnequipGun()
     {
-        Debug.Log("Unequipping gun");
         hasGun = false;
     }
 
@@ -68,7 +65,6 @@ public class Mafia : Role
     [Client]
     protected override void SetNameTags()
     {
-        Debug.Log("setting name tags as mafia");
         List<Player> players = PlayerManager.instance.GetAllPlayers();
         foreach (Player player in players)
         {

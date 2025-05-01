@@ -255,15 +255,12 @@ public class Player : NetworkBehaviour
     [Server]
     public void SetAbleToSeeNametags(bool ableToSee)
     {
-        RpcSetAbleToSeeNametags(ableToSee);
+        RpcSetAbleToSeeNametags(connectionToClient, ableToSee);
     }
 
-    [ClientRpc]
-    public void RpcSetAbleToSeeNametags(bool ableToSee)
+    [TargetRpc]
+    public void RpcSetAbleToSeeNametags(NetworkConnectionToClient target, bool ableToSee)
     {
-        Debug.Log($"Setting able to see nametags: {ableToSee}");
-        if (!isLocalPlayer || !isOwned) return;
-
         if (ableToSee)
         {
             CameraCullingMaskManager.instance.SetNameTagLayerVisible();

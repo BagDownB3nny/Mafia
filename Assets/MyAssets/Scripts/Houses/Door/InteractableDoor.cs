@@ -129,15 +129,12 @@ public class InteractableDoor : Interactable
     [Client]
     public override void Interact()
     {
-        Debug.Log("Interact called on door");
         if (door.isKnockedDown) return;
         if (!isEnabled) return;
         uint playerNetId = PlayerManager.instance.localPlayer.netId;
         if (authorisedPlayers.Contains(playerNetId))
         {
-            Debug.Log("Player is authorised to open the door");
             CmdInteract();
-            Debug.Log("CmdInteract called on door");
         }
         else
         {
@@ -148,7 +145,6 @@ public class InteractableDoor : Interactable
     [Command(requiresAuthority = false)]
     private void CmdInteract()
     {
-        Debug.Log("CmdInteract received on door");
         if (door.isKnockedDown) return;
         if (!isEnabled) return;
         if (isOpen)
