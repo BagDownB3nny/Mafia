@@ -39,7 +39,6 @@ public class Guardian : Role
     [Server]
     public override void InteractWithHouse(NetworkIdentity houseNetId)
     {
-        Debug.Log("DOOR");
         RemovePreviouslyPlacedSigils();
         House house = houseNetId.GetComponent<House>();
         house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true).Mark(house.netId);

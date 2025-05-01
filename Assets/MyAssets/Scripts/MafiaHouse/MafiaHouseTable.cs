@@ -82,7 +82,6 @@ public class MafiaHouseTable : NetworkBehaviour
     [Server]
     public void SetSelectedHouseMini(InteractableVillageHouseMini houseMini)
     {
-        Debug.Log("Setting selected house mini");
         Debug.Log(houseMini);
         if (selectedHouseMini != null)
         {
@@ -136,14 +135,14 @@ public class MafiaHouseTable : NetworkBehaviour
         else
         {
             newHouseMini.MarkHouse();
-            if (newHouseMini.playerName == null)
+            if (newHouseMini.PlayerName == null)
             {
                 whiteboard.SetNewMarkedPlayer("UNNAMED RAT");
                 return;
             }
             else
             {
-                whiteboard.SetNewMarkedPlayer(newHouseMini.playerName);
+                whiteboard.SetNewMarkedPlayer(newHouseMini.PlayerName);
             }
         }
 
@@ -152,7 +151,7 @@ public class MafiaHouseTable : NetworkBehaviour
             Player localPlayer = PlayerManager.instance.localPlayer;
             if (localPlayer.role == RoleName.Mafia)
             {
-                PlayerUIManager.instance.SetInformativeText($"Attack {newHouseMini.playerName}'s house!");
+                PlayerUIManager.instance.SetInformativeText($"Attack {newHouseMini.PlayerName}'s house!");
             }
         }
     }

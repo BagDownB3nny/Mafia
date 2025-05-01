@@ -196,7 +196,7 @@ public class PlayerMovement : NetworkBehaviour
         controller.Move(moveVector * ladderMoveSpeed * Time.deltaTime);
     }
 
-    [ClientRpc]
+    [ClientRpc] // Possible to use [TargetRpc] if you want to lock movement for a specific player
     public void RpcLockPlayerMovement()
     {
         LockPlayerMovement();

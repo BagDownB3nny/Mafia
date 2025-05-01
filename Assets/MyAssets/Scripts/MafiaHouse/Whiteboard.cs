@@ -8,7 +8,6 @@ public class Whiteboard : MonoBehaviour
     public void SetNewMarkedPlayer(string newPlayer)
     {
         text.text = $"Marked house: \n\n {newPlayer}";
-        Debug.Log("Whiteboard change");
     }
 
     public void ClearWhiteboard()
