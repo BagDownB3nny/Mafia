@@ -7,11 +7,11 @@ public class MafiaActions : RoleActions
 
     public override void HandleRoleSpecificActions()
     {
-        HandleGunActions();
+        HandleGunEquipping();
     }
 
     [Client]
-    private void HandleGunActions()
+    private void HandleGunEquipping()
     {
         // Only allow gun actions during night time (between 12 AM and 8 AM)
         int currentHour = TimeManagerV2.instance.currentHour;
@@ -25,14 +25,6 @@ public class MafiaActions : RoleActions
         if (Input.GetKeyDown(equipGunKey))
         {
             CmdToggleGun();
-        }
-
-        // Handle shooting
-        if (Input.GetMouseButtonDown(0) && player.GetRoleScript() is Mafia mafiaRole && mafiaRole.HasGun())
-        {
-            Debug.Log("Shooting with gun");
-            Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
-            CmdShoot(currentLookingAtDirection, playerCamera.transform.position);
         }
     }
 

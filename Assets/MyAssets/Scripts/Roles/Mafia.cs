@@ -18,6 +18,7 @@ public class Mafia : Role
 
     [SerializeField] private GameObject remoteGunVisual;
     private GameObject localGunVisual;
+    [SerializeField] private LocalPlayerGun localGunScript;
 
     private void Start()
     {
@@ -40,6 +41,8 @@ public class Mafia : Role
         if (isLocalPlayer)
         {
             localGunVisual.SetActive(newStatus);
+            localGunScript.enabled = newStatus;
+            Debug.Log("Local gun status changed: " + newStatus);
         }
         else
         {

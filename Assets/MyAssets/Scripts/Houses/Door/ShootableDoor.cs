@@ -9,16 +9,19 @@ public class ShootableDoor : Shootable
     [SerializeField] private Door door;
     [SerializeField] private Transform doorKnockedPosition;
 
+
+    // The return value indicates if a shot was successfully fired
     [Server]
-    public override void OnShot(NetworkConnectionToClient shooter)
+    public override bool OnShot(NetworkConnectionToClient shooter)
     {
-        if (door.isKnockedDown) return;
+        if (door.isKnockedDown) return true;
         House house = GetComponent<Door>().house;
         HouseProtectionSigil houseProtectionSigil = house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true);
         if (houseProtectionSigil.isMarked)
         {
             // Door is protected, not knocked down
             PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This door is protected!", 1.5f);
+            return true;
         }
         else if (!house.isMarked && door.isOutsideDoor)
         {
@@ -26,11 +29,13 @@ public class ShootableDoor : Shootable
             {
                 // Mafia currently plan to attack a different house
                 PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "I should follow the plan of attack we have at the mafia house...", 1.5f);
+                return false;
             }
             else
             {
-                // House is not marked, but the door is protected
+                // House is not marked
                 PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "We should make a plan of attack at the mafia house first...", 1.5f);
+                return false;
             }
         }
         else
@@ -38,6 +43,7 @@ public class ShootableDoor : Shootable
             // Door is not protected
             {
                 KnockDoorDown();
+                return true;
             }
         }
     }

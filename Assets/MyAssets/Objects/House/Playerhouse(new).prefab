@@ -2955,7 +2955,6 @@ MonoBehaviour:
   isEnabled: 1
   doorOpenPosition: {fileID: 2995793535048226464}
   doorClosedPosition: {fileID: 7577986680265450031}
-  knockingAudioSource: {fileID: 0}
 --- !u!114 &4697583065704764444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2987,7 +2986,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: ccc553ffebe3f4764969caacd9bf1904, type: 3}
   m_Resource: {fileID: 8300000, guid: ccc553ffebe3f4764969caacd9bf1904, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3820,7 +3819,6 @@ MonoBehaviour:
   isEnabled: 1
   doorOpenPosition: {fileID: 2751652691059123924}
   doorClosedPosition: {fileID: 1653012185324137340}
-  knockingAudioSource: {fileID: 0}
 --- !u!114 &828046701533220865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7312,7 +7310,6 @@ MonoBehaviour:
   isEnabled: 1
   doorOpenPosition: {fileID: 5414213344068438719}
   doorClosedPosition: {fileID: 8811399090403518925}
-  knockingAudioSource: {fileID: 0}
 --- !u!114 &3866053911542351963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7343,7 +7340,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: ccc553ffebe3f4764969caacd9bf1904, type: 3}
   m_Resource: {fileID: 8300000, guid: ccc553ffebe3f4764969caacd9bf1904, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11375,7 +11372,6 @@ MonoBehaviour:
   isEnabled: 0
   doorOpenPosition: {fileID: 1465004086023684853}
   doorClosedPosition: {fileID: 48836196764343234}
-  knockingAudioSource: {fileID: 0}
 --- !u!114 &2151663045346168646
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2393,7 +2393,8 @@ PrefabInstance:
       value: Main Camera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 781213931468357676, guid: 1daa513304da14aa5bebc3894e4daa6b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6491380398840456971, guid: 1daa513304da14aa5bebc3894e4daa6b, type: 3}
@@ -15447,6 +15448,7 @@ MonoBehaviour:
   syncInterval: 0
   isOutsideDoor: 0
   house: {fileID: 0}
+  isKnockedDown: 0
 --- !u!114 &1738785854344566176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22043,6 +22045,7 @@ MonoBehaviour:
   syncInterval: 0
   isOutsideDoor: 0
   house: {fileID: 0}
+  isKnockedDown: 0
 --- !u!33 &6741652639043036762
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -22526,7 +22529,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  irlSecondsPerGameHour: 10
+  irlSecondsPerGameHour: 3
   hourlyServerEvents:
   - m_PersistentCalls:
       m_Calls: []
