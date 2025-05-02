@@ -119,6 +119,16 @@ public class Player : NetworkBehaviour
         playerUIPrefab.text = steamUsername;
     }
 
+    [Server]
+    public void GiveSpectatorMode()
+    {
+        GetComponent<PlayerTeleporter>().TeleportToSpectatorSpawn();
+        GetComponent<PlayerDeath>().isDead = true;
+        GetComponent<PlayerMovement>().OnDeath(this);
+        // Did this instead of kill because we don't want unintended side effects 
+        // Eg. Death pubsub event, corpse spawning, etc.
+    }
+
     [Command]
     private void CmdUpdateSteamUsername(string newUsername)
     {

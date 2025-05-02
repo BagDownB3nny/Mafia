@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class PlayerTeleporter : NetworkBehaviour
 {
+
+    [Header("Teleport locations")]
     public Transform mafiaNightSpawnpoint;
     private Transform mafiaHouseTunnel;
     public Transform executionSpot;
+
     private Player player;
 
     private void Start()
@@ -25,6 +28,19 @@ public class PlayerTeleporter : NetworkBehaviour
     {
         House house = player.house;
         TeleportPlayer(house.spawnPoint.position);
+    }
+
+    [Server]
+    public void TeleportToSpectatorSpawn()
+    {
+        if (SpectatorSpawn.spectatorSpawnpoint != null)
+        {
+            TeleportPlayer(SpectatorSpawn.spectatorSpawnpoint.position);
+        }
+        else
+        {
+            Debug.LogError("Spectator spawnpoint not set!");
+        }
     }
 
     [Server]

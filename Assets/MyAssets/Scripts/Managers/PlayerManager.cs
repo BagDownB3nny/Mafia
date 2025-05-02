@@ -21,6 +21,8 @@ public class PlayerManager : NetworkBehaviour
     [SyncVar]
     public int playerCount;
 
+    public bool isGameStarted = false;
+
 
     public void Awake()
     {
@@ -41,9 +43,15 @@ public class PlayerManager : NetworkBehaviour
     {
         playerNetIds[username] = playerNetId;
         playerCount = playerNetIds.Count;
-        if (playerNetIds.Count == NetworkServer.connections.Count)
+        if (playerNetIds.Count == NetworkServer.connections.Count && !isGameStarted)
         {
             OnAllPlayersLoaded();
+            isGameStarted = true;
+        }
+        else if (isGameStarted)
+        {
+            Player joinedPlayer = GetPlayerByNetId(playerNetId);
+            joinedPlayer.GiveSpectatorMode();
         }
     }
 

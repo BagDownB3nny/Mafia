@@ -5,7 +5,6 @@ using UnityEngine;
 public class CustomNetworkManager : NetworkManager
 {
 
-
     public void HostLobby()
     {
         // Start hosting a new lobby
