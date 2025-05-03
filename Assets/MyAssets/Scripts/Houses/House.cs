@@ -238,15 +238,15 @@ public class House : NetworkBehaviour
     [Server]
     public void LockTrapDoor()
     {
-        trapDoor.GetComponent<InteractableDoor>().RemoveAuthority(player);
-        ladder.isEnabled = false;
+        // trapDoor.GetComponent<InteractableDoor>().RemoveAuthority(player);
+        // ladder.isEnabled = false;
     }
 
     [Server]
     public void UnlockTrapDoor()
     {
-        trapDoor.GetComponent<InteractableDoor>().AssignAuthority(player);
-        ladder.isEnabled = true;
+        // trapDoor.GetComponent<InteractableDoor>().AssignAuthority(player);
+        // ladder.isEnabled = true;
     }
 
     [Server]
