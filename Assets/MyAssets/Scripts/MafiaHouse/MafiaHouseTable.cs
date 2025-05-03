@@ -149,7 +149,7 @@ public class MafiaHouseTable : NetworkBehaviour
         if (PlayerManager.instance.localPlayer != null)
         {
             Player localPlayer = PlayerManager.instance.localPlayer;
-            if (localPlayer.role == RoleName.Mafia)
+            if (localPlayer.role == RoleName.Mafia && newHouseMini != null)
             {
                 PlayerUIManager.instance.SetInformativeText($"Attack {newHouseMini.PlayerName}'s house!");
             }
