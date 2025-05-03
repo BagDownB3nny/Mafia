@@ -11230,9 +11230,6 @@ GameObject:
   - component: {fileID: 72540031924872029}
   - component: {fileID: 5969593591065132382}
   - component: {fileID: 440570896626775500}
-  - component: {fileID: 672911173664110559}
-  - component: {fileID: 5774249190178995708}
-  - component: {fileID: 2151663045346168646}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -11330,62 +11327,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5906679143440119, guid: 53a91de9ce98c4450829940b59360d2a, type: 3}
---- !u!114 &672911173664110559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7509378367008692108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5774249190178995708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7509378367008692108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87e77f22b4fc64d7c846da8f4760ce16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  door: {fileID: 2151663045346168646}
-  isOpen: 0
-  doorOpenPosition: {fileID: 1465004086023684853}
-  doorClosedPosition: {fileID: 48836196764343234}
---- !u!114 &2151663045346168646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7509378367008692108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc7dba24e9de4321b7b08b0e2f66196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  isOutsideDoor: 0
-  house: {fileID: 0}
-  isKnockedDown: 0
-  isEnabled: 1
 --- !u!1 &7621318876243386588
 GameObject:
   m_ObjectHideFlags: 0
@@ -11465,7 +11406,7 @@ MonoBehaviour:
   - {fileID: 4697583065704764444}
   - {fileID: 828046701533220865}
   - {fileID: 5906264006165740239}
-  trapDoor: {fileID: 2151663045346168646}
+  trapDoor: {fileID: 0}
   ladder: {fileID: 1702468945338641811}
   SeerRoom: {fileID: 7938526211625574111}
   namePlateText: {fileID: 6634924007354509649}
