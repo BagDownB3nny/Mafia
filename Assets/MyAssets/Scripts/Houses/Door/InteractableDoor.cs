@@ -10,12 +10,6 @@ public class InteractableDoor : Interactable
     [SyncVar]
     public bool isOpen = false;
 
-    [SyncVar]
-    public bool isBroken = false;
-
-    [SyncVar]
-    public bool isEnabled = true;
-
     public readonly SyncList<uint> authorisedPlayers = new SyncList<uint>();
     [SerializeField] private Transform doorOpenPosition;
     [SerializeField] private Transform doorClosedPosition;
@@ -55,7 +49,7 @@ public class InteractableDoor : Interactable
     public override void OnHover()
     {
         if (door.isKnockedDown) return;
-        if (!isEnabled) return;
+        if (!door.isEnabled) return;
         Highlight();
         uint playerNetId = PlayerManager.instance.localPlayer.netId;
         Role playerRoleScript = PlayerManager.instance.localPlayer.GetRoleScript();
@@ -79,7 +73,7 @@ public class InteractableDoor : Interactable
     public override void OnUnhover()
     {
         if (door.isKnockedDown) return;
-        if (!isEnabled) return;
+        if (!door.isEnabled) return;
         Unhighlight();
         PlayerUIManager.instance.ClearInteractableText();
     }
@@ -99,7 +93,7 @@ public class InteractableDoor : Interactable
     public void CmdKnock()
     {
         if (door.isKnockedDown) return;
-        if (!isEnabled) return;
+        if (!door.isEnabled) return;
         RpcKnock();
     }
 
@@ -107,7 +101,7 @@ public class InteractableDoor : Interactable
     public void RpcKnock()
     {
         if (door.isKnockedDown) return;
-        if (!isEnabled) return;
+        if (!door.isEnabled) return;
         if (knockingAudioSource.isPlaying) return;
         // Play knock sound effect
         // Play knock animation
@@ -130,7 +124,7 @@ public class InteractableDoor : Interactable
     public override void Interact()
     {
         if (door.isKnockedDown) return;
-        if (!isEnabled) return;
+        if (!door.isEnabled) return;
         uint playerNetId = PlayerManager.instance.localPlayer.netId;
         if (authorisedPlayers.Contains(playerNetId))
         {
@@ -146,7 +140,7 @@ public class InteractableDoor : Interactable
     private void CmdInteract()
     {
         if (door.isKnockedDown) return;
-        if (!isEnabled) return;
+        if (!door.isEnabled) return;
         if (isOpen)
         {
 
