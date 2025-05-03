@@ -42,8 +42,8 @@ public class House : NetworkBehaviour
 
     public void EnableTrapdoor()
     {
-        trapDoor.isEnabled = true;
-        ladder.isEnabled = true;
+        // trapDoor.isEnabled = true;
+        // ladder.isEnabled = true;
     }
 
     [Server]
