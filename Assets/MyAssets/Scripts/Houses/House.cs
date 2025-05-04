@@ -10,7 +10,7 @@ public class House : NetworkBehaviour
     [SerializeField] private Door trapDoor;
     [SerializeField] private InteractableLadder ladder;
     [SerializeField] private GameObject SeerRoom;
-    [SerializeField] public TMPro.TextMeshProUGUI namePlateText;
+    [SerializeField] TMPro.TextMeshProUGUI namePlateText;
 
     public Transform spawnPoint;
     public Transform tunnelTeleporterPosition;
@@ -65,7 +65,19 @@ public class House : NetworkBehaviour
     [Client]
     public void OnPlayerChanged(Player oldValue, Player newValue)
     {
-        namePlateText.text = newValue.steamUsername;
+        if (newValue == null)
+        {
+            Debug.LogError($"Server SyncVar happens before client Var is created. " +
+                $"Player is null for house {netId}");
+            return;
+        }
+        SetNameplateText(newValue.steamUsername);
+    }
+
+    [Client]
+    public void SetNameplateText(string text)
+    {
+        namePlateText.text = text;
     }
 
     [Client]
@@ -76,8 +88,6 @@ public class House : NetworkBehaviour
             door.gameObject.layer = LayerMask.NameToLayer("GhostPassable");
         }
     }
-
-
 
     [Server]
     public void CloseAllDoors()
