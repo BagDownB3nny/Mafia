@@ -186,7 +186,6 @@ public class PlayerCamera : MonoBehaviour
         if (lastInteractable != null)
         {
             lastInteractable.OnUnhover();
-            // lastInteractable.Unhighlight();
             lastInteractable = null;
         }
     }

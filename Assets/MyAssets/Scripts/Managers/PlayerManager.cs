@@ -103,7 +103,7 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(RoleName.Mafia);
+                player.SetRole(RoleName.Medium);
             }
             else
             {
@@ -248,29 +248,38 @@ public class PlayerManager : NetworkBehaviour
         return nonMafiaPlayers;
     }
 
-    [Server]
-    public void EnableMediumInteractions()
+    public List<Player> GetMediumPlayers()
     {
+        List<Player> mediumPlayers = new();
         foreach (Player player in GetAllPlayers())
         {
             if (player.role == RoleName.Medium)
             {
-                Medium role = player.GetRoleScript() as Medium;
-                role.ActivateMediumAbility();
+                mediumPlayers.Add(player);
             }
         }
+        return mediumPlayers;
+    }
+
+    [Server]
+    public void EnableMediumInteractions()
+    {
+        foreach (Player player in GetMediumPlayers())
+        {
+            Medium role = player.GetRoleScript() as Medium;
+            role.EnableMediumAbility();
+        }
+        HouseManager.instance.HighlightMediumHouseForGhosts();
     }
 
     [Server]
     public void DisableMediumInteractions()
     {
-        foreach (Player player in GetAllPlayers())
+        foreach (Player player in GetMediumPlayers())
         {
-            if (player.role == RoleName.Medium)
-            {
-                Medium role = player.GetRoleScript() as Medium;
-                role.DeactivateMediumAbility();
-            }
+            Medium role = player.GetRoleScript() as Medium;
+            role.DisableMediumAbility();
         }
+        HouseManager.instance.UnhighlightMediumHouseForGhosts();
     }
 }

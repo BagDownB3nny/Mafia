@@ -130,8 +130,6 @@ public class TimeManagerV2 : NetworkBehaviour
     {
         HouseManager.instance.UnhighlightHousesForOwners();
 
-        // Medium and ghost interactions
-        HouseManager.instance.HighlightMediumHouseForGhosts();
         PlayerManager.instance.EnableMediumInteractions();
 
         // Give mafia members guns
@@ -166,8 +164,6 @@ public class TimeManagerV2 : NetworkBehaviour
             });
         }
 
-        // Medium and ghost interactions
-        HouseManager.instance.UnhighlightMediumHouseForGhosts();
         PlayerManager.instance.DisableMediumInteractions();
 
         // Activate voting booth

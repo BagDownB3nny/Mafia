@@ -9,8 +9,10 @@ public class House : NetworkBehaviour
     [SerializeField] private List<Door> doors;
     [SerializeField] private Door trapDoor;
     [SerializeField] private InteractableLadder ladder;
-    [SerializeField] private GameObject SeerRoom;
     [SerializeField] TMPro.TextMeshProUGUI namePlateText;
+    [Header("Role rooms")]
+    [SerializeField] private GameObject SeerRoom;
+    [SerializeField] private GameObject MediumRoom;
 
     public Transform spawnPoint;
     public Transform tunnelTeleporterPosition;
@@ -265,6 +267,9 @@ public class House : NetworkBehaviour
         if (role == RoleName.Seer)
         {
             SeerRoom.SetActive(true);
+        } else if (role == RoleName.Medium)
+        {
+            MediumRoom.SetActive(true);
         }
         RpcSpawnRoleRoom(role);
     }
@@ -275,6 +280,9 @@ public class House : NetworkBehaviour
         if (role == RoleName.Seer)
         {
             SeerRoom.SetActive(true);
+        } else if (role == RoleName.Medium)
+        {
+            MediumRoom.SetActive(true);
         }
     }
 

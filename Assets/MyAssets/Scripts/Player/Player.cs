@@ -279,4 +279,20 @@ public class Player : NetworkBehaviour
             CameraCullingMaskManager.instance.SetNameTagLayerInvisible();
         }
     }
+
+    [Client]
+    public void DisablePlayerControllersAndCamera()
+    {
+        GetComponent<PlayerMovement>().enabled = false;
+        Camera.main.GetComponent<MoveCamera>().enabled = false;
+        Camera.main.GetComponent<PlayerCamera>().EnterSpectatorMode();
+    }
+
+    [Client]
+    public void EnablePlayerControllersAndCamera()
+    {
+        GetComponent<PlayerMovement>().enabled = true;
+        Camera.main.GetComponent<MoveCamera>().enabled = true;
+        Camera.main.GetComponent<PlayerCamera>().EnterFPSMode();
+    }
 }

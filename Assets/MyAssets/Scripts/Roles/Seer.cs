@@ -22,7 +22,7 @@ public class Seer : Role
     {
         if (Input.GetKeyDown(KeyCode.E) && timeToDeactivation <= 0 && isLookingThroughCrystalBall)
         {
-            StopLookingThroughCrystalBall();
+            DeactivateSeerAbility();
         }
         else if (timeToDeactivation > 0 && isLookingThroughCrystalBall)
         {
@@ -53,7 +53,7 @@ public class Seer : Role
     }
 
     [Client]
-    public void LookThroughCrystalBall()
+    public void ActivateSeerAbility()
     {
         Player markedPlayer = PlayerManager.instance.GetPlayerByNetId(markedPlayerNetId);
         if (markedPlayer == null)
@@ -72,37 +72,22 @@ public class Seer : Role
             return;
         }
         markedPlayerSeeingEyeSigil.Activate();
-        DisablePlayerControllersAndCamera();
+        Player localPlayer = PlayerManager.instance.localPlayer;
+        localPlayer.DisablePlayerControllersAndCamera();
         isLookingThroughCrystalBall = true;
         timeToDeactivation = 0.5f;
         PlayerUIManager.instance.SetControlsText("[E] Exit Crystal Ball");
     }
 
     [Client]
-    private void StopLookingThroughCrystalBall()
+    private void DeactivateSeerAbility()
     {
         Camera.main.GetComponentInChildren<FollowSeeingEyeSigil>(includeInactive: true).enabled = false;
         isLookingThroughCrystalBall = false;
-        EnablePlayerControllersAndCamera();
+        Player localPlayer = PlayerManager.instance.localPlayer;
+        localPlayer.EnablePlayerControllersAndCamera();
         PlayerUIManager.instance.ClearControlsText();
     }
-
-    [Client]
-    private void DisablePlayerControllersAndCamera()
-    {
-        GetComponentInParent<PlayerMovement>().enabled = false;
-        Camera.main.GetComponent<MoveCamera>().enabled = false;
-        Camera.main.GetComponent<PlayerCamera>().EnterSpectatorMode();
-    }
-
-    [Client]
-    private void EnablePlayerControllersAndCamera()
-    {
-        GetComponentInParent<PlayerMovement>().enabled = true;
-        Camera.main.GetComponent<MoveCamera>().enabled = true;
-        Camera.main.GetComponent<PlayerCamera>().EnterFPSMode();
-    }
-
     private void OnMarkedPlayerNetIdChanged(uint oldMarkedPlayerNetId, uint newMarkedPlayerNetId)
     {
         Player markedPlayer = PlayerManager.instance.GetPlayerByNetId(newMarkedPlayerNetId);

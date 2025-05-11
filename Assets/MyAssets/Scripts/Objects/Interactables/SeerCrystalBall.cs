@@ -23,7 +23,7 @@ public class SeerCrystalBall : Interactable
         if (localPlayer.role == RoleName.Seer)
         {
             Seer seerScript = localPlayer.GetComponentInChildren<Seer>();
-            seerScript.LookThroughCrystalBall();
+            seerScript.ActivateSeerAbility();
         }
     }
 }
