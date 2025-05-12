@@ -8,6 +8,9 @@ public class PlayerManager : NetworkBehaviour
     // Is singleton
     public static PlayerManager instance;
 
+    // Is false if the scene is lobby, is true if the scene is game
+    [SerializeField] public bool isGamePlayerManager;
+
     // A list containing all the roles for the current lobby
     // This list should be updated everytime a player joins or leaves the lobby
     // For example, in a 6 player game, there could be 1 werewolf, 1 seer, 1 medium, and 3 villagers
@@ -41,6 +44,8 @@ public class PlayerManager : NetworkBehaviour
     [Server]
     public void AddPlayer(string username, uint playerNetId)
     {
+        if (!isGamePlayerManager) return;
+
         playerNetIds[username] = playerNetId;
         playerCount = playerNetIds.Count;
         if (playerNetIds.Count == NetworkServer.connections.Count && !isGameStarted)

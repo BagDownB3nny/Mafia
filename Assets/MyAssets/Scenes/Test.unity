@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.2
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 9741ff8f72d2c4448872988c5778c973, type: 2}
@@ -736,11 +736,16 @@ MonoBehaviour:
   - {fileID: 1809965590}
   - {fileID: 1206978363}
   - {fileID: 1520181013}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 637042220}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: -0.0000015298986, y: 0, z: 35}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &21534140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1485,11 +1490,16 @@ MonoBehaviour:
   - {fileID: 250204888}
   - {fileID: 862369004}
   - {fileID: 1770252599}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 431876241}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: -13.393919, y: 0, z: 32.335785}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &33762616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,11 +2793,16 @@ MonoBehaviour:
   - {fileID: 1259594803}
   - {fileID: 1798641193}
   - {fileID: 1837592176}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 1721823634}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: -32.33578, y: 0, z: -13.39392}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &64231900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3902,11 +3917,16 @@ MonoBehaviour:
   - {fileID: 2126996385}
   - {fileID: 1181216776}
   - {fileID: 939349644}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 745836393}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: 24.748734, y: 0, z: -24.748741}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &90006298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6663,7 +6683,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 903758786}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &170467550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6679,8 +6702,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 223863748}
   doorClosedPosition: {fileID: 1696780645}
 --- !u!114 &170467551
@@ -6716,6 +6739,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1731559512}
 --- !u!64 &170467553
 MeshCollider:
@@ -7222,7 +7246,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1878142078}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &176816349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7238,8 +7265,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1826683914}
   doorClosedPosition: {fileID: 1321379667}
 --- !u!114 &176816350
@@ -7275,6 +7302,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1870736644}
 --- !u!64 &176816352
 MeshCollider:
@@ -8975,6 +9003,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 808359963}
 --- !u!114 &215273236
 MonoBehaviour:
@@ -8991,8 +9020,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1159305719}
   doorClosedPosition: {fileID: 987296648}
 --- !u!114 &215273237
@@ -9028,7 +9057,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1432448301}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &215273239
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9684,11 +9716,16 @@ MonoBehaviour:
   - {fileID: 372657822}
   - {fileID: 1345047590}
   - {fileID: 2086369819}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 1730489365}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: 32.33578, y: 0, z: 13.393921}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &232983796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10101,7 +10138,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 33762615}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &250204889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10117,8 +10157,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1738378286}
   doorClosedPosition: {fileID: 145681934}
 --- !u!114 &250204890
@@ -10154,6 +10194,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 888106759}
 --- !u!64 &250204892
 MeshCollider:
@@ -11392,11 +11433,16 @@ MonoBehaviour:
   - {fileID: 1517654823}
   - {fileID: 1423348934}
   - {fileID: 453655030}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 1141152644}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: 13.393927, y: 0, z: -32.33578}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &285606087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13459,7 +13505,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1339791620}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &322442476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13475,8 +13524,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1452164838}
   doorClosedPosition: {fileID: 212191008}
 --- !u!114 &322442477
@@ -13512,6 +13561,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1816541201}
 --- !u!64 &322442479
 MeshCollider:
@@ -13734,7 +13784,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1348987789}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &325363927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13750,8 +13803,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 2135543246}
   doorClosedPosition: {fileID: 1966215483}
 --- !u!114 &325363928
@@ -14001,6 +14054,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1664831085}
 --- !u!114 &329675794
 MonoBehaviour:
@@ -14017,8 +14071,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1959996229}
   doorClosedPosition: {fileID: 1306627495}
 --- !u!114 &329675795
@@ -14054,7 +14108,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1029369080}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &329675797
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14845,7 +14902,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1063291964}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &361097066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14861,8 +14921,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 2051058693}
   doorClosedPosition: {fileID: 1847065619}
 --- !u!114 &361097067
@@ -14898,6 +14958,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 475222066}
 --- !u!64 &361097069
 MeshCollider:
@@ -15501,7 +15562,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 232983795}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &372657823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15517,8 +15581,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 456574988}
   doorClosedPosition: {fileID: 410182299}
 --- !u!114 &372657824
@@ -15554,6 +15618,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 2055602951}
 --- !u!64 &372657826
 MeshCollider:
@@ -15943,7 +16008,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1432448301}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &379516342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15959,8 +16027,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1622689753}
   doorClosedPosition: {fileID: 224853450}
 --- !u!114 &379516343
@@ -15996,6 +16064,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 479693248}
 --- !u!64 &379516345
 MeshCollider:
@@ -17378,6 +17447,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1219965712}
 --- !u!114 &423720098
 MonoBehaviour:
@@ -17394,8 +17464,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1118557848}
   doorClosedPosition: {fileID: 1849712092}
 --- !u!114 &423720099
@@ -17431,7 +17501,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 903758786}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &423720101
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18780,6 +18853,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 2023382366}
 --- !u!114 &453655028
 MonoBehaviour:
@@ -18796,8 +18870,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1708226876}
   doorClosedPosition: {fileID: 209223017}
 --- !u!114 &453655029
@@ -18833,7 +18907,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 285606086}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &453655031
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20478,7 +20555,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 0}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &477782424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20494,8 +20574,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
-  isBroken: 0
   doorOpenPosition: {fileID: 1681652104}
   doorClosedPosition: {fileID: 1819131586}
 --- !u!114 &477782425
@@ -22521,7 +22601,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1063291964}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &510435516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22537,8 +22620,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1342627452}
   doorClosedPosition: {fileID: 506551899}
 --- !u!114 &510435517
@@ -26639,7 +26722,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1153762852}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &612971367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26655,8 +26741,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 2006537159}
   doorClosedPosition: {fileID: 1770144313}
 --- !u!114 &612971368
@@ -27936,7 +28022,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1029369080}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &643343375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27952,8 +28041,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1865750925}
   doorClosedPosition: {fileID: 771762162}
 --- !u!114 &643343376
@@ -27989,6 +28078,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 474884750}
 --- !u!64 &643343378
 MeshCollider:
@@ -28925,6 +29015,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1256644116}
 --- !u!114 &671831719
 MonoBehaviour:
@@ -28941,8 +29032,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1683924251}
   doorClosedPosition: {fileID: 1651937121}
 --- !u!114 &671831720
@@ -28978,7 +29069,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 802442519}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &671831722
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31270,6 +31364,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 577606302}
 --- !u!114 &737006969
 MonoBehaviour:
@@ -31286,8 +31381,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1847449630}
   doorClosedPosition: {fileID: 173538406}
 --- !u!114 &737006970
@@ -31323,7 +31418,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1063291964}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &737006972
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33606,11 +33704,16 @@ MonoBehaviour:
   - {fileID: 1558267995}
   - {fileID: 806770259}
   - {fileID: 1526452279}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 1132861896}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: 13.39392, y: 0, z: 32.33578}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &783706565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34496,11 +34599,16 @@ MonoBehaviour:
   - {fileID: 1636915958}
   - {fileID: 2119225675}
   - {fileID: 671831721}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 781803387}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: -24.748737, y: 0, z: 24.748737}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &802442520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34664,7 +34772,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 783706564}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &806770260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34680,8 +34791,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1486842172}
   doorClosedPosition: {fileID: 1666303759}
 --- !u!114 &806770261
@@ -36619,7 +36730,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 33762615}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &862369005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36635,8 +36749,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 2027253383}
   doorClosedPosition: {fileID: 1755377547}
 --- !u!114 &862369006
@@ -38256,11 +38370,16 @@ MonoBehaviour:
   - {fileID: 170467549}
   - {fileID: 1963154666}
   - {fileID: 423720100}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 421943159}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: 24.748737, y: 0, z: 24.748737}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &903758787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39726,6 +39845,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 224710291}
 --- !u!114 &939349642
 MonoBehaviour:
@@ -39742,8 +39862,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1689607840}
   doorClosedPosition: {fileID: 1186397093}
 --- !u!114 &939349643
@@ -39779,7 +39899,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 90006297}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &939349645
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40839,6 +40962,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1200304584}
 --- !u!114 &957629105
 MonoBehaviour:
@@ -40855,8 +40979,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 127491056}
   doorClosedPosition: {fileID: 963940000}
 --- !u!114 &957629106
@@ -40892,7 +41016,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1153762852}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &957629108
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -41374,7 +41501,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1878142078}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &962570852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41390,8 +41520,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 403926585}
   doorClosedPosition: {fileID: 274090690}
 --- !u!114 &962570853
@@ -41882,7 +42012,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -41944,13 +42074,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978876099}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.9836973, y: -0, z: -0, w: -0.17983243}
+  m_LocalRotation: {x: 0.87313485, y: 0, z: 0, w: 0.48747876}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 200.72, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 121.65, y: 0, z: 0}
 --- !u!114 &978876102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43629,11 +43759,16 @@ MonoBehaviour:
   - {fileID: 643343374}
   - {fileID: 1382766433}
   - {fileID: 329675796}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 1761135583}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: -35, y: 0, z: -0.000003059797}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &1029369081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45185,11 +45320,16 @@ MonoBehaviour:
   - {fileID: 361097065}
   - {fileID: 510435515}
   - {fileID: 737006971}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 717379580}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: -24.74874, y: 0, z: -24.748735}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &1063291965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47014,8 +47154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39d8ca3f208a4075b5d295a51356818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSensitivity: 2
   orientation: {fileID: 0}
   isCursorMode: 0
+  isSpectatorMode: 0
 --- !u!114 &1106646493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47075,6 +47217,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  remoteGunVisual: {fileID: 0}
+  localGunScript: {fileID: 0}
 --- !u!114 &1106646495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47194,9 +47338,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   houseMiniPrefab: {fileID: 5553602909193787467, guid: a4568c9a7e9ad4eb09db57aa37600fa6, type: 3}
-  houseMiniParent: {fileID: 2993580268510785561, guid: a4568c9a7e9ad4eb09db57aa37600fa6, type: 3}
-  whiteboard: {fileID: 294626099}
   selectedHouseMini: {fileID: 0}
+  whiteboard: {fileID: 294626099}
 --- !u!23 &1106726271
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -49007,11 +49150,16 @@ MonoBehaviour:
   - {fileID: 1812168362}
   - {fileID: 612971366}
   - {fileID: 957629107}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 560250063}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: 32.335785, y: 0, z: -13.39392}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &1153762853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50332,7 +50480,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 90006297}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1181216777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50348,8 +50499,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 601051188}
   doorClosedPosition: {fileID: 141041651}
 --- !u!114 &1181216778
@@ -51609,7 +51760,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 21534139}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1206978364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51625,8 +51779,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1371472814}
   doorClosedPosition: {fileID: 1528716963}
 --- !u!114 &1206978365
@@ -52177,6 +52331,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 26295177}
 --- !u!114 &1224429082
 MonoBehaviour:
@@ -52193,8 +52348,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 2019176288}
   doorClosedPosition: {fileID: 1209481283}
 --- !u!114 &1224429083
@@ -52230,7 +52385,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1878142078}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &1224429085
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -53397,7 +53555,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 64231899}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1259594804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53413,8 +53574,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1231243355}
   doorClosedPosition: {fileID: 148123439}
 --- !u!114 &1259594805
@@ -53450,6 +53611,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1567142739}
 --- !u!64 &1259594807
 MeshCollider:
@@ -56866,11 +57028,16 @@ MonoBehaviour:
   - {fileID: 322442475}
   - {fileID: 2103204802}
   - {fileID: 1479125101}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 2114515314}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: -32.33578, y: 0, z: 13.393922}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &1339791621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57174,7 +57341,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 232983795}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1345047591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57190,8 +57360,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 823794019}
   doorClosedPosition: {fileID: 552887922}
 --- !u!114 &1345047592
@@ -57502,11 +57672,16 @@ MonoBehaviour:
   - {fileID: 1400357808}
   - {fileID: 325363926}
   - {fileID: 1577993101}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 1907582832}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: 0.0000004173708, y: 0, z: -35}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &1348987790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58431,7 +58606,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1029369080}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1382766434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58447,8 +58625,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 117358290}
   doorClosedPosition: {fileID: 1066389347}
 --- !u!114 &1382766435
@@ -59616,7 +59794,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1348987789}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1400357809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59632,8 +59813,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 4033876}
   doorClosedPosition: {fileID: 1709439765}
 --- !u!114 &1400357810
@@ -59669,6 +59850,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 833294141}
 --- !u!64 &1400357812
 MeshCollider:
@@ -60049,7 +60231,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 285606086}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1423348935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60065,8 +60250,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 284878202}
   doorClosedPosition: {fileID: 983574470}
 --- !u!114 &1423348936
@@ -60235,11 +60420,16 @@ MonoBehaviour:
   - {fileID: 379516341}
   - {fileID: 1911378376}
   - {fileID: 215273238}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 71592779}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: -13.393925, y: 0, z: -32.33578}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &1432448302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60286,7 +60476,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2121144123}
   - {fileID: 611494300}
   - {fileID: 35182155}
   - {fileID: 334961474}
@@ -62493,6 +62682,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 163032894}
 --- !u!114 &1479125099
 MonoBehaviour:
@@ -62509,8 +62699,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1504891799}
   doorClosedPosition: {fileID: 93587589}
 --- !u!114 &1479125100
@@ -62546,7 +62736,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1339791620}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &1479125102
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -64104,7 +64297,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 285606086}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1517654824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64120,8 +64316,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 21025416}
   doorClosedPosition: {fileID: 988107794}
 --- !u!114 &1517654825
@@ -64157,6 +64353,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1180057340}
 --- !u!64 &1517654827
 MeshCollider:
@@ -64334,6 +64531,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 898098562}
 --- !u!114 &1520181011
 MonoBehaviour:
@@ -64350,8 +64548,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 341901893}
   doorClosedPosition: {fileID: 2028774283}
 --- !u!114 &1520181012
@@ -64387,7 +64585,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 21534139}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &1520181014
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -64775,6 +64976,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 2009700233}
 --- !u!114 &1526452277
 MonoBehaviour:
@@ -64791,8 +64993,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 4877278}
   doorClosedPosition: {fileID: 2140320422}
 --- !u!114 &1526452278
@@ -64828,7 +65030,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 783706564}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &1526452280
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -66222,7 +66427,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 783706564}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1558267996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66238,8 +66446,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 860087348}
   doorClosedPosition: {fileID: 1590112595}
 --- !u!114 &1558267997
@@ -66275,6 +66483,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 280401362}
 --- !u!64 &1558267999
 MeshCollider:
@@ -67245,6 +67454,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 2137957347}
 --- !u!114 &1577993099
 MonoBehaviour:
@@ -67261,8 +67471,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 619207449}
   doorClosedPosition: {fileID: 22650844}
 --- !u!114 &1577993100
@@ -67298,7 +67508,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1348987789}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &1577993102
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -69298,7 +69511,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 802442519}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1636915959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69314,8 +69530,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1220207473}
   doorClosedPosition: {fileID: 431164685}
 --- !u!114 &1636915960
@@ -69351,6 +69567,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 932894172}
 --- !u!64 &1636915962
 MeshCollider:
@@ -75026,6 +75243,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1668182370}
 --- !u!114 &1770252597
 MonoBehaviour:
@@ -75042,8 +75260,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 39532766}
   doorClosedPosition: {fileID: 1623674647}
 --- !u!114 &1770252598
@@ -75079,7 +75297,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 33762615}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &1770252600
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76376,7 +76597,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 64231899}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1798641194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76392,8 +76616,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 498152922}
   doorClosedPosition: {fileID: 1316090095}
 --- !u!114 &1798641195
@@ -76810,7 +77034,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 0}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1807510626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76826,8 +77053,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 0
-  isBroken: 0
   doorOpenPosition: {fileID: 1029654067}
   doorClosedPosition: {fileID: 1744495685}
 --- !u!114 &1807510627
@@ -76863,6 +77090,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 775670652}
 --- !u!64 &1807510629
 MeshCollider:
@@ -77058,7 +77286,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 21534139}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1809965591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77074,8 +77305,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 220479989}
   doorClosedPosition: {fileID: 619110533}
 --- !u!114 &1809965592
@@ -77111,6 +77342,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 615483799}
 --- !u!64 &1809965594
 MeshCollider:
@@ -77240,7 +77472,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1153762852}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1812168363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77256,8 +77491,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 2056551379}
   doorClosedPosition: {fileID: 33323608}
 --- !u!114 &1812168364
@@ -77293,6 +77528,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1202589734}
 --- !u!64 &1812168366
 MeshCollider:
@@ -78014,6 +78250,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 611254199}
 --- !u!114 &1837592174
 MonoBehaviour:
@@ -78030,8 +78267,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 657476155}
   doorClosedPosition: {fileID: 1220137395}
 --- !u!114 &1837592175
@@ -78067,7 +78304,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 64231899}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &1837592177
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -80427,11 +80667,16 @@ MonoBehaviour:
   - {fileID: 176816348}
   - {fileID: 962570851}
   - {fileID: 1224429084}
+  trapDoor: {fileID: 0}
+  ladder: {fileID: 0}
   SeerRoom: {fileID: 814248399}
+  namePlateText: {fileID: 0}
   spawnPoint: {fileID: 0}
+  tunnelTeleporterPosition: {fileID: 0}
+  highlightableHouse: {fileID: 0}
   positionRelativeToVillageCenter: {x: 35, y: 0, z: 0}
   player: {fileID: 0}
-  isProtected: 0
+  isMarked: 0
 --- !u!114 &1878142079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82117,7 +82362,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1432448301}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1911378377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82133,8 +82381,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1008212322}
   doorClosedPosition: {fileID: 2024976422}
 --- !u!114 &1911378378
@@ -84165,7 +84413,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 903758786}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &1963154667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84181,8 +84432,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 417221333}
   doorClosedPosition: {fileID: 1761620913}
 --- !u!114 &1963154668
@@ -89272,6 +89523,7 @@ MonoBehaviour:
   isLocalPlayerOnLadder: 0
   timePlayerMountedLadder: 0
   ladderTeleportPosition: {fileID: 2081962418}
+  isEnabled: 1
 --- !u!114 &2071545964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89714,6 +89966,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1797213194}
 --- !u!114 &2086369817
 MonoBehaviour:
@@ -89730,8 +89983,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1599471455}
   doorClosedPosition: {fileID: 473304414}
 --- !u!114 &2086369818
@@ -89767,7 +90020,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 232983795}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!64 &2086369820
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -90382,7 +90638,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 1339791620}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &2103204803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90398,8 +90657,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 105354915}
   doorClosedPosition: {fileID: 842860960}
 --- !u!114 &2103204804
@@ -91276,7 +91535,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 802442519}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &2119225676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91292,8 +91554,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 324898893}
   doorClosedPosition: {fileID: 1874320880}
 --- !u!114 &2119225677
@@ -91558,92 +91820,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120054245}
   m_Mesh: {fileID: 1049928748687988745, guid: ad29318dcaa0aa74a9c03eab6bb17331, type: 3}
---- !u!1 &2121144122
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2121144123}
-  - component: {fileID: 2121144125}
-  - component: {fileID: 2121144124}
-  m_Layer: 0
-  m_Name: Housetrapdoor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2121144123
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121144122}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.00000003774895, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.0310001, y: 0.42, z: 4.1430016}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1432888998}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &2121144124
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121144122}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 999334134344075035, guid: 53a91de9ce98c4450829940b59360d2a, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &2121144125
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121144122}
-  m_Mesh: {fileID: 5906679143440119, guid: 53a91de9ce98c4450829940b59360d2a, type: 3}
 --- !u!1 &2122012182
 GameObject:
   m_ObjectHideFlags: 0
@@ -91832,7 +92008,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isOutsideDoor: 0
   house: {fileID: 90006297}
+  isKnockedDown: 0
+  isEnabled: 1
 --- !u!114 &2126996386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91848,8 +92027,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   isOpen: 1
-  isBroken: 0
   doorOpenPosition: {fileID: 1334205218}
   doorClosedPosition: {fileID: 123294648}
 --- !u!114 &2126996387
@@ -91885,6 +92064,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  door: {fileID: 0}
   doorKnockedPosition: {fileID: 1995298859}
 --- !u!64 &2126996389
 MeshCollider:
@@ -92313,6 +92493,7 @@ MonoBehaviour:
   isLocalPlayerOnLadder: 0
   timePlayerMountedLadder: 0
   ladderTeleportPosition: {fileID: 1128381149}
+  isEnabled: 1
 --- !u!114 &2138595999
 MonoBehaviour:
   m_ObjectHideFlags: 0
