@@ -104,19 +104,18 @@ public class Player : NetworkBehaviour
     public void GetSteamUsername()
     {
         // TODO - Uncomment this when Steamworks.NET is implemented
-        if (SteamManager.Initialized)
-        {
-            steamUsername = SteamFriends.GetPersonaName();
-            CmdUpdateSteamUsername(steamUsername);
-        }
-        else
-        {
-            steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
-            CmdUpdateSteamUsername(steamUsername);
-        }
-        // steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
-        // CmdUpdateSteamUsername(steamUsername);
-        // playerUIPrefab.text = steamUsername;
+        // if (SteamManager.Initialized)
+        // {
+        //     steamUsername = SteamFriends.GetPersonaName();
+        //     CmdUpdateSteamUsername(steamUsername);
+        // }
+        // else
+        // {
+        //     steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
+        //     CmdUpdateSteamUsername(steamUsername);
+        // }
+        steamUsername = "Player " + UnityEngine.Random.Range(0, 1000);
+        CmdUpdateSteamUsername(steamUsername);
     }
 
     [Server]
@@ -196,10 +195,10 @@ public class Player : NetworkBehaviour
     private void OnUsernameChanged(string oldUsername, string newUsername)
     {
         playerUIPrefab.text = newUsername;
-        Debug.Log($"{gameObject.name} updated username text: {newUsername}");
         if (house)
         {
-            house.namePlateText.text = newUsername;
+            Debug.Log($"Nameplate updated house -> player{newUsername}");
+            house.SetNameplateText(newUsername);
         }
     }
 
@@ -279,5 +278,21 @@ public class Player : NetworkBehaviour
         {
             CameraCullingMaskManager.instance.SetNameTagLayerInvisible();
         }
+    }
+
+    [Client]
+    public void DisablePlayerControllersAndCamera()
+    {
+        GetComponent<PlayerMovement>().enabled = false;
+        Camera.main.GetComponent<MoveCamera>().enabled = false;
+        Camera.main.GetComponent<PlayerCamera>().EnterSpectatorMode();
+    }
+
+    [Client]
+    public void EnablePlayerControllersAndCamera()
+    {
+        GetComponent<PlayerMovement>().enabled = true;
+        Camera.main.GetComponent<MoveCamera>().enabled = true;
+        Camera.main.GetComponent<PlayerCamera>().EnterFPSMode();
     }
 }
