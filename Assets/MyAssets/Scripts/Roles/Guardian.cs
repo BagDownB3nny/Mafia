@@ -13,40 +13,18 @@ public class Guardian : Role
     [SyncVar]
     private uint markedHouseNetId;
 
-    [Header("Guardian Params")]
-
-    public override string RolePlayerInteractText => "Protect with Protection Sigil";
-    public override bool IsAbleToInteractWithPlayers => true;
-
-    public override string InteractWithDoorText => "Protect with Protection Sigil";
-
-    public override bool IsAbleToInteractWithDoors => true;
     protected override List<SigilName> SigilsAbleToSee => new() { SigilName.ProtectionSigil };
 
     [Header("Guardian internal params")]
-    private Player protectedPlayer;
-    private House protectedHouse;
+
+    [SyncVar]
+    public Player protectedPlayer;
+
+    [SyncVar]
+    public House protectedHouse;
 
     [Server]
-    public override void InteractWithPlayer(NetworkIdentity playerNetworkIdentity)
-    {
-        RemovePreviouslyPlacedSigils();
-        Player player = playerNetworkIdentity.GetComponent<Player>();
-        player.GetComponentInChildren<PlayerProtectionSigil>(includeInactive: true).Mark(player.netId);
-        protectedPlayer = player;
-    }
-
-    [Server]
-    public override void InteractWithHouse(NetworkIdentity houseNetId)
-    {
-        RemovePreviouslyPlacedSigils();
-        House house = houseNetId.GetComponent<House>();
-        house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true).Mark(house.netId);
-        protectedHouse = house;
-    }
-
-    [Server]
-    private void RemovePreviouslyPlacedSigils()
+    public void RemovePreviouslyPlacedSigils()
     {
         if (protectedPlayer != null)
         {

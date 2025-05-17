@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public enum PubSubEvent
 {
-    PlayerDeath,
-    HouseDestroyed,
+    PlayerDeath, // Server only
+    HouseDestroyed, // Server only
+    NewInteractableLookedAt, // Client only
     // PlayerHealthChanged,
     // EnemyKilled
 }
@@ -13,11 +14,13 @@ public enum PubSubEvent
 // Define specific delegates for each event type
 public delegate void PlayerDeathEventHandler(Player killedPlayer);
 public delegate void HouseDestroyedEventHandler(House destroyedHouse);
+
+public delegate void NewInteractableLookedAtEventHandler(Interactable newInteractable);
 // public delegate void PlayerHealthChangedEventHandler(int currentHealth, int maxHealth);
 // public delegate void EnemyKilledEventHandler(string enemyType, int points);
 
 
-// This pubsub class is only used by the server, not client
+// This pubsub class is used by both server and client
 public static class PubSub
 {
     // Dictionary to store subscribers for each event type

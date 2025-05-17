@@ -29,30 +29,22 @@ public class InteractableVillageHouseMini : Interactable
         this.house = house;
     }
 
-    [Client]
-    public override void OnHover()
+    public override RoleName[] GetRolesThatCanInteract()
     {
-        Highlight();
-        if (isOccupantDead)
-        {
-            PlayerUIManager.instance.SetInteractableText($"{PlayerName} is dead");
-            return;
-        }
-
-        if (isHouseDestroyed)
-        {
-            PlayerUIManager.instance.SetInteractableText($"{PlayerName}'s house is destroyed. {PlayerName} must be hiding somewhere...");
-            return;
-        }
-        string interactableText = $"Mark {PlayerName}'s house";
-        PlayerUIManager.instance.SetInteractableText(interactableText);
+        return new RoleName[] { RoleName.Mafia };
     }
 
-    [Client]
-    public override void OnUnhover()
+    public override string GetInteractableText()
     {
-        Unhighlight();
-        PlayerUIManager.instance.ClearInteractableText();
+        if (isOccupantDead)
+        {
+            return $"{PlayerName} is dead";
+        }
+        if (isHouseDestroyed)
+        {
+            return $"{PlayerName}'s house is destroyed. {PlayerName} must be hiding somewhere...";
+        }
+        return $"Mark {PlayerName}'s house";
     }
 
     [Client]

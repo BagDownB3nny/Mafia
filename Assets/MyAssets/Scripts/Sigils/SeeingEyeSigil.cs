@@ -6,6 +6,8 @@ public class SeeingEyeSigil : Sigil
 {
     private static uint markedPlayerNetId = 0;
 
+    public bool isMarked = false;
+
     [Server]
     public override void Mark(uint playerNetId)
     {
@@ -29,18 +31,6 @@ public class SeeingEyeSigil : Sigil
         gameObject.SetActive(active);
     }
 
-    [Client]
-    public void Activate()
-    {
-        FollowSeeingEyeSigil followSeeingEyeSigil = Camera.main.GetComponentInChildren<FollowSeeingEyeSigil>(includeInactive: true);
-        if (followSeeingEyeSigil == null)
-        {
-            Debug.LogError("Camera does not have a FollowSeeingEyeSigil component");
-            return;
-        }
-        followSeeingEyeSigil.seeingEyeSigil = transform;
-        followSeeingEyeSigil.enabled = true;
-    }
     [Server]
     public static void ResetSeeingEyeSigil()
     {

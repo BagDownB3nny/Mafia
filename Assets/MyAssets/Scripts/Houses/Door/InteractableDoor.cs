@@ -23,6 +23,11 @@ public class InteractableDoor : Interactable
         knockingAudioSource = GetComponent<AudioSource>();
     }
 
+    public override RoleName[] GetRolesThatCanInteract()
+    {
+        return GetAllRoles();
+    }
+
     [Server]
     public void AssignAuthority(Player player)
     {
@@ -46,38 +51,21 @@ public class InteractableDoor : Interactable
     }
 
     [Client]
-    public override void OnHover()
+    public override string GetInteractableText()
     {
-        if (door.isKnockedDown) return;
-        if (!door.isEnabled) return;
-        Highlight();
+        if (door.isKnockedDown) return null;
+        if (!door.isEnabled) return null;
+
         uint playerNetId = PlayerManager.instance.localPlayer.netId;
-        Role playerRoleScript = PlayerManager.instance.localPlayer.GetRoleScript();
         if (authorisedPlayers.Contains(playerNetId))
         {
-            string interactableText = isOpen ? "[E] Close" : "[E] Open";
-            PlayerUIManager.instance.SetInteractableText(interactableText);
-        }
-        else if (playerRoleScript.IsAbleToInteractWithDoors && door.isOutsideDoor)
-        {
-            string interactableText = playerRoleScript.InteractWithDoorText;
-            PlayerUIManager.instance.SetInteractableText(interactableText);
+            return isOpen ? "[E] Close" : "[E] Open";
         }
         else
         {
-            PlayerUIManager.instance.SetInteractableText("[E] Knock");
+            return "[E] Knock";
         }
     }
-
-    [Client]
-    public override void OnUnhover()
-    {
-        if (door.isKnockedDown) return;
-        if (!door.isEnabled) return;
-        Unhighlight();
-        PlayerUIManager.instance.ClearInteractableText();
-    }
-
 
     [Client]
     public void ClientKnock()

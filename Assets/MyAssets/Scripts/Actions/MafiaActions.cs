@@ -5,8 +5,10 @@ public class MafiaActions : RoleActions
 {
     private readonly KeyCode equipGunKey = KeyCode.Q;
 
-    public override void HandleRoleSpecificActions()
+    [Client]
+    private void Update()
     {
+        if (!isLocalPlayer) return;
         HandleGunEquipping();
     }
 

@@ -17,7 +17,6 @@ public class MouseSenseSlider : MonoBehaviour
         if (PlayerPrefs.HasKey("MouseSensitivity"))
         {
             mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
-            PlayerCamera.instance.mouseSensitivity = mouseSensitivity;
             sensitivitySlider.value = mouseSensitivity;
         }
 
@@ -32,7 +31,6 @@ public class MouseSenseSlider : MonoBehaviour
     {
         mouseSensitivity = value;
         PlayerPrefs.SetFloat("MouseSensitivity", value);
-        PlayerCamera.instance.mouseSensitivity = value; // Assuming you have a method to set mouse sensitivity in PlayerCamera
         UpdateSensitivityText();
     }
 

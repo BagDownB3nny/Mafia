@@ -10,19 +10,14 @@ public class Lever : Interactable
     [SerializeField] private Transform leverClosePosition;
     [SerializeField] private Trapdoor trapdoor;
 
-    public override void OnHover()
-    {
-        Highlight();
-    }
-
-    public override void OnUnhover()
-    {
-        Unhighlight();
-    }
-
     public override void Interact()
     {
         CmdInteract();
+    }
+
+    public override RoleName[] GetRolesThatCanInteract()
+    {
+        return GetAllRoles();
     }
 
     [Command(requiresAuthority = false)]

@@ -1,3 +1,4 @@
+using System.Linq;
 using Mirror;
 using UnityEngine;
 
@@ -16,68 +17,67 @@ public class PlayerActions : NetworkBehaviour
         player = GetComponent<Player>();
     }
 
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        if (!isLocalPlayer || !isClient) return;
+        PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
+    }
+
+    public void OnEnable()
+    {
+        if (!isLocalPlayer || !isClient) return;
+
+        PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
+    }
+
+    public void OnDisable()
+    {
+        if (!isLocalPlayer || !isClient) return;
+
+        PubSub.Unsubscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
+    }
+
+    public void OnDestroy()
+    {
+        if (isClient)
+        {
+            PubSub.Unsubscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
+        }
+    }
+
     void Update()
     {
         if (!isLocalPlayer) return;
         HandleInteractions();
-        player.GetRoleActions()?.HandleRoleSpecificActions();
     }
+
+    public void OnLookingAt(Interactable interactable)
+    {
+        if (interactable.isLocalPlayer) return;
+
+        bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Villager);
+        if (isInteractable)
+        {
+            string interactableText = interactable.GetInteractableText();
+            interactable.Highlight();
+            PlayerUIManager.instance.AddInteractableText(interactable, interactableText);
+        }
+    }
+
+    [Client]
+
     protected void HandleInteractions()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interactable interactable = playerCamera.GetInteractable();
-            if (interactable != null)
+            bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Villager);
+            if (isInteractable)
             {
-                bool isAbleToInteractWithPlayers = player.IsAbleToInteractWithPlayers();
-                if (interactable is InteractablePlayer && isAbleToInteractWithPlayers)
-                {
-                    CmdInteractWithPlayer(interactable.gameObject.GetComponentInParent<NetworkIdentity>());
-                }
-                else if (interactable is InteractableDoor)
-                {
-                    InteractableDoor interactableDoor = interactable as InteractableDoor;
-                    HandleDoorInteraction(interactableDoor);
-                }
-                else if (interactable is Interactable)
-                {
-                    interactable.Interact();
-                }
+                interactable.Interact();
             }
         }
-    }
-
-    [Client]
-    protected void HandleDoorInteraction(InteractableDoor door)
-    {
-        bool isAbleToInteractWithDoors = player.IsAbleToInteractWithDoors();
-        if (door.authorisedPlayers.Contains(player.netId) || !isAbleToInteractWithDoors)
-        {
-            door.Interact();
-        }
-        else if (isAbleToInteractWithDoors)
-        {
-            RoleInteractWithHouse(door);
-        }
-    }
-
-    [Command]
-    protected virtual void CmdInteractWithPlayer(NetworkIdentity playerInteractedWith)
-    {
-        Role roleScript = player.GetRoleScript();
-        roleScript.InteractWithPlayer(playerInteractedWith);
-    }
-
-    protected virtual void RoleInteractWithHouse(InteractableDoor door)
-    {
-        Door doorComponent = door.GetComponent<Door>();
-        if (!doorComponent.isOutsideDoor)
-        {
-            // Cannot interact with inside door
-            Debug.Log("Cannot interact with inside door");
-            return;
-        }
-        Role roleScript = player.GetRoleScript();
-        roleScript.InteractWithHouse(door.GetComponentInParent<NetworkIdentity>());
     }
 }

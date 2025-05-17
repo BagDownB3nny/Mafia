@@ -11,17 +11,9 @@ public class InteractableLadder : Interactable
     [SyncVar]
     public bool isEnabled = true;
 
-    [Client]
-    public override void OnHover()
+    public override RoleName[] GetRolesThatCanInteract()
     {
-        if (!isEnabled) return;
-        PlayerUIManager.instance.SetInteractableText("[E] Climb");
-    }
-
-    [Client]
-    public override void OnUnhover()
-    {
-        PlayerUIManager.instance.ClearInteractableText();
+        return GetAllRoles();
     }
 
     [Client]
@@ -35,6 +27,19 @@ public class InteractableLadder : Interactable
         else
         {
             PlayerUnmountLadder();
+        }
+    }
+
+    public override string GetInteractableText()
+    {
+        if (!isEnabled) return null;
+        if (isLocalPlayerOnLadder)
+        {
+            return "[E] Jump";
+        }
+        else
+        {
+            return "[E] Climb";
         }
     }
 

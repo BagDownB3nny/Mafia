@@ -5,12 +5,6 @@ using System.Collections.Generic;
 public class Medium : Role
 {
     [Header("Medium Params")]
-    public override string RolePlayerInteractText => "";
-    public override bool IsAbleToInteractWithPlayers => false;
-
-    public override string InteractWithDoorText => "";
-    public override bool IsAbleToInteractWithDoors => true;
-
     protected override List<SigilName> SigilsAbleToSee => new() { };
 
     [Header("Medium internal params")]
@@ -29,11 +23,6 @@ public class Medium : Role
             timeToDeactivation -= Time.deltaTime;
         }
     }
-    public override void InteractWithPlayer(NetworkIdentity player)
-    {
-        // Implement the interaction logic for Medium with players
-        Debug.Log("Medium interacting with player: " + player.name);
-    }
 
     [Server]
     public void EnableMediumAbility()
@@ -46,14 +35,15 @@ public class Medium : Role
     {
         isEnabled = false;
     }
-    
+
     [Command]
     public void ActivateMediumAbility()
     {
         if (isEnabled)
         {
             RpcActivateMediumAbility(connectionToClient);
-        } else 
+        }
+        else
         {
             PlayerUIManager.instance.RpcSetTemporaryInteractableText(connectionToClient, "You can only use the ouija board past 12am", 1.5f);
         }

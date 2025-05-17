@@ -95,7 +95,10 @@ public class Player : NetworkBehaviour
     [Client]
     private void StartCamera()
     {
-        Camera.main.transform.GetComponent<MoveCamera>().SetCameraPosition(cameraTransform);
+        MoveCamera moveCamera = Camera.main.transform.GetComponent<MoveCamera>();
+        moveCamera.SetCameraPosition(cameraTransform);
+        moveCamera.playerDefaultCameraPosition = cameraTransform;
+
         PlayerCamera.instance.SetOrientation(this.transform);
         Camera.main.transform.localPosition = new Vector3(0, 0, 0);
     }
@@ -242,25 +245,6 @@ public class Player : NetworkBehaviour
         playerUIPrefab.color = color;
     }
 
-    public bool IsAbleToInteractWithPlayers()
-    {
-        if (GetRoleScript() == null)
-        {
-            return false;
-        }
-        return GetRoleScript().IsAbleToInteractWithPlayers;
-    }
-
-    public bool IsAbleToInteractWithDoors()
-    {
-        if (GetRoleScript() == null)
-        {
-            return false;
-        }
-        return GetRoleScript().IsAbleToInteractWithDoors;
-    }
-
-
     [Server]
     public void SetAbleToSeeNametags(bool ableToSee)
     {
@@ -284,7 +268,6 @@ public class Player : NetworkBehaviour
     public void DisablePlayerControllersAndCamera()
     {
         GetComponent<PlayerMovement>().enabled = false;
-        Camera.main.GetComponent<MoveCamera>().enabled = false;
         Camera.main.GetComponent<PlayerCamera>().EnterSpectatorMode();
     }
 

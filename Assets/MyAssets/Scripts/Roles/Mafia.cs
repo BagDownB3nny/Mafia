@@ -4,11 +4,6 @@ using System.Collections.Generic;
 
 public class Mafia : Role
 {
-    public override string RolePlayerInteractText => null;
-    public override bool IsAbleToInteractWithPlayers => false;
-
-    public override string InteractWithDoorText => null;
-    public override bool IsAbleToInteractWithDoors => false;
     protected override List<SigilName> SigilsAbleToSee => new();
 
     [SyncVar(hook = nameof(OnGunStatusChanged))]
@@ -23,12 +18,6 @@ public class Mafia : Role
     private void Start()
     {
         localGunVisual = Camera.main.transform.Find("Gun").gameObject;
-    }
-
-    public override void InteractWithPlayer(NetworkIdentity player)
-    {
-        // Implement the interaction logic for Mafia with players
-        Debug.Log("Mafia interacting with player: " + player.name);
     }
 
     public bool HasGun()

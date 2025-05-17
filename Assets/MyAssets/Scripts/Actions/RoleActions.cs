@@ -11,6 +11,4 @@ public abstract class RoleActions : NetworkBehaviour
         player = GetComponentInParent<Player>();
         playerCamera = PlayerCamera.instance;
     }
-
-    public abstract void HandleRoleSpecificActions();
 }

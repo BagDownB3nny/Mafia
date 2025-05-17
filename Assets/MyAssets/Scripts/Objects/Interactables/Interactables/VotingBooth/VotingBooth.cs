@@ -35,6 +35,11 @@ public class VotingBooth : Interactable
         }
     }
 
+    public override RoleName[] GetRolesThatCanInteract()
+    {
+        return GetAllRoles();
+    }
+
     [Server]
     public void ResetVotes()
     {
@@ -61,19 +66,11 @@ public class VotingBooth : Interactable
         OnVotesChanged?.Invoke();
     }
 
-    [Client]
-    public override void OnHover()
+    public override string GetInteractableText()
     {
-        Highlight();
-        PlayerUIManager.instance.SetInteractableText("Cast vote");
+        return "[E] Cast vote";
     }
 
-    [Client]
-    public override void OnUnhover()
-    {
-        Unhighlight();
-        PlayerUIManager.instance.ClearInteractableText();
-    }
 
     [Client]
     public override void Interact()

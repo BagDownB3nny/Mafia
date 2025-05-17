@@ -2,15 +2,20 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using Mirror;
+using System.Collections.Generic;
+using System;
 
 // Should only be called for the client
 public class PlayerUIManager : NetworkBehaviour
 {
     public static PlayerUIManager instance;
     [SerializeField] private TMP_Text roleText;
-    [SerializeField] private TMP_Text interactableText;
     [SerializeField] private TMP_Text informativeText;
     [SerializeField] private TMP_Text controlsText;
+
+    [Header("Interactable Texts")]
+    private List<(Interactable Interactable, string Text)> interactableTexts = new();
+    [SerializeField] private TMP_Text interactableText;
 
     public void Awake()
     {
@@ -92,6 +97,34 @@ public class PlayerUIManager : NetworkBehaviour
 
         SetInformativeText(roleInformationText, 10f);
         SetControlsText(controlsText);
+    }
+
+    [Client]
+    public void AddInteractableText(Interactable interactable, string text)
+    {
+        if (text == null || text == "") return;
+
+        interactableTexts.Add((interactable, text));
+        SetInteractableTextV2();
+    }
+
+    [Client]
+    public void RemoveInteractableText(Interactable interactable)
+    {
+        interactableTexts.RemoveAll(tuple => tuple.Interactable == interactable);
+        SetInteractableTextV2();
+    }
+
+    [Client]
+    private void SetInteractableTextV2()
+    {
+        string text = "";
+        foreach (var tuple in interactableTexts)
+        {
+            text += tuple.Text;
+            text += "\n";
+        }
+        interactableText.text = text;
     }
 
     [Client]

@@ -7,7 +7,6 @@ public class PlayerCamera : MonoBehaviour
     [Header("User input")]
     private float xRotation = 0.0f;
     private float yRotation = 0.0f;
-    public float mouseSensitivity = 2.00f;
     private Interactable lastInteractable;
 
     [Header("Player info")]
@@ -67,29 +66,26 @@ public class PlayerCamera : MonoBehaviour
     private void HandleLookAtInteractable()
     {
         GameObject lookingAt = GetFilteredLookingAt<Interactable>(5.0f);
-        if (lookingAt == null || lookingAt.GetComponentInParent<Interactable>() == null)
-        {
-            if (lastInteractable != null)
-            {
-                lastInteractable.OnUnhover();
-                // lastInteractable.Unhighlight();
-                lastInteractable = null;
-            }
-            return;
-        }
-        // Is looking at an interactable
-        else if (lookingAt != null && lookingAt.GetComponentInParent<Interactable>() != null)
-        {
-            Interactable currentInteractable = lookingAt.GetComponentInParent<Interactable>();
+        bool isLookingAtInteractable = lookingAt != null && lookingAt.GetComponentInParent<Interactable>() != null;
 
-            // If the current interactable is the same as the last one, do nothing
-            if (currentInteractable == lastInteractable) return;
+        if (isLookingAtInteractable && lastInteractable == null)
+        {
             if (lastInteractable != null)
             {
-                lastInteractable.OnUnhover();
+                lastInteractable.Unhighlight();
+                PlayerUIManager.instance.RemoveInteractableText(lastInteractable);
             }
-            currentInteractable.OnHover();
+
+            Interactable currentInteractable = lookingAt.GetComponentInParent<Interactable>();
+            PubSub.Publish(PubSubEvent.NewInteractableLookedAt, currentInteractable);
             lastInteractable = currentInteractable;
+        }
+        // Case 3: Not looking at interactable + previous interactable
+        else if (!isLookingAtInteractable && lastInteractable != null)
+        {
+            lastInteractable.Unhighlight();
+            PlayerUIManager.instance.RemoveInteractableText(lastInteractable);
+            lastInteractable = null;
         }
     }
 
@@ -100,6 +96,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleMoveCamera()
     {
+        float mouseSensitivity = MouseSenseSlider.mouseSensitivity;
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * 150.0f * mouseSensitivity;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * 150.0f * mouseSensitivity;
 
@@ -185,7 +182,8 @@ public class PlayerCamera : MonoBehaviour
         isSpectatorMode = true;
         if (lastInteractable != null)
         {
-            lastInteractable.OnUnhover();
+            lastInteractable.Unhighlight();
+            PlayerUIManager.instance.RemoveInteractableText(lastInteractable);
             lastInteractable = null;
         }
     }

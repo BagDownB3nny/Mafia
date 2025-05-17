@@ -338,6 +338,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  isMarked: 0
 --- !u!1 &2184973063737604252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,6 +1027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6906925903717376290}
   - component: {fileID: 539495994201946342}
+  - component: {fileID: 7698744840583591128}
   m_Layer: 10
   m_Name: SeerScripts
   m_TagString: Untagged
@@ -1063,7 +1065,25 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  markedPlayerNetId: 0
+  markedPlayer: {fileID: 0}
+  isLookingThroughCrystalBall: 0
+  timeToDeactivation: 0
+--- !u!114 &7698744840583591128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5610600952356056363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d441f5238e4848e7b0476438fd6ea59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  seer: {fileID: 539495994201946342}
 --- !u!1 &5640486018382957152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,6 +1320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6879346083100994513}
   - component: {fileID: 8041685658851238653}
+  - component: {fileID: 8776105264419314423}
   m_Layer: 10
   m_Name: GuardianScripts
   m_TagString: Untagged
@@ -1337,6 +1358,24 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  protectedPlayer: {fileID: 0}
+  protectedHouse: {fileID: 0}
+--- !u!114 &8776105264419314423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5957186964196364939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db08a5bd49e6f4c44b370c7f97bd7bc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  guardian: {fileID: 8041685658851238653}
 --- !u!1 &6387075342258683162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,7 +1838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5106085884163312799
 Transform:
   m_ObjectHideFlags: 0

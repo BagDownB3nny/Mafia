@@ -108,11 +108,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(RoleName.Medium);
+                player.SetRole(RoleName.Guardian);
             }
             else
             {
-                player.SetRole(RoleName.Guardian);
+                player.SetRole(RoleName.Seer);
             }
             // player.SetRole(playerRoles[index]);
             // index++;

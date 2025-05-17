@@ -1,17 +1,15 @@
 using Mirror;
 public class OuijaBoard : Interactable
 {
-    [Client]
-    public override void OnHover()
+    public override RoleName[] GetRolesThatCanInteract()
     {
-        Highlight();
-        PlayerUIManager.instance.SetInteractableText("[E] Use ouija board to commune with the dead");
+        return new RoleName[] { RoleName.Medium };
     }
-    public override void OnUnhover()
+    public override string GetInteractableText()
     {
-        Unhighlight();
-        PlayerUIManager.instance.ClearInteractableText();
+        return "[E] Use ouija board";
     }
+
     public override void Interact()
     {
         Player localPlayer = PlayerManager.instance.localPlayer;
