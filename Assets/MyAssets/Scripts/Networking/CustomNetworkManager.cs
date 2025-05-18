@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Mirror;
 using UnityEngine;
@@ -36,7 +37,7 @@ public class CustomNetworkManager : NetworkManager
             ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
             : Instantiate(playerPrefab);
 
-        // instantiating a "Player" prefab gives it the name "Player(clone)"
+        // Instantiating a "Player" prefab gives it the name "Player(clone)"
         // => appending the connectionId is WAY more useful for debugging!
         player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
         NetworkServer.AddPlayerForConnection(conn, player);
@@ -46,9 +47,17 @@ public class CustomNetworkManager : NetworkManager
         Player playerComponent = player.GetComponent<Player>();
         if (playerHouse != null)
         {
-            playerComponent.house = playerHouse;
-            playerHouse.AssignPlayer(playerComponent);
+            // Ensures earlier AddPlayerForConnection calls are flushed
+            StartCoroutine(AssignPlayerToHouse(playerHouse, playerComponent));
         }
+    }
+
+    // Initiates assignment after ServerAddPlayer completes
+    IEnumerator AssignPlayerToHouse(House playerHouse, Player player)
+    {
+        yield return null;
+        player.house = playerHouse;
+        playerHouse.AssignPlayer(player);
     }
 
     public override void OnServerSceneChanged(string sceneName)
