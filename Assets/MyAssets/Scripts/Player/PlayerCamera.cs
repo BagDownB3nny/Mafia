@@ -120,6 +120,8 @@ public class PlayerCamera : MonoBehaviour
 
     public static GameObject GetLookingAt(Vector3 lookingAtDirection, Vector3 originPosition, float maxDistance)
     {
+        // lookingAtDirection and originPosition are both client-side
+        // The raycast is done on the server, so the hit object might be a different object based on server position
         RaycastHit hit;
         if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance))
         {
