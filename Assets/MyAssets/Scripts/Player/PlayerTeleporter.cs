@@ -8,6 +8,7 @@ public class PlayerTeleporter : NetworkBehaviour
     public Transform mafiaNightSpawnpoint;
     private Transform mafiaHouseTunnel;
     public Transform executionSpot;
+    public Vector3 playerHouseSpawnpoint;
 
     private Player player;
 

@@ -13,6 +13,7 @@ public class House : NetworkBehaviour
     [Header("Role rooms")]
     [SerializeField] private GameObject SeerRoom;
     [SerializeField] private GameObject MediumRoom;
+    [SerializeField] private GameObject MafiaRoom;
 
     public Transform spawnPoint;
     public Transform tunnelTeleporterPosition;
@@ -267,9 +268,14 @@ public class House : NetworkBehaviour
         if (role == RoleName.Seer)
         {
             SeerRoom.SetActive(true);
-        } else if (role == RoleName.Medium)
+        }
+        else if (role == RoleName.Medium)
         {
             MediumRoom.SetActive(true);
+        }
+        else if (role == RoleName.Mafia)
+        {
+            MafiaRoom.SetActive(true);
         }
         RpcSpawnRoleRoom(role);
     }
@@ -280,9 +286,14 @@ public class House : NetworkBehaviour
         if (role == RoleName.Seer)
         {
             SeerRoom.SetActive(true);
-        } else if (role == RoleName.Medium)
+        }
+        else if (role == RoleName.Medium)
         {
             MediumRoom.SetActive(true);
+        }
+        else if (role == RoleName.Mafia)
+        {
+            MafiaRoom.SetActive(true);
         }
     }
 

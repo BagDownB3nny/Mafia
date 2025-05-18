@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class MafiaHouse : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class MafiaHouse : MonoBehaviour
         }
     }
 
+    [Server]
     public void AssignMafiaDoorAuthority()
     {
         List<Player> mafiaPlayers = PlayerManager.instance.GetMafiaPlayers();

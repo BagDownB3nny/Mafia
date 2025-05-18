@@ -6,9 +6,11 @@ public class SeerCrystalBall : Interactable
     {
         return new RoleName[] { RoleName.Seer };
     }
+
     public override string GetInteractableText()
     {
-        return "[E] Use crystal ball";
+        // Not used right now, action has been moved to seer actions
+        return null;
     }
 
     [Client]

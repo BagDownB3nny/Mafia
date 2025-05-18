@@ -44,15 +44,22 @@ public class InteractableVillageHouseMini : Interactable
         {
             return $"{PlayerName}'s house is destroyed. {PlayerName} must be hiding somewhere...";
         }
-        return $"Mark {PlayerName}'s house";
+        if (isMarked)
+        {
+            return $"Unmark {PlayerName}'s house";
+        }
+        else
+        {
+            return $"Mark {PlayerName}'s house";
+        }
     }
 
     [Client]
     public override void Interact()
     {
-        if (isOccupantDead)
+        if (isOccupantDead || isHouseDestroyed)
         {
-            Debug.Log("House occupant is dead");
+            Debug.Log("Cannot interact with this house mini");
             return;
         }
         if (!isMarked)

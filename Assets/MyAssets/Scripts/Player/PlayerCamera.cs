@@ -142,6 +142,12 @@ public class PlayerCamera : MonoBehaviour
     {
         RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxDistance);
         hits = hits.Where(h => h.collider.gameObject.GetComponentInParent<T>() != null).OrderBy(h => h.distance).ToArray();
+
+        Debug.Log($"Filtered hits: {hits.Length}");
+        if (hits.Length == 1)
+        {
+            Debug.Log($"Filtered hits: {hits[0].collider.gameObject.name}");
+        }
         if (hits.Length > 0)
         {
             return hits[0].collider.gameObject;

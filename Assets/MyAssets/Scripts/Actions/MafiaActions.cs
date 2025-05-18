@@ -1,15 +1,72 @@
 using UnityEngine;
 using Mirror;
+using System.Linq;
 
 public class MafiaActions : RoleActions
 {
     private readonly KeyCode equipGunKey = KeyCode.Q;
+
+    public void OnEnable()
+    {
+        if (!isLocalPlayer || !isClient) return;
+
+        PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
+    }
+
+    public void OnDisable()
+    {
+        if (!isLocalPlayer || !isClient) return;
+
+        PubSub.Unsubscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
+    }
 
     [Client]
     private void Update()
     {
         if (!isLocalPlayer) return;
         HandleGunEquipping();
+        HandleMafiaActions();
+    }
+
+    [Client]
+    public void OnLookingAt(Interactable interactable)
+    {
+        bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Mafia);
+        if (!isInteractable) return;
+
+        if (interactable is TeleporterRune teleporterRune)
+        {
+            string interactableText = teleporterRune.GetInteractableText();
+            teleporterRune.Highlight();
+            PlayerUIManager.instance.AddInteractableText(teleporterRune, interactableText);
+        }
+        else if (interactable is InteractableVillageHouseMini houseMini)
+        {
+            string interactableText = houseMini.GetInteractableText();
+            houseMini.Highlight();
+            PlayerUIManager.instance.AddInteractableText(houseMini, interactableText);
+        }
+    }
+
+    [Client]
+    private void HandleMafiaActions()
+    {
+        Interactable interactable = playerCamera.GetInteractable();
+        bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Mafia);
+
+        if (!isInteractable) return;
+
+        if (Input.GetKeyDown(KeyCode.R))
+
+            if (interactable is TeleporterRune teleporterRune)
+            {
+                teleporterRune.Interact();
+            }
+            else if (interactable is InteractableVillageHouseMini houseMini)
+            {
+                houseMini.Interact();
+            }
+
     }
 
     [Client]
@@ -58,36 +115,5 @@ public class MafiaActions : RoleActions
                 mafiaRole.EquipGun();
             }
         }
-    }
-
-    [Command]
-    private void CmdShoot(Vector3 lookingAtDirection, Vector3 playerPosition)
-    {
-        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerPosition, 40.0f);
-        Shootable shootable = GetShootable(lookingAt);
-        if (lookingAt != null && shootable != null)
-        {
-            if (connectionToClient == null)
-            {
-                Debug.LogError("Connection to client is null");
-                return;
-            }
-            shootable.OnShot(connectionToClient);
-        }
-    }
-
-    private Shootable GetShootable(GameObject containsShootable)
-    {
-        if (containsShootable == null)
-        {
-            Debug.LogError("Contains shootable is null");
-            return null;
-        }
-        Shootable shootable = containsShootable.GetComponentInParent<Shootable>();
-        if (shootable == null)
-        {
-            shootable = containsShootable.GetComponentInChildren<Shootable>();
-        }
-        return shootable;
     }
 }

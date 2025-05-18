@@ -36,6 +36,7 @@ public class InteractableDoor : Interactable
             Debug.LogError("Player is null");
             return;
         }
+        Debug.Log("Assigning authority to player: " + player.netId);
         authorisedPlayers.Add(player.netId);
     }
 
