@@ -4,6 +4,7 @@ using System.Collections;
 using Mirror;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 // Should only be called for the client
 public class PlayerUIManager : NetworkBehaviour
@@ -88,7 +89,6 @@ public class PlayerUIManager : NetworkBehaviour
                 break;
             case RoleName.Medium:
                 roleInformationText = "Find the Mafia! Use your ability to talk to the dead wisely!";
-                controlsText = "At night, the dead will visit you! \nTalk to them to find the mafia!";
                 break;
             default:
                 roleInformationText = "Unknown Role!";
@@ -144,6 +144,40 @@ public class PlayerUIManager : NetworkBehaviour
     public void RpcSetTemporaryInteractableText(NetworkConnectionToClient target, string text, float time)
     {
         SetTemporaryInteractableText(text, time);
+    }
+
+    [Server]
+    public void InformGhostsAboutMediumActivation()
+    {
+        List<Player> ghosts = PlayerManager.instance.GetDeadPlayers();
+        List<NetworkConnectionToClient> ghostConnections = ghosts.Select(g => g.connectionToClient).ToList();
+        foreach (NetworkConnectionToClient conn in ghostConnections)
+        {
+            RpcInformGhostAboutMediumActivation(conn);
+        }
+    }
+
+    [TargetRpc]
+    public void RpcInformGhostAboutMediumActivation(NetworkConnectionToClient target)
+    {
+        SetInformativeText("The medium is calling for you...");
+    }
+
+    [Server]
+    public void InformGhostsAboutMediumDeactivation()
+    {
+        List<Player> ghosts = PlayerManager.instance.GetDeadPlayers();
+        List<NetworkConnectionToClient> ghostConnections = ghosts.Select(g => g.connectionToClient).ToList();
+        foreach (NetworkConnectionToClient conn in ghostConnections)
+        {
+            RpcInformGhostsAboutMediumDeactivation(conn);
+        }
+    }
+
+    [TargetRpc]
+    public void RpcInformGhostsAboutMediumDeactivation(NetworkConnectionToClient target)
+    {
+        ClearInformativeText();
     }
 
     [Client]
@@ -217,9 +251,6 @@ public class PlayerUIManager : NetworkBehaviour
     {
         TimeManagerV2.instance.hourlyClientEvents[22].RemoveAllListeners();
         TimeManagerV2.instance.hourlyClientEvents[0].RemoveAllListeners();
-
-        string twelveAmText = "[12AM] The medium is calling for you in his house... Talk to him...";
-        TimeManagerV2.instance.hourlyClientEvents[0].AddListener(() => SetInformativeText(twelveAmText, 10f));
 
         string controlsText = "You are dead! But you can still help your team by talking to the medium at night...";
         SetControlsText(controlsText);

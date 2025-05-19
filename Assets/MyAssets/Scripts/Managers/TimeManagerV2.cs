@@ -130,8 +130,6 @@ public class TimeManagerV2 : NetworkBehaviour
     {
         HouseManager.instance.UnhighlightHousesForOwners();
 
-        PlayerManager.instance.EnableMediumInteractions();
-
         // Give mafia members guns
         PlayerManager.instance.GetMafiaPlayers().ForEach(player =>
         {
@@ -163,8 +161,6 @@ public class TimeManagerV2 : NetworkBehaviour
                 }
             });
         }
-
-        PlayerManager.instance.DisableMediumInteractions();
 
         // Activate voting booth
         VotingManager.instance.StartVoting();

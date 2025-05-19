@@ -1,22 +1,55 @@
 using Mirror;
 public class OuijaBoard : Interactable
 {
+
+    public bool canBeUsed = false;
+    public bool isActivated = false;
+
+
+    public void OnEnable()
+    {
+        TimeManagerV2.instance.hourlyServerEvents[0].AddListener(EnableOuijaBoard);
+        TimeManagerV2.instance.hourlyServerEvents[8].AddListener(DisableOuijaBoard);
+    }
+
+    public void OnDisable()
+    {
+        TimeManagerV2.instance.hourlyServerEvents[0].RemoveListener(EnableOuijaBoard);
+        TimeManagerV2.instance.hourlyServerEvents[8].RemoveListener(DisableOuijaBoard);
+    }
+
+    public void EnableOuijaBoard()
+    {
+        canBeUsed = true;
+    }
+
+    public void DisableOuijaBoard()
+    {
+        canBeUsed = false;
+    }
+
     public override RoleName[] GetRolesThatCanInteract()
     {
         return new RoleName[] { RoleName.Medium };
     }
     public override string GetInteractableText()
     {
-        return "[E] Use ouija board";
+        if (!canBeUsed)
+        {
+            return null;
+        }
+        else if (isActivated)
+        {
+            return "[R] Stop using ouija board";
+        }
+        else
+        {
+            return "[R] Use ouija board";
+        }
     }
 
     public override void Interact()
     {
-        Player localPlayer = PlayerManager.instance.localPlayer;
-        if (localPlayer.role == RoleName.Medium)
-        {
-            Medium mediumScript = localPlayer.GetComponentInChildren<Medium>();
-            mediumScript.ActivateMediumAbility();
-        }
+        // Logic is in medium actions
     }
 }

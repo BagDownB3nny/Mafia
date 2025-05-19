@@ -235,8 +235,6 @@ public class Player : NetworkBehaviour
         }
     }
 
-
-
     [Client]
     public void SetNameTagColor(Color color)
     {
