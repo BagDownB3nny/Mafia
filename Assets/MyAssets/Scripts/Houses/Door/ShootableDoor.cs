@@ -17,13 +17,7 @@ public class ShootableDoor : Shootable
         if (door.isKnockedDown) return true;
         House house = GetComponent<Door>().house;
         HouseProtectionSigil houseProtectionSigil = house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true);
-        if (houseProtectionSigil.isMarked && door.isOutsideDoor)
-        {
-            // Door is protected, not knocked down
-            PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This house is protected by the guardian!", 1.5f);
-            return true;
-        }
-        else if (!house.isMarked && door.isOutsideDoor)
+        if (!house.isMarked && door.isOutsideDoor)
         {
             if (MafiaHouseTable.instance.selectedHouseMini != null)
             {
@@ -37,6 +31,12 @@ public class ShootableDoor : Shootable
                 PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "We should make a plan of attack at the mafia house first...", 1.5f);
                 return false;
             }
+        }
+        else if (houseProtectionSigil.isMarked && door.isOutsideDoor)
+        {
+            // Door is protected, not knocked down
+            PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "This house is protected by the guardian!", 1.5f);
+            return true;
         }
         else
         {
