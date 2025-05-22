@@ -25,7 +25,8 @@ public class PlayerManager : NetworkBehaviour
     public Player localPlayer;
 
     // Key: username, Value: playerNetId
-    public readonly SyncDictionary<string, uint> playerNetIds = new SyncDictionary<string, uint>();
+    public readonly SyncDictionary<int, string> ConnIdToUsernameDict = new SyncDictionary<int, string>();
+    public readonly SyncDictionary<int, uint> ConnIdToNetIdDict = new SyncDictionary<int, uint>();
 
     [SyncVar]
     public int playerCount;
@@ -59,7 +60,7 @@ public class PlayerManager : NetworkBehaviour
         }
         else if (scene == sceneName.Game)
         {
-            AddGamePlayer(username, playerNetId);
+            AddGamePlayer(username, connectionId, player);
         }
     }
 
@@ -70,22 +71,29 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Server]
-    public void AddGamePlayer(string username, uint playerNetId)
+    public void AddGamePlayer(string username, int connectionId, Player player)
     {
-        playerNetIds[username] = playerNetId;
-        playerCount = playerNetIds.Count;
-        if (playerNetIds.Count == NetworkServer.connections.Count && !isGameStarted)
+        ConnIdToUsernameDict[connectionId] = username;
+        ConnIdToNetIdDict[connectionId] = player.netId;
+
+        playerCount = ConnIdToUsernameDict.Count;
+        if (ConnIdToUsernameDict.Count == NetworkServer.connections.Count && !isGameStarted)
         {
             OnAllPlayersLoaded();
             isGameStarted = true;
         }
         else if (isGameStarted)
         {
-            Player joinedPlayer = GetPlayerByNetId(playerNetId);
+            Player joinedPlayer = GetPlayerByConnId(connectionId);
             joinedPlayer.GiveSpectatorMode();
         }
     }
 
+    public Player GetPlayerByConnId(int connId)
+    {
+        uint netId = ConnIdToNetIdDict[connId];
+        return GetPlayerByNetId(netId);
+    }
 
     public void HandleNetworkStop()
     {
@@ -151,7 +159,7 @@ public class PlayerManager : NetworkBehaviour
         // This is just a placeholder
         // In a real game, you would have a more complex algorithm to generate roles
         // For example, in a 6 player game, there could be 1 werewolf, 1 seer, 1 medium, and 3 villagers
-        RoleName[] roles = new RoleName[playerNetIds.Count];
+        RoleName[] roles = new RoleName[ConnIdToUsernameDict.Count];
 
         for (int i = 0; i < roles.Length; i++)
         {
@@ -186,17 +194,36 @@ public class PlayerManager : NetworkBehaviour
     public List<Player> GetAllPlayers()
     {
         List<Player> players = new();
-        foreach (uint netId in playerNetIds.Values)
+        foreach (uint netId in ConnIdToNetIdDict.Values)
         {
             players.Add(GetPlayerByNetId(netId));
         }
         return players;
     }
 
+
     public List<string> GetAllPlayerNames()
     {
-        return playerNetIds.Keys.ToList();
+        return ConnIdToUsernameDict.Values.ToList();
     }
+
+    public List<int> GetAllPlayerConnIds()
+    {
+        return ConnIdToUsernameDict.Keys.ToList();
+    }
+
+    public string GetPlayerUsernameByConnId(int connId)
+    {
+        if (ConnIdToUsernameDict.ContainsKey(connId))
+        {
+            return ConnIdToUsernameDict[connId];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 
     public Player GetPlayerByNetId(uint netId)
     {
@@ -207,22 +234,6 @@ public class PlayerManager : NetworkBehaviour
         else if (NetworkClient.spawned.ContainsKey(netId))
         {
             return NetworkClient.spawned[netId].GetComponent<Player>();
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public Player GetPlayerByName(string name)
-    {
-        if (NetworkServer.spawned.ContainsKey(playerNetIds[name]))
-        {
-            return NetworkServer.spawned[playerNetIds[name]].GetComponent<Player>();
-        }
-        else if (NetworkClient.spawned.ContainsKey(playerNetIds[name]))
-        {
-            return NetworkClient.spawned[playerNetIds[name]].GetComponent<Player>();
         }
         else
         {

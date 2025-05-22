@@ -7,14 +7,11 @@ public class VotingBooth : Interactable
 {
 
 
-    // Key is player voting, value is player voted for
-    public Dictionary<string, string> votes = new Dictionary<string, string>();
+    // Key is player voting, (connId) value is player voted for (connId)
+    public Dictionary<int, int> votes = new Dictionary<int, int>();
 
-    // Key is player voted for, value is number of votes
-    public Dictionary<string, int> votesCount = new Dictionary<string, int>();
-
-    // Key is player voted for, value is first player to vote for them
-    public Dictionary<string, string> executioners = new Dictionary<string, string>();
+    // Key is player voted for (connId), value is number of votes
+    public Dictionary<int, int> votesCount = new Dictionary<int, int>();
 
     // Observer
     public event Action OnVotesChanged;
@@ -45,7 +42,6 @@ public class VotingBooth : Interactable
     {
         votes.Clear();
         votesCount.Clear();
-        executioners.Clear();
 
         InitialiseDictionaries();
     }
@@ -54,14 +50,10 @@ public class VotingBooth : Interactable
     [Server]
     public void InitialiseDictionaries()
     {
-        List<string> playerNames = PlayerManager.instance.GetAllPlayerNames();
-        foreach (string playerName in playerNames)
+        List<int> playerConnIds = PlayerManager.instance.GetAllPlayerConnIds();
+        foreach (int connId in playerConnIds)
         {
-            votesCount.Add(playerName, 0);
-        }
-        foreach (string playerName in playerNames)
-        {
-            executioners.Add(playerName, "");
+            votesCount.Add(connId, 0);
         }
         OnVotesChanged?.Invoke();
     }
@@ -78,65 +70,59 @@ public class VotingBooth : Interactable
         votingSlip.Enable();
     }
 
-    // Dictionary of key: player voting, value: player voted for
-    [Command(requiresAuthority = false)]
-    public void CmdVote(string playerVotingName, string playerVotedForName)
+    [Server]
+    public void SubmitVote(int playerVotingConnId, int playerVotingForConnId)
     {
-        Debug.Log($"{playerVotingName} voted for {playerVotedForName} [Server]");
-        if (votes.ContainsKey(playerVotingName))
+        if (votes.ContainsKey(playerVotingConnId))
         {
-            RemoveVote(playerVotingName);
+            RemoveVote(playerVotingConnId);
         }
-        AddVote(playerVotingName, playerVotedForName);
+        AddVote(playerVotingConnId, playerVotingForConnId);
         OnVotesChanged?.Invoke();
     }
 
     [Server]
-    private void AddVote(string playerVotingName, string playerVotedForName)
+    private void AddVote(int playerVotingConnId, int playerVotedForConnId)
     {
-        votes.Add(playerVotingName, playerVotedForName);
-        votesCount[playerVotedForName]++;
-        if (executioners[playerVotedForName] == "")
-        {
-            executioners[playerVotedForName] = playerVotingName;
-        }
+        votes.Add(playerVotingConnId, playerVotedForConnId);
+        votesCount[playerVotedForConnId]++;
     }
 
     [Server]
-    private void RemoveVote(string playerVotingName)
+    private void RemoveVote(int playerVotingConnId)
     {
-        string playerVotedForPreviously = votes[playerVotingName];
-        votes.Remove(playerVotingName);
+        int playerVotedForPreviously = votes[playerVotingConnId];
+        votes.Remove(playerVotedForPreviously);
         votesCount[playerVotedForPreviously]--;
-        if (votesCount[playerVotedForPreviously] == 0)
-        {
-            executioners[playerVotedForPreviously] = "";
-        }
     }
 
     [Server]
-    public Dictionary<string, int> GetVotesCount()
+    public Dictionary<int, int> GetVotesCount()
     {
         return votesCount;
     }
 
     [Server]
-    public string GetVotedOutPlayer()
+    public Player GetVotedOutPlayer()
     {
         int maxVotes = 0;
-        string playerVotedOut = "";
-        foreach (KeyValuePair<string, int> vote in votesCount)
+        int playerVotedOutConnId = -1;
+        foreach (KeyValuePair<int, int> vote in votesCount)
         {
             if (vote.Value > maxVotes)
             {
                 maxVotes = vote.Value;
-                playerVotedOut = vote.Key;
+                playerVotedOutConnId = vote.Key;
             }
             else if (vote.Value == maxVotes)
             {
-                playerVotedOut = "";
+                playerVotedOutConnId = -1;
             }
         }
+
+        if (playerVotedOutConnId == -1) return null; // No one voted out
+
+        Player playerVotedOut = PlayerManager.instance.GetPlayerByConnId(playerVotedOutConnId);
         return playerVotedOut;
     }
 }

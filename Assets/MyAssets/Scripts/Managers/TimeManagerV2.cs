@@ -183,21 +183,7 @@ public class TimeManagerV2 : NetworkBehaviour
     {
         // Deactivate voting booth
         VotingManager.instance.StopVoting();
-
-        // Start execution
-        string votedOutPlayerName = VotingBooth.instance.GetVotedOutPlayer();
-
-        if (votedOutPlayerName != "")
-        {
-            Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
-            votedOutPlayer.GetComponent<PlayerTeleporter>().TeleportToExecutionSpot();
-
-            // TODO: Restrict that player's movement from 6pm till 11pm (gives chance for them to be spared)
-            votedOutPlayer.GetComponent<PlayerMovement>().RpcLockPlayerMovement();
-            votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(true);
-        }
-
-        // Turn on all lights
+        VotingManager.instance.StartExecution();
         LightManager.instance.TurnOnAllLights();
     }
 
@@ -205,16 +191,7 @@ public class TimeManagerV2 : NetworkBehaviour
     [Server]
     private void TenPmEvent()
     {
-        // End execution
-        string votedOutPlayerName = VotingBooth.instance.GetVotedOutPlayer();
-
-        if (votedOutPlayerName != "")
-        {
-            Player votedOutPlayer = PlayerManager.instance.GetPlayerByName(votedOutPlayerName);
-            votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
-            votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(false);
-        }
-
+        VotingManager.instance.StopExecution();
         HouseManager.instance.HighlightHousesForOwners();
     }
 

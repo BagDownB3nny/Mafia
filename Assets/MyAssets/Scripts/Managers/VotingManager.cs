@@ -33,4 +33,40 @@ public class VotingManager : NetworkBehaviour
     {
         votingBooth.gameObject.SetActive(false);
     }
+
+    [Server]
+    public void StartExecution()
+    {
+        // Start execution
+        Player votedOutPlayer = VotingBooth.instance.GetVotedOutPlayer();
+        if (votedOutPlayer == null) return; // Tie breaker case, no one voted out
+
+        ExecutePlayer(votedOutPlayer);
+    }
+
+    [Server]
+    public void ExecutePlayer(Player votedOutPlayer)
+    {
+        votedOutPlayer.GetComponent<PlayerTeleporter>().TeleportToExecutionSpot();
+        votedOutPlayer.GetComponent<PlayerMovement>().RpcLockPlayerMovement();
+        votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(true);
+    }
+
+    [Server]
+    public void StopExecution()
+    {
+        // End execution
+        Player votedOutPlayer = VotingBooth.instance.GetVotedOutPlayer();
+        if (votedOutPlayer == null) return; // Tie breaker case, no one voted out
+
+        StopPlayerExecution(votedOutPlayer);
+    }
+
+
+    [Server]
+    public void StopPlayerExecution(Player votedOutPlayer)
+    {
+        votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
+        votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(false);
+    }
 }

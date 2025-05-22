@@ -27,7 +27,6 @@ public class GameManager : NetworkBehaviour
         PlayerManager.instance.AssignRoles();
         MafiaHouse.instance.AssignMafiaDoorAuthority();
         VotingBooth.instance.InitialiseDictionaries();
-        VotingSlip.instance.GenerateVotingSlip();
         VotingManager.instance.StopVoting();
         TimeManagerV2.instance.StartGame();
         DayCycleManager.instance.StartGame();

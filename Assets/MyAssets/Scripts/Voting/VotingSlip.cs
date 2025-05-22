@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class VotingSlip : MonoBehaviour
     [SerializeField] private GameObject votingPlayerRow;
     [SerializeField] private VotingBooth votingBooth;
     private VotingRow currentlySelectedRow;
+
+    private bool isVotingSlipGenerated = false;
 
     public static VotingSlip instance;
 
@@ -36,9 +39,7 @@ public class VotingSlip : MonoBehaviour
     {
         foreach (Transform child in VotingTogglesContainer.transform)
         {
-            Debug.Log(killedPlayer.steamUsername);
             TMP_Text textComponent = child.GetComponentInChildren<TMP_Text>();
-            Debug.Log(textComponent.text);
             if (textComponent.text == killedPlayer.steamUsername)
             {
                 string strikedText = $"<s>{killedPlayer.steamUsername}</s>";
@@ -49,9 +50,10 @@ public class VotingSlip : MonoBehaviour
 
     public void Enable()
     {
-        if (playerNames == null)
+        if (!isVotingSlipGenerated)
         {
             GenerateVotingSlip();
+            isVotingSlipGenerated = true;
         }
         PlayerCamera.instance.EnterCursorMode();
         VotingSlipUI.SetActive(true);
@@ -65,12 +67,19 @@ public class VotingSlip : MonoBehaviour
 
     public void GenerateVotingSlip()
     {
-        playerNames = PlayerManager.instance.GetAllPlayerNames();
-        for (int i = 0; i < playerNames.Count; i++)
+        SyncDictionary<int, string> connIdToUsername = PlayerManager.instance.ConnIdToUsernameDict;
+        foreach (KeyValuePair<int, string> kvp in connIdToUsername)
         {
+            int connId = kvp.Key;
+            string username = kvp.Value;
+            Debug.Log($"Generating voting slip for {username} with connId {connId}");
+
             GameObject votingRow = Instantiate(votingPlayerRow, new Vector3(0, 0, 0), Quaternion.identity);
             votingRow.transform.SetParent(VotingTogglesContainer.transform);
-            votingRow.GetComponentInChildren<TMP_Text>().text = playerNames[i];
+
+            VotingRow row = votingRow.GetComponent<VotingRow>();
+            row.SetPlayerName(username);
+            row.playerConnId = connId;
         }
     }
 
@@ -81,10 +90,10 @@ public class VotingSlip : MonoBehaviour
         {
             if (toggle.isOn)
             {
-                string playerVotedForName = currentlySelectedRow.GetComponentInChildren<TMP_Text>().text;
-                string playerVotingName = PlayerManager.instance.GetLocalPlayerName();
-                Debug.Log($"{playerVotingName} voted for {playerVotedForName}");
-                votingBooth.CmdVote(playerVotingName, playerVotedForName);
+                int playerVotedForConnId = currentlySelectedRow.playerConnId;
+                Player localPlayer = PlayerManager.instance.localPlayer;
+                PlayerVoter playerVoter = localPlayer.GetComponent<PlayerVoter>();
+                playerVoter.CmdVote(playerVotedForConnId);
                 ExitVotingSlip();
             }
         }

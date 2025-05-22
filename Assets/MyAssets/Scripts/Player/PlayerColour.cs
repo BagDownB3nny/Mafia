@@ -20,7 +20,6 @@ public class PlayerColour : NetworkBehaviour
         // Im using white as a null value since I cant return null
         if (color == Color.white) return;
 
-        Debug.Log("Setting player colour to: " + color);
         originalPlayerColor = color;
     }
 

@@ -263,6 +263,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 9185389385487116618}
+  playerNameText: {fileID: 5498079458061303766}
+  playerConnId: 0
+  playerName: 
 --- !u!1 &7150665930567588685
 GameObject:
   m_ObjectHideFlags: 0

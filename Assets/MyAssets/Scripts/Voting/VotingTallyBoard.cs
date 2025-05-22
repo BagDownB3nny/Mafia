@@ -19,8 +19,18 @@ public class VotingTallyBoard : NetworkBehaviour
 
     private void UpdateTallyBoard()
     {
-        Dictionary<string, int> votesCount = votingBooth.GetVotesCount();
-        string votesCountJson = JsonConvert.SerializeObject(votesCount);
+        Dictionary<int, int> votesCountWithConnId = votingBooth.GetVotesCount();
+        // map each key to a username
+        Dictionary<string, int> votesCountWithUsername = new Dictionary<string, int>();
+        foreach (KeyValuePair<int, int> voteCount in votesCountWithConnId)
+        {
+            int connId = voteCount.Key;
+            int votes = voteCount.Value;
+            string username = PlayerManager.instance.GetPlayerUsernameByConnId(connId);
+            votesCountWithUsername.Add(username, votes);
+        }
+
+        string votesCountJson = JsonConvert.SerializeObject(votesCountWithUsername);
         RpcUpdateTallyBoard(votesCountJson);
     }
 
