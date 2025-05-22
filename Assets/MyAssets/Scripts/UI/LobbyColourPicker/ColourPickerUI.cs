@@ -3,6 +3,7 @@ using UnityEngine;
 public class ColourPickerUI : MonoBehaviour
 {
     [SerializeField] private GameObject colourButtons;
+    [SerializeField] private GameObject colourWindow;
 
     public void Start()
     {
@@ -28,5 +29,11 @@ public class ColourPickerUI : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void ExitWindow()
+    {
+        colourWindow.SetActive(false);
+        PlayerCamera.instance.ExitCursorMode();
     }
 }

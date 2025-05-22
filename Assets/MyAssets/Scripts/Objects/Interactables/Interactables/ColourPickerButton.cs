@@ -21,20 +21,8 @@ public class ColourPickerButton : Interactable
 
     public override void Interact()
     {
-        if (colourButtonWindow != null)
-        {
-            if (colourButtonWindow.activeSelf)
-            {
-                colourButtonWindow.SetActive(false);
-                isColourButtonWindowActive = false;
-                PlayerCamera.instance.isCursorMode = false;
-            }
-            else
-            {
-                colourButtonWindow.SetActive(true);
-                isColourButtonWindowActive = true;
-                PlayerCamera.instance.isCursorMode = true;
-            }
-        }
+        colourButtonWindow.SetActive(true);
+        isColourButtonWindowActive = true;
+        PlayerCamera.instance.EnterCursorMode();
     }
 }

@@ -136,7 +136,9 @@ public class Player : NetworkBehaviour
         Debug.Log($"Updated steam username: {steamUsername}");
         if (PlayerManager.instance)
         {
-            PlayerManager.instance.AddPlayer(steamUsername, netId);
+            NetworkConnectionToClient conn = connectionToClient;
+            int connectionId = conn.connectionId;
+            PlayerManager.instance.AddPlayer(this);
         }
     }
 

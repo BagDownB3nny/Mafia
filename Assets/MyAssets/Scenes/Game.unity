@@ -19760,6 +19760,10 @@ PrefabInstance:
       value: PlayerManager
       objectReference: {fileID: 0}
     - target: {fileID: 4214671968615723524, guid: 32255df267e1f4e9189ed09beaca11a0, type: 3}
+      propertyPath: scene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214671968615723524, guid: 32255df267e1f4e9189ed09beaca11a0, type: 3}
       propertyPath: isGameStarted
       value: 0
       objectReference: {fileID: 0}

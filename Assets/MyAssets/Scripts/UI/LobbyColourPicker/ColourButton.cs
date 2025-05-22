@@ -6,9 +6,13 @@ public class ColourButton : MonoBehaviour
 {
     public Color color;
 
+    public void Start()
+    {
+        GetComponent<Button>().onClick.AddListener(OnClick);
+    }
+
     public void SetColour(Color newColor)
     {
-        Debug.Log("Setting colour to: " + newColor);
         color = newColor;
         GetComponent<Image>().color = color;
     }

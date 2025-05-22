@@ -55,12 +55,10 @@ public class PlayerColourManager : NetworkBehaviour
     }
 
     [Server]
-    public void OnPlayerJoinedLobby(NetworkConnection conn)
+    public void OnPlayerJoinedLobby(Player player, int connectionId)
     {
-        int connectionId = conn.connectionId;
         Color colour = GetUnusedColour();
-        playerColours[connectionId] = colour;
-        PlayerColour playerColour = conn.identity.GetComponent<PlayerColour>();
+        PlayerColour playerColour = player.GetComponent<PlayerColour>();
         playerColour.SetColor(colour);
     }
 
@@ -75,28 +73,28 @@ public class PlayerColourManager : NetworkBehaviour
     }
 
     [Server]
-    public void OnPlayerChangedColour(NetworkConnection conn, Color newColour)
+    public void OnPlayerChangedColour(Player player, Color newColour)
     {
-        int connectionId = conn.connectionId;
+        int connectionId = player.connectionToClient.connectionId;
         if (playerColours.ContainsKey(connectionId))
         {
             playerColours[connectionId] = newColour;
-            PlayerColour playerColour = conn.identity.GetComponent<PlayerColour>();
-            playerColour.SetColor(newColour);
+        }
+        else
+        {
+            playerColours.Add(connectionId, newColour);
         }
     }
 
     [Server]
-    public void OnGameStart()
+    public Color GetColour(int connectionId)
     {
-        // Set all players to their assigned colours
-        foreach (var playerColour in playerColours)
+        if (!playerColours.ContainsKey(connectionId))
         {
-            int connectionId = playerColour.Key;
-            Color colour = playerColour.Value;
-            PlayerColour player = NetworkServer.connections[connectionId].identity.GetComponent<PlayerColour>();
-            player.SetColor(colour);
+            // Im using white as a null value since I cant return null
+            return Color.white;
         }
+        return playerColours[connectionId];
     }
 
 

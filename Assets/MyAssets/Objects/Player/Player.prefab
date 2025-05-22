@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 7710177438006953709}
   - component: {fileID: 3354859831561668301}
   - component: {fileID: 5076295586729670798}
+  - component: {fileID: 4865196368662244860}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -799,6 +800,22 @@ MonoBehaviour:
   corpsePrefab: {fileID: 8579996662577155270, guid: 0e6a36458ad554a5f830fdee240477b8, type: 3}
   ghostVisual: {fileID: 7622600152990933505}
   aliveVisual: {fileID: 8320479938080240892}
+--- !u!114 &4865196368662244860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3241956818840615573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463a179a94e864c37abc0498d4ca5283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  playerModel: {fileID: 8636581749400225338}
 --- !u!1 &3368703614637123062
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,13 +3,19 @@ using Mirror;
 using System.Linq;
 using System.Collections.Generic;
 
+public enum sceneName
+{
+    Lobby,
+    Game
+}
+
 public class PlayerManager : NetworkBehaviour
 {
     // Is singleton
     public static PlayerManager instance;
 
     // Is false if the scene is lobby, is true if the scene is game
-    [SerializeField] public bool isGamePlayerManager;
+    [SerializeField] public sceneName scene;
 
     // A list containing all the roles for the current lobby
     // This list should be updated everytime a player joins or leaves the lobby
@@ -42,10 +48,30 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Server]
-    public void AddPlayer(string username, uint playerNetId)
+    public void AddPlayer(Player player)
     {
-        if (!isGamePlayerManager) return;
+        string username = player.steamUsername;
+        uint playerNetId = player.netId;
+        int connectionId = player.connectionToClient.connectionId;
+        if (scene == sceneName.Lobby)
+        {
+            AddLobbyPlayer(player, connectionId);
+        }
+        else if (scene == sceneName.Game)
+        {
+            AddGamePlayer(username, playerNetId);
+        }
+    }
 
+    [Server]
+    public void AddLobbyPlayer(Player player, int connectionId)
+    {
+        PlayerColourManager.instance.OnPlayerJoinedLobby(player, connectionId);
+    }
+
+    [Server]
+    public void AddGamePlayer(string username, uint playerNetId)
+    {
         playerNetIds[username] = playerNetId;
         playerCount = playerNetIds.Count;
         if (playerNetIds.Count == NetworkServer.connections.Count && !isGameStarted)
