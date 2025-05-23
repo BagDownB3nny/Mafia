@@ -31,28 +31,25 @@ public class LocalPlayerGun : NetworkBehaviour
             }
             shotCooldown = timePerShot;
             Vector3 currentLookingAtDirection = playerCamera.GetLookingAtDirection();
-            CmdShoot(currentLookingAtDirection, playerCamera.transform.position);
+            GameObject shotAt = PlayerCamera.GetLookingAt(currentLookingAtDirection, playerCamera.transform.position, 40.0f);
+            Shootable shootable = GetShootable(shotAt);
+            CmdShoot(shootable);
         }
     }
 
     [Command]
-    private void CmdShoot(Vector3 lookingAtDirection, Vector3 playerPosition)
+    private void CmdShoot(Shootable shootable)
     {
-        GameObject lookingAt = PlayerCamera.GetLookingAt(lookingAtDirection, playerPosition, 40.0f);
-        NetworkConnectionToClient connectionToPlayer = PlayerManager.instance.localPlayer.connectionToClient;
-        Shootable shootable = GetShootable(lookingAt);
-        if (lookingAt != null && shootable != null)
+        if (shootable == null)
         {
-            if (connectionToPlayer == null)
-            {
-                Debug.LogError("Connection to client is null");
-                return;
-            }
-            bool didShotGoThrough = shootable.OnShot(connectionToPlayer);
-            if (didShotGoThrough)
-            {
-                RpcRemotePlayerShot();
-            }
+            RpcRemotePlayerShot();
+            return;
+        }
+
+        bool didShotGoThrough = shootable.OnShot(connectionToClient);
+        if (didShotGoThrough)
+        {
+            RpcRemotePlayerShot();
         }
         else
         {

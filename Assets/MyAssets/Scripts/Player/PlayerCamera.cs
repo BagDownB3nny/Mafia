@@ -111,7 +111,10 @@ public class PlayerCamera : MonoBehaviour
     public static GameObject GetLookingAt(Vector3 lookingAtDirection, Transform origin, float maxDistance)
     {
         RaycastHit hit;
-        if (Physics.Raycast(origin.position, lookingAtDirection, out hit, maxDistance))
+        // Offset the origin position to avoid hitting the player
+        Vector3 originPosition = origin.position;
+        Vector3 offsetOrigin = OffsetPosition(originPosition, lookingAtDirection);
+        if (Physics.Raycast(offsetOrigin, lookingAtDirection, out hit, maxDistance))
         {
             return hit.collider.gameObject;
         }
@@ -123,17 +126,30 @@ public class PlayerCamera : MonoBehaviour
         // lookingAtDirection and originPosition are both client-side
         // The raycast is done on the server, so the hit object might be a different object based on server position
         RaycastHit hit;
-        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance))
+        // Offset the origin position to avoid hitting the player
+        Vector3 offsetOrigin = OffsetPosition(originPosition, lookingAtDirection);
+        if (Physics.Raycast(offsetOrigin, lookingAtDirection, out hit, maxDistance))
         {
             return hit.collider.gameObject;
         }
         return null;
     }
 
+    private static Vector3 OffsetPosition(Vector3 origin, Vector3 direction)
+    {
+        float distance = 5f; // Adjust this value as needed
+        Vector3 offset = direction * distance;
+        return origin + offset;
+    }
+
     public GameObject GetLookingAt(float maxDistance)
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance))
+        // Offset the origin position to avoid hitting the player
+        Vector3 lookingAtDirection = transform.forward;
+        Vector3 originPosition = transform.position;
+        Vector3 offsetOrigin = OffsetPosition(originPosition, lookingAtDirection);
+        if (Physics.Raycast(offsetOrigin, lookingAtDirection, out hit, maxDistance))
         {
             return hit.collider.gameObject;
         }
@@ -142,7 +158,12 @@ public class PlayerCamera : MonoBehaviour
 
     public GameObject GetFilteredLookingAt<T>(float maxDistance)
     {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxDistance);
+        // Offset the origin position to avoid hitting the player
+        Vector3 lookingAtDirection = transform.forward;
+        Vector3 originPosition = transform.position;
+        Vector3 offsetOrigin = OffsetPosition(originPosition, lookingAtDirection);
+
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, lookingAtDirection, maxDistance);
         hits = hits.Where(h => h.collider.gameObject.GetComponentInParent<T>() != null).OrderBy(h => h.distance).ToArray();
 
         if (hits.Length > 0)

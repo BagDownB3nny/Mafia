@@ -1,5 +1,6 @@
 using Mirror;
 using TMPro;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class ShootablePlayer : Shootable
@@ -9,6 +10,8 @@ public class ShootablePlayer : Shootable
     [Server]
     public override bool OnShot(NetworkConnectionToClient shooter)
     {
+        if (shooter == connectionToClient) return false;
+
         if (player.GetComponentInChildren<PlayerProtectionSigil>(includeInactive: true).isMarked)
         {
             // If the player is protected, do not shoot
