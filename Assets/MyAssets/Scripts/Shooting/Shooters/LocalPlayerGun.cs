@@ -51,15 +51,12 @@ public class LocalPlayerGun : NetworkBehaviour
         {
             RpcRemotePlayerShot();
         }
-        else
-        {
-            RpcRemotePlayerShot();
-        }
     }
 
     [ClientRpc]
     private void RpcRemotePlayerShot()
     {
+        Debug.Log("BANG");
         pistolShotSound.Play();
     }
 

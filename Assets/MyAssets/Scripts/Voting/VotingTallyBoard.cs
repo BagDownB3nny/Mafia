@@ -27,6 +27,8 @@ public class VotingTallyBoard : NetworkBehaviour
             int connId = voteCount.Key;
             int votes = voteCount.Value;
             string username = PlayerManager.instance.GetPlayerUsernameByConnId(connId);
+
+            // TODO [BUG] Duplicate usernames will crash game
             votesCountWithUsername.Add(username, votes);
         }
 
