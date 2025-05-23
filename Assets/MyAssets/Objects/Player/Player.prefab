@@ -817,6 +817,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   playerModel: {fileID: 8636581749400225338}
+  originalPlayerColour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1457075471946208697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,7 +1982,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 4ad43327123284f628fb3c1a10649465, type: 3}
   m_Resource: {fileID: 8300000, guid: 4ad43327123284f628fb3c1a10649465, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1990,7 +1991,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0
-  MaxDistance: 1000
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
