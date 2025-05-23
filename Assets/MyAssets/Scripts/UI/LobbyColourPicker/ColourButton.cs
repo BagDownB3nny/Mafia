@@ -24,6 +24,11 @@ public class ColourButton : MonoBehaviour
     [Client]
     public void OnClick()
     {
+        if (unselectableColourImage.activeSelf)
+        {
+            Debug.Log("This colour is already taken");
+            return;
+        }
         Player player = PlayerManager.instance.localPlayer;
         player.GetComponent<PlayerColour>().CmdSetColour(colour);
         // colourPickerUI.SetCurrentColourButton(this);
