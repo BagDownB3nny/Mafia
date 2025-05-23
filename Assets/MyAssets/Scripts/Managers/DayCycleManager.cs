@@ -15,16 +15,28 @@ public class DayCycleManager : NetworkBehaviour
             {"environmentLightingIntensity", 0.4f},
             {"environmentReflectionsIntensity", 0.5f},
             {"skyboxExposure", 0.3f},
-            {"fogDensity", 0f}
+            {"fogDensity", 0f},
+            {"saturation", -100f}
         }},
 
-        {"2PmSettings", new Dictionary<string, float> {
+        { "9AmSettings", new Dictionary<string, float> {
+            {"sunIntensity", 0.7f},
+            {"moonIntensity", 0.05f},
+            {"environmentLightingIntensity", 0.6f},
+            {"environmentReflectionsIntensity", 0.7f},
+            {"skyboxExposure", 0.7f},
+            {"fogDensity", 0f},
+            {"saturation", 0f}
+        }},
+
+        { "2PmSettings", new Dictionary<string, float> {
             {"sunIntensity", 1f},
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 1f},
             {"environmentReflectionsIntensity", 1f},
             {"skyboxExposure", 1.5f},
-            {"fogDensity", 0f}
+            {"fogDensity", 0f},
+            {"saturation", 0f}
         }},
 
         {"6PmSettings", new Dictionary<string, float> {
@@ -33,25 +45,38 @@ public class DayCycleManager : NetworkBehaviour
             {"environmentLightingIntensity", 0.4f},
             {"environmentReflectionsIntensity", 0.5f},
             {"skyboxExposure", 0.3f},
-            {"fogDensity", 0f}
+            {"fogDensity", 0f},
+            {"saturation", 0f}
         }},
 
         {"7PmSettings", new Dictionary<string, float> {
-            {"sunIntensity", 0f},
+            {"sunIntensity", 0.2f},
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.4f},
             {"environmentReflectionsIntensity", 0.5f},
             {"skyboxExposure", 0.3f},
-            {"fogDensity", 0f}
+            {"fogDensity", 0f},
+            {"saturation", 0f}
         }},
 
-        {"12AmSettings", new Dictionary<string, float> {
+        {"11PmSettings", new Dictionary<string, float> {
+            {"sunIntensity", 0f},
+            {"moonIntensity", 0.05f},
+            {"environmentLightingIntensity", 0.3f},
+            {"environmentReflectionsIntensity", 0.5f},
+            {"skyboxExposure", 0.2f},
+            {"fogDensity", 0f},
+            {"saturation", 0f}
+        }},
+
+        { "12AmSettings", new Dictionary<string, float> {
             {"sunIntensity", 0f},
             {"moonIntensity", 0.05f},
             {"environmentLightingIntensity", 0.2f},
             {"environmentReflectionsIntensity", 0.5f},
             {"skyboxExposure", 0.1f},
-            {"fogDensity", 0.01f}
+            {"fogDensity", 0.01f},
+            {"saturation", -100f}
         }},
 
         {"7AmSettings", new Dictionary<string, float> {
@@ -60,7 +85,8 @@ public class DayCycleManager : NetworkBehaviour
             {"environmentLightingIntensity", 0.2f},
             {"environmentReflectionsIntensity", 0.5f},
             {"skyboxExposure", 0.1f},
-            {"fogDensity", 0.01f}
+            {"fogDensity", 0.01f},
+            {"saturation", -100f}
         }},
     };
 
@@ -74,11 +100,17 @@ public class DayCycleManager : NetworkBehaviour
         }},
         {"8Am", new Dictionary<string, object> {
             {"hour", 8},
-            {"nextTransition", "2Pm"},
+            {"nextTransition", "9Am"},
             {"settings", timeSettings["8AmSettings"]},
-            {"durationToNextTransition", 6}
+            {"durationToNextTransition", 1}
         }},
-        {"2Pm", new Dictionary<string, object> {
+        {"9Am", new Dictionary<string, object> {
+            {"hour", 9},
+            {"nextTransition", "2Pm"},
+            {"settings", timeSettings["9AmSettings"]},
+            {"durationToNextTransition", 5}
+        }},
+        { "2Pm", new Dictionary<string, object> {
             {"hour", 14},
             {"nextTransition", "6Pm"},
             {"settings", timeSettings["2PmSettings"]},
@@ -92,11 +124,17 @@ public class DayCycleManager : NetworkBehaviour
         }},
         {"7Pm", new Dictionary<string, object> {
             {"hour", 19},
-            {"nextTransition", "12Am"},
+            {"nextTransition", "11Pm"},
             {"settings", timeSettings["7PmSettings"]},
-            {"durationToNextTransition", 5}
+            {"durationToNextTransition", 4}
         }},
-        {"12Am", new Dictionary<string, object> {
+        {"11Pm", new Dictionary<string, object> {
+            {"hour", 23},
+            {"nextTransition", "12Am"},
+            {"settings", timeSettings["11PmSettings"]},
+            {"durationToNextTransition", 1}
+        }},
+        { "12Am", new Dictionary<string, object> {
             {"hour", 0},
             {"nextTransition", "7Am"},
             {"settings", timeSettings["12AmSettings"]},
@@ -208,6 +246,7 @@ public class DayCycleManager : NetworkBehaviour
 
         // Assuming you have references to your sun and moon lights
         // Light moon = GameObject.Find("Moon").GetComponent<Light>();
+        VolumeManager.instance.SetSaturation(currentSettings["saturation"]);
 
         UpdateSunRotation();
         // change fog density
