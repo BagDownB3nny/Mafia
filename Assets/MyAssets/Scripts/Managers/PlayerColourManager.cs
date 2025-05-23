@@ -28,7 +28,7 @@ public class PlayerColourManager : NetworkBehaviour
             HexToColor("#fa8072")      // salmon
         };
 
-    SyncDictionary<int, Color> playerColours = new SyncDictionary<int, Color>();
+    public SyncDictionary<int, Color> playerColours = new SyncDictionary<int, Color>();
 
     public void Awake()
     {

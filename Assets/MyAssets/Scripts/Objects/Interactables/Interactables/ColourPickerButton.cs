@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class ColourPickerButton : Interactable
 {
-
-    private bool isColourButtonWindowActive = false;
-    [SerializeField] public GameObject colourButtonWindow;
+    [SerializeField] public ColourPickerUI colourPickerUI;
 
 
     public override RoleName[] GetRolesThatCanInteract()
@@ -21,8 +19,6 @@ public class ColourPickerButton : Interactable
 
     public override void Interact()
     {
-        colourButtonWindow.SetActive(true);
-        isColourButtonWindowActive = true;
-        PlayerCamera.instance.EnterCursorMode();
+        colourPickerUI.EnterWindow();
     }
 }

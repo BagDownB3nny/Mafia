@@ -4,7 +4,11 @@ using UnityEngine.UI;
 
 public class ColourButton : MonoBehaviour
 {
-    public Color color;
+
+    [SerializeField] public GameObject selectedColourImage;
+    [SerializeField] public GameObject unselectableColourImage;
+    [SerializeField] private ColourPickerUI colourPickerUI;
+    public Color colour;
 
     public void Start()
     {
@@ -13,14 +17,15 @@ public class ColourButton : MonoBehaviour
 
     public void SetColour(Color newColor)
     {
-        color = newColor;
-        GetComponent<Image>().color = color;
+        colour = newColor;
+        GetComponent<Image>().color = colour;
     }
 
     [Client]
     public void OnClick()
     {
         Player player = PlayerManager.instance.localPlayer;
-        player.GetComponent<PlayerColour>().CmdSetColour(color);
+        player.GetComponent<PlayerColour>().CmdSetColour(colour);
+        // colourPickerUI.SetCurrentColourButton(this);
     }
 }

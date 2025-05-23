@@ -9,7 +9,7 @@ public class PlayerColour : NetworkBehaviour
 
 
     [SyncVar(hook = nameof(OnColorChanged))]
-    Color originalPlayerColor;
+    public Color originalPlayerColour;
 
 
     public override void OnStartServer()
@@ -20,13 +20,13 @@ public class PlayerColour : NetworkBehaviour
         // Im using white as a null value since I cant return null
         if (color == Color.white) return;
 
-        originalPlayerColor = color;
+        originalPlayerColour = color;
     }
 
     [Server]
     public void SetColor(Color newColor)
     {
-        originalPlayerColor = newColor;
+        originalPlayerColour = newColor;
 
         Player player = GetComponent<Player>();
         PlayerColourManager.instance.OnPlayerChangedColour(player, newColor);

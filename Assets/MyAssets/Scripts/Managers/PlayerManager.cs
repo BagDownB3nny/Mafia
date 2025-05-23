@@ -52,15 +52,18 @@ public class PlayerManager : NetworkBehaviour
     public void AddPlayer(Player player)
     {
         string username = player.steamUsername;
-        uint playerNetId = player.netId;
         int connectionId = player.connectionToClient.connectionId;
+
+        ConnIdToUsernameDict[connectionId] = username;
+        ConnIdToNetIdDict[connectionId] = player.netId;
+
         if (scene == sceneName.Lobby)
         {
             AddLobbyPlayer(player, connectionId);
         }
         else if (scene == sceneName.Game)
         {
-            AddGamePlayer(username, connectionId, player);
+            AddGamePlayer(connectionId);
         }
     }
 
@@ -70,13 +73,27 @@ public class PlayerManager : NetworkBehaviour
         PlayerColourManager.instance.OnPlayerJoinedLobby(player, connectionId);
     }
 
-    [Server]
-    public void AddGamePlayer(string username, int connectionId, Player player)
+    public int GetConnIdByNetId(uint netId)
     {
-        ConnIdToUsernameDict[connectionId] = username;
-        ConnIdToNetIdDict[connectionId] = player.netId;
+        foreach (KeyValuePair<int, uint> kvp in ConnIdToNetIdDict)
+        {
+            if (kvp.Value == netId)
+            {
+                return kvp.Key;
+            }
+        }
+        return -1;
+    }
 
-        playerCount = ConnIdToUsernameDict.Count;
+    [Client]
+    public int LocalPlayerConnId()
+    {
+        return GetConnIdByNetId(localPlayer.netId);
+    }
+
+    [Server]
+    public void AddGamePlayer(int connectionId)
+    {
         if (ConnIdToUsernameDict.Count == NetworkServer.connections.Count && !isGameStarted)
         {
             OnAllPlayersLoaded();
