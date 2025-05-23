@@ -15,7 +15,7 @@ public class MediumActions : RoleActions
         if (!isLocalPlayer || !isClient) return;
 
         PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-        TimeManagerV2.instance.hourlyServerEvents[8].AddListener(DeactivateMediumAbility);
+        TimeManagerV2.instance.hourlyClientEvents[8].AddListener(DeactivateMediumAbility);
     }
 
     public void OnDisable()
