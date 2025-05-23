@@ -104,6 +104,7 @@ public class TimeManagerV2 : NetworkBehaviour
     {
         if (isClient)
         {
+            Debug.Log($"Triggering client hourly event for hour {newHour}");
             hourlyClientEvents[newHour].Invoke();
         }
     }

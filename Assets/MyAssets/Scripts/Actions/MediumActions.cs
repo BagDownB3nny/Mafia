@@ -105,6 +105,7 @@ public class MediumActions : RoleActions
     [Client]
     public void DeactivateMediumAbility()
     {
+        Debug.Log("Deactivating medium ability");
         isCommunicating = false;
         DissonanceRoomManager.instance.OnMediumDeactivation();
         CameraCullingMaskManager.instance.SetGhostLayerInvisible();
