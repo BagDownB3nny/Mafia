@@ -2,6 +2,7 @@ using Mirror;
 public class OuijaBoard : Interactable
 {
 
+    [SyncVar]
     public bool canBeUsed = false;
     public bool isActivated = false;
 
@@ -18,11 +19,13 @@ public class OuijaBoard : Interactable
         TimeManagerV2.instance.hourlyServerEvents[8].RemoveListener(DisableOuijaBoard);
     }
 
+    [Server]
     public void EnableOuijaBoard()
     {
         canBeUsed = true;
     }
 
+    [Server]
     public void DisableOuijaBoard()
     {
         canBeUsed = false;
