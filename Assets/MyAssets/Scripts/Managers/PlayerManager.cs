@@ -159,11 +159,11 @@ public class PlayerManager : NetworkBehaviour
         {
             if (player.name == "Player [connId=0]")
             {
-                player.SetRole(RoleName.Mafia);
+                player.SetRole(RoleName.Medium);
             }
             else
             {
-                player.SetRole(RoleName.Mafia);
+                player.SetRole(RoleName.Medium);
             }
             // player.SetRole(playerRoles[index]);
             // index++;

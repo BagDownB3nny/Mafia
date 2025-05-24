@@ -35,7 +35,6 @@ public class SteamLobby : MonoBehaviour
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
     }
-
     public void SetLobbyCode(string code)
     {
         Debug.Log("Setting lobby code to " + code);
