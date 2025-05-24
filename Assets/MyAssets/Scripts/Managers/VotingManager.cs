@@ -49,7 +49,7 @@ public class VotingManager : NetworkBehaviour
     {
         votedOutPlayer.GetComponent<PlayerTeleporter>().TeleportToExecutionSpot();
         votedOutPlayer.GetComponent<PlayerMovement>().RpcLockPlayerMovement();
-        votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(true);
+        votedOutPlayer.GetComponent<PlayerMovement>().RpcSetLockSigilActive(true);
     }
 
     [Server]
@@ -66,7 +66,7 @@ public class VotingManager : NetworkBehaviour
     [Server]
     public void StopPlayerExecution(Player votedOutPlayer)
     {
-        votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
-        votedOutPlayer.GetComponent<PlayerMovement>().SetLockSigilActive(false);
+        votedOutPlayer.GetComponent<PlayerMovement>().RpcUnlockPlayerMovement();
+        votedOutPlayer.GetComponent<PlayerMovement>().RpcSetLockSigilActive(false);
     }
 }

@@ -209,6 +209,19 @@ public class PlayerMovement : NetworkBehaviour
         vertical = 0;
     }
 
+    [ClientRpc]
+    public void RpcUnlockPlayerMovement()
+    {
+        UnlockPlayerMovement();
+    }
+
+    [ClientRpc]
+    public void RpcSetLockSigilActive(bool isActive)
+    {
+        SetLockSigilActive(isActive);
+    }
+
+    [Client]
     public void SetLockSigilActive(bool isActive)
     {
         if (isActive)
