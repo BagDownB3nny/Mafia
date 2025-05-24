@@ -57,9 +57,21 @@ public class PlayerColourManager : NetworkBehaviour
     [Server]
     public void OnPlayerJoinedLobby(Player player, int connectionId)
     {
+        // Player already has a colour, no need to assign a new one
+        if (playerColours.ContainsKey(connectionId)) return;
+
         Color colour = GetUnusedColour();
         PlayerColour playerColour = player.GetComponent<PlayerColour>();
         playerColour.SetColor(colour);
+    }
+
+    public void DebugLogPlayerColours()
+    {
+        Debug.Log("Debug logging player colours");
+        foreach (var playerColour in playerColours)
+        {
+            Debug.Log($"Player {playerColour.Key} has colour {playerColour.Value}");
+        }
     }
 
     [Server]
@@ -84,6 +96,7 @@ public class PlayerColourManager : NetworkBehaviour
         {
             playerColours.Add(connectionId, newColour);
         }
+        DebugLogPlayerColours();
     }
 
     [Server]
