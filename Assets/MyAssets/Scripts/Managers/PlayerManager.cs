@@ -157,16 +157,16 @@ public class PlayerManager : NetworkBehaviour
         int index = 0;
         foreach (Player player in GetAllPlayers())
         {
-            if (player.name == "Player [connId=0]")
-            {
-                player.SetRole(RoleName.Medium);
-            }
-            else
-            {
-                player.SetRole(RoleName.Medium);
-            }
-            // player.SetRole(playerRoles[index]);
-            // index++;
+            // if (player.name == "Player [connId=0]")
+            // {
+            //     player.SetRole(RoleName.Medium);
+            // }
+            // else
+            // {
+            //     player.SetRole(RoleName.Medium);
+            // }
+            player.SetRole(playerRoles[index]);
+            index++;
         }
     }
 

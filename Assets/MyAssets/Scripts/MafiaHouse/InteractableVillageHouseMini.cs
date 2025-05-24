@@ -46,11 +46,11 @@ public class InteractableVillageHouseMini : Interactable
         }
         if (isMarked)
         {
-            return $"Unmark {PlayerName}'s house";
+            return $"[R] Unmark {PlayerName}'s house";
         }
         else
         {
-            return $"Mark {PlayerName}'s house";
+            return $"[R] Mark {PlayerName}'s house";
         }
     }
 
