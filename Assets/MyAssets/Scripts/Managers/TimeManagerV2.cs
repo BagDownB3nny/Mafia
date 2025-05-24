@@ -8,20 +8,20 @@ public class TimeManagerV2 : NetworkBehaviour
 {
 
     [Header("Time settings")]
-    [SerializeField] public float irlSecondsPerGameHour = 1f;
+    public float irlSecondsPerGameHour = 1f;
 
     [Header("ServerEvents")]
 
     // These events are invoked by the server
     public UnityEvent[] hourlyServerEvents = new UnityEvent[24];
-    public UnityEvent irlSecondlyServerEvent = new UnityEvent();
+    public UnityEvent irlSecondlyServerEvent = new();
 
     [Header("ClientEvents")]
 
     // These events are invoked by the client
     // Client events should only affect the appearance of the game on the client (eg. clock, lights)
     public UnityEvent[] hourlyClientEvents = new UnityEvent[24];
-    public UnityEvent irlSecondlyClientEvent = new UnityEvent();
+    public UnityEvent irlSecondlyClientEvent = new();
 
 
 
@@ -62,10 +62,9 @@ public class TimeManagerV2 : NetworkBehaviour
     public void StartGame()
     {
         currentHour = 19;
-        // currentHour = 19;
         currentMinute = 0;
         TriggerHourlyEvent();
-        InvokeRepeating("TickMinuteHand", 1f, 1f);
+        InvokeRepeating(nameof(TickMinuteHand), 1f, 1f);
     }
 
     [Server]
@@ -120,10 +119,7 @@ public class TimeManagerV2 : NetworkBehaviour
     [Server]
     private void TriggerHourlyEvent()
     {
-        if (hourlyServerEvents[currentHour] != null)
-        {
-            hourlyServerEvents[currentHour].Invoke();
-        }
+        hourlyServerEvents[currentHour]?.Invoke();
     }
 
     [Server]
