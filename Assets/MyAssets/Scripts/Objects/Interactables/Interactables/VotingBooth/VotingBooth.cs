@@ -7,11 +7,11 @@ public class VotingBooth : Interactable
 {
 
 
-    // Key is player voting, (connId) value is player voted for (connId)
-    public Dictionary<int, int> votes = new Dictionary<int, int>();
+    // Key is voter player (connId), value is suspect player voted for (connId)
+    public Dictionary<int, int> votes = new();
 
-    // Key is player voted for (connId), value is number of votes
-    public Dictionary<int, int> votesCount = new Dictionary<int, int>();
+    // Key is suspect player (connId), value is number of votes
+    public Dictionary<int, int> votesCount = new();
 
     // Observer
     public event Action OnVotesChanged;
@@ -71,29 +71,30 @@ public class VotingBooth : Interactable
     }
 
     [Server]
-    public void SubmitVote(int playerVotingConnId, int playerVotingForConnId)
+    public void SubmitVote(int voterConnId, int suspectVotedForConnId)
     {
-        if (votes.ContainsKey(playerVotingConnId))
+        // BUG:  An item with the same key has already been added
+        if (votes.ContainsKey(voterConnId))
         {
-            RemoveVote(playerVotingConnId);
+            RemoveVote(voterConnId);
         }
-        AddVote(playerVotingConnId, playerVotingForConnId);
+        AddVote(voterConnId, suspectVotedForConnId);
         OnVotesChanged?.Invoke();
     }
 
     [Server]
-    private void AddVote(int playerVotingConnId, int playerVotedForConnId)
+    private void AddVote(int voterConnId, int suspectVotedForConnId)
     {
-        votes.Add(playerVotingConnId, playerVotedForConnId);
-        votesCount[playerVotedForConnId]++;
+        votes.Add(voterConnId, suspectVotedForConnId);
+        votesCount[suspectVotedForConnId]++;
     }
 
     [Server]
-    private void RemoveVote(int playerVotingConnId)
+    private void RemoveVote(int voterConnId)
     {
-        int playerVotedForPreviously = votes[playerVotingConnId];
-        votes.Remove(playerVotedForPreviously);
-        votesCount[playerVotedForPreviously]--;
+        int suspectPreviouslyVotedForConnId = votes[voterConnId];
+        votes.Remove(voterConnId);
+        votesCount[suspectPreviouslyVotedForConnId]--;
     }
 
     [Server]
@@ -106,23 +107,23 @@ public class VotingBooth : Interactable
     public Player GetVotedOutPlayer()
     {
         int maxVotes = 0;
-        int playerVotedOutConnId = -1;
+        int suspectVotedOutConnId = -1;
         foreach (KeyValuePair<int, int> vote in votesCount)
         {
             if (vote.Value > maxVotes)
             {
                 maxVotes = vote.Value;
-                playerVotedOutConnId = vote.Key;
+                suspectVotedOutConnId = vote.Key;
             }
             else if (vote.Value == maxVotes)
             {
-                playerVotedOutConnId = -1;
+                suspectVotedOutConnId = -1;
             }
         }
 
-        if (playerVotedOutConnId == -1) return null; // No one voted out
+        if (suspectVotedOutConnId == -1) return null; // No one voted out
 
-        Player playerVotedOut = PlayerManager.instance.GetPlayerByConnId(playerVotedOutConnId);
+        Player playerVotedOut = PlayerManager.instance.GetPlayerByConnId(suspectVotedOutConnId);
         return playerVotedOut;
     }
 }

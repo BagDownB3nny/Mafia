@@ -9,7 +9,6 @@ public class VotingSlip : MonoBehaviour
 {
     [SerializeField] private GameObject VotingTogglesContainer;
     [SerializeField] private GameObject VotingSlipUI;
-    private List<String> playerNames;
     [SerializeField] private GameObject votingPlayerRow;
     [SerializeField] private VotingBooth votingBooth;
     private VotingRow currentlySelectedRow;
@@ -90,10 +89,10 @@ public class VotingSlip : MonoBehaviour
         {
             if (toggle.isOn)
             {
-                int playerVotedForConnId = currentlySelectedRow.playerConnId;
+                int suspectVotedForConnId = currentlySelectedRow.playerConnId;
                 Player localPlayer = PlayerManager.instance.localPlayer;
                 PlayerVoter playerVoter = localPlayer.GetComponent<PlayerVoter>();
-                playerVoter.CmdVote(playerVotedForConnId);
+                playerVoter.CmdVote(suspectVotedForConnId);
                 ExitVotingSlip();
             }
         }

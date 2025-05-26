@@ -21,7 +21,7 @@ public class VotingTallyBoard : NetworkBehaviour
     {
         Dictionary<int, int> votesCountWithConnId = votingBooth.GetVotesCount();
         // map each key to a username
-        Dictionary<string, int> votesCountWithUsername = new Dictionary<string, int>();
+        Dictionary<string, int> votesCountWithUsername = new();
         foreach (KeyValuePair<int, int> voteCount in votesCountWithConnId)
         {
             int connId = voteCount.Key;
