@@ -77,6 +77,7 @@ public class PlayerActions : NetworkBehaviour
             if (isInteractable)
             {
                 interactable.Interact();
+                playerCamera.SetLastInteractableToNull();
             }
         }
     }

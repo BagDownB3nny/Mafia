@@ -27,9 +27,10 @@ public class LobbyManager : MonoBehaviour
     {
         if (NetworkServer.active)
         {
-            NetworkServer.DisconnectAll();
+            // [ASSUMPTION] The host is acting as the server, there is no dedicated server.
+            NetworkManager.singleton.StopHost();
         }
-        else
+        if (NetworkClient.active)
         {
             NetworkClient.Disconnect();
         }

@@ -26687,7 +26687,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  irlSecondsPerGameHour: 10
+  irlSecondsPerGameHour: 3
   hourlyServerEvents:
   - m_PersistentCalls:
       m_Calls: []

@@ -46,12 +46,18 @@ public class Player : NetworkBehaviour
     {
         StartCamera();
         GetSteamUsername();
+        SetLayer();
 
         if (PlayerManager.instance != null)
         {
             PlayerManager.instance.localPlayer = this;
         }
+    }
 
+    [Client]
+    private void SetLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
     }
 
     [Client]

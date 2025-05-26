@@ -18,11 +18,6 @@ public class MenuNavigator : MonoBehaviour
         }
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
     public void LoadHostLobby()
     {
         SceneManager.LoadScene("HostLobby");
@@ -36,5 +31,16 @@ public class MenuNavigator : MonoBehaviour
     public void LoadJoinLobby()
     {
         SceneManager.LoadScene("JoinLobby");
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        // This code ONLY COMPILES in the Unity Editor
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                // This code ONLY COMPILES in builds
+                Application.Quit();
+#endif
     }
 }

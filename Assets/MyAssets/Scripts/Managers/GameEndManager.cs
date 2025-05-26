@@ -43,11 +43,11 @@ public class GameEndManager : NetworkBehaviour
         {
             aliveMafiaPlayers.Remove(player);
         }
-        if (isGameEnd())
-        {
-            ShowGameEndScreen();
-            Invoke("EndGame", 3f); // 3 second delay
-        }
+        // if (isGameEnd())
+        // {
+        //     ShowGameEndScreen();
+        //     Invoke("EndGame", 3f); // 3 second delay
+        // }
     }
 
     public void EndGame()

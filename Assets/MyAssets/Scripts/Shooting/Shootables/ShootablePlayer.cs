@@ -8,8 +8,6 @@ public class ShootablePlayer : Shootable
     [Server]
     public override bool OnShot(NetworkConnectionToClient shooter)
     {
-        if (shooter == connectionToClient) return true;
-
         if (player.GetComponentInChildren<PlayerProtectionSigil>(includeInactive: true).isMarked)
         {
             // If the player is protected, do not shoot
