@@ -11,18 +11,6 @@ public class PlayerColour : NetworkBehaviour
     [SyncVar(hook = nameof(OnColorChanged))]
     public Color originalPlayerColour;
 
-
-    public override void OnStartServer()
-    {
-        int connectionId = connectionToClient.connectionId;
-        Color color = PlayerColourManager.instance.GetColour(connectionId);
-
-        // Im using white as a null value since I cant return null
-        if (color == Color.white) return;
-
-        originalPlayerColour = color;
-    }
-
     [Server]
     public void SetColor(Color newColor)
     {

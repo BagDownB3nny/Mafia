@@ -31,6 +31,5 @@ public class ColourButton : MonoBehaviour
         }
         Player player = PlayerManager.instance.localPlayer;
         player.GetComponent<PlayerColour>().CmdSetColour(colour);
-        // colourPickerUI.SetCurrentColourButton(this);
     }
 }

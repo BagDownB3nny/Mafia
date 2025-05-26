@@ -5,12 +5,12 @@ public class ColourPickerUI : MonoBehaviour
 {
     [SerializeField] private GameObject colourButtons;
     [SerializeField] private GameObject colourWindow;
-
-    private bool ColourButtonsInitialised = false;
+    private bool ColourButtonUIsInitialised = false;
 
     public void Start()
     {
         SubscribeToPlayerColourManager();
+        InitialiseColourButtons();
     }
 
     public void InitialiseColourButtons()
@@ -37,10 +37,14 @@ public class ColourPickerUI : MonoBehaviour
                 break;
             }
         }
+    }
 
+    public void SetUIToColourButtons()
+    {
         // Set other buttons to unselectable
         int localPlayerConnId = PlayerManager.instance.LocalPlayerConnId();
 
+        Debug.Log("Setting UI to Colour Buttons");
         foreach (var keyValuePair in PlayerColourManager.instance.playerColours)
         {
             ColourButton button = GetColourButton(keyValuePair.Value);
@@ -67,10 +71,10 @@ public class ColourPickerUI : MonoBehaviour
 
     public void EnterWindow()
     {
-        if (!ColourButtonsInitialised)
+        if (!ColourButtonUIsInitialised)
         {
-            InitialiseColourButtons();
-            ColourButtonsInitialised = true;
+            SetUIToColourButtons();
+            ColourButtonUIsInitialised = true;
         }
 
         colourWindow.SetActive(true);
@@ -115,14 +119,12 @@ public class ColourPickerUI : MonoBehaviour
         ColourButton newButton = GetColourButton(newColour);
         int localPlayerConnId = PlayerManager.instance.LocalPlayerConnId();
 
-        Debug.Log($"OnPlayerColourChanged: {playerConnId} {oldColour} -> {newColour}");
-
         if (localPlayerConnId == playerConnId)
         {
-            newButton.selectedColourImage.SetActive(true);
-            newButton.unselectableColourImage.SetActive(false);
             oldButton.selectedColourImage.SetActive(false);
             oldButton.unselectableColourImage.SetActive(false);
+            newButton.selectedColourImage.SetActive(true);
+            newButton.unselectableColourImage.SetActive(false);
         }
         else
         {
@@ -140,9 +142,12 @@ public class ColourPickerUI : MonoBehaviour
             ColourButton button = child.GetComponent<ColourButton>();
             if (button != null && button.colour == color)
             {
+                Debug.Log($"Found ColourButton for color: {color}");
+                Debug.Log($"Button: {button}");
                 return button;
             }
         }
+        Debug.LogWarning($"No ColourButton found for color: {color}");
         return null;
     }
 }

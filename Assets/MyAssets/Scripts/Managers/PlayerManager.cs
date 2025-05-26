@@ -94,6 +94,7 @@ public class PlayerManager : NetworkBehaviour
     [Server]
     public void AddGamePlayer(int connectionId)
     {
+        PlayerColourManager.instance.OnPlayerJoinedGame(GetPlayerByConnId(connectionId), connectionId);
         if (ConnIdToUsernameDict.Count == NetworkServer.connections.Count && !isGameStarted)
         {
             OnAllPlayersLoaded();

@@ -1,5 +1,7 @@
 using UnityEngine;
 using Mirror;
+using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerColourManager : NetworkBehaviour
 {
@@ -28,20 +30,32 @@ public class PlayerColourManager : NetworkBehaviour
             HexToColor("#fa8072")      // salmon
         };
 
-    public SyncDictionary<int, Color> playerColours = new SyncDictionary<int, Color>();
+    public readonly SyncDictionary<int, Color> playerColours = new SyncDictionary<int, Color>();
+
+    // This dictionary is used to store player colours across scenes
+    public static Dictionary<int, Color> playerColoursDict = new Dictionary<int, Color>();
 
     public void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            PopulateSyncDictionary();
         }
         else
         {
             Debug.LogWarning("More than one instance of PlayerColourManager found!");
             Destroy(gameObject);
             return;
+        }
+    }
+
+    private void PopulateSyncDictionary()
+    {
+        playerColours.Clear();
+        foreach (var playerColour in playerColoursDict)
+        {
+            playerColours.Add(playerColour.Key, playerColour.Value);
         }
     }
 
@@ -57,10 +71,24 @@ public class PlayerColourManager : NetworkBehaviour
     [Server]
     public void OnPlayerJoinedLobby(Player player, int connectionId)
     {
-        // Player already has a colour, no need to assign a new one
-        if (playerColours.ContainsKey(connectionId)) return;
+        Color colour;
+        if (playerColoursDict.ContainsKey(connectionId))
+        {
+            colour = playerColoursDict[connectionId];
+        }
+        else
+        {
+            colour = GetUnusedColour();
+        }
 
-        Color colour = GetUnusedColour();
+        PlayerColour playerColour = player.GetComponent<PlayerColour>();
+        playerColour.SetColor(colour);
+    }
+
+    [Server]
+    public void OnPlayerJoinedGame(Player player, int connectionId)
+    {
+        Color colour = playerColoursDict[connectionId];
         PlayerColour playerColour = player.GetComponent<PlayerColour>();
         playerColour.SetColor(colour);
     }
@@ -90,13 +118,20 @@ public class PlayerColourManager : NetworkBehaviour
         int connectionId = player.connectionToClient.connectionId;
         if (playerColours.ContainsKey(connectionId))
         {
+            if (playerColours[connectionId] == newColour)
+            {
+                Debug.Log("Player colour is already set to this colour, not changing");
+                return;
+            }
             playerColours[connectionId] = newColour;
+            playerColoursDict[connectionId] = newColour;
         }
         else
         {
+            Debug.Log("Assigning new colour to player");
             playerColours.Add(connectionId, newColour);
+            playerColoursDict.Add(connectionId, newColour);
         }
-        DebugLogPlayerColours();
     }
 
     [Server]
