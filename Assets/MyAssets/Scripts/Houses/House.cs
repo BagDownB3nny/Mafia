@@ -88,7 +88,7 @@ public class House : NetworkBehaviour
     {
         foreach (Door door in doors)
         {
-            door.gameObject.layer = LayerMask.NameToLayer("GhostPassable");
+            door.gameObject.layer = LayerName.GhostPassable.Index();
         }
     }
 

@@ -18,49 +18,33 @@ public class CameraCullingMaskManager : MonoBehaviour
         }
     }
 
-    public void SetSigilLayerVisible(SigilName sigil)
+    public void SetLayerVisible(LayerName layerName)
     {
-        Camera.main.cullingMask |= 1 << LayerMask.NameToLayer(sigil.ToString());
+        Camera.main.cullingMask |= layerName.Mask();
     }
 
-    public void SetSigilLayerInvisible(SigilName sigil)
+    public void SetLayerInvisible(LayerName layerName)
     {
-        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer(sigil.ToString()));
-    }
-
-    public void SetAllSigilsVisible()
-    {
-        for (int i = 0; i < System.Enum.GetValues(typeof(SigilName)).Length; i++)
-        {
-            SetSigilLayerVisible((SigilName)i);
-        }
-    }
-
-    public void SetAllSigilsInvisible()
-    {
-        for (int i = 0; i < System.Enum.GetValues(typeof(SigilName)).Length; i++)
-        {
-            SetSigilLayerInvisible((SigilName)i);
-        }
+        Camera.main.cullingMask &= ~layerName.Mask();
     }
 
     public void SetGhostLayerVisible()
     {
-        Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("Ghost");
+        SetLayerVisible(LayerName.Ghost);
     }
 
     public void SetGhostLayerInvisible()
     {
-        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("Ghost"));
+        SetLayerInvisible(LayerName.Ghost);
     }
 
     public void SetNameTagLayerVisible()
     {
-        Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("NameTag");
+        SetLayerVisible(LayerName.NameTag);
     }
 
     public void SetNameTagLayerInvisible()
     {
-        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("NameTag"));
+        SetLayerInvisible(LayerName.NameTag);
     }
 }

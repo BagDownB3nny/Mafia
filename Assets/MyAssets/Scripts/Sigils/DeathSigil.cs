@@ -5,10 +5,12 @@ using UnityEngine;
 public class DeathSigil : Sigil
 {
     private readonly Player player;
+    // public override string Layer => LayerName.DeathSigil.ToString();
+    public override LayerName Layer => LayerName.Mafia;
 
     [SyncVar]
     private int marksReceived = 0;
-    public static List<DeathSigil> deathSigils = new List<DeathSigil>();
+    public static List<DeathSigil> deathSigils = new();
 
     private void Start()
     {

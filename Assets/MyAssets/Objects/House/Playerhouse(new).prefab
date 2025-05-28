@@ -606,7 +606,7 @@ GameObject:
   - component: {fileID: 3162826609888278098}
   - component: {fileID: 31222332535844444}
   - component: {fileID: 5206271576902267542}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 6230119178020492531}
   - component: {fileID: 8353861838269727355}
   - component: {fileID: 4147360087284611193}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TeleporterRune
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4258,7 +4258,7 @@ GameObject:
   - component: {fileID: 8007108339022185899}
   - component: {fileID: 8449198718096015886}
   - component: {fileID: 8970645017860010276}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5669,7 +5669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6515297825811283654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TeleportLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9083,7 +9083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2428799658655127579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TeleporterRune
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -4,6 +4,7 @@ using System;
 
 public class SeeingEyeSigil : Sigil
 {
+    public override LayerName Layer => LayerName.Seer;
     private static uint markedPlayerNetId = 0;
 
     public bool isMarked = false;

@@ -57,7 +57,7 @@ public class Player : NetworkBehaviour
     [Client]
     private void SetLayer()
     {
-        gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        gameObject.layer = LayerName.IgnoreRaycast.Index();
     }
 
     [Client]

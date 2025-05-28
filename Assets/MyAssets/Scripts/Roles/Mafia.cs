@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Mafia : Role
 {
-    protected override List<SigilName> SigilsAbleToSee => new();
+    protected override List<LayerName> LayersAbleToSee => new() {LayerName.Mafia};
 
     [SyncVar(hook = nameof(OnGunStatusChanged))]
     private bool hasGun = false;

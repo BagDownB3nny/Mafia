@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class PlayerProtectionSigil : Sigil
 {
+    public override LayerName Layer => LayerName.Guardian;
     public bool isMarked = false;
-    public static List<PlayerProtectionSigil> activeSigils = new List<PlayerProtectionSigil>();
+    public static List<PlayerProtectionSigil> activeSigils = new();
 
     [Server]
     public override void Mark(uint playerNetId)

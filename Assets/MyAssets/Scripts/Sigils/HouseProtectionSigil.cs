@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class HouseProtectionSigil : Sigil
 {
+    public override LayerName Layer => LayerName.Guardian;
     public bool isMarked = false;
     public static List<HouseProtectionSigil> activeSigils = new List<HouseProtectionSigil>();
 

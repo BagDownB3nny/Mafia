@@ -3,8 +3,9 @@ using Mirror;
 
 // For now the teleporter rune is only used for mafia <-> mafiahouse travel
 // If use cases expand we need to refactor this code
-public class TeleporterRune : Interactable
+public class TeleporterRune : Interactable, IHideable
 {
+    public LayerName Layer => LayerName.Mafia;
 
     [Header("Teleportation locations")]
     public Transform teleportLocation;

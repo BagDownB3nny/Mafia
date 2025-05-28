@@ -61,7 +61,7 @@ public class PlayerDeath : NetworkBehaviour
     private void OnPlayerDeath()
     {
         Player player = GetComponentInParent<Player>();
-        Layer.SetLayerChildren(player.gameObject, LayerMask.NameToLayer("Ghost"));
+        Layer.SetLayerRecursively(player.gameObject, LayerName.Ghost);
         ghostVisual.SetActive(true);
         aliveVisual.SetActive(false);
     }

@@ -6,16 +6,16 @@ public class Hole : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.layer);
-        if (other.gameObject.layer == PlayerLayer)
+        if (other.gameObject.layer == LayerName.Player.Index())
         {
-            other.gameObject.layer = GoThroughGroundPlayerLayer;
+            other.gameObject.layer = LayerName.GoThroughGroundPlayer.Index();
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == GoThroughGroundPlayerLayer)
+        if (other.gameObject.layer == LayerName.GoThroughGroundPlayer.Index())
         {
-            other.gameObject.layer = PlayerLayer;
+            other.gameObject.layer = LayerName.Player.Index();
         }
     }
 }

@@ -7,7 +7,7 @@ public class Seer : Role
     [SyncVar]
     public Player markedPlayer;
 
-    protected override List<SigilName> SigilsAbleToSee => new() { SigilName.SeeingEyeSigil };
+    protected override List<LayerName> LayersAbleToSee => new() { LayerName.Seer };
 
     [Header("Seer internal params")]
     public bool isLookingThroughCrystalBall = false;

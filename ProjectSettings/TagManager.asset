@@ -11,9 +11,9 @@ TagManager:
   - Ground
   - Water
   - UI
-  - SeeingEyeSigil
-  - ProtectionSigil
-  - DeathSigil
+  - Seer
+  - Guardian
+  - Mafia
   - Ghost
   - Player
   - GoThroughGroundPlayer

@@ -1,17 +1,16 @@
-using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
 
 public abstract class Role : NetworkBehaviour
 {
-    protected abstract List<SigilName> SigilsAbleToSee { get; }
+    protected abstract List<LayerName> LayersAbleToSee { get; }
 
     [Client]
     public virtual void OnEnable()
     {
         if (isLocalPlayer)
         {
-            EnableSigils();
+            ShowHideables();
             SetNameTags();
         }
     }
@@ -21,25 +20,25 @@ public abstract class Role : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            DisableSigils();
+            HideHideables();
             ResetNameTags();
         }
     }
 
     [Client]
-    private void EnableSigils()
+    private void ShowHideables()
     {
-        foreach (SigilName sigil in SigilsAbleToSee)
+        foreach (LayerName layerName in LayersAbleToSee)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerVisible(sigil);
+            CameraCullingMaskManager.instance.SetLayerVisible(layerName);
         }
     }
 
-    private void DisableSigils()
+    private void HideHideables()
     {
-        foreach (SigilName sigil in SigilsAbleToSee)
+        foreach (LayerName layerName  in LayersAbleToSee)
         {
-            CameraCullingMaskManager.instance.SetSigilLayerInvisible(sigil);
+            CameraCullingMaskManager.instance.SetLayerInvisible(layerName);
         }
     }
 

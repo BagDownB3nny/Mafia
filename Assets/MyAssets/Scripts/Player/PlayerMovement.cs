@@ -28,7 +28,6 @@ public class PlayerMovement : NetworkBehaviour
     public float ladderMoveSpeed = 3f; // Ladder movement speed
 
     [Header("Ground Check")]
-    public LayerMask groundLayer; // Define which layers are considered ground
     public float groundCheckHeight = 0.5f; // Height of the capsule cast (half of the player collider height)
 
     [Header("Bunny Hop")]
@@ -259,7 +258,7 @@ public class PlayerMovement : NetworkBehaviour
             radius, // Radius of the capsule
             Vector3.down, // Cast downward
             groundCheckHeight, // Max distance to check
-            groundLayer // Layer mask to check against ground layers
+            LayerName.Ground.Mask()
         );
     }
 }

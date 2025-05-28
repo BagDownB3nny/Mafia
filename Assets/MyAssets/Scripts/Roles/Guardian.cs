@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Guardian : Role
 {
+    protected override List<LayerName> LayersAbleToSee => new() { LayerName.Guardian };
 
     [Header("Marked player / house")]
 
@@ -13,7 +14,6 @@ public class Guardian : Role
     [SyncVar]
     private uint markedHouseNetId;
 
-    protected override List<SigilName> SigilsAbleToSee => new() { SigilName.ProtectionSigil };
 
     [Header("Guardian internal params")]
 
