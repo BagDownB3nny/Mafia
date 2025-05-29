@@ -11,4 +11,14 @@ public class Seer : Role
 
     [Header("Seer internal params")]
     public bool isLookingThroughCrystalBall = false;
+
+    [Server]
+    public void RemovePreviouslyPlacedSigils()
+    {
+        if (markedPlayer != null)
+        {
+            SeeingEyeSigil markedPlayerSeeingEyeSigil = markedPlayer.GetComponentInChildren<SeeingEyeSigil>(includeInactive: true);
+            markedPlayerSeeingEyeSigil.Unmark();
+        }
+    }
 }

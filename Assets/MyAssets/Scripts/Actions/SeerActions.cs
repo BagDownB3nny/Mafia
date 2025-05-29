@@ -162,6 +162,7 @@ public class SeerActions : RoleActions
         }
         else if (!sigil.isMarked)
         {
+            seer.RemovePreviouslyPlacedSigils();
             sigil.Mark(player.netId);
             seer.markedPlayer = player;
         }
