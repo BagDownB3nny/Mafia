@@ -5,9 +5,9 @@ public class PlayerVoter : NetworkBehaviour
 {
 
     [Command]
-    public void CmdVote(int playerVotedForConnId)
+    public void CmdVote(int suspectVotedForConnId)
     {
-        int playerVotingConnId = connectionToClient.connectionId;
-        VotingBooth.instance.SubmitVote(playerVotingConnId, playerVotedForConnId);
+        int voterConnId = connectionToClient.connectionId;
+        VotingBooth.instance.SubmitVote(voterConnId, suspectVotedForConnId);
     }
 }

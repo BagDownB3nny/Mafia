@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlayerProtectionSigil : Sigil
 {
     public bool isMarked = false;
-    public static List<PlayerProtectionSigil> activeSigils = new List<PlayerProtectionSigil>();
+    public static List<PlayerProtectionSigil> activeSigils = new();
 
     [Server]
     public override void Mark(uint playerNetId)
