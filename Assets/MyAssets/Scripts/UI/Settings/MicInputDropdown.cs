@@ -44,7 +44,14 @@ public class MicrophoneSettings : MonoBehaviour
     // Called when the dropdown value changes
     public void OnDropdownValueChanged(int index)
     {
+        Debug.Log("OnDropdownValueChanged: " + index);
+        // Log all options
+        foreach (TMP_Dropdown.OptionData option in microphoneDropdown.options)
+        {
+            Debug.Log("Option: " + option.text);
+        }
         string selectedMic = microphoneDropdown.options[index].text;
+        Debug.Log("Selected microphone: " + selectedMic);
         SetMicrophone(selectedMic);
     }
 
@@ -54,10 +61,10 @@ public class MicrophoneSettings : MonoBehaviour
         {
             // Update Dissonance microphone
             dissonanceComms.MicrophoneName = deviceName;
-
             // Save to PlayerPrefs
             PlayerPrefs.SetString("DefaultMic", deviceName);
             PlayerPrefs.Save();
+            Debug.Log("Set microphone: " + deviceName);
         }
         catch
         {
