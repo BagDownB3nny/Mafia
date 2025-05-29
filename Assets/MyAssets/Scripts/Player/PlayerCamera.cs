@@ -164,7 +164,6 @@ public class PlayerCamera : MonoBehaviour
         {
             return null;
         }
-        Debug.Log($"Hit: {hit.collider.gameObject.name} at distance {hit.distance}");
         T component = hit.collider.GetComponentInParent<T>();
         if (component != null)
         {
