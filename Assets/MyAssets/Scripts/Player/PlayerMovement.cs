@@ -47,8 +47,11 @@ public class PlayerMovement : NetworkBehaviour
     private CharacterController controller;
     private Vector3 velocity;
 
-    // Players have movement locked (when voting, in settings, etc.)
+    // Movement disabled from systems e.g. in menu, during cutscenes
     private bool isLocked;
+    // Movement disabled from player interactions e.g. being executed
+    private bool isFrozen;
+
     [SerializeField] private CapsuleCollider capsuleCollider;
 
     private MovementType movementType;
@@ -97,7 +100,7 @@ public class PlayerMovement : NetworkBehaviour
     void Update()
     {
         if (!isLocalPlayer) return;
-        if (isLocked) return;
+        if (isLocked || isFrozen) return;
         // GetUserInputMoveDirectionRb();
         GetUserInputMoveDirection();
     }
@@ -201,6 +204,7 @@ public class PlayerMovement : NetworkBehaviour
         LockPlayerMovement();
     }
 
+    [Client]
     public void LockPlayerMovement()
     {
         isLocked = true;
@@ -212,6 +216,35 @@ public class PlayerMovement : NetworkBehaviour
     public void RpcUnlockPlayerMovement()
     {
         UnlockPlayerMovement();
+    }
+
+    [Client]
+    public void UnlockPlayerMovement()
+    {
+        isLocked = false;
+    }
+
+    [ClientRpc]
+    public void RpcFreezePlayerMovement()
+    {
+        FreezePlayerMovement();
+    }
+    [Client]
+    public void FreezePlayerMovement()
+    {
+        isFrozen = true;
+        horizontal = 0;
+        vertical = 0;
+    }
+    [ClientRpc]
+    public void RpcUnfreezePlayerMovement()
+    {
+        UnfreezePlayerMovement();
+    }
+    [Client]
+    public void UnfreezePlayerMovement()
+    {
+        isFrozen = false;
     }
 
     [ClientRpc]
@@ -235,11 +268,7 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    public void UnlockPlayerMovement()
-    {
-        isLocked = false;
-    }
-
+    [Client]
     private void DisableUnlockSigil()
     {
         unlockSigil.SetActive(false);

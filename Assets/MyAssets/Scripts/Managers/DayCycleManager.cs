@@ -199,14 +199,16 @@ public class DayCycleManager : NetworkBehaviour
         int rotationPerGameHour = 360 / 24;
         // 7am = 0, 8am = 15, 6pm = 165, 7pm = 180
         currentSunRotation = rotationPerGameHour * (currentHour - 7) + (currentMinute / 60f) * rotationPerGameHour;
-        rotationPerIrlSecond = rotationPerGameHour / TimeManagerV2.instance.irlSecondsPerGameHour;
+        float irlSecondsPerGameHour = GameSettingsManager.instance.irlSecondsPerGameHour;
+        rotationPerIrlSecond = rotationPerGameHour / irlSecondsPerGameHour;
     }
 
     [Client]
     private IEnumerator TransitionSky(float hoursToNextTransition)
     {
         float elapsed = 0f;
-        float duration = hoursToNextTransition * TimeManagerV2.instance.irlSecondsPerGameHour;
+        float irlSecondsPerGameHour = GameSettingsManager.instance.irlSecondsPerGameHour;
+        float duration = hoursToNextTransition * irlSecondsPerGameHour;
 
         while (elapsed < duration)
         {

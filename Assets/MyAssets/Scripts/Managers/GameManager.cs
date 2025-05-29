@@ -23,8 +23,7 @@ public class GameManager : NetworkBehaviour
     [Server]
     public void StartGame()
     {
-        Debug.Log("Starting game");
-        PlayerManager.instance.AssignRoles();
+        RoleManager.instance.AssignRoles();
         MafiaHouse.instance.AssignMafiaDoorAuthority();
         VotingBooth.instance.InitialiseDictionaries();
         VotingManager.instance.StopVoting();

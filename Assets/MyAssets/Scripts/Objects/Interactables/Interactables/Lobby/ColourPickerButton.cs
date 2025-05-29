@@ -9,7 +9,6 @@ public class ColourPickerButton : Interactable
     public override RoleName[] GetRolesThatCanInteract()
     {
         return GetAllRoles();
-        // test
     }
 
     public override string GetInteractableText()

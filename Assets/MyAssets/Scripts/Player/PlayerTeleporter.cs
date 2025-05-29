@@ -19,7 +19,10 @@ public class PlayerTeleporter : NetworkBehaviour
         {
             executionSpot = ExecutionSpot.instance.transform;
         }
-        mafiaHouseTunnel = MafiaHouseTeleporter.instance.destination;
+        if (MafiaHouseTeleporter.instance != null)
+        {
+            mafiaHouseTunnel = MafiaHouseTeleporter.instance.destination;
+        }
     }
 
 

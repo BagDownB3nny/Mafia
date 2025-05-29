@@ -6,10 +6,6 @@ using System;
 
 public class TimeManagerV2 : NetworkBehaviour
 {
-
-    [Header("Time settings")]
-    public float irlSecondsPerGameHour = 1f;
-
     [Header("ServerEvents")]
 
     // These events are invoked by the server
@@ -70,6 +66,7 @@ public class TimeManagerV2 : NetworkBehaviour
     [Server]
     private void TickMinuteHand()
     {
+        float irlSecondsPerGameHour = GameSettingsManager.instance.irlSecondsPerGameHour;
         int newMinute = currentMinute + Convert.ToInt32(Math.Floor(60 / irlSecondsPerGameHour));
         int newHour = currentHour;
         if (newMinute >= 60)
@@ -81,7 +78,6 @@ public class TimeManagerV2 : NetworkBehaviour
                 newHour = 0;
             }
         }
-
         SetNewTime(newHour, newMinute);
     }
 

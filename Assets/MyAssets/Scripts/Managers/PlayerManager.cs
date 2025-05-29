@@ -68,9 +68,28 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Server]
+    public bool CanStartGame()
+    {
+        int expectedPlayerCount = RoleSettingsUI.instance.expectedPlayerCount;
+        int playerCount = GetPlayerCount();
+        int roleCount = RoleSettingsUI.instance.GetRoleCount();
+        if (playerCount == expectedPlayerCount && roleCount == expectedPlayerCount)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public int GetPlayerCount()
+    {
+        return ConnIdToUsernameDict.Count;
+    }
+
+    [Server]
     public void AddLobbyPlayer(Player player, int connectionId)
     {
         PlayerColourManager.instance.OnPlayerJoinedLobby(player, connectionId);
+        RoleSettingsUI.instance.OnPlayerJoin();
     }
 
     public int GetConnIdByNetId(uint netId)
@@ -147,68 +166,6 @@ public class PlayerManager : NetworkBehaviour
             player.SetAbleToSeeNametags(true);
         }
     }
-
-    [Server]
-    public void AssignRoles()
-    {
-        playerRoles = GenerateRoles();
-        // Shuffle the roles
-        playerRoles = playerRoles.OrderBy(x => Random.value).ToArray();
-
-        int index = 0;
-        foreach (Player player in GetAllPlayers())
-        {
-            if (player.name == "Player [connId=0]")
-            {
-                player.SetRole(RoleName.Medium);
-            }
-            else
-            {
-                player.SetRole(RoleName.Mafia);
-            }
-            // player.SetRole(playerRoles[index]);
-            // index++;
-        }
-    }
-
-    [Server]
-    public RoleName[] GenerateRoles()
-    {
-        // This is just a placeholder
-        // In a real game, you would have a more complex algorithm to generate roles
-        // For example, in a 6 player game, there could be 1 werewolf, 1 seer, 1 medium, and 3 villagers
-        RoleName[] roles = new RoleName[ConnIdToUsernameDict.Count];
-
-        for (int i = 0; i < roles.Length; i++)
-        {
-            if (i == 0 || i == 7 || i == 10)
-            {
-                roles[i] = RoleName.Mafia;
-            }
-            else if (i == 1 || i == 9)
-            {
-                roles[i] = RoleName.Seer;
-            }
-            else if (i == 2)
-            {
-                roles[i] = RoleName.Guardian;
-            }
-            else if (i == 3)
-            {
-                roles[i] = RoleName.Medium;
-            }
-            else if (i == 4)
-            {
-                roles[i] = RoleName.SixthSense;
-            }
-            else if (i == 5 || i == 6 || i == 8)
-            {
-                roles[i] = RoleName.Villager;
-            }
-        }
-        return roles;
-    }
-
     public List<Player> GetAllPlayers()
     {
         List<Player> players = new();
