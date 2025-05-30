@@ -289,7 +289,6 @@ public class RoleSettingsUI : NetworkBehaviour
         {
             RoleManager.roleDict[item.Key] = item.Value;
         }
-        Debug.Log("RoleDict: " + string.Join(", ", RoleManager.roleDict));
     }
 
     [Server]

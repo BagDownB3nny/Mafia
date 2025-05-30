@@ -23,14 +23,14 @@ public class PlayerDeath : NetworkBehaviour
     {
         if (isDead)
         {
-            Debug.LogWarning("Player is already dead");
+            Debug.LogError("Player is already dead");
             return;
         }
         ServerKillPlayer();
     }
 
     [Server]
-    public void ServerKillPlayer()
+    public void ServerKillPlayer(bool spawnCorpse = true)
     {
         isDead = true;
         GameObject corpse = Instantiate(corpsePrefab, transform.position, transform.rotation);

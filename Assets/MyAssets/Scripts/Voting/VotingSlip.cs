@@ -71,7 +71,6 @@ public class VotingSlip : MonoBehaviour
         {
             int connId = kvp.Key;
             string username = kvp.Value;
-            Debug.Log($"Generating voting slip for {username} with connId {connId}");
 
             GameObject votingRow = Instantiate(votingPlayerRow, new Vector3(0, 0, 0), Quaternion.identity);
             votingRow.transform.SetParent(VotingTogglesContainer.transform);

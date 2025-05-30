@@ -26,7 +26,6 @@ public class ColourButton : MonoBehaviour
     {
         if (unselectableColourImage.activeSelf)
         {
-            Debug.Log("This colour is already taken");
             return;
         }
         Player player = PlayerManager.instance.localPlayer;

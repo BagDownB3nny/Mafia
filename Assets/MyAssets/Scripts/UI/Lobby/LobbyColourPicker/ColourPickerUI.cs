@@ -35,7 +35,7 @@ public class ColourPickerUI : MonoBehaviour
             }
             else if (colorIndex >= colors.Length)
             {
-                Debug.LogWarning("Not enough colors for all buttons");
+                Debug.LogError("Not enough colors for all buttons");
                 break;
             }
         }
@@ -46,7 +46,6 @@ public class ColourPickerUI : MonoBehaviour
         // Set other buttons to unselectable
         int localPlayerConnId = PlayerManager.instance.LocalPlayerConnId();
 
-        Debug.Log("Setting UI to Colour Buttons");
         foreach (var keyValuePair in PlayerColourManager.instance.playerColours)
         {
             ColourButton button = GetColourButton(keyValuePair.Value);
@@ -144,12 +143,10 @@ public class ColourPickerUI : MonoBehaviour
             ColourButton button = child.GetComponent<ColourButton>();
             if (button != null && button.colour == color)
             {
-                Debug.Log($"Found ColourButton for color: {color}");
-                Debug.Log($"Button: {button}");
                 return button;
             }
         }
-        Debug.LogWarning($"No ColourButton found for color: {color}");
+        Debug.LogError($"No ColourButton found for color: {color}");
         return null;
     }
 }

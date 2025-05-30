@@ -39,7 +39,6 @@ public class SeeingEyeSigil : Sigil
         {
             return;
         }
-        Debug.Log(markedPlayerNetId);
         Player player = PlayerManager.instance.GetPlayerByNetId(markedPlayerNetId);
         if (player == null)
         {

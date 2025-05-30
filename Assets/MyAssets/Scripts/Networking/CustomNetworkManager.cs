@@ -55,11 +55,10 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
-        base.OnServerDisconnect(conn);
         string currentScene = SceneManager.GetActiveScene().name;
         if (currentScene == "Game")
         {
-            // Act like player died
+            OnDisconnectFromGame(conn);
         } else if (currentScene == "Lobby")
         {
             OnDisconnectFromLobby(conn);
@@ -68,6 +67,17 @@ public class CustomNetworkManager : NetworkManager
         {
             Debug.LogError($"Client disconnected, scene not handled: {currentScene}");
         }
+        // Base method destroys connection's player object
+        base.OnServerDisconnect(conn);
+    }
+
+    [Server]
+    public void OnDisconnectFromGame(NetworkConnectionToClient conn)
+    {
+        int connectionId = conn.connectionId;
+        Player player = PlayerManager.instance.GetPlayerByConnId(connectionId);
+        player.GetComponent<PlayerDeath>().ServerKillPlayer(false);
+        PlayerManager.instance.RemovePlayer(connectionId);
     }
 
     [Server]    

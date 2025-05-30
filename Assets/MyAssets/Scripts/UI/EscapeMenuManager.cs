@@ -1,25 +1,36 @@
 using UnityEngine;
+using Mirror;
+using UnityEngine.SceneManagement;
 
-public class EscapeMenuManager : MonoBehaviour
+public class EscapeMenuManager : NetworkBehaviour
 {
 
     public static EscapeMenuManager instance;
 
     [SerializeField] private GameObject escapeMenuPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject quitToLobbyButton;
+    [SerializeField] private GameObject leaveGameButton;
 
     public void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            Debug.Log("EscapeMenuManager instance created");
         }
         else
         {
-            Debug.LogWarning("EscapeMenuManager instance already exists, destroying this one.");
-            Debug.LogWarning(instance);
             Destroy(gameObject);
+        }
+    }
+
+    public override void OnStartServer()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (isServer && sceneName == "Game")
+        {
+            quitToLobbyButton.SetActive(true);
+            leaveGameButton.SetActive(false);
         }
     }
 
@@ -70,5 +81,17 @@ public class EscapeMenuManager : MonoBehaviour
     public void OnClickBack()
     {
         CloseEscapeMenu();
+    }
+
+    [Client]
+    public void OnClickLeaveGame()
+    {
+        NetworkClient.Disconnect();
+    }
+
+    [Server]
+    public void OnClickExitToLobby()
+    {
+        GameEndManager.instance.EndGame();
     }
 }

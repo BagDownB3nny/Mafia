@@ -5,7 +5,6 @@ public class Hole : MonoBehaviour
     [SerializeField] private int PlayerLayer, GoThroughGroundPlayerLayer;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.layer);
         if (other.gameObject.layer == LayerName.Player.Index())
         {
             other.gameObject.layer = LayerName.GoThroughGroundPlayer.Index();

@@ -42,7 +42,6 @@ public class RoleNumberSetter : NetworkBehaviour
     [Client]
     public void SyncClientUI()
     {
-        Debug.Log("SyncClientUI: " + role);
         int number = roleSettingsUI.roleDict[role];
         SetNumber(number);
     }
@@ -66,7 +65,6 @@ public class RoleNumberSetter : NetworkBehaviour
         if (role == this.role)
         {
             int newNumber = roleSettingsUI.roleDict[role];
-            Debug.Log("OnRoleDictSet: " + role + " " + newNumber);
             SetNumber(newNumber);
         }
     }
