@@ -41,8 +41,8 @@ public class PlayerMovement : NetworkBehaviour
 
     public float moveSpeed = 5f; // Movement speed
 
-    [SerializeField] public float gravity = -15f; // Gravity strength
-    [SerializeField] public float jumpHeight = 1f; // Jump height
+    [SerializeField] private float gravity = -15f; // Gravity strength
+    [SerializeField] private float jumpHeight = 1f; // Jump height
 
     private CharacterController controller;
     private Vector3 velocity;

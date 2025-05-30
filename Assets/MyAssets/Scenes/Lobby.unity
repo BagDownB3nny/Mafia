@@ -368,7 +368,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 1167686191}
   unselectableColourImage: {fileID: 1642697767}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &9412851
 MonoBehaviour:
@@ -6159,7 +6158,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  roleSettingsUI: {fileID: 634904618}
+  roleSettingsMenu: {fileID: 0}
   numberText: {fileID: 1781510923}
   leftArrowButton: {fileID: 1119841944}
   rightArrowButton: {fileID: 1085369082}
@@ -6218,7 +6217,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 836457156}
   unselectableColourImage: {fileID: 81257026}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &206126011
 MonoBehaviour:
@@ -9855,7 +9853,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  colourPickerUI: {fileID: 514379761}
+  colourPickerMenu: {fileID: 514379761}
 --- !u!1 &315281898
 GameObject:
   m_ObjectHideFlags: 0
@@ -10722,7 +10720,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 117729817}
   unselectableColourImage: {fileID: 230524741}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &341475640
 MonoBehaviour:
@@ -11308,7 +11305,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 1127831676}
   unselectableColourImage: {fileID: 1183840531}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &357646445
 MonoBehaviour:
@@ -13372,7 +13368,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 683953890}
   unselectableColourImage: {fileID: 565643582}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &415841149
 MonoBehaviour:
@@ -17243,7 +17238,7 @@ GameObject:
   - component: {fileID: 514379760}
   - component: {fileID: 514379761}
   m_Layer: 5
-  m_Name: ColourPickerUI
+  m_Name: ColourPickerMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17281,8 +17276,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e910fb762f9141e2945ebc00f745a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  root: {fileID: 1914867964}
   colourButtons: {fileID: 1130598756}
-  colourWindow: {fileID: 1914867964}
+  confirmButton: {fileID: 0}
 --- !u!1001 &520667627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19793,7 +19792,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 508219700}
   unselectableColourImage: {fileID: 950479666}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &580985064
 MonoBehaviour:
@@ -21225,7 +21223,7 @@ GameObject:
   - component: {fileID: 634904618}
   - component: {fileID: 634904619}
   m_Layer: 5
-  m_Name: GameSettingsUI
+  m_Name: LobbySettingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21266,7 +21264,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  gameSettingsWindow: {fileID: 2093952165}
+  root: {fileID: 2093952165}
   timeSettingsUi: {fileID: 634904619}
   expectedPlayerCountText: {fileID: 1781510923}
   playerNumberSetter: {fileID: 203720758}
@@ -22446,7 +22444,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 929707272}
   unselectableColourImage: {fileID: 777182307}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &691358486
 MonoBehaviour:
@@ -22858,7 +22855,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  roleSettingsUI: {fileID: 634904618}
   numberText: {fileID: 1843987754}
   leftArrowButton: {fileID: 348907290}
   rightArrowButton: {fileID: 492080653}
@@ -23340,7 +23336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 2009527504}
   unselectableColourImage: {fileID: 291654997}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &703281889
 MonoBehaviour:
@@ -30705,7 +30700,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 826314530}
   unselectableColourImage: {fileID: 1974445887}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &933594912
 MonoBehaviour:
@@ -31879,7 +31873,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game Settings
+  m_text: 'Lobby Settings
 
 '
   m_isRightToLeft: 0
@@ -34685,7 +34679,7 @@ GameObject:
   - component: {fileID: 1051168081}
   - component: {fileID: 1051168082}
   m_Layer: 5
-  m_Name: Escape
+  m_Name: SettingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34723,8 +34717,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32de7c2aa4604df1aef08790055d944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escapeMenuPanel: {fileID: 1064988250}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  root: {fileID: 1064988250}
   settingsPanel: {fileID: 1324377625}
+  quitToLobbyButton: {fileID: 0}
+  leaveGameButton: {fileID: 0}
 --- !u!1 &1060109194
 GameObject:
   m_ObjectHideFlags: 0
@@ -34890,7 +34889,7 @@ GameObject:
   - component: {fileID: 1064988253}
   - component: {fileID: 1064988252}
   m_Layer: 5
-  m_Name: Escape
+  m_Name: SettingsUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35597,6 +35596,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 145159429}
+  - {fileID: 1194095066}
   - {fileID: 278906200}
   - {fileID: 105253641}
   - {fileID: 1006298497}
@@ -38772,7 +38772,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 1874140524}
   unselectableColourImage: {fileID: 1468370281}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1180069070
 GameObject:
@@ -39395,6 +39394,68 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194053586}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1194095065
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1082327430}
+    m_Modifications:
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7631240969534167009, guid: 13fb43d0313964d33916db226a348895, type: 3}
+      propertyPath: m_Name
+      value: MenuManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13fb43d0313964d33916db226a348895, type: 3}
+--- !u!4 &1194095066 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3647638211739068034, guid: 13fb43d0313964d33916db226a348895, type: 3}
+  m_PrefabInstance: {fileID: 1194095065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1198150165
 GameObject:
   m_ObjectHideFlags: 0
@@ -39537,7 +39598,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 391108675}
   unselectableColourImage: {fileID: 2087314716}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1201134884
 MonoBehaviour:
@@ -48198,7 +48258,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 46578320}
   unselectableColourImage: {fileID: 1797449547}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1481686585
 MonoBehaviour:
@@ -48747,7 +48806,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 434342418}
   unselectableColourImage: {fileID: 527015060}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1493996681
 MonoBehaviour:
@@ -51134,7 +51192,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  roleSettingsUI: {fileID: 634904618}
   numberText: {fileID: 1630817705}
   leftArrowButton: {fileID: 2061785912}
   rightArrowButton: {fileID: 1611721925}
@@ -54240,7 +54297,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  roleSettingsUI: {fileID: 634904618}
   numberText: {fileID: 950147024}
   leftArrowButton: {fileID: 638835952}
   rightArrowButton: {fileID: 1204422964}
@@ -54979,7 +55035,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 1075632893}
   unselectableColourImage: {fileID: 1314556115}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1673491862
 MonoBehaviour:
@@ -58086,7 +58141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 713392419}
   unselectableColourImage: {fileID: 1789235415}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1773039670
 MonoBehaviour:
@@ -58373,7 +58427,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  roleSettingsUI: {fileID: 634904618}
   numberText: {fileID: 427808024}
   leftArrowButton: {fileID: 417990329}
   rightArrowButton: {fileID: 640638262}
@@ -59011,7 +59064,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColourImage: {fileID: 567742152}
   unselectableColourImage: {fileID: 376578648}
-  colourPickerUI: {fileID: 514379761}
   colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1788254053
 MonoBehaviour:
@@ -59225,7 +59277,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  roleSettingsUI: {fileID: 634904618}
   numberText: {fileID: 835611199}
   leftArrowButton: {fileID: 874640748}
   rightArrowButton: {fileID: 1736411338}
@@ -62127,7 +62178,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  gameSettingsWindow: {fileID: 2093952165}
+  lobbySettingsMenu: {fileID: 634904618}
 --- !u!1 &1877402043
 GameObject:
   m_ObjectHideFlags: 0
@@ -62944,7 +62995,7 @@ GameObject:
   - component: {fileID: 1914867967}
   - component: {fileID: 1914867966}
   m_Layer: 5
-  m_Name: ColourpickerWindow
+  m_Name: ColourPickerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66011,7 +66062,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  roleSettingsUI: {fileID: 634904618}
   numberText: {fileID: 833916832}
   leftArrowButton: {fileID: 241682038}
   rightArrowButton: {fileID: 1928910048}
@@ -66115,7 +66165,7 @@ GameObject:
   - component: {fileID: 2019799880}
   - component: {fileID: 2019799879}
   m_Layer: 0
-  m_Name: GameSettingsButton
+  m_Name: LobbySettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66552,7 +66602,7 @@ GameObject:
   - component: {fileID: 2036375217}
   - component: {fileID: 2036375218}
   m_Layer: 0
-  m_Name: RaceChanger (1)
+  m_Name: LobbySettingsHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68890,7 +68940,7 @@ GameObject:
   - component: {fileID: 2093952168}
   - component: {fileID: 2093952167}
   m_Layer: 5
-  m_Name: GameSettingsWindow
+  m_Name: LobbySettingsUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,7 +15,7 @@ public class PlayerManager : NetworkBehaviour
     public static PlayerManager instance;
 
     // Is false if the scene is lobby, is true if the scene is game
-    [SerializeField] public sceneName scene;
+    public sceneName scene;
 
     // A list containing all the roles for the current lobby
     // This list should be updated everytime a player joins or leaves the lobby
@@ -77,9 +77,9 @@ public class PlayerManager : NetworkBehaviour
     [Server]
     public bool CanStartGame()
     {
-        int expectedPlayerCount = RoleSettingsUI.instance.expectedPlayerCount;
+        int expectedPlayerCount = RoleSettingsMenu.instance.expectedPlayerCount;
         int playerCount = GetPlayerCount();
-        int roleCount = RoleSettingsUI.instance.GetRoleCount();
+        int roleCount = RoleSettingsMenu.instance.GetRoleCount();
         if (playerCount == expectedPlayerCount && roleCount == expectedPlayerCount)
         {
             return true;
@@ -96,7 +96,7 @@ public class PlayerManager : NetworkBehaviour
     public void AddLobbyPlayer(Player player, int connectionId)
     {
         PlayerColourManager.instance.OnPlayerJoinedLobby(player, connectionId);
-        RoleSettingsUI.instance.OnPlayerJoin();
+        RoleSettingsMenu.instance.OnPlayerJoin();
     }
 
     public int GetConnIdByNetId(uint netId)

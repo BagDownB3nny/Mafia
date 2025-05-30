@@ -1,13 +1,13 @@
-using Mirror;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ColourPickerUI : MonoBehaviour
+public class ColourPickerMenu : Menu
 {
     [SerializeField] private GameObject colourButtons;
-    [SerializeField] private GameObject colourWindow;
+    [SerializeField] private Button confirmButton;
     private bool ColourButtonUIsInitialised = false;
 
-    public static ColourPickerUI instance;
+    public static ColourPickerMenu instance;
 
     public void Start()
     {
@@ -69,22 +69,14 @@ public class ColourPickerUI : MonoBehaviour
         }
     }
 
-    public void EnterWindow()
+    public override void Open()
     {
         if (!ColourButtonUIsInitialised)
         {
             SetUIToColourButtons();
             ColourButtonUIsInitialised = true;
         }
-
-        colourWindow.SetActive(true);
-        PlayerCamera.instance.EnterCursorMode();
-    }
-
-    public void ExitWindow()
-    {
-        colourWindow.SetActive(false);
-        PlayerCamera.instance.ExitCursorMode();
+        base.Open();
     }
 
     public void SubscribeToPlayerColourManager()
@@ -134,6 +126,11 @@ public class ColourPickerUI : MonoBehaviour
             newButton.selectedColourImage.SetActive(false);
             newButton.unselectableColourImage.SetActive(true);
         }
+    }
+
+    public void OnConfirmClick()
+    {
+        Close();
     }
 
     public ColourButton GetColourButton(Color color)
