@@ -28,7 +28,7 @@ public class ColourButton : MonoBehaviour
         {
             return;
         }
-        Player player = PlayerManager.instance.localPlayer;
+        Player player = NetworkClient.localPlayer.GetComponent<Player>();
         player.GetComponent<PlayerColour>().CmdSetColour(colour);
     }
 }

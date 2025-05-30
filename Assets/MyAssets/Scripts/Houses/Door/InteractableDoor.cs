@@ -57,7 +57,7 @@ public class InteractableDoor : Interactable
         if (door.isKnockedDown) return null;
         if (!door.isEnabled) return null;
 
-        uint playerNetId = PlayerManager.instance.localPlayer.netId;
+        uint playerNetId = NetworkClient.localPlayer.netId;
         if (authorisedPlayers.Contains(playerNetId))
         {
             return isOpen ? "[E] Close" : "[E] Open";
@@ -114,7 +114,7 @@ public class InteractableDoor : Interactable
     {
         if (door.isKnockedDown) return;
         if (!door.isEnabled) return;
-        uint playerNetId = PlayerManager.instance.localPlayer.netId;
+        uint playerNetId = NetworkClient.localPlayer.netId;
         if (authorisedPlayers.Contains(playerNetId))
         {
             CmdInteract();
