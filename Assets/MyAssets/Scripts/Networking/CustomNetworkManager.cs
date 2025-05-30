@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -50,6 +51,34 @@ public class CustomNetworkManager : NetworkManager
             // Ensures earlier AddPlayerForConnection calls are flushed
             StartCoroutine(AssignPlayerToHouse(playerHouse, playerComponent));
         }
+    }
+
+    public override void OnServerDisconnect(NetworkConnectionToClient conn)
+    {
+        base.OnServerDisconnect(conn);
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene == "Game")
+        {
+            // Act like player died
+        } else if (currentScene == "Lobby")
+        {
+            OnDisconnectFromLobby(conn);
+        }
+        else
+        {
+            Debug.LogError($"Client disconnected, scene not handled: {currentScene}");
+        }
+    }
+
+    [Server]    
+    public void OnDisconnectFromLobby(NetworkConnectionToClient conn)
+    {
+        int connectionId = conn.connectionId;
+        PlayerManager.instance.RemovePlayer(connectionId);
+        // Player manager removal must be first to be called
+        
+        PlayerColourManager.instance.OnPlayerLeftLobby(conn);
+        RoleSettingsUI.instance.OnPlayerLeftLobby(conn);
     }
 
     // Initiates assignment after ServerAddPlayer completes

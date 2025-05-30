@@ -68,6 +68,13 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Server]
+    public void RemovePlayer(int connectionId)
+    {
+        ConnIdToUsernameDict.Remove(connectionId);
+        ConnIdToNetIdDict.Remove(connectionId);
+    }
+
+    [Server]
     public bool CanStartGame()
     {
         int expectedPlayerCount = RoleSettingsUI.instance.expectedPlayerCount;

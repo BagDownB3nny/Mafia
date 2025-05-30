@@ -7,6 +7,8 @@ public class ColourPickerUI : MonoBehaviour
     [SerializeField] private GameObject colourWindow;
     private bool ColourButtonUIsInitialised = false;
 
+    public static ColourPickerUI instance;
+
     public void Start()
     {
         SubscribeToPlayerColourManager();
@@ -59,15 +61,14 @@ public class ColourPickerUI : MonoBehaviour
         }
     }
 
-    // public void SetCurrentColourButton(ColourButton button)
-    // {
-    //     if (currentColourButton != null)
-    //     {
-    //         currentColourButton.selectedColourImage.SetActive(false);
-    //     }
-    //     button.selectedColourImage.SetActive(true);
-    //     currentColourButton = button;
-    // }
+    public void OnPlayerColourRemoved(int playerConnId, Color oldColour)
+    {
+        ColourButton button = GetColourButton(oldColour);
+        if (button != null)
+        {
+            button.unselectableColourImage.SetActive(false);
+        }
+    }
 
     public void EnterWindow()
     {
@@ -91,6 +92,7 @@ public class ColourPickerUI : MonoBehaviour
     {
         PlayerColourManager.instance.playerColours.OnAdd += OnPlayerColourAdded;
         PlayerColourManager.instance.playerColours.OnSet += OnPlayerColourChanged;
+        PlayerColourManager.instance.playerColours.OnRemove += OnPlayerColourRemoved;
     }
 
 

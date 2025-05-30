@@ -66,6 +66,19 @@ public class RoleSettingsUI : NetworkBehaviour
         setDefaultRoleSettingsButton.SetActive(false);
     }
 
+    [Server]
+    public void OnPlayerLeftLobby(NetworkConnectionToClient conn)
+    {
+        if (expectedPlayerCountIncreased) return;
+        else if (roleSettingsChanged) {
+            SetExpectedPlayerCount(expectedPlayerCount - 1);
+        } else {
+            SetExpectedPlayerCount(expectedPlayerCount - 1);
+            SetDefaultRoleDict();
+            SaveRoleSetting();
+        }
+    }
+
     [Client]
     public void OnExitClick()
     {
