@@ -2,11 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using Mirror;
 
-public class TimeSettingsUi : NetworkBehaviour
+public class TimeSettingsMenu : NetworkBehaviour
 {
     [Header("Time Settings")]
 
-    private List<int> timeOptions = new List<int> { 3, 4, 5, 6, 7, 8, 9, 10 };
+    private readonly List<int> timeOptions = new() { 3, 4, 5, 6, 7, 8, 9, 10 };
     private int currentTimeIndex;
 
     [SyncVar (hook = nameof(OnIrlSecondsPerGameHourChanged))]

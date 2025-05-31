@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class GameSettingsButton : Interactable
+public class LobbySettingsButton : Interactable
 {
-    [SerializeField] public GameObject gameSettingsWindow;
+    [SerializeField] private Menu lobbySettingsMenu;
 
 
     public override RoleName[] GetRolesThatCanInteract()
@@ -17,7 +17,7 @@ public class GameSettingsButton : Interactable
 
     public override void Interact()
     {
-        gameSettingsWindow.SetActive(true);
+        lobbySettingsMenu.Open();
         PlayerCamera.instance.EnterCursorMode();
     }
 }

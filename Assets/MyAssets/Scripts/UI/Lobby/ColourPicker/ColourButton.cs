@@ -5,9 +5,8 @@ using UnityEngine.UI;
 public class ColourButton : MonoBehaviour
 {
 
-    [SerializeField] public GameObject selectedColourImage;
-    [SerializeField] public GameObject unselectableColourImage;
-    [SerializeField] private ColourPickerUI colourPickerUI;
+    public GameObject selectedColourImage;
+    public GameObject unselectableColourImage;
     public Color colour;
 
     public void Start()

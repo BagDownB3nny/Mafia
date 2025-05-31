@@ -1,27 +1,24 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using TMPro;
 using UnityEngine.UI;
 
-public class RoleSettingsUI : NetworkBehaviour
+public class RoleSettingsMenu : Menu
 {
 
-
     [Header("UI")]
-    [SerializeField] public GameObject gameSettingsWindow;
-    [SerializeField] public TimeSettingsUi timeSettingsUi;
-    [SerializeField] public TMP_Text expectedPlayerCountText;
-    [SerializeField] public PlayerNumberSetter playerNumberSetter;
-    [SerializeField] public GameObject setDefaultRoleSettingsButton;
-    [SerializeField] public Button confirmButton;
-    [SerializeField] public Button exitButton;
-    [SerializeField] public TMP_Text errorText;
-    [SerializeField] public PlayerCounter playerCounter;
+    [SerializeField] private TimeSettingsMenu timeSettingsUi;
+    [SerializeField] private TMP_Text expectedPlayerCountText;
+    [SerializeField] private PlayerNumberSetter playerNumberSetter;
+    [SerializeField] private GameObject setDefaultRoleSettingsButton;
+    [SerializeField] private Button confirmButton;
+    [SerializeField] private Button exitButton;
+    [SerializeField] private TMP_Text errorText;
+    [SerializeField] private PlayerCounter playerCounter;
 
     [Header("Role Settings")]
     // Key is the role, value is the number of players with that role
-    public readonly SyncDictionary<RoleName, int> roleDict = new SyncDictionary<RoleName, int>();
+    public readonly SyncDictionary<RoleName, int> roleDict = new();
 
 
     [SyncVar(hook = nameof(OnExpectedPlayerCountChanged))]
@@ -33,7 +30,7 @@ public class RoleSettingsUI : NetworkBehaviour
 
     // For testing purposes
     // public int fakePlayerCount;
-    public static RoleSettingsUI instance;
+    public static RoleSettingsMenu instance;
 
     public void Awake()
     {
@@ -82,8 +79,7 @@ public class RoleSettingsUI : NetworkBehaviour
     [Client]
     public void OnExitClick()
     {
-        gameSettingsWindow.SetActive(false);
-        PlayerCamera.instance.EnterFPSMode();
+        base.Close();
     }
 
     [Client]
@@ -191,7 +187,7 @@ public class RoleSettingsUI : NetworkBehaviour
     [Server]
     public bool IsChangingSettings()
     {
-        return gameSettingsWindow.activeSelf;
+        return base.IsOpen;
     }
 
     [Server]
@@ -301,10 +297,9 @@ public class RoleSettingsUI : NetworkBehaviour
     [Server]
     public void OnConfirmClick()
     {
-        gameSettingsWindow.SetActive(false);
         timeSettingsUi.SaveTimeSetting();
         SaveRoleSetting();
-        PlayerCamera.instance.EnterFPSMode();
+        base.Close();
 
         // int playerCount = fakePlayerCount;
         int playerCount = PlayerManager.instance.GetPlayerCount();

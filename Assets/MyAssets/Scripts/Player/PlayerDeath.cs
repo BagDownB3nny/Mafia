@@ -16,7 +16,7 @@ public class PlayerDeath : NetworkBehaviour
 
     [Header("Player visuals")]
     [SerializeField] private GameObject ghostVisual;
-    [SerializeField] public GameObject aliveVisual;
+    [SerializeField] private GameObject aliveVisual;
 
     [Server]
     public void KillPlayer()

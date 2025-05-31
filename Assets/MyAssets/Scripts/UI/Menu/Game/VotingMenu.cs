@@ -5,17 +5,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VotingSlip : MonoBehaviour
+public class VotingMenu : Menu
 {
     [SerializeField] private GameObject VotingTogglesContainer;
-    [SerializeField] private GameObject VotingSlipUI;
     [SerializeField] private GameObject votingPlayerRow;
     [SerializeField] private VotingBooth votingBooth;
     private VotingRow currentlySelectedRow;
 
     private bool isVotingSlipGenerated = false;
 
-    public static VotingSlip instance;
+    public static VotingMenu instance;
 
     public void Awake()
     {
@@ -54,14 +53,7 @@ public class VotingSlip : MonoBehaviour
             GenerateVotingSlip();
             isVotingSlipGenerated = true;
         }
-        PlayerCamera.instance.EnterCursorMode();
-        VotingSlipUI.SetActive(true);
-    }
-
-    public void ExitVotingSlip()
-    {
-        PlayerCamera.instance.EnterFPSMode();
-        VotingSlipUI.SetActive(false);
+        base.Open();
     }
 
     public void GenerateVotingSlip()
@@ -92,7 +84,7 @@ public class VotingSlip : MonoBehaviour
                 Player localPlayer = NetworkClient.localPlayer.GetComponent<Player>();
                 PlayerVoter playerVoter = localPlayer.GetComponent<PlayerVoter>();
                 playerVoter.CmdVote(suspectVotedForConnId);
-                ExitVotingSlip();
+                base.Close();
             }
         }
     }

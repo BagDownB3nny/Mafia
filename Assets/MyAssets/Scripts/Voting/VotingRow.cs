@@ -20,13 +20,13 @@ public class VotingRow : MonoBehaviour
         bool isChecked = toggle.isOn;
         if (isChecked)
         {
-            VotingSlip votingSlip = GetComponentInParent<VotingSlip>();
-            votingSlip.SetSelectedRow(this);
+            VotingMenu votingMenu = GetComponentInParent<VotingMenu>();
+            votingMenu.SetSelectedRow(this);
         }
         else
         {
-            VotingSlip votingSlip = GetComponentInParent<VotingSlip>();
-            votingSlip.SetSelectedRow(null);
+            VotingMenu votingMenu = GetComponentInParent<VotingMenu>();
+            votingMenu.SetSelectedRow(null);
         }
     }
 

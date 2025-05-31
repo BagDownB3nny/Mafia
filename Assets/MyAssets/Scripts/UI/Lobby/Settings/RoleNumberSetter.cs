@@ -9,21 +9,20 @@ public class RoleNumberSetter : NetworkBehaviour
 {
 
     [Header("UI")]
-    [SerializeField] public RoleSettingsUI roleSettingsUI;
-    [SerializeField] public TMP_Text numberText;
-    [SerializeField] public GameObject leftArrowButton;
-    [SerializeField] public GameObject rightArrowButton;
+    [SerializeField] private TMP_Text numberText;
+    [SerializeField] private GameObject leftArrowButton;
+    [SerializeField] private GameObject rightArrowButton;
 
     [Header("Role")]
-    public RoleName role;
+    [SerializeField] private RoleName role;
 
     public override void OnStartClient()
     {
         // Disable arrows for clients
         if (isServer) return;
 
-        roleSettingsUI.roleDict.OnSet += OnRoleDictSet;
-        roleSettingsUI.roleDict.OnAdd += OnRoleDictAdd;
+        RoleSettingsMenu.instance.roleDict.OnSet += OnRoleDictSet;
+        RoleSettingsMenu.instance.roleDict.OnAdd += OnRoleDictAdd;
         SyncClientUI();
 
         leftArrowButton.SetActive(false);
@@ -32,17 +31,17 @@ public class RoleNumberSetter : NetworkBehaviour
  
     public override void OnStartServer()
     {
-        roleSettingsUI.roleDict.OnSet += OnRoleDictSet;
-        roleSettingsUI.roleDict.OnAdd += OnRoleDictAdd;
+        RoleSettingsMenu.instance.roleDict.OnSet += OnRoleDictSet;
+        RoleSettingsMenu.instance.roleDict.OnAdd += OnRoleDictAdd;
 
-        int startingNumber = roleSettingsUI.roleDict[role];
+        int startingNumber = RoleSettingsMenu.instance.roleDict[role];
         SetNumber(startingNumber);
     }
 
     [Client]
     public void SyncClientUI()
     {
-        int number = roleSettingsUI.roleDict[role];
+        int number = RoleSettingsMenu.instance.roleDict[role];
         SetNumber(number);
     }
 
@@ -64,7 +63,7 @@ public class RoleNumberSetter : NetworkBehaviour
     {
         if (role == this.role)
         {
-            int newNumber = roleSettingsUI.roleDict[role];
+            int newNumber = RoleSettingsMenu.instance.roleDict[role];
             SetNumber(newNumber);
         }
     }
@@ -73,7 +72,7 @@ public class RoleNumberSetter : NetworkBehaviour
     {
         if (role == this.role)
         {
-            int newNumber = roleSettingsUI.roleDict[role];
+            int newNumber = RoleSettingsMenu.instance.roleDict[role];
             SetNumber(newNumber);
         }
     }
@@ -81,24 +80,24 @@ public class RoleNumberSetter : NetworkBehaviour
     [Server]
     public void OnLeftArrowClick()
     {
-        int oldNumber = roleSettingsUI.roleDict[role];
+        int oldNumber = RoleSettingsMenu.instance.roleDict[role];
         int newNumber = oldNumber - 1;
         if (newNumber == 0)
         {
             leftArrowButton.SetActive(false);
         }
-        roleSettingsUI.SetRole(role, oldNumber - 1);
+        RoleSettingsMenu.instance.SetRole(role, oldNumber - 1);
     }
 
     [Server]
     public void OnRightArrowClick()
     {
-        int oldNumber = roleSettingsUI.roleDict[role];
+        int oldNumber = RoleSettingsMenu.instance.roleDict[role];
         int newNumber = oldNumber + 1;
         if (newNumber == 1)
         {
             leftArrowButton.SetActive(true);
         }
-        roleSettingsUI.SetRole(role, newNumber);
+        RoleSettingsMenu.instance.SetRole(role, newNumber);
     }
 }

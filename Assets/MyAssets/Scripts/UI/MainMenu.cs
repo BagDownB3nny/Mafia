@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuNavigator : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    public static MenuNavigator instance;
+    public static MainMenu instance;
 
     public void Awake()
     {

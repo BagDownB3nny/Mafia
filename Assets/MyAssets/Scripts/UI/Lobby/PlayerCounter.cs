@@ -10,7 +10,7 @@ public class PlayerCounter : NetworkBehaviour
     [SyncVar(hook = nameof(OnPlayerCountColorChanged))]
     public Color playerCountColor;
 
-    [SerializeField] public TMP_Text playerCountText;
+    [SerializeField] private TMP_Text playerCountText;
 
     [Server]
     public void SetPlayerCount(string newPlayerCount, Color color)

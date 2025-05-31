@@ -16,7 +16,7 @@ public class VotingBooth : Interactable
     // Observer
     public event Action OnVotesChanged;
 
-    [SerializeField] private VotingSlip votingSlip;
+    [SerializeField] private VotingMenu votingMenu;
 
     public static VotingBooth instance;
 
@@ -67,7 +67,7 @@ public class VotingBooth : Interactable
     [Client]
     public override void Interact()
     {
-        votingSlip.Enable();
+        votingMenu.Enable();
     }
 
     [Server]

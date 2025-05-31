@@ -103,7 +103,7 @@ public class CustomNetworkManager : NetworkManager
         // Player manager removal must be first to be called
         
         PlayerColourManager.instance.OnPlayerLeftLobby(conn);
-        RoleSettingsUI.instance.OnPlayerLeftLobby(conn);
+        RoleSettingsMenu.instance.OnPlayerLeftLobby(conn);
     }
 
     // Initiates assignment after ServerAddPlayer completes
