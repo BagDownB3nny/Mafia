@@ -48,7 +48,7 @@ public class InteractableLadder : Interactable
     {
         timePlayerMountedLadder = Time.time;
         isLocalPlayerOnLadder = true;
-        Player localPlayer = PlayerManager.instance.localPlayer;
+        Player localPlayer = NetworkClient.localPlayer.GetComponent<Player>();
 
         localPlayer.GetComponent<PlayerMovement>().ChangeToLadderMovement();
 
@@ -63,7 +63,7 @@ public class InteractableLadder : Interactable
     private void PlayerUnmountLadder()
     {
         isLocalPlayerOnLadder = false;
-        Player localPlayer = PlayerManager.instance.localPlayer;
+        Player localPlayer = NetworkClient.localPlayer.GetComponent<Player>();
 
         localPlayer.GetComponent<PlayerMovement>().ChangeToNormalMovement();
     }

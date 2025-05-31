@@ -1,6 +1,7 @@
 using UnityEngine;
+using Mirror;
 
-public class LadderCollider : MonoBehaviour
+public class LadderCollider : NetworkBehaviour
 {
 
     [SerializeField] InteractableLadder ladder;
@@ -9,7 +10,7 @@ public class LadderCollider : MonoBehaviour
     {
         if (other.CompareTag("Player") && ladder.isLocalPlayerOnLadder)
         {
-            Player player = PlayerManager.instance.localPlayer;
+            Player player = NetworkClient.localPlayer.GetComponent<Player>();
             player.GetComponent<PlayerMovement>().ChangeToNormalMovement();
             ladder.isLocalPlayerOnLadder = false;
         }

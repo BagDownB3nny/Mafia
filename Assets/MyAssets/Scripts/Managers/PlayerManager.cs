@@ -22,8 +22,6 @@ public class PlayerManager : NetworkBehaviour
     // For example, in a 6 player game, there could be 1 werewolf, 1 seer, 1 medium, and 3 villagers
     public RoleName[] playerRoles;
 
-    public Player localPlayer;
-
     // Key: username, Value: playerNetId
     public readonly SyncDictionary<int, string> ConnIdToUsernameDict = new SyncDictionary<int, string>();
     public readonly SyncDictionary<int, uint> ConnIdToNetIdDict = new SyncDictionary<int, uint>();
@@ -114,7 +112,7 @@ public class PlayerManager : NetworkBehaviour
     [Client]
     public int LocalPlayerConnId()
     {
-        return GetConnIdByNetId(localPlayer.netId);
+        return GetConnIdByNetId(NetworkClient.localPlayer.netId);
     }
 
     [Server]
@@ -131,6 +129,7 @@ public class PlayerManager : NetworkBehaviour
             Player joinedPlayer = GetPlayerByConnId(connectionId);
             joinedPlayer.GiveSpectatorMode();
         }
+        NetworkClient.localPlayer.GetComponent<Player>().SetNameTagColor(Color.red);
     }
 
     public Player GetPlayerByConnId(int connId)
@@ -153,7 +152,7 @@ public class PlayerManager : NetworkBehaviour
     [Client]
     public string GetLocalPlayerName()
     {
-        return localPlayer.steamUsername;
+        return NetworkClient.localPlayer.GetComponent<Player>().steamUsername;
     }
 
     [Server]

@@ -81,7 +81,7 @@ public class VotingMenu : Menu
             if (toggle.isOn)
             {
                 int suspectVotedForConnId = currentlySelectedRow.playerConnId;
-                Player localPlayer = PlayerManager.instance.localPlayer;
+                Player localPlayer = NetworkClient.localPlayer.GetComponent<Player>();
                 PlayerVoter playerVoter = localPlayer.GetComponent<PlayerVoter>();
                 playerVoter.CmdVote(suspectVotedForConnId);
                 base.Close();

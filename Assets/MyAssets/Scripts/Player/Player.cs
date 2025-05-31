@@ -47,11 +47,6 @@ public class Player : NetworkBehaviour
         StartCamera();
         GetSteamUsername();
         SetLayer();
-
-        if (PlayerManager.instance != null)
-        {
-            PlayerManager.instance.localPlayer = this;
-        }
     }
 
     [Client]
@@ -223,9 +218,13 @@ public class Player : NetworkBehaviour
             DisableRoleScriptsExcept(newRole);
             PlayerUIManager.instance.SetAllPlayerTexts();
         }
-        else if (newRole == RoleName.Mafia && PlayerManager.instance.localPlayer.role == RoleName.Mafia)
+        // Somehow causing a bug because the other player is instantiating faster than localplayer
+        else if (newRole == RoleName.Mafia)
         {
-            SetNameTagColor(Color.red);
+            if (NetworkClient.localPlayer.GetComponent<Player>() && NetworkClient.localPlayer.GetComponent<Player>().role == RoleName.Mafia)
+            {
+                SetNameTagColor(Color.red);
+            }
         }
 
         if (isLocalPlayer && newRole != RoleName.Mafia)

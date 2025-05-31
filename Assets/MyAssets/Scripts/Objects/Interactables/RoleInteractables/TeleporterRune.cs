@@ -44,7 +44,7 @@ public class TeleporterRune : Interactable, IHideable
     [Client]
     public void TeleportToMafiaHouse()
     {
-        Player player = PlayerManager.instance.localPlayer;
+        Player player = NetworkClient.localPlayer.GetComponent<Player>();
         PlayerTeleporter playerTeleporter = player.GetComponent<PlayerTeleporter>();
         Transform mafiaHouseTeleportLocation = mafiaHouseTeleportRune.teleportLocation;
         playerTeleporter.ClientTeleportPlayer(mafiaHouseTeleportLocation.position, mafiaHouseTeleportLocation.rotation);
@@ -54,7 +54,7 @@ public class TeleporterRune : Interactable, IHideable
     [Client]
     public void TeleportFromMafiaHouse()
     {
-        Player player = PlayerManager.instance.localPlayer;
+        Player player = NetworkClient.localPlayer.GetComponent<Player>();
         PlayerTeleporter playerTeleporter = player.GetComponent<PlayerTeleporter>();
         if (returnLocation)
         {
