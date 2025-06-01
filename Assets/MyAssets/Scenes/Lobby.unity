@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 8011276}
   - component: {fileID: 8011275}
   - component: {fileID: 8011274}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LadderViewbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 8011272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.718, y: 1.029, z: -0.957}
+  m_LocalPosition: {x: 2.541, y: 1.029, z: -0.957}
   m_LocalScale: {x: 0.2318, y: 2.1648583, z: 0.83435667}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1237,6 +1237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561f85ce3d364408f8ef3f3c820cecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   ladder: {fileID: 124202343}
 --- !u!65 &37524183
 BoxCollider:
@@ -8195,7 +8198,7 @@ GameObject:
   - component: {fileID: 260458343}
   - component: {fileID: 260458345}
   - component: {fileID: 260458344}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LadderCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8229,6 +8232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 2145054241}
   ladder: {fileID: 1370155442}
 --- !u!65 &260458345
@@ -8841,7 +8847,6 @@ MonoBehaviour:
   syncInterval: 0
   scene: 0
   playerRoles: 
-  localPlayer: {fileID: 0}
   playerCount: 0
   isGameStarted: 0
 --- !u!114 &278906202
@@ -24810,7 +24815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771825559}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LadderColliderBtm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32177,6 +32182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 751962271}
   ladder: {fileID: 124202343}
 --- !u!65 &965622159
@@ -34052,7 +34060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1027191480}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34723,8 +34731,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32de7c2aa4604df1aef08790055d944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   escapeMenuPanel: {fileID: 1064988250}
   settingsPanel: {fileID: 1324377625}
+  quitToLobbyButton: {fileID: 0}
+  leaveGameButton: {fileID: 0}
 --- !u!1 &1060109194
 GameObject:
   m_ObjectHideFlags: 0
@@ -41150,6 +41163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 65193318}
   ladder: {fileID: 124202343}
 --- !u!65 &1242348547
@@ -42252,7 +42268,7 @@ GameObject:
   - component: {fileID: 1302801726}
   - component: {fileID: 1302801728}
   - component: {fileID: 1302801727}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LadderCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42286,6 +42302,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 1027191480}
   ladder: {fileID: 1370155442}
 --- !u!65 &1302801728
@@ -45607,7 +45626,7 @@ GameObject:
   - component: {fileID: 1417078386}
   - component: {fileID: 1417078388}
   - component: {fileID: 1417078387}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LadderCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45641,6 +45660,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561f85ce3d364408f8ef3f3c820cecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   ladder: {fileID: 1370155442}
 --- !u!65 &1417078388
 BoxCollider:
@@ -68356,7 +68378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2075942255}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LadderColliderTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70100,7 +70122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2145054241}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}

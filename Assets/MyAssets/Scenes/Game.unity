@@ -18335,7 +18335,7 @@ Transform:
   m_GameObject: {fileID: 2753694568508760065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.718, y: 1.0312, z: -0.957}
+  m_LocalPosition: {x: 2.559, y: 1.0312, z: -0.957}
   m_LocalScale: {x: 0.2318, y: 2.1648583, z: 0.83435667}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20051,6 +20051,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561f85ce3d364408f8ef3f3c820cecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   ladder: {fileID: 6532875801685290505}
 --- !u!33 &1748933125261858601
 MeshFilter:
@@ -20148,6 +20151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 6118842987467999897}
   ladder: {fileID: 6532875801685290505}
 --- !u!1 &1815129576393121536
@@ -20286,7 +20292,7 @@ GameObject:
   - component: {fileID: 8651442304264683887}
   - component: {fileID: 9101734985739329205}
   - component: {fileID: 5814207989380446551}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LadderCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20856,7 +20862,7 @@ GameObject:
   - component: {fileID: 2458657348645357282}
   - component: {fileID: 8194074842409035148}
   - component: {fileID: 5879371351971821077}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LadderCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21571,7 +21577,7 @@ GameObject:
   - component: {fileID: 1561891863692685320}
   - component: {fileID: 5845513979276386174}
   - component: {fileID: 758559325552833747}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LadderViewbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22466,7 +22472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2115758179440027948}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: PlayerPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22991,7 +22997,7 @@ GameObject:
   - component: {fileID: 4742060056386192322}
   - component: {fileID: 3197160966498822685}
   - component: {fileID: 4165815495218746364}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LadderCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23085,6 +23091,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 5020610156547385319}
   ladder: {fileID: 1378029400812916156}
 --- !u!4 &4168506819630990425
@@ -23405,7 +23414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6656356391034535905}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LadderColliderBtm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25314,6 +25323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 2115758179440027948}
   ladder: {fileID: 1378029400812916156}
 --- !u!33 &5821163018567190260
@@ -25509,6 +25521,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561f85ce3d364408f8ef3f3c820cecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   ladder: {fileID: 1378029400812916156}
 --- !u!23 &5879593937024872862
 MeshRenderer:
@@ -26381,7 +26396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6656161343008401057}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LadderColliderTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29031,6 +29046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 872040039846265938}
   ladder: {fileID: 6532875801685290505}
 --- !u!1 &8108696989906170207
@@ -29127,7 +29145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5020610156547385319}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: PlayerPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}

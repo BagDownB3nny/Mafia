@@ -23,6 +23,8 @@ public class PlayerCamera : MonoBehaviour
 
     public static PlayerCamera instance;
 
+    [Header ("Ignore raycast layers")]
+    public static LayerMask ignoreRaycastLayers;
     public void Awake()
     {
         instance = this;
@@ -30,6 +32,11 @@ public class PlayerCamera : MonoBehaviour
 
     public void Start()
     {
+        ignoreRaycastLayers = LayerMask.GetMask(
+            LayerName.LocalPlayer.ToString(),
+            LayerName.IgnoreRaycast.ToString(),
+            LayerName.GoThroughGroundPlayer.ToString()
+    );
         EnterFPSMode();
     }
 
@@ -122,7 +129,7 @@ public class PlayerCamera : MonoBehaviour
         RaycastHit hit;
         // Offset the origin position to avoid hitting the player
         Vector3 originPosition = origin.position;
-        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance))
+        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance, ~ignoreRaycastLayers))
         {
             return hit.collider.gameObject;
         }
@@ -134,7 +141,7 @@ public class PlayerCamera : MonoBehaviour
         // lookingAtDirection and originPosition are both client-side
         // The raycast is done on the server, so the hit object might be a different object based on server position
         RaycastHit hit;
-        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance))
+        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance, ~ignoreRaycastLayers))
         {
             return hit.collider.gameObject;
         }
@@ -147,7 +154,7 @@ public class PlayerCamera : MonoBehaviour
         // Offset the origin position to avoid hitting the player
         Vector3 lookingAtDirection = transform.forward;
         Vector3 originPosition = transform.position;
-        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance))
+        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance, ~ignoreRaycastLayers))
         {
             return hit.collider.gameObject;
         }
@@ -159,7 +166,7 @@ public class PlayerCamera : MonoBehaviour
         // Offset the origin position to avoid hitting the player
         Vector3 lookingAtDirection = transform.forward;
         Vector3 originPosition = transform.position;
-        bool hasHit = Physics.Raycast(originPosition, lookingAtDirection, out RaycastHit hit, maxDistance);
+        bool hasHit = Physics.Raycast(originPosition, lookingAtDirection, out RaycastHit hit, maxDistance, ~ignoreRaycastLayers);
         if (!hasHit)
         {
             return null;

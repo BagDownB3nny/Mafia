@@ -21,7 +21,8 @@ public static class Layer
         "Corpse",                  // 12
         "GhostPassable",          // 13
         "NameTag",                // 14
-        "CharacterRenderTexture" // 15
+        "CharacterRenderTexture", // 15
+        "LocalPlayer"             // 16
     };
     // For assignment of singular layers to objects
     public static int Index(this LayerName layer) =>

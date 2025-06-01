@@ -28,6 +28,8 @@ public class PlayerMovement : NetworkBehaviour
     public float ladderMoveSpeed = 3f; // Ladder movement speed
 
     [Header("Ground Check")]
+    public LayerMask groundLayer; // Define which layers are considered ground
+    public LayerMask groundLayerWhenGoThroughGroundPlayer;
     public float groundCheckHeight = 0.5f; // Height of the capsule cast (half of the player collider height)
 
     [Header("Bunny Hop")]
@@ -155,6 +157,7 @@ public class PlayerMovement : NetworkBehaviour
     private void MovePlayerNormal()
     {
         bool isGrounded = IsGrounded();
+        Debug.Log(isGrounded);
         // Calculate movement direction based on the orientation
         Vector3 moveDirection = (orientation.forward * vertical + orientation.right * horizontal).normalized;
 
@@ -276,18 +279,23 @@ public class PlayerMovement : NetworkBehaviour
 
     private bool IsGrounded()
     {
+        bool isGoThroughGroundPlayer = gameObject.layer == LayerName.GoThroughGroundPlayer.Index();
+        LayerMask layerMask = isGoThroughGroundPlayer ? groundLayerWhenGoThroughGroundPlayer : groundLayer;
+
         // Perform a capsule cast to check if the player is grounded
         float playerHeight = capsuleCollider.height;
         float radius = capsuleCollider.radius;
 
         // CapsuleCast from the player's position downward to check for ground
-        return Physics.CapsuleCast(
+        bool isGrounded = Physics.CapsuleCast(
             transform.position + Vector3.up * (playerHeight / 2), // Top of the capsule
             transform.position + Vector3.up * (playerHeight / 2) - Vector3.up * groundCheckHeight, // Bottom of the capsule
             radius, // Radius of the capsule
             Vector3.down, // Cast downward
             groundCheckHeight, // Max distance to check
-            LayerName.Ground.Mask()
+            layerMask
         );
+
+        return isGrounded;
     }
 }

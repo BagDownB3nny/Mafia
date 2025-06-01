@@ -23,5 +23,6 @@ public enum LayerName
     Corpse,
     GhostPassable,
     NameTag,
-    CharacterRenderTexture
+    CharacterRenderTexture,
+    LocalPlayer
 }

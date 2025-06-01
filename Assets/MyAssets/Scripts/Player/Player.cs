@@ -46,13 +46,13 @@ public class Player : NetworkBehaviour
     {
         StartCamera();
         GetSteamUsername();
-        SetLayer();
+        SetLocalPlayerLayer();
     }
 
     [Client]
-    private void SetLayer()
+    private void SetLocalPlayerLayer()
     {
-        gameObject.layer = LayerName.IgnoreRaycast.Index();
+        gameObject.layer = LayerName.LocalPlayer.Index();
     }
 
     [Client]
