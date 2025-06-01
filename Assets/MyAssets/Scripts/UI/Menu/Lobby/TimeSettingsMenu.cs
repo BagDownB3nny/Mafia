@@ -5,7 +5,6 @@ using Mirror;
 public class TimeSettingsMenu : NetworkBehaviour
 {
     [Header("Time Settings")]
-
     private readonly List<int> timeOptions = new() { 3, 4, 5, 6, 7, 8, 9, 10 };
     private int currentTimeIndex;
 
@@ -15,8 +14,21 @@ public class TimeSettingsMenu : NetworkBehaviour
     [Header("UI Elements")]
     [SerializeField] private GameObject leftArrow;
     [SerializeField] private GameObject rightArrow;
-
     [SerializeField] private TMPro.TextMeshProUGUI timeText;
+
+    public static TimeSettingsMenu instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public override void OnStartServer()
     {

@@ -88,7 +88,10 @@ public class VotingMenu : Menu
             }
         }
     }
-
+    public void ExitVotingSlip()
+    {
+        base.Close();
+    }
     public void SetSelectedRow(VotingRow row)
     {
         if (currentlySelectedRow != null)

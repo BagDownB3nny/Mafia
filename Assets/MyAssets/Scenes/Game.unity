@@ -2168,7 +2168,7 @@ GameObject:
   - component: {fileID: 207705702}
   - component: {fileID: 207705701}
   m_Layer: 5
-  m_Name: ' BackToGame'
+  m_Name: BackToGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5543,9 +5543,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: EndGame
+      - m_Target: {fileID: 1225905651}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: OnClickLeaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10642,8 +10642,6 @@ MonoBehaviour:
   syncInterval: 0
   root: {fileID: 776899278}
   settingsPanel: {fileID: 1134391603}
-  quitToLobbyButton: {fileID: 0}
-  leaveGameButton: {fileID: 0}
 --- !u!1 &1235307761
 GameObject:
   m_ObjectHideFlags: 0

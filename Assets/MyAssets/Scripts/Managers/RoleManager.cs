@@ -6,7 +6,7 @@ using System.Linq;
 public class RoleManager : MonoBehaviour
 {
 
-    public static Dictionary<RoleName, int> roleDict = new Dictionary<RoleName, int>();
+    public static Dictionary<RoleName, int> roleDict = new();
     public static RoleManager instance;
     public void Awake()
     {
@@ -22,7 +22,7 @@ public class RoleManager : MonoBehaviour
     public void AssignRoles()
     {
         List<Player> players = PlayerManager.instance.GetAllPlayers();
-        List<RoleName> rolesToAssign = new List<RoleName>();
+        List<RoleName> rolesToAssign = new();
 
         // Create list of roles based on roleDict quantities
         foreach (var kvp in roleDict)

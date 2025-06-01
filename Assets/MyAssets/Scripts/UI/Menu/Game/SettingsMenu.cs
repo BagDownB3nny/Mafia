@@ -8,8 +8,6 @@ public class SettingsMenu : Menu
     public static SettingsMenu instance;
 
     [SerializeField] private GameObject settingsPanel;
-    [SerializeField] private GameObject quitToLobbyButton;
-    [SerializeField] private GameObject leaveGameButton;
 
     public void Awake()
     {
@@ -23,15 +21,15 @@ public class SettingsMenu : Menu
         }
     }
 
-    public override void OnStartServer()
-    {
-        string sceneName = SceneManager.GetActiveScene().name;
-        if (isServer && sceneName == "Game")
-        {
-            quitToLobbyButton.SetActive(true);
-            leaveGameButton.SetActive(false);
-        }
-    }
+    // public override void OnStartServer()
+    // {
+    //     string sceneName = SceneManager.GetActiveScene().name;
+    //     if (isServer && sceneName == "Game")
+    //     {
+    //         quitToLobbyButton.SetActive(true);
+    //         leaveGameButton.SetActive(false);
+    //     }
+    // }
 
     public override void Open()
     {
