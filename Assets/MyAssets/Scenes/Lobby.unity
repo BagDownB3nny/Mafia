@@ -1236,6 +1236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561f85ce3d364408f8ef3f3c820cecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   ladder: {fileID: 124202343}
 --- !u!65 &37524183
 BoxCollider:
@@ -6158,7 +6161,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  roleSettingsMenu: {fileID: 0}
+  roleSettingsMenu: {fileID: 634904618}
   numberText: {fileID: 1781510923}
   leftArrowButton: {fileID: 1119841944}
   rightArrowButton: {fileID: 1085369082}
@@ -8227,6 +8230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 2145054241}
   ladder: {fileID: 1370155442}
 --- !u!65 &260458345
@@ -8839,7 +8845,6 @@ MonoBehaviour:
   syncInterval: 0
   scene: 0
   playerRoles: 
-  localPlayer: {fileID: 0}
   playerCount: 0
   isGameStarted: 0
 --- !u!114 &278906202
@@ -32171,6 +32176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 751962271}
   ladder: {fileID: 124202343}
 --- !u!65 &965622159
@@ -41210,6 +41218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 65193318}
   ladder: {fileID: 124202343}
 --- !u!65 &1242348547
@@ -42346,6 +42357,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f9dd804dcbe4c7f879a888b82c3c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerPosition: {fileID: 1027191480}
   ladder: {fileID: 1370155442}
 --- !u!65 &1302801728
@@ -45435,8 +45449,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 514379761}
-        m_TargetAssemblyTypeName: ColourPickerUI, Assembly-CSharp
-        m_MethodName: ExitWindow
+        m_TargetAssemblyTypeName: ColourPickerMenu, Assembly-CSharp
+        m_MethodName: OnConfirmClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -45701,6 +45715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561f85ce3d364408f8ef3f3c820cecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   ladder: {fileID: 1370155442}
 --- !u!65 &1417078388
 BoxCollider:

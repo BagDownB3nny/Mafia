@@ -15,6 +15,7 @@ public abstract class Menu : NetworkBehaviour
 
     public virtual void Close()
     {
+        Debug.Log("Close virtual called");
         root.SetActive(false);
         PlayerCamera.instance.ExitCursorMode();
         MenuManager.instance.Unregister(this);
