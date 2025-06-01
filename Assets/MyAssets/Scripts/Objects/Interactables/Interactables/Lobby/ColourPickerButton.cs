@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ColourPickerButton : Interactable
 {
-    [SerializeField] public ColourPickerUI colourPickerUI;
+    public ColourPickerMenu colourPickerMenu;
 
 
     public override RoleName[] GetRolesThatCanInteract()
@@ -18,6 +18,6 @@ public class ColourPickerButton : Interactable
 
     public override void Interact()
     {
-        colourPickerUI.EnterWindow();
+        colourPickerMenu.Open();
     }
 }

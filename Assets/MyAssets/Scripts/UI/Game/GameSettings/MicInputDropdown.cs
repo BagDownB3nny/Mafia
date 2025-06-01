@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class MicrophoneSettings : MonoBehaviour
 {
-    public DissonanceComms dissonanceComms;
-    [SerializeField] public TMP_Dropdown microphoneDropdown;
+    [SerializeField] private DissonanceComms dissonanceComms;
+    [SerializeField] private TMP_Dropdown microphoneDropdown;
 
     private void Start()
     {

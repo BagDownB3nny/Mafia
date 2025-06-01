@@ -2,12 +2,11 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
 
-public class EscapeMenuManager : NetworkBehaviour
+public class SettingsMenu : Menu
 {
 
-    public static EscapeMenuManager instance;
+    public static SettingsMenu instance;
 
-    [SerializeField] private GameObject escapeMenuPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject quitToLobbyButton;
     [SerializeField] private GameObject leaveGameButton;
@@ -34,38 +33,17 @@ public class EscapeMenuManager : NetworkBehaviour
         }
     }
 
-    public void Update()
+    public override void Open()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ToggleEscapeMenu();
-        }
-    }
-
-    public void ToggleEscapeMenu()
-    {
-        if (escapeMenuPanel.activeSelf)
-        {
-            CloseEscapeMenu();
-        }
-        else
-        {
-            OpenEscapeMenu();
-        }
-    }
-
-    public void OpenEscapeMenu()
-    {
-        PlayerCamera.instance.EnterCursorMode();
+        Debug.Log("Opening SettingsMenu");
         PlayerMovement.localInstance.LockPlayerMovement();
-        escapeMenuPanel.SetActive(true);
+        base.Open();
     }
 
-    public void CloseEscapeMenu()
+    public override void Close()
     {
-        PlayerCamera.instance.ExitCursorMode();
         PlayerMovement.localInstance.UnlockPlayerMovement();
-        escapeMenuPanel.SetActive(false);
+        base.Close();
     }
 
     public void OpenSettings()
@@ -80,7 +58,7 @@ public class EscapeMenuManager : NetworkBehaviour
 
     public void OnClickBack()
     {
-        CloseEscapeMenu();
+        Close();
     }
 
     [Client]

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class MouseSenseSlider : MonoBehaviour
 {
     [Header("References")]
-    public Slider sensitivitySlider;
-    public TMP_Text sensitivityValueText;
+    [SerializeField] private Slider sensitivitySlider;
+    [SerializeField] private TMP_Text sensitivityValueText;
 
     [Header("Settings")]
     public static float mouseSensitivity = 2.00f; // Default value

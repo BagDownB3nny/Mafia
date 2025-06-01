@@ -193,7 +193,6 @@ public class PlayerCamera : MonoBehaviour
 
     public void EnterFPSMode()
     {
-        Debug.Log("Entering fps mode");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isCursorMode = false;
@@ -217,7 +216,6 @@ public class PlayerCamera : MonoBehaviour
 
     public void EnterSpectatorMode()
     {
-        Debug.Log("Entering spectator mode");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isCursorMode = false;
