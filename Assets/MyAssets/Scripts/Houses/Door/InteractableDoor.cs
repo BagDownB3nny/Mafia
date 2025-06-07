@@ -62,10 +62,11 @@ public class InteractableDoor : Interactable
         {
             return isOpen ? "[E] Close" : "[E] Open";
         }
-        else
+        else if (door.isKnockable)
         {
             return "[E] Knock";
-        }
+        } 
+        return "NOT INTERACTABLE";
     }
 
     [Client]
@@ -119,7 +120,7 @@ public class InteractableDoor : Interactable
         {
             CmdInteract();
         }
-        else
+        else if (door.isKnockable)
         {
             CmdKnock();
         }

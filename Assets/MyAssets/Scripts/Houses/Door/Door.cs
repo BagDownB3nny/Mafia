@@ -1,4 +1,5 @@
 using Mirror;
+using UnityEngine;
 
 public class Door : NetworkBehaviour
 {
@@ -11,4 +12,6 @@ public class Door : NetworkBehaviour
 
     [SyncVar]
     public bool isEnabled = true;
+
+    [SerializeField] public bool isKnockable = true;
 }

@@ -20429,6 +20429,7 @@ MonoBehaviour:
   house: {fileID: 0}
   isKnockedDown: 0
   isEnabled: 1
+  isKnockable: 0
 --- !u!114 &1738785854344566176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27054,6 +27055,7 @@ MonoBehaviour:
   house: {fileID: 0}
   isKnockedDown: 0
   isEnabled: 1
+  isKnockable: 1
 --- !u!33 &6741652639043036762
 MeshFilter:
   m_ObjectHideFlags: 0

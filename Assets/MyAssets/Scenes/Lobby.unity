@@ -34725,7 +34725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32de7c2aa4604df1aef08790055d944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escapeMenuPanel: {fileID: 1064988250}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  root: {fileID: 1064988250}
   settingsPanel: {fileID: 1324377625}
   quitToLobbyButton: {fileID: 0}
   leaveGameButton: {fileID: 0}

@@ -61,6 +61,7 @@ public class PlayerActions : NetworkBehaviour
         if (isInteractable)
         {
             string interactableText = interactable.GetInteractableText();
+            if (interactableText == "NOT INTERACTABLE") return;
             interactable.Highlight();
             PlayerUIManager.instance.AddInteractableText(interactable, interactableText);
         }
