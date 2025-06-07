@@ -108,17 +108,16 @@ public class Player : NetworkBehaviour
     public void GetSteamUsername()
     {
         string username;
-        // if (SteamManager.Initialized)
-        // {
-        //     Debug.Log("Getting Steam username for player");
-        //     username = SteamFriends.GetPersonaName();
-        //     CmdUpdateSteamUsername(username);
-        // }
-        // else
-        // {
-        username = "Player " + UnityEngine.Random.Range(0, 1000);
-        CmdUpdateSteamUsername(username);
-        // }
+        if (SteamManager.Initialized)
+        {
+            username = SteamFriends.GetPersonaName();
+            CmdUpdateSteamUsername(username);
+        }
+        else
+        {
+            username = "Player " + UnityEngine.Random.Range(0, 1000);
+            CmdUpdateSteamUsername(username);
+        }
     }
 
     [Server]
