@@ -43,7 +43,7 @@ public class GuardianActions : RoleActions
         else if (interactable is InteractableDoor doorInteractable)
         {
             Door door = doorInteractable.GetComponent<Door>();
-            if (!door.isOutsideDoor) return;
+            if (!door.isOutsideDoor || door.isMafiaHouseDoor) return;
 
             doorInteractable.Highlight();
             string interactableText = "[R] Mark with Protection Sigil";
@@ -75,6 +75,7 @@ public class GuardianActions : RoleActions
     private void HandleDoorInteraction(InteractableDoor door)
     {
         if (door == null) { Debug.LogError("Interacting with null door"); return; }
+        if (door.GetComponent<Door>().isMafiaHouseDoor) return;
 
         CmdInteractWithDoor(door);
     }

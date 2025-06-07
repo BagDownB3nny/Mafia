@@ -3,6 +3,7 @@ using System.Linq;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Steamworks;
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -63,6 +64,11 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
+        // if (SteamManager.Initialized)
+        // {
+        //     SteamMatchmaking.LeaveLobby(currentLobbyID); // Leave Steam lobby
+        // }
+        
         if (PlayerManager.instance && !PlayerManager.instance.ConnIdToNetIdDict.Keys.Contains(conn.connectionId))
         {
             // If player is trying to join game mid-game, playermanager will not contain their connId

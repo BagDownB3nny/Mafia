@@ -35,6 +35,15 @@ public class TimeSettingsMenu : NetworkBehaviour
         currentTimeIndex = PlayerPrefs.GetInt("timeIndex", 3);
         irlSecondsPerGameHour = timeOptions[currentTimeIndex];
         timeText.text = irlSecondsPerGameHour.ToString();
+
+        if (currentTimeIndex == 0)
+        {
+            leftArrow.SetActive(false);
+        }
+        else if (currentTimeIndex == timeOptions.Count - 1)
+        {
+            rightArrow.SetActive(false);
+        }
     }
 
     public override void OnStartClient()

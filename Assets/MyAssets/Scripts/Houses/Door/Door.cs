@@ -14,4 +14,5 @@ public class Door : NetworkBehaviour
     public bool isEnabled = true;
 
     [SerializeField] public bool isKnockable = true;
+    [SerializeField] public bool isMafiaHouseDoor = false;
 }

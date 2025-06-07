@@ -20700,6 +20700,7 @@ MonoBehaviour:
   isKnockedDown: 0
   isEnabled: 1
   isKnockable: 0
+  isMafiaHouseDoor: 1
 --- !u!114 &1738785854344566176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27326,6 +27327,7 @@ MonoBehaviour:
   isKnockedDown: 0
   isEnabled: 1
   isKnockable: 1
+  isMafiaHouseDoor: 0
 --- !u!33 &6741652639043036762
 MeshFilter:
   m_ObjectHideFlags: 0
