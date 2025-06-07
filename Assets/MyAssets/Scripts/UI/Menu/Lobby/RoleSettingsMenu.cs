@@ -326,6 +326,28 @@ public class RoleSettingsMenu : Menu
         base.Close();
     }
 
+    [Client]
+    public override void Close()
+    {
+        Debug.Log("Closing RoleSettingsMenu");
+        CmdResetRoleMenu();
+        base.Close();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdResetRoleMenu()
+    {
+        Debug.Log("Resetting RoleSettingsMenu");
+        roleDict.Clear();
+        // Set roleDict to initial values from RoleManager
+        foreach (var item in RoleManager.roleDict)
+        {
+            Debug.Log($"Setting role {item.Key} to {item.Value}");
+            roleDict[item.Key] = item.Value;
+        }
+        expectedPlayerCount = PlayerManager.instance.GetPlayerCount();
+    }
+
     public bool DictEquals(SyncDictionary<RoleName, int> dict1, SyncDictionary<RoleName, int> dict2)
     {
         foreach (var item in dict1)

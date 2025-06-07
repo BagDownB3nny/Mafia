@@ -42,26 +42,118 @@ MonoBehaviour:
   m_GameObject: {fileID: 6138324316807589159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0517fbf4f486d4a94a5b3eafebb6b6cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 906044ef1e52c4894a6902beda390dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  dayDuration: 20
-  nightDuration: 20
-  OnDayEndEvent:
+  hourlyServerEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  irlSecondlyServerEvent:
     m_PersistentCalls:
       m_Calls: []
-  OnNightStartEvent:
+  hourlyClientEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  irlSecondlyClientEvent:
     m_PersistentCalls:
       m_Calls: []
-  OnNightEndEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDayStartEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  currentHour: 0
+  currentMinute: 0
 --- !u!114 &4829035826402538713
 MonoBehaviour:
   m_ObjectHideFlags: 0
