@@ -17286,7 +17286,6 @@ MonoBehaviour:
   syncInterval: 0
   root: {fileID: 1914867964}
   colourButtons: {fileID: 1130598756}
-  confirmButton: {fileID: 0}
 --- !u!1001 &520667627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18141,7 +18140,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 634904618}
-        m_TargetAssemblyTypeName: RoleSettingsUI, Assembly-CSharp
+        m_TargetAssemblyTypeName: RoleSettingsMenu, Assembly-CSharp
         m_MethodName: OnConfirmClick
         m_Mode: 1
         m_Arguments:
@@ -21270,7 +21269,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   root: {fileID: 2093952165}
-  timeSettingsUi: {fileID: 634904619}
+  timeSettingsUI: {fileID: 0}
   expectedPlayerCountText: {fileID: 1781510923}
   playerNumberSetter: {fileID: 203720758}
   setDefaultRoleSettingsButton: {fileID: 586589902}

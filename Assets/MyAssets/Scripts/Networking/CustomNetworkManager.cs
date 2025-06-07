@@ -63,7 +63,7 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
-        if (PlayerManager.instance && PlayerManager.instance.ConnIdToNetIdDict.Keys.Contains(conn.connectionId))
+        if (PlayerManager.instance && !PlayerManager.instance.ConnIdToNetIdDict.Keys.Contains(conn.connectionId))
         {
             // If player is trying to join game mid-game, playermanager will not contain their connId
             base.OnServerDisconnect(conn);

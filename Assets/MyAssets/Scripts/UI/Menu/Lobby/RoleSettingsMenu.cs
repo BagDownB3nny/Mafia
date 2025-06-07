@@ -7,7 +7,6 @@ public class RoleSettingsMenu : Menu
 {
 
     [Header("UI")]
-    [SerializeField] private TimeSettingsMenu timeSettingsUi;
     [SerializeField] private TMP_Text expectedPlayerCountText;
     [SerializeField] private PlayerNumberSetter playerNumberSetter;
     [SerializeField] private GameObject setDefaultRoleSettingsButton;
@@ -19,7 +18,6 @@ public class RoleSettingsMenu : Menu
     [Header("Role Settings")]
     // Key is the role, value is the number of players with that role
     public readonly SyncDictionary<RoleName, int> roleDict = new();
-
 
     [SyncVar(hook = nameof(OnExpectedPlayerCountChanged))]
     public int expectedPlayerCount;
@@ -48,7 +46,6 @@ public class RoleSettingsMenu : Menu
     public override void OnStartServer()
     {
         int playerCount = 1;
-        // fakePlayerCount = playerCount;
         SetExpectedPlayerCount(playerCount);
         SetDefaultRoleDict();
         SaveRoleSetting();
@@ -94,7 +91,7 @@ public class RoleSettingsMenu : Menu
         expectedPlayerCount = playerCount;
         expectedPlayerCountText.text = playerCount.ToString();
         CheckForValidRoleSettings();
-        SetLobbyUiPlayerCount();
+        SetLobbyUIPlayerCount();
 
         int lobbyPlayerCount = PlayerManager.instance.GetPlayerCount();
         if (playerCount == lobbyPlayerCount)
@@ -103,7 +100,7 @@ public class RoleSettingsMenu : Menu
         }
     }
 
-    public void SetLobbyUiPlayerCount()
+    public void SetLobbyUIPlayerCount()
     {
         int playerCount = PlayerManager.instance.GetPlayerCount();
         if (playerCount == 0) {
@@ -117,12 +114,9 @@ public class RoleSettingsMenu : Menu
 
 
     // If expectedPlayerCount has been increased
-    // 
-
     [ContextMenu ("Add player")]
     public void OnPlayerJoin()
     {
-        // fakePlayerCount++;
         if (IsChangingSettings())
         {
             OnPlayerJoinWhileHostChangingSettings();
@@ -131,7 +125,7 @@ public class RoleSettingsMenu : Menu
         {
             OnPlayerJoinWhileHostNotChangingSettings();
         }
-        SetLobbyUiPlayerCount();
+        SetLobbyUIPlayerCount();
     }
 
     public void OnPlayerJoinWhileHostNotChangingSettings()
@@ -202,11 +196,9 @@ public class RoleSettingsMenu : Menu
         CheckForValidRoleSettings();
     }
 
-
-
     public SyncDictionary<RoleName, int> GetDefaultRoleDict(int playerCount)
     {
-        SyncDictionary<RoleName, int> roleDict = new SyncDictionary<RoleName, int>();
+        SyncDictionary<RoleName, int> roleDict = new();
 
         // Initialize all roles to 0
         foreach (RoleName role in System.Enum.GetValues(typeof(RoleName)))
@@ -297,11 +289,9 @@ public class RoleSettingsMenu : Menu
     [Server]
     public void OnConfirmClick()
     {
-        timeSettingsUi.SaveTimeSetting();
+        TimeSettingsMenu.instance.SaveTimeSetting();
         SaveRoleSetting();
-        base.Close();
 
-        // int playerCount = fakePlayerCount;
         int playerCount = PlayerManager.instance.GetPlayerCount();
 
         // If player count is less than expected player count, it means the host increased the player count
@@ -315,9 +305,12 @@ public class RoleSettingsMenu : Menu
         if (DictEquals(roleDict, GetDefaultRoleDict(expectedPlayerCount)))
         {
             roleSettingsChanged = false;
-        } else {
+        }
+        else
+        {
             roleSettingsChanged = true;
         }
+        base.Close();
     }
 
     public bool DictEquals(SyncDictionary<RoleName, int> dict1, SyncDictionary<RoleName, int> dict2)

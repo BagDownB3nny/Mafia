@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class ColourPickerMenu : Menu
 {
     [SerializeField] private GameObject colourButtons;
-    [SerializeField] private Button confirmButton;
     private bool ColourButtonUIsInitialised = false;
 
     public static ColourPickerMenu instance;
