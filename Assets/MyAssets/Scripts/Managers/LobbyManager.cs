@@ -29,6 +29,9 @@ public class LobbyManager : MonoBehaviour
         {
             // [ASSUMPTION] The host is acting as the server, there is no dedicated server.
             NetworkManager.singleton.StopHost();
+            RoleManager.roleDict.Clear();
+            RoleSettingsMenu.expectedPlayerCountIncreased = false;
+            RoleSettingsMenu.roleSettingsChanged = false;
         }
         if (NetworkClient.active)
         {

@@ -157,7 +157,6 @@ public class PlayerMovement : NetworkBehaviour
     private void MovePlayerNormal()
     {
         bool isGrounded = IsGrounded();
-        Debug.Log(isGrounded);
         // Calculate movement direction based on the orientation
         Vector3 moveDirection = (orientation.forward * vertical + orientation.right * horizontal).normalized;
 

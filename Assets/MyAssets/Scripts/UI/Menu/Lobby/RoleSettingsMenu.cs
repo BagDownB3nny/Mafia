@@ -23,8 +23,8 @@ public class RoleSettingsMenu : Menu
     public int expectedPlayerCount;
 
     [Header ("Internal params")]
-    private bool expectedPlayerCountIncreased = false;
-    private bool roleSettingsChanged = false;
+    public static bool expectedPlayerCountIncreased = false;
+    public static bool roleSettingsChanged = false;
 
     // For testing purposes
     // public int fakePlayerCount;
@@ -45,10 +45,23 @@ public class RoleSettingsMenu : Menu
 
     public override void OnStartServer()
     {
-        int playerCount = 1;
-        SetExpectedPlayerCount(playerCount);
-        SetDefaultRoleDict();
-        SaveRoleSetting();
+
+        if (RoleManager.roleDict.Count == 0)
+        {
+            Debug.Log("RoleManager.roleDict is empty");
+            int playerCount = 1;
+            SetExpectedPlayerCount(playerCount);
+            SetDefaultRoleDict();
+            SaveRoleSetting();
+        } else {
+            Debug.Log("RoleManager.roleDict is not empty");
+            foreach (var item in RoleManager.roleDict)
+            {
+                roleDict[item.Key] = item.Value;
+            }
+            int playerCount = GetRoleCount();
+            SetExpectedPlayerCount(playerCount);
+        }
     }
 
     public override void OnStartClient()
@@ -135,7 +148,7 @@ public class RoleSettingsMenu : Menu
 
         // Case 1: Lobby expects more players than current player count
         // Action: Do nothing since host expects the player
-        if (playerCount < expectedPlayerCount) return;
+        if (playerCount <=  expectedPlayerCount) return;
 
         // Case 2: Lobby host has not changed any settings
         // Action: Increase expected player count and set default role distribution
