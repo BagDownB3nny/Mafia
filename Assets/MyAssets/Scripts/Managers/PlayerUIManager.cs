@@ -77,11 +77,11 @@ public class PlayerUIManager : NetworkBehaviour
                 break;
             case RoleName.Seer:
                 roleInformationText = "Find the Mafia! Use your seeing powers wisely!";
-                controlsText = "Interact [E] with a player to mark them! \nLook through the crystal ball [E] to see the marked player!";
+                controlsText = "Interact [R] with a player to mark them! \nLook through the crystal ball [R] to see the marked player!";
                 break;
             case RoleName.Guardian:
                 roleInformationText = "Protect the Villagers! Use your protection powers wisely!";
-                controlsText = "Interact [E] with a player/door to protect them for the night!";
+                controlsText = "Interact [R] with a player/door to protect them for the night!";
                 break;
             case RoleName.SixthSense:
                 roleInformationText = "Find the Mafia! Use your sixth-sense wisely!";
@@ -220,7 +220,7 @@ public class PlayerUIManager : NetworkBehaviour
         // Midnight - Show gun controls and initial text
         TimeManagerV2.instance.hourlyClientEvents[0].AddListener(() =>
         {
-            SetControlsText("Press Q to equip/unequip gun");
+            SetControlsText("[Q] Equip/unequip gun");
             SetInformativeText(midnightText);
         });
 

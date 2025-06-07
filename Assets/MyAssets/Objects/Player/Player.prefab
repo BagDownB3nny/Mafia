@@ -600,10 +600,10 @@ MonoBehaviour:
   ladderMoveSpeed: 3
   groundLayer:
     serializedVersion: 2
-    m_Bits: 4105
+    m_Bits: 5129
   groundLayerWhenGoThroughGroundPlayer:
     serializedVersion: 2
-    m_Bits: 4097
+    m_Bits: 5121
   groundCheckHeight: 0.82
   bunnyHopMultiplier: 1
   bunnyHopThreshold: 0.1

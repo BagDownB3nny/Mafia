@@ -155,6 +155,7 @@ public class SteamManager : MonoBehaviour {
 			return;
 		}
 
+		Debug.Log("SteamManager: OnDestroy");
 		s_instance = null;
 
 		if (!m_bInitialized) {

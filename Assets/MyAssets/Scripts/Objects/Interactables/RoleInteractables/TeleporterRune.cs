@@ -33,11 +33,11 @@ public class TeleporterRune : Interactable, IHideable
     {
         if (isMafiaHouseTeleportRune)
         {
-            return "[R] Teleport to Mafia House";
+            return "[R] Teleport";
         }
         else
         {
-            return "[R] Teleport";
+            return "[R] Teleport to Mafia House";
         }
     }
 
