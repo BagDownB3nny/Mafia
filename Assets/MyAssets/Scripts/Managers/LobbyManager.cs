@@ -26,7 +26,8 @@ public class LobbyManager : MonoBehaviour
 
     public void EndGame()
     {
-        CSteamID lobbyCode = new CSteamID(ulong.Parse(SteamLobby.instance.LobbyCode));
+        Debug.Log(NetworkServer.active);
+        Debug.Log(NetworkClient.active);
         if (NetworkServer.active)
         {
             // [ASSUMPTION] The host is acting as the server, there is no dedicated server.
@@ -36,8 +37,9 @@ public class LobbyManager : MonoBehaviour
             RoleSettingsMenu.expectedPlayerCountIncreased = false;
             RoleSettingsMenu.roleSettingsChanged = false;
         }
-        if (NetworkClient.active)
+        else if (NetworkClient.active)
         {
+            Debug.Log("Disconnecting client");
             NetworkClient.Disconnect();
             // SteamMatchmaking.LeaveLobby(lobbyCode);
         }
