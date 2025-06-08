@@ -345,7 +345,7 @@ public class RoleSettingsMenu : Menu
             Debug.Log($"Setting role {item.Key} to {item.Value}");
             roleDict[item.Key] = item.Value;
         }
-        expectedPlayerCount = GetRoleCount();
+        SetExpectedPlayerCount(GetRoleCount());
     }
 
     public bool DictEquals(SyncDictionary<RoleName, int> dict1, SyncDictionary<RoleName, int> dict2)
