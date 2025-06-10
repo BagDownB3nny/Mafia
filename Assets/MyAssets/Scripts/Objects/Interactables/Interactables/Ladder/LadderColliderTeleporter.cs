@@ -12,7 +12,7 @@ public class LadderColliderTeleporter : NetworkBehaviour
         if (other.CompareTag("Player") && ladder.isLocalPlayerOnLadder)
         {
             Player player = NetworkClient.localPlayer.GetComponent<Player>();
-            player.GetComponent<PlayerTeleporter>().ClientTeleportPlayer(playerPosition.position, playerPosition.rotation);
+            player.GetComponent<PlayerTeleporter>().ClientTeleportPlayer(playerPosition.position);
             player.GetComponent<PlayerMovement>().ChangeToNormalMovement();
             ladder.isLocalPlayerOnLadder = false;
         }

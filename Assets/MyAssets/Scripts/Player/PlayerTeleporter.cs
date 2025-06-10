@@ -82,7 +82,7 @@ public class PlayerTeleporter : NetworkBehaviour
     }
 
     [Client]
-    public void ClientTeleportPlayer(Vector3 position, Quaternion rotation)
+    public void ClientTeleportPlayer(Vector3 position)
     {
         NetworkTransformBase networkTransform = GetComponent<NetworkTransformBase>();
         networkTransform.OnTeleport(position);
@@ -92,6 +92,6 @@ public class PlayerTeleporter : NetworkBehaviour
     [Client]
     public void TeleportToMafiaHouseTunnel()
     {
-        ClientTeleportPlayer(mafiaHouseTunnel.position, mafiaHouseTunnel.transform.rotation);
+        ClientTeleportPlayer(mafiaHouseTunnel.position);
     }
 }

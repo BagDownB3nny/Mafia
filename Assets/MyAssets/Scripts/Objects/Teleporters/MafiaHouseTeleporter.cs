@@ -38,7 +38,7 @@ public class MafiaHouseTeleporter : MonoBehaviour
             if (player.isLocalPlayer)
             {
                 PlayerTeleporter playerTeleporter = player.GetComponent<PlayerTeleporter>();
-                playerTeleporter.ClientTeleportPlayer(localPlayerTeleportPoint.position, localPlayerTeleportPoint.transform.rotation);
+                playerTeleporter.ClientTeleportPlayer(localPlayerTeleportPoint.position);
                 localPlayerTeleportPoint = defaultLocalPlayerTeleportPoint;
             }
         }

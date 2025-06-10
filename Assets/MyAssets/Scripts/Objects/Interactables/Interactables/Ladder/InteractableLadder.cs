@@ -56,7 +56,7 @@ public class InteractableLadder : Interactable
         teleportPosition.y = localPlayer.transform.position.y;
         Quaternion teleportRotation = ladderTeleportPosition.rotation;
 
-        localPlayer.GetComponent<PlayerTeleporter>().ClientTeleportPlayer(teleportPosition, teleportRotation);
+        localPlayer.GetComponent<PlayerTeleporter>().ClientTeleportPlayer(teleportPosition );
     }
 
     [Client]

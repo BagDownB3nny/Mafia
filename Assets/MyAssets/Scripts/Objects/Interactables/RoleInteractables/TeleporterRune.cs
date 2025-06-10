@@ -47,7 +47,7 @@ public class TeleporterRune : Interactable, IHideable
         Player player = NetworkClient.localPlayer.GetComponent<Player>();
         PlayerTeleporter playerTeleporter = player.GetComponent<PlayerTeleporter>();
         Transform mafiaHouseTeleportLocation = mafiaHouseTeleportRune.teleportLocation;
-        playerTeleporter.ClientTeleportPlayer(mafiaHouseTeleportLocation.position, mafiaHouseTeleportLocation.rotation);
+        playerTeleporter.ClientTeleportPlayer(mafiaHouseTeleportLocation.position);
         mafiaHouseTeleportRune.returnLocation = teleportLocation;
     }
 
@@ -58,11 +58,14 @@ public class TeleporterRune : Interactable, IHideable
         PlayerTeleporter playerTeleporter = player.GetComponent<PlayerTeleporter>();
         if (returnLocation)
         {
-            playerTeleporter.ClientTeleportPlayer(returnLocation.position, returnLocation.rotation);
+            Debug.Log("Teleporting to return location");
+            playerTeleporter.ClientTeleportPlayer(returnLocation.position);
         }
         else
         {
-            playerTeleporter.TeleportToSpawn();
+            Debug.Log("Teleporting to house spawn point");
+            House house = player.house;
+            playerTeleporter.ClientTeleportPlayer(house.spawnPoint.position);
         }
     }
 
