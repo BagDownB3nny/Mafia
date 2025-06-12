@@ -93,31 +93,31 @@ public class MafiaHouseTable : NetworkBehaviour
     }
 
 
-    [Server]
-    public void InstantiateHouseMinis()
-    {
-        List<House> houses = HouseManager.instance.houses;
+    // [Server]
+    // public void InstantiateHouseMinis()
+    // {
+    //     List<House> houses = HouseManager.instance.GetHouses();
 
-        foreach (House house in houses)
-        {
-            Vector3 housePosition = house.positionRelativeToVillageCenter;
-            Vector3 houseMiniPositionRelativeToTableCenter = housePosition * 0.03f;
+    //     foreach (House house in houses)
+    //     {
+    //         Vector3 housePosition = house.positionRelativeToVillageCenter;
+    //         Vector3 houseMiniPositionRelativeToTableCenter = housePosition * 0.03f;
 
-            Vector3 lookAtDirection = Vector3.zero - housePosition;
-            Quaternion houseMiniRotation = Quaternion.LookRotation(lookAtDirection);
+    //         Vector3 lookAtDirection = Vector3.zero - housePosition;
+    //         Quaternion houseMiniRotation = Quaternion.LookRotation(lookAtDirection);
 
 
-            GameObject houseMini = Instantiate(
-                houseMiniPrefab,
-                transform.position + houseMiniPositionRelativeToTableCenter,
-                houseMiniRotation
-            );
+    //         GameObject houseMini = Instantiate(
+    //             houseMiniPrefab,
+    //             transform.position + houseMiniPositionRelativeToTableCenter,
+    //             houseMiniRotation
+    //         );
 
-            NetworkServer.Spawn(houseMini);
-            houseMini.GetComponent<InteractableVillageHouseMini>().LinkHouse(house);
-            houseMinis.Add(houseMini.GetComponent<InteractableVillageHouseMini>().netId);
-        }
-    }
+    //         NetworkServer.Spawn(houseMini);
+    //         houseMini.GetComponent<InteractableVillageHouseMini>().LinkHouse(house);
+    //         houseMinis.Add(houseMini.GetComponent<InteractableVillageHouseMini>().netId);
+    //     }
+    // }
 
     [Client]
     private void OnSelectedHouseMiniChanged(InteractableVillageHouseMini oldHouseMini, InteractableVillageHouseMini newHouseMini)

@@ -46,6 +46,12 @@ public class MafiaActions : RoleActions
             houseMini.Highlight();
             PlayerUIManager.instance.AddInteractableText(houseMini, interactableText);
         }
+        else if (interactable is TargetDummy targetDummy)
+        {
+            string interactableText = targetDummy.GetInteractableText();
+            targetDummy.Highlight();
+            PlayerUIManager.instance.AddInteractableText(targetDummy, interactableText);
+        }
     }
 
     [Client]
@@ -65,6 +71,10 @@ public class MafiaActions : RoleActions
             else if (interactable is InteractableVillageHouseMini houseMini)
             {
                 houseMini.Interact();
+            }
+            else if (interactable is TargetDummy targetDummy)
+            {
+                targetDummy.Interact();
             }
 
     }

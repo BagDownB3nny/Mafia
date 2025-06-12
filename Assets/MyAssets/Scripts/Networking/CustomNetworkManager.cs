@@ -57,8 +57,7 @@ public class CustomNetworkManager : NetworkManager
         Player playerComponent = player.GetComponent<Player>();
         if (playerHouse != null)
         {
-            // Ensures earlier AddPlayerForConnection calls are flushed
-            StartCoroutine(AssignPlayerToHouse(playerHouse, playerComponent));
+            AssignPlayerToHouse(playerHouse, playerComponent);
         }
     }
 
@@ -112,29 +111,27 @@ public class CustomNetworkManager : NetworkManager
         RoleSettingsMenu.instance.OnPlayerLeftLobby(conn);
     }
 
-    // Initiates assignment after ServerAddPlayer completes
-    IEnumerator AssignPlayerToHouse(House playerHouse, Player player)
+    public void AssignPlayerToHouse(House playerHouse, Player player)
     {
-        yield return null;
         player.house = playerHouse;
         playerHouse.AssignPlayer(player);
     }
 
-    public override void OnServerSceneChanged(string sceneName)
-    {
-        base.OnServerSceneChanged(sceneName);
+    // public override void OnServerSceneChanged(string sceneName)
+    // {
+    //     base.OnServerSceneChanged(sceneName);
 
-        if (sceneName == "Game")
-        {
-            OnGameSceneStarted();
-        }
-    }
+    //     if (sceneName == "Game")
+    //     {
+    //         OnGameSceneStarted();
+    //     }
+    // }
 
-    private void OnGameSceneStarted()
-    {
-        HouseManager.instance.InstantiateHouses();
-        MafiaHouseTable.instance.InstantiateHouseMinis();
-    }
+    // private void OnGameSceneStarted()
+    // {
+    //     HouseManager.instance.InstantiateHouses();
+    //     MafiaHouseTable.instance.InstantiateHouseMinis();
+    // }
 
     public override void ServerChangeScene(string newSceneName)
     {

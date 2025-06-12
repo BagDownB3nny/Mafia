@@ -5,6 +5,7 @@ using UnityEngine;
 public class House : NetworkBehaviour
 {
 
+
     [Header("House object references")]
     [SerializeField] private List<Door> doors;
     [SerializeField] private Door trapDoor;
@@ -17,6 +18,9 @@ public class House : NetworkBehaviour
 
     public Transform spawnPoint;
     public Transform tunnelTeleporterPosition;
+
+    [Header("Target dummy")]
+    [SerializeField] public TargetDummy targetDummy;
 
 
     [Header("Highlighting")]
@@ -35,14 +39,6 @@ public class House : NetworkBehaviour
     [SyncVar]
     public bool isMarked;
 
-    public void OnDestroy()
-    {
-        if (HouseManager.instance != null)
-        {
-            HouseManager.instance.houses.Remove(this);
-        }
-    }
-
     public void EnableTrapdoor()
     {
         // trapDoor.isEnabled = true;
@@ -57,7 +53,8 @@ public class House : NetworkBehaviour
             MafiaHouseTeleporter.instance.SetLocalPlayerDefaultTeleportPoint(tunnelTeleporterPosition);
         }
         this.player = player;
-        Debug.Log($"Assigned player {player.steamUsername} to house {netId}");
+        targetDummy.SetActive(true);
+        targetDummy.SetLinkedPlayer(player);
         foreach (Door door in doors)
         {
             InteractableDoor interactableDoor = door.GetComponent<InteractableDoor>();

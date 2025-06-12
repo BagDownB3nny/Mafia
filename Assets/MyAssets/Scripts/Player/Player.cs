@@ -203,6 +203,7 @@ public class Player : NetworkBehaviour
         {
             Debug.Log($"Nameplate updated house -> player{newUsername}");
             house.SetNameplateText(newUsername);
+            house.targetDummy.SetLinkedPlayerName(newUsername);
         }
     }
 

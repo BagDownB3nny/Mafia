@@ -7,9 +7,8 @@ public class HouseManager : NetworkBehaviour
 
     [SerializeField] private GameObject housePrefab;
     public static HouseManager instance;
-
-    public List<House> houses = new();
     [SerializeField] private Transform houseParent;
+    [SerializeField] private List<House> houses;
     [SerializeField] private Transform doorsParent;
 
     public void Awake()
@@ -22,6 +21,18 @@ public class HouseManager : NetworkBehaviour
         {
             return;
         }
+    }
+
+    public List<House> GetHouses()
+    {
+        if (houses.Count == 0)
+        {
+        foreach (House house in houseParent.GetComponentsInChildren<House>())
+            {
+                houses.Add(house);
+            }
+        }
+        return houses;
     }
 
     public House GetHouseByNetId(uint netId)
@@ -40,51 +51,51 @@ public class HouseManager : NetworkBehaviour
         }
     }
 
-    [Server]
-    public void InstantiateHouses()
-    {
-        // int numberOfPlayers = 16;
-        int numberOfPlayers = NetworkServer.connections.Count;
-        float angleStep = 360f / numberOfPlayers;
-        // Different radiuses for different number of players
-        float radius;
-        if (numberOfPlayers <= 12)
-        {
-            radius = 40;
-        }
-        else
-        {
-            radius = 40;
-        }
-        for (int i = 0; i < numberOfPlayers; i++)
-        {
-            float angle = i * angleStep; // Angle for the current player
-            float angleInRadians = angle * Mathf.Deg2Rad;
+    // [Server]
+    // public void InstantiateHouses()
+    // {
+    //     // int numberOfPlayers = 16;
+    //     int numberOfPlayers = NetworkServer.connections.Count;
+    //     float angleStep = 360f / numberOfPlayers;
+    //     // Different radiuses for different number of players
+    //     float radius;
+    //     if (numberOfPlayers <= 12)
+    //     {
+    //         radius = 40;
+    //     }
+    //     else
+    //     {
+    //         radius = 40;
+    //     }
+    //     for (int i = 0; i < numberOfPlayers; i++)
+    //     {
+    //         float angle = i * angleStep; // Angle for the current player
+    //         float angleInRadians = angle * Mathf.Deg2Rad;
 
-            // houses should be spawned in a circle around the center of the map
-            Vector3 housePosition = new Vector3(
-                Mathf.Cos(angleInRadians) * radius,
-                0,
-                Mathf.Sin(angleInRadians) * radius
-            );
+    //         // houses should be spawned in a circle around the center of the map
+    //         Vector3 housePosition = new Vector3(
+    //             Mathf.Cos(angleInRadians) * radius,
+    //             0,
+    //             Mathf.Sin(angleInRadians) * radius
+    //         );
 
-            // Calculate the rotation to face the center
-            Vector3 directionToCenter = (Vector3.zero - housePosition).normalized;
-            Quaternion houseRotation = Quaternion.LookRotation(directionToCenter);
+    //         // Calculate the rotation to face the center
+    //         Vector3 directionToCenter = (Vector3.zero - housePosition).normalized;
+    //         Quaternion houseRotation = Quaternion.LookRotation(directionToCenter);
 
-            GameObject house = Instantiate(housePrefab, housePosition, houseRotation);
-            house.transform.SetParent(houseParent);
-            house.GetComponent<House>().positionRelativeToVillageCenter = transform.InverseTransformPoint(house.transform.position);
+    //         GameObject house = Instantiate(housePrefab, housePosition, houseRotation);
+    //         house.transform.SetParent(houseParent);
+    //         house.GetComponent<House>().positionRelativeToVillageCenter = transform.InverseTransformPoint(house.transform.position);
 
-            NetworkServer.Spawn(house);
-            houses.Add(house.GetComponent<House>());
-        }
-    }
+    //         NetworkServer.Spawn(house);
+    //         houses.Add(house.GetComponent<House>());
+    //     }
+    // }
 
     [Server]
     public void CloseAllDoors()
     {
-        foreach (House house in houses)
+        foreach (House house in GetHouses())
         {
             house.CloseAllDoors();
         }
@@ -93,7 +104,7 @@ public class HouseManager : NetworkBehaviour
     [Server]
     public void OpenAllDoors()
     {
-        foreach (House house in houses)
+        foreach (House house in  GetHouses())
         {
             house.OpenAllDoors();
         }
@@ -102,7 +113,7 @@ public class HouseManager : NetworkBehaviour
     [Server]
     public void ProtectAllHouses()
     {
-        foreach (House house in houses)
+        foreach (House house in  GetHouses())
         {
             house.Mark();
         }
@@ -111,7 +122,7 @@ public class HouseManager : NetworkBehaviour
     [Server]
     public void HighlightHousesForOwners()
     {
-        foreach (House house in houses)
+        foreach (House house in  GetHouses())
         {
             house.HighlightForOwner();
         }
@@ -120,7 +131,7 @@ public class HouseManager : NetworkBehaviour
     [Server]
     public void UnhighlightHousesForOwners()
     {
-        foreach (House house in houses)
+        foreach (House house in  GetHouses())
         {
             house.UnhighlightForOwner();
         }
@@ -129,7 +140,7 @@ public class HouseManager : NetworkBehaviour
     [Server]
     public void HighlightMediumHouseForGhosts()
     {
-        foreach (House house in houses)
+        foreach (House house in  GetHouses())
         {
             Player owner = house.player;
             if (owner != null && owner.GetRole() == RoleName.Medium)
@@ -142,7 +153,7 @@ public class HouseManager : NetworkBehaviour
     [Server]
     public void UnhighlightMediumHouseForGhosts()
     {
-        foreach (House house in houses)
+        foreach (House house in  GetHouses())
         {
             Player owner = house.player;
             if (owner != null && owner.GetRole() == RoleName.Medium)

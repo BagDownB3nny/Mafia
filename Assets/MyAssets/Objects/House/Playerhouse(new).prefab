@@ -3141,6 +3141,8 @@ MonoBehaviour:
   house: {fileID: 2610861947467362568}
   isKnockedDown: 0
   isEnabled: 1
+  isKnockable: 1
+  isMafiaHouseDoor: 0
 --- !u!82 &4867068349170114337
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3557,7 +3559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1555190348757903708
 Transform:
   m_ObjectHideFlags: 0
@@ -3896,7 +3898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7153597956270288568
 Transform:
   m_ObjectHideFlags: 0
@@ -7030,6 +7032,8 @@ MonoBehaviour:
   house: {fileID: 2610861947467362568}
   isKnockedDown: 0
   isEnabled: 1
+  isKnockable: 1
+  isMafiaHouseDoor: 0
 --- !u!114 &8805312559921296511
 MonoBehaviour:
   m_ObjectHideFlags: 0

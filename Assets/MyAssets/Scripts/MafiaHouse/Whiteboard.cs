@@ -4,6 +4,12 @@ public class Whiteboard : MonoBehaviour
 {
 
     [SerializeField] private TMPro.TextMeshProUGUI text;
+    public static Whiteboard instance;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     public void SetNewMarkedPlayer(string newPlayer)
     {
@@ -12,6 +18,6 @@ public class Whiteboard : MonoBehaviour
 
     public void ClearWhiteboard()
     {
-        text.text = "Mark a house using the table miniatures";
+        text.text = "Curse a house by using a voodoo dummy";
     }
 }
