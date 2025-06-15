@@ -21,6 +21,13 @@ public class PlayerCamera : MonoBehaviour
 
     private CameraMode _currentMode = CameraMode.FirstPerson;
     private CameraMode previousMode = CameraMode.FirstPerson;
+    private readonly Dictionary<CameraMode, List<CameraMode>> transitions = new()
+    {
+        { CameraMode.FirstPerson, new List<CameraMode> { CameraMode.FirstPerson, CameraMode.Cursor, CameraMode.Spectator, CameraMode.CrystalBall } },
+        { CameraMode.Cursor, new List<CameraMode> { CameraMode.FirstPerson, CameraMode.Spectator, CameraMode.CrystalBall } },
+        { CameraMode.Spectator, new List<CameraMode> { CameraMode.Cursor } },
+        { CameraMode.CrystalBall, new List<CameraMode> { CameraMode.FirstPerson, CameraMode.Cursor, CameraMode.Spectator } }
+    };
     public CameraMode CurrentMode
     {
         get => _currentMode;
@@ -50,6 +57,12 @@ public class PlayerCamera : MonoBehaviour
         EnterFPSMode();
     }
 
+    public bool CanTransitionTo(CameraMode from, CameraMode to)
+    {
+        // Safeguard against invalid transitions
+        return transitions.ContainsKey(from) && transitions[CurrentMode].Contains(to);
+    }
+
     private void OnCameraModeChanged(CameraMode oldMode, CameraMode newMode)
     {
         // Get death status once
@@ -61,6 +74,12 @@ public class PlayerCamera : MonoBehaviour
             // Prevent switching to FirstPerson or CrystalBall modes if the player is dead
             Debug.LogWarning($"Dead player cannot enter {newMode} mode. Forcing Spectator mode.");
             _currentMode = CameraMode.Spectator;
+            return;
+        }
+
+        if (!CanTransitionTo(oldMode, newMode))
+        {
+            Debug.LogWarning($"Invalid camera mode transition from {oldMode} to {newMode}. Current mode remains {CurrentMode}.");
             return;
         }
 
