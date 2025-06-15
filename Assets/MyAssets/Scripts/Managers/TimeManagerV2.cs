@@ -200,4 +200,9 @@ public class TimeManagerV2 : NetworkBehaviour
         //     votedOutPlayer.GetComponent<PlayerMovement>().UnlockPlayerMovement();
         // }
     }
+
+    public bool IsBetweenMidnightAndMorning()
+    {
+        return currentHour >= 0 && currentHour < 8;
+    }
 }

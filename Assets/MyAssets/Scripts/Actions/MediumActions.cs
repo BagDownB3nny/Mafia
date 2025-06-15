@@ -65,7 +65,9 @@ public class MediumActions : RoleActions
             {
                 if (interactable is OuijaBoard ouijaBoard && timeToDeactivation <= 0)
                 {
-                    if (!ouijaBoard.canBeUsed)
+                    // Extra checks in case
+                    bool isBetweenMidnightAndMorning = TimeManagerV2.instance.IsBetweenMidnightAndMorning();
+                    if (!ouijaBoard.canBeUsed || !isBetweenMidnightAndMorning)
                     {
                         PlayerUIManager.instance.SetInformativeText("Ouija board can only be used at night");
                         return;
@@ -107,7 +109,6 @@ public class MediumActions : RoleActions
     [Client]
     public void DeactivateMediumAbility()
     {
-        Debug.Log("Deactivating medium ability");
         isCommunicating = false;
         DissonanceRoomManager.instance.OnMediumDeactivation();
         CameraCullingMaskManager.instance.SetGhostLayerInvisible();

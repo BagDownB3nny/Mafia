@@ -101,7 +101,7 @@ public class TargetDummy : Interactable
     [Client]
     public override string GetInteractableText()
     {
-        if (isOccupantDead)
+        if (isOccupantDead || isHouseDestroyed)
         {
             return notInteractableText;
         }
