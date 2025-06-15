@@ -68,6 +68,11 @@ public class PlayerCamera : MonoBehaviour
         // Get death status once
         bool isPlayerDead = NetworkClient.localPlayer?.GetComponent<PlayerDeath>()?.isDead ?? false;
 
+        if (oldMode != CameraMode.Cursor)
+        {
+            previousMode = oldMode;
+        }
+
         // If player is dead, only allow Spectator or Cursor modes
         if (isPlayerDead && newMode != CameraMode.Spectator && newMode != CameraMode.Cursor)
         {
@@ -85,7 +90,7 @@ public class PlayerCamera : MonoBehaviour
 
         switch (newMode)
         {
-            case CameraMode.FirstPerson:
+            case CameraMode.FirstPerson when !isPlayerDead:
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;
@@ -94,7 +99,7 @@ public class PlayerCamera : MonoBehaviour
                 Cursor.visible = true;
                 break;
             case CameraMode.Spectator:
-            case CameraMode.CrystalBall:
+            case CameraMode.CrystalBall when !isPlayerDead:
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 SetLastInteractableToNull();
