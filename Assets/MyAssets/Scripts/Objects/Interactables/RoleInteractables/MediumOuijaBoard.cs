@@ -39,7 +39,7 @@ public class OuijaBoard : Interactable
     {
         if (!canBeUsed)
         {
-            return null;
+            return Interactable.notInteractableText;
         }
         else if (isActivated)
         {

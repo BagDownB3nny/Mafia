@@ -43,6 +43,7 @@ public class MediumActions : RoleActions
         if (interactable is OuijaBoard ouijaBoard)
         {
             string interactableText = ouijaBoard.GetInteractableText();
+            if (interactableText == Interactable.notInteractableText) return;
             ouijaBoard.Highlight();
             PlayerUIManager.instance.AddInteractableText(ouijaBoard, interactableText);
         }
