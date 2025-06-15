@@ -58,6 +58,7 @@ public class PlayerCamera : MonoBehaviour
         // If player is dead, only allow Spectator or Cursor modes
         if (isPlayerDead && newMode != CameraMode.Spectator && newMode != CameraMode.Cursor)
         {
+            // Prevent switching to FirstPerson or CrystalBall modes if the player is dead
             Debug.LogWarning($"Dead player cannot enter {newMode} mode. Forcing Spectator mode.");
             _currentMode = CameraMode.Spectator;
             return;
@@ -236,6 +237,8 @@ public class PlayerCamera : MonoBehaviour
     {
         if (CurrentMode == CameraMode.Cursor)
         {
+            // Store the spectator mode and stay in cursor mode
+            previousMode = CameraMode.Spectator;
             return;
         }
         CurrentMode = CameraMode.Spectator;
@@ -243,6 +246,13 @@ public class PlayerCamera : MonoBehaviour
 
     public void EnterCrystalBallMode(Transform position)
     {
+        if (CurrentMode == CameraMode.Cursor)
+        {
+            // Store the crystal ball mode and stay in cursor mode
+            previousMode = CameraMode.CrystalBall;
+            return;
+        }
+        previousMode = CurrentMode;
         CurrentMode = CameraMode.CrystalBall;
         moveCamera.enabled = true;
         moveCamera.currentCameraPosition = position;
@@ -259,5 +269,10 @@ public class PlayerCamera : MonoBehaviour
         {
             CurrentMode = previousMode;
         }
+    }
+
+    public void ExitCrystalBallMode()
+    {
+        CurrentMode = previousMode;
     }
 }

@@ -39,8 +39,17 @@ public class SeerActions : RoleActions
         if (player.isLocalPlayer)
         {
             // If the local player dies, reset the Seer state
-            seer.markedPlayer = null;
+            CmdClearMarkedPlayer();
             seer.isLookingThroughCrystalBall = false;
+        }
+        if (player == seer.markedPlayer && isLocalPlayer)
+        {
+            // If the marked player dies, unmark them
+            CmdClearMarkedPlayer();
+            seer.isLookingThroughCrystalBall = false;
+            PlayerUIManager.instance.ClearControlsText();
+            Camera.main.GetComponent<PlayerCamera>().ExitCrystalBallMode();
+            // TODO: Set informative text about the death of the marked player
         }
         base.OnPlayerDeath(player);
     }
@@ -85,7 +94,7 @@ public class SeerActions : RoleActions
         {
             seer.isLookingThroughCrystalBall = false;
             PlayerUIManager.instance.ClearControlsText();
-            Camera.main.GetComponent<PlayerCamera>().EnterFPSMode();
+            Camera.main.GetComponent<PlayerCamera>().ExitCrystalBallMode();
         }
     }
 
@@ -155,9 +164,15 @@ public class SeerActions : RoleActions
         }
         else if (!sigil.isMarked)
         {
+            seer.markedPlayer = player;
             seer.RemovePreviouslyPlacedSigils();
             sigil.Mark(player.netId);
-            seer.markedPlayer = player;
         }
+    }
+    [Command]
+    private void CmdClearMarkedPlayer()
+    {
+        seer.markedPlayer = null;
+        SeeingEyeSigil.ResetSeeingEyeSigil();
     }
 }
