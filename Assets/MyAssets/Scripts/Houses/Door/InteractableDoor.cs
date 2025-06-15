@@ -66,7 +66,7 @@ public class InteractableDoor : Interactable
         {
             return "[E] Knock";
         } 
-        return "NOT INTERACTABLE";
+        return notInteractableText;
     }
 
     [Client]

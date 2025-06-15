@@ -99,7 +99,7 @@ public class TimeManagerV2 : NetworkBehaviour
     {
         if (isClient)
         {
-            Debug.Log($"Triggering client hourly event for hour {newHour}");
+            // Debug.Log($"Triggering client hourly event for hour {newHour}");
             hourlyClientEvents[newHour].Invoke();
         }
     }
@@ -163,7 +163,7 @@ public class TimeManagerV2 : NetworkBehaviour
         SigilsManager.instance.ResetAllSigils();
 
         // Clear mafia target selection
-        MafiaHouseTable.instance.ClearSelection();
+        TargetDummyManager.instance.ClearSelection();
 
         // Turn off all lights
         LightManager.instance.TurnOffAllLights();

@@ -35,7 +35,6 @@ public class SettingsMenu : Menu
 
     public override void Open()
     {
-        Debug.Log("Opening SettingsMenu");
         PlayerMovement.localInstance.LockPlayerMovement();
         base.Open();
     }

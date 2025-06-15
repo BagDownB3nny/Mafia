@@ -10,6 +10,5 @@ public class AudioSettingsManager : MonoBehaviour
     {
         string microphoneName = PlayerPrefs.GetString("DefaultMic", "Default");
         dissonanceComms.MicrophoneName = microphoneName;
-        Debug.Log("Set microphone: " + microphoneName);
     }
 }

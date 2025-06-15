@@ -53,8 +53,8 @@ public class House : NetworkBehaviour
             MafiaHouseTeleporter.instance.SetLocalPlayerDefaultTeleportPoint(tunnelTeleporterPosition);
         }
         this.player = player;
-        targetDummy.SetActive(true);
-        targetDummy.SetLinkedPlayer(player);
+        Debug.Log($"Assigning player {player.steamUsername} to house {netId}");
+        targetDummy.SetupTargetDummy(player, this);
         foreach (Door door in doors)
         {
             InteractableDoor interactableDoor = door.GetComponent<InteractableDoor>();
