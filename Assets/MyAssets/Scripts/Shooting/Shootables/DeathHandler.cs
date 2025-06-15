@@ -2,7 +2,7 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 
-public class DeathHandler : NetworkBehaviour
+public class CorpseHandler : NetworkBehaviour
 {
 
     [SyncVar(hook = nameof(OnNameChanged))]

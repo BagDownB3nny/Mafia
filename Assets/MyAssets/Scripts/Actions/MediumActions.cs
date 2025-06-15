@@ -10,22 +10,6 @@ public class MediumActions : RoleActions
     private float timeToDeactivation;
     private bool isCommunicating;
 
-    public void OnEnable()
-    {
-        if (!isLocalPlayer || !isClient) return;
-
-        PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-        TimeManagerV2.instance.hourlyClientEvents[8].AddListener(DeactivateMediumAbility);
-    }
-
-    public void OnDisable()
-    {
-        if (!isLocalPlayer || !isClient) return;
-
-        PubSub.Unsubscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-        TimeManagerV2.instance.hourlyClientEvents[8].RemoveListener(DeactivateMediumAbility);
-    }
-
     public void Update()
     {
         if (!isLocalPlayer) return;
@@ -34,7 +18,7 @@ public class MediumActions : RoleActions
     }
 
     [Client]
-    public void OnLookingAt(Interactable interactable)
+    protected override void OnLookingAt(Interactable interactable)
     {
         Debug.Log("Looking at interactable: " + interactable.name);
         bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Medium);
@@ -46,6 +30,18 @@ public class MediumActions : RoleActions
             ouijaBoard.Highlight();
             PlayerUIManager.instance.AddInteractableText(ouijaBoard, interactableText);
         }
+    }
+    [Client]
+    protected override void OnPlayerDeath(Player player)
+    {
+        if (player.isLocalPlayer)
+        {
+            isCommunicating = false;
+            DissonanceRoomManager.instance.OnMediumDeactivation();
+            CameraCullingMaskManager.instance.SetGhostLayerInvisible();
+            CmdInformGhostsAboutMediumDeactivation();
+        }
+        base.OnPlayerDeath(player);
     }
 
     [Client]

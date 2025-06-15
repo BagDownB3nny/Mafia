@@ -5,7 +5,7 @@ public class LocalPlayerGun : NetworkBehaviour
 {
 
     [SerializeField] private AudioSource pistolShotSound;
-    float timePerShot = 0.6f;
+    readonly float timePerShot = 0.6f;
     float shotCooldown = 0.0f;
     private PlayerCamera playerCamera;
     public void Awake()

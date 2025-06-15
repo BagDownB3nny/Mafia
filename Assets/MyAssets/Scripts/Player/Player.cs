@@ -41,7 +41,6 @@ public class Player : NetworkBehaviour
     {
         GetRoleScripts();
     }
-
     public override void OnStartLocalPlayer()
     {
         StartCamera();
@@ -137,8 +136,6 @@ public class Player : NetworkBehaviour
         Debug.Log($"Updated steam username: {steamUsername}");
         if (PlayerManager.instance)
         {
-            NetworkConnectionToClient conn = connectionToClient;
-            int connectionId = conn.connectionId;
             PlayerManager.instance.AddPlayer(this);
         }
     }
@@ -149,12 +146,6 @@ public class Player : NetworkBehaviour
         GameObject roleObject = roleScripts[role];
         Role roleScript = roleObject.GetComponentInChildren<Role>(includeInactive: true);
         return roleScript;
-    }
-
-    public RoleActions GetRoleActions()
-    {
-        if (!roleScripts.ContainsKey(role)) return null;
-        return roleScripts[role].GetComponent<RoleActions>();
     }
 
     [Server]
@@ -208,7 +199,7 @@ public class Player : NetworkBehaviour
     }
 
     [Client]
-    public void OnRoleChanged(RoleName oldRole, RoleName newRole)
+    private void OnRoleChanged(RoleName oldRole, RoleName newRole)
     {
         if (isLocalPlayer)
         {
@@ -266,20 +257,5 @@ public class Player : NetworkBehaviour
         {
             CameraCullingMaskManager.instance.SetNameTagLayerInvisible();
         }
-    }
-
-    [Client]
-    public void DisablePlayerControllersAndCamera()
-    {
-        GetComponent<PlayerMovement>().enabled = false;
-        Camera.main.GetComponent<PlayerCamera>().EnterSpectatorMode();
-    }
-
-    [Client]
-    public void EnablePlayerControllersAndCamera()
-    {
-        GetComponent<PlayerMovement>().enabled = true;
-        Camera.main.GetComponent<MoveCamera>().enabled = true;
-        Camera.main.GetComponent<PlayerCamera>().EnterFPSMode();
     }
 }

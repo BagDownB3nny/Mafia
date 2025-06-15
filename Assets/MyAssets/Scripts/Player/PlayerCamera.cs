@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -13,18 +13,27 @@ public class PlayerCamera : MonoBehaviour
     [Header("Player info")]
     public Transform orientation = null;
 
-    [Header("Camera modes")]
 
-    // Cursor mode is for when the player is in a menu (e.g. settings)
-    public bool isCursorMode = false;
-
-    // Spectator mode is for when the player is spectating
-    public bool isSpectatorMode = false;
-
+    [Header("Ignore raycast layers")]
+    public static LayerMask ignoreRaycastLayers;
+    private MoveCamera moveCamera;
     public static PlayerCamera instance;
 
-    [Header ("Ignore raycast layers")]
-    public static LayerMask ignoreRaycastLayers;
+    private CameraMode _currentMode = CameraMode.FirstPerson;
+    private CameraMode previousMode = CameraMode.FirstPerson;
+    public CameraMode CurrentMode
+    {
+        get => _currentMode;
+        private set
+        {
+            if (_currentMode == value) return;
+
+            var oldMode = _currentMode;
+            _currentMode = value;
+            OnCameraModeChanged(oldMode, value);
+        }
+    }
+
     public void Awake()
     {
         instance = this;
@@ -32,12 +41,48 @@ public class PlayerCamera : MonoBehaviour
 
     public void Start()
     {
+        moveCamera = Camera.main.GetComponent<MoveCamera>();
         ignoreRaycastLayers = LayerMask.GetMask(
             LayerName.LocalPlayer.ToString(),
             LayerName.IgnoreRaycast.ToString(),
             LayerName.GoThroughGroundPlayer.ToString()
-    );
+        );
         EnterFPSMode();
+    }
+
+    private void OnCameraModeChanged(CameraMode oldMode, CameraMode newMode)
+    {
+        // Get death status once
+        bool isPlayerDead = NetworkClient.localPlayer?.GetComponent<PlayerDeath>()?.isDead ?? false;
+
+        // If player is dead, only allow Spectator or Cursor modes
+        if (isPlayerDead && newMode != CameraMode.Spectator && newMode != CameraMode.Cursor)
+        {
+            Debug.LogWarning($"Dead player cannot enter {newMode} mode. Forcing Spectator mode.");
+            _currentMode = CameraMode.Spectator;
+            return;
+        }
+
+        switch (newMode)
+        {
+            case CameraMode.FirstPerson:
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                break;
+            case CameraMode.Cursor:
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                break;
+            case CameraMode.Spectator:
+            case CameraMode.CrystalBall:
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                SetLastInteractableToNull();
+                break;
+            default:
+                Debug.LogWarning($"Unhandled camera mode: {newMode}");
+                break;
+        }
     }
 
     public void SetOrientation(Transform newOrientation)
@@ -65,10 +110,12 @@ public class PlayerCamera : MonoBehaviour
         if (orientation == null) return;
 
         // If the player is in cursor mode, do nothing
-        if (isCursorMode) return;
+        if (CurrentMode == CameraMode.Cursor) return;
         HandleMoveCamera();
-        if (isSpectatorMode) return;
-        HandleLookAtInteractable();
+        if (CurrentMode == CameraMode.FirstPerson)
+        {
+            HandleLookAtInteractable();
+        }
     }
 
     private void HandleLookAtInteractable()
@@ -76,22 +123,13 @@ public class PlayerCamera : MonoBehaviour
         GameObject lookingAt = GetFilteredLookingAt<Interactable>(5.0f);
 
         bool isLookingAtInteractable = lookingAt != null && lookingAt.GetComponentInParent<Interactable>() != null;
+        SetLastInteractableToNull();
 
         if (isLookingAtInteractable)
         {
-
-            if (lastInteractable != null)
-            {
-                SetLastInteractableToNull();
-            }
-
             Interactable currentInteractable = lookingAt.GetComponentInParent<Interactable>();
             PubSub.Publish(PubSubEvent.NewInteractableLookedAt, currentInteractable);
             lastInteractable = currentInteractable;
-        }
-        else if (!isLookingAtInteractable && lastInteractable != null)
-        {
-            SetLastInteractableToNull();
         }
     }
 
@@ -140,8 +178,7 @@ public class PlayerCamera : MonoBehaviour
     {
         // lookingAtDirection and originPosition are both client-side
         // The raycast is done on the server, so the hit object might be a different object based on server position
-        RaycastHit hit;
-        if (Physics.Raycast(originPosition, lookingAtDirection, out hit, maxDistance, ~ignoreRaycastLayers))
+        if (Physics.Raycast(originPosition, lookingAtDirection, out RaycastHit hit, maxDistance, ~ignoreRaycastLayers))
         {
             return hit.collider.gameObject;
         }
@@ -180,51 +217,47 @@ public class PlayerCamera : MonoBehaviour
         {
             return null;
         }
-        // RaycastHit[] hits = Physics.RaycastAll(transform.position, lookingAtDirection, maxDistance);
-        // hits = hits.Where(h => h.collider.gameObject.GetComponentInParent<T>() != null).OrderBy(h => h.distance).ToArray();
-
-        // if (hits.Length > 0)
-        // {
-        //     return hits[0].collider.gameObject;
-        // }
-
-        // return null;
     }
 
     public void EnterFPSMode()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        isCursorMode = false;
-        isSpectatorMode = false;
+        CurrentMode = CameraMode.FirstPerson;
+        moveCamera.enabled = false;
+        moveCamera.SetToPlayerCameraPosition();
     }
 
     public void EnterCursorMode()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        isCursorMode = true;
+        previousMode = CurrentMode;
+        CurrentMode = CameraMode.Cursor;
+    }
+
+    public void EnterSpectatorMode()
+    {
+        if (CurrentMode == CameraMode.Cursor)
+        {
+            return;
+        }
+        CurrentMode = CameraMode.Spectator;
+    }
+
+    public void EnterCrystalBallMode(Transform position)
+    {
+        CurrentMode = CameraMode.CrystalBall;
+        moveCamera.enabled = true;
+        moveCamera.currentCameraPosition = position;
     }
 
     public void ExitCursorMode()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        isCursorMode = false;
-    }
-
-
-    public void EnterSpectatorMode()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        isCursorMode = false;
-        isSpectatorMode = true;
-        if (lastInteractable != null)
+        bool isPlayerDead = NetworkClient.localPlayer?.GetComponent<PlayerDeath>()?.isDead ?? false;
+        if (isPlayerDead)
         {
-            lastInteractable.Unhighlight();
-            PlayerUIManager.instance.RemoveInteractableText(lastInteractable);
-            lastInteractable = null;
+            EnterSpectatorMode();
+        }
+        else
+        {
+            CurrentMode = previousMode;
         }
     }
 }

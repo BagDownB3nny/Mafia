@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameEndManager : NetworkBehaviour
 {
-    private List<Player> alivePlayers = new List<Player>();
-    private List<Player> aliveMafiaPlayers = new List<Player>();
+    private List<Player> alivePlayers = new();
+    private List<Player> aliveMafiaPlayers = new();
     public static GameEndManager instance;
 
     private void Awake()
@@ -46,7 +46,7 @@ public class GameEndManager : NetworkBehaviour
         if (isGameEnd())
         {
             ShowGameEndScreen();
-            Invoke("EndGame", 3f); // 3 second delay
+            Invoke(nameof(EndGame), 3f); // 3 second delay
         }
     }
 

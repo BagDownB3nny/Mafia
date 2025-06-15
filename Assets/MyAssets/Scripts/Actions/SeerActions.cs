@@ -9,20 +9,6 @@ public class SeerActions : RoleActions
     [Header("Seer internal params")]
     private float timeToDeactivation;
 
-    public void OnEnable()
-    {
-        if (!isLocalPlayer || !isClient) return;
-
-        PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-    }
-
-    public void OnDisable()
-    {
-        if (!isLocalPlayer || !isClient) return;
-
-        PubSub.Unsubscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-    }
-
     public void Update()
     {
         if (!isLocalPlayer) return;
@@ -31,7 +17,7 @@ public class SeerActions : RoleActions
     }
 
     [Client]
-    public void OnLookingAt(Interactable interactable)
+    protected override void OnLookingAt(Interactable interactable)
     {
         bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Seer);
         if (!isInteractable) return;
@@ -46,6 +32,17 @@ public class SeerActions : RoleActions
         {
             HandleCrystalBallHover(interactableCrystalBall);
         }
+    }
+    [Client]
+    protected override void OnPlayerDeath(Player player)
+    {
+        if (player.isLocalPlayer)
+        {
+            // If the local player dies, reset the Seer state
+            seer.markedPlayer = null;
+            seer.isLookingThroughCrystalBall = false;
+        }
+        base.OnPlayerDeath(player);
     }
 
     [Client]
@@ -86,11 +83,9 @@ public class SeerActions : RoleActions
 
         if (Input.GetKeyDown(KeyCode.R) && timeToDeactivation <= 0)
         {
-            Camera.main.GetComponent<MoveCamera>().SetToPlayerCameraPosition();
             seer.isLookingThroughCrystalBall = false;
             PlayerUIManager.instance.ClearControlsText();
-            Player localPlayer = NetworkClient.localPlayer.GetComponent<Player>();
-            localPlayer.EnablePlayerControllersAndCamera();
+            Camera.main.GetComponent<PlayerCamera>().EnterFPSMode();
         }
     }
 
@@ -131,11 +126,9 @@ public class SeerActions : RoleActions
         SeeingEyeSigil markedPlayerSeeingEyeSigil = markedPlayer.GetComponentInChildren<SeeingEyeSigil>(includeInactive: true);
         if (markedPlayerSeeingEyeSigil == null) { Debug.LogError("Player does not have a seeing-eye sigil"); return; }
 
-        Player localPlayer = NetworkClient.localPlayer.GetComponent<Player>();
-        localPlayer.DisablePlayerControllersAndCamera();
-        Camera.main.GetComponent<MoveCamera>().currentCameraPosition = markedPlayerSeeingEyeSigil.transform;
         seer.isLookingThroughCrystalBall = true;
         timeToDeactivation = 0.5f;
+        Camera.main.GetComponent<PlayerCamera>().EnterCrystalBallMode(markedPlayerSeeingEyeSigil.transform);
         PlayerUIManager.instance.SetControlsText("[R] Exit Crystal Ball");
     }
 

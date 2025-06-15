@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Mirror;
 using UnityEngine;
 
@@ -68,6 +67,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void OnStartServer()
     {
+        base.OnStartServer();
         PubSub.Subscribe<PlayerDeathEventHandler>(PubSubEvent.PlayerDeath, OnDeath);
     }
 

@@ -7,20 +7,6 @@ public class GuardianActions : RoleActions
 
     [SerializeField] private Guardian guardian;
 
-    public void OnEnable()
-    {
-        if (!isLocalPlayer || !isClient) return;
-
-        PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-    }
-
-    public void OnDisable()
-    {
-        if (!isLocalPlayer || !isClient) return;
-
-        PubSub.Unsubscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-    }
-
     public void Update()
     {
         if (!isLocalPlayer) return;
@@ -29,7 +15,7 @@ public class GuardianActions : RoleActions
     }
 
     [Client]
-    public void OnLookingAt(Interactable interactable)
+    protected override void OnLookingAt(Interactable interactable)
     {
         bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Guardian);
         if (!isInteractable) return;
@@ -49,6 +35,18 @@ public class GuardianActions : RoleActions
             string interactableText = "[R] Mark with Protection Sigil";
             PlayerUIManager.instance.AddInteractableText(doorInteractable, interactableText);
         }
+    }
+    [Client]
+    protected override void OnPlayerDeath(Player player)
+    {
+        if (player.isLocalPlayer)
+        {
+            // If the local player dies, reset the Guardian state
+            guardian.protectedHouse = null;
+            guardian.protectedPlayer = null;
+            guardian.RemovePreviouslyPlacedSigils();
+        }
+        base.OnPlayerDeath(player);
     }
 
     [Client]

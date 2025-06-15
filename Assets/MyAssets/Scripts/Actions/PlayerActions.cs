@@ -5,36 +5,30 @@ using UnityEngine;
 public class PlayerActions : NetworkBehaviour
 {
     private PlayerCamera playerCamera;
-    private Player player;
 
     public override void OnStartLocalPlayer()
     {
         playerCamera = PlayerCamera.instance;
     }
 
-    public void Start()
-    {
-        player = GetComponent<Player>();
-    }
-
     public override void OnStartClient()
     {
         base.OnStartClient();
 
-        if (!isLocalPlayer || !isClient) return;
+        if (!isLocalPlayer) return;
         PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
     }
 
     public void OnEnable()
     {
-        if (!isLocalPlayer || !isClient) return;
+        if (!isLocalPlayer) return;
 
         PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
     }
 
     public void OnDisable()
     {
-        if (!isLocalPlayer || !isClient) return;
+        if (!isLocalPlayer) return;
 
         PubSub.Unsubscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
     }

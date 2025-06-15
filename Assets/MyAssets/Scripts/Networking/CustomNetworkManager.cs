@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Linq;
 using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Steamworks;
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -96,7 +94,7 @@ public class CustomNetworkManager : NetworkManager
     {
         int connectionId = conn.connectionId;
         Player player = PlayerManager.instance.GetPlayerByConnId(connectionId);
-        player.GetComponent<PlayerDeath>().ServerKillPlayer(false);
+        player.GetComponent<PlayerDeath>().ServerKillPlayer();
         PlayerManager.instance.RemovePlayer(connectionId);
     }
 

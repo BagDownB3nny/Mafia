@@ -6,20 +6,6 @@ public class MafiaActions : RoleActions
 {
     private readonly KeyCode equipGunKey = KeyCode.Q;
 
-    public void OnEnable()
-    {
-        if (!isLocalPlayer || !isClient) return;
-
-        PubSub.Subscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-    }
-
-    public void OnDisable()
-    {
-        if (!isLocalPlayer || !isClient) return;
-
-        PubSub.Unsubscribe<NewInteractableLookedAtEventHandler>(PubSubEvent.NewInteractableLookedAt, OnLookingAt);
-    }
-
     [Client]
     private void Update()
     {
@@ -29,7 +15,7 @@ public class MafiaActions : RoleActions
     }
 
     [Client]
-    public void OnLookingAt(Interactable interactable)
+    protected override void OnLookingAt(Interactable interactable)
     {
         bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Mafia);
         if (!isInteractable) return;
@@ -52,6 +38,15 @@ public class MafiaActions : RoleActions
             targetDummy.Highlight();
             PlayerUIManager.instance.AddInteractableText(targetDummy, interactableText);
         }
+    }
+    [Client]
+    protected override void OnPlayerDeath(Player player)
+    {
+        if (player.isLocalPlayer)
+        {
+            CmdToggleGun(true); // Ensure gun is unequipped if the player dies
+        }
+        base.OnPlayerDeath(player);
     }
 
     [Client]
@@ -93,30 +88,25 @@ public class MafiaActions : RoleActions
         // Toggle gun equip state
         if (Input.GetKeyDown(equipGunKey))
         {
-            CmdToggleGun();
+            CmdToggleGun(false);
         }
     }
 
     [Command]
-    public void CmdToggleGun()
+    public void CmdToggleGun(bool forceUnequip)
     {
         // Double check on server side that it's night time
         int currentHour = TimeManagerV2.instance.currentHour;
-        if (currentHour >= 8 && currentHour < 24)
+        if (currentHour >= 8 && currentHour < 24 && !forceUnequip)
         {
             // It's daytime, don't allow gun toggling
             return;
         }
 
         Role roleScript = player.GetRoleScript();
-        if (roleScript == null)
-        {
-            Debug.LogError("Role script is null");
-            return;
-        }
         if (roleScript is Mafia mafiaRole)
         {
-            if (mafiaRole.HasGun())
+            if (mafiaRole.HasGun() || forceUnequip)
             {
                 mafiaRole.UnequipGun();
             }
@@ -125,5 +115,7 @@ public class MafiaActions : RoleActions
                 mafiaRole.EquipGun();
             }
         }
+        Debug.LogError("Role script is null");
+        return;
     }
 }

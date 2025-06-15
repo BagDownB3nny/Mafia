@@ -11,7 +11,7 @@ public class MafiaHouseTable : NetworkBehaviour
     [SyncVar(hook = nameof(OnSelectedHouseMiniChanged))]
     public InteractableVillageHouseMini selectedHouseMini;
 
-    public readonly SyncList<uint> houseMinis = new SyncList<uint>();
+    public readonly SyncList<uint> houseMinis = new();
 
 
     [SerializeField] private Whiteboard whiteboard;

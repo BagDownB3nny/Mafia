@@ -30,11 +30,11 @@ public class PlayerDeath : NetworkBehaviour
     }
 
     [Server]
-    public void ServerKillPlayer(bool spawnCorpse = true)
+    public void ServerKillPlayer()
     {
         isDead = true;
         GameObject corpse = Instantiate(corpsePrefab, transform.position, transform.rotation);
-        corpse.GetComponent<DeathHandler>().playerName = player.steamUsername;
+        corpse.GetComponent<CorpseHandler>().playerName = player.steamUsername;
         NetworkServer.Spawn(corpse);
         PubSub.Publish(PubSubEvent.PlayerDeath, player);
     }

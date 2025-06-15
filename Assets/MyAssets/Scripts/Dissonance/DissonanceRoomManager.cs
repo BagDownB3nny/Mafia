@@ -14,9 +14,9 @@ public enum VoiceTriggers
 public class DissonanceRoomManager : MonoBehaviour
 {
 
-    [SerializeField] List<VoiceTriggers> voiceTriggerNames = new List<VoiceTriggers>();
+    [SerializeField] List<VoiceTriggers> voiceTriggerNames = new();
     [SerializeField] DissonanceComms dissonanceComms;
-    [SerializeField] List<string> voiceTriggerTokens = new List<string>();
+    [SerializeField] List<string> voiceTriggerTokens = new();
 
     public static DissonanceRoomManager instance;
 

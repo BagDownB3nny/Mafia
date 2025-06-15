@@ -6,14 +6,6 @@ public class Guardian : Role
 {
     protected override List<LayerName> LayersAbleToSee => new() { LayerName.Guardian };
 
-    [Header("Marked player / house")]
-
-    [SyncVar]
-    private uint markedPlayerNetId;
-
-    [SyncVar]
-    private uint markedHouseNetId;
-
 
     [Header("Guardian internal params")]
 
