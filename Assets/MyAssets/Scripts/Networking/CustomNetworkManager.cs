@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class CustomNetworkManager : NetworkManager
 {
 
+    public override void Awake()
+    {
+        base.Awake();
+        FileLogger.Log("Starting game and filelogger");
+    }
+
     public void HostLobby()
     {
         // Start hosting a new lobby

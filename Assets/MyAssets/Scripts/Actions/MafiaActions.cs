@@ -20,21 +20,25 @@ public class MafiaActions : RoleActions
         bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Mafia);
         if (!isInteractable) return;
 
-        if (interactable is TeleporterRune teleporterRune)
+        if (interactable is TrapdoorTeleporter trapdoorTeleporter)
         {
-            string interactableText = teleporterRune.GetInteractableText();
-            teleporterRune.Highlight();
-            PlayerUIManager.instance.AddInteractableText(teleporterRune, interactableText);
+            string interactableText = trapdoorTeleporter.GetInteractableText();
+            if (interactableText == Interactable.notInteractableText) return;
+
+            trapdoorTeleporter.Highlight();
+            PlayerUIManager.instance.AddInteractableText(trapdoorTeleporter, interactableText);
         }
-        else if (interactable is InteractableVillageHouseMini houseMini)
-        {
-            string interactableText = houseMini.GetInteractableText();
-            houseMini.Highlight();
-            PlayerUIManager.instance.AddInteractableText(houseMini, interactableText);
-        }
+        // else if (interactable is InteractableVillageHouseMini houseMini)
+        // {
+        //     string interactableText = houseMini.GetInteractableText();
+        //     houseMini.Highlight();
+        //     PlayerUIManager.instance.AddInteractableText(houseMini, interactableText);
+        // }
         else if (interactable is TargetDummy targetDummy)
         {
             string interactableText = targetDummy.GetInteractableText();
+            if (interactableText == Interactable.notInteractableText) return;   
+
             targetDummy.Highlight();
             PlayerUIManager.instance.AddInteractableText(targetDummy, interactableText);
         }
@@ -59,14 +63,14 @@ public class MafiaActions : RoleActions
 
         if (Input.GetKeyDown(KeyCode.R))
 
-            if (interactable is TeleporterRune teleporterRune)
+            if (interactable is TrapdoorTeleporter trapdoorTeleporter)
             {
-                teleporterRune.Interact();
+                trapdoorTeleporter.Interact();
             }
-            else if (interactable is InteractableVillageHouseMini houseMini)
-            {
-                houseMini.Interact();
-            }
+            // else if (interactable is InteractableVillageHouseMini houseMini)
+            // {
+            //     houseMini.Interact();
+            // }
             else if (interactable is TargetDummy targetDummy)
             {
                 targetDummy.Interact();

@@ -30,5 +30,10 @@ public class GameManager : NetworkBehaviour
         TimeManagerV2.instance.StartGame();
         DayCycleManager.instance.StartGame();
         GameEndManager.instance.StartGame();
+        string fileLoggerPath = FileLogger.LogFilePath;
+        if (Debugger.instance != null)
+        {
+            Debugger.instance.Log($"File logger path: {fileLoggerPath}");
+        }
     }
 }

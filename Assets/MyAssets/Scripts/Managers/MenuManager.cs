@@ -45,7 +45,6 @@ public class MenuManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("No menu is open, opening SettingsMenu.");
                 OnNoMenuToClose();
             }
         }

@@ -12,6 +12,9 @@ public enum InteractableType
 [RequireComponent(typeof(Outline))]
 public abstract class Interactable : NetworkBehaviour
 {
+
+    public static string notInteractableText = "NOT INTERACTABLE";
+
     // [Client]
     public void Highlight()
     {

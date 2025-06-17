@@ -19,7 +19,7 @@ public class ShootableDoor : Shootable
         HouseProtectionSigil houseProtectionSigil = house.GetComponentInChildren<HouseProtectionSigil>(includeInactive: true);
         if (!house.isMarked && door.isOutsideDoor)
         {
-            if (MafiaHouseTable.instance.selectedHouseMini != null)
+            if (TargetDummyManager.instance.cursedTargetDummy != null)
             {
                 // Mafia currently plan to attack a different house
                 PlayerUIManager.instance.RpcSetTemporaryInteractableText(shooter, "I should follow the plan of attack we have at the mafia house...", 1.5f);
