@@ -3,7 +3,8 @@ using UnityEngine;
 public class MoveCamera : MonoBehaviour
 {
     public Transform playerDefaultCameraPosition;
-    public Transform currentCameraPosition = null;
+    private Transform currentCameraPosition = null;
+    
 
     public void SetCameraPosition(Transform newCameraPosition)
     {

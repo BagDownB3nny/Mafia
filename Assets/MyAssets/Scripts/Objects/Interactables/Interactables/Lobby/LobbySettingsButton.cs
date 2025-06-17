@@ -18,6 +18,5 @@ public class LobbySettingsButton : Interactable
     public override void Interact()
     {
         lobbySettingsMenu.Open();
-        PlayerCamera.instance.EnterCursorMode();
     }
 }

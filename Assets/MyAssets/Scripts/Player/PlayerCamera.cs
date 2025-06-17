@@ -19,8 +19,8 @@ public class PlayerCamera : MonoBehaviour
     private MoveCamera moveCamera;
     public static PlayerCamera instance;
 
-    private CameraMode _currentMode = CameraMode.FirstPerson;
-    private CameraMode previousMode = CameraMode.FirstPerson;
+    private CameraMode _currentMode;
+    private CameraMode previousMode;
     private readonly Dictionary<CameraMode, List<CameraMode>> transitions = new()
     {
         { CameraMode.FirstPerson, new List<CameraMode> { CameraMode.FirstPerson, CameraMode.Cursor, CameraMode.Spectator, CameraMode.CrystalBall } },
@@ -54,24 +54,22 @@ public class PlayerCamera : MonoBehaviour
             LayerName.IgnoreRaycast.ToString(),
             LayerName.GoThroughGroundPlayer.ToString()
         );
-        EnterFPSMode();
+        // Explicit FPS mode initialization to ensure the camera starts in the correct mode
+        CurrentMode = CameraMode.FirstPerson;
+        moveCamera.SetToPlayerCameraPosition();
+        OnCameraModeChanged(CurrentMode, CameraMode.FirstPerson);
     }
 
     public bool CanTransitionTo(CameraMode from, CameraMode to)
     {
         // Safeguard against invalid transitions
-        return transitions.ContainsKey(from) && transitions[CurrentMode].Contains(to);
+        return transitions.ContainsKey(from) && transitions[from].Contains(to);
     }
 
     private void OnCameraModeChanged(CameraMode oldMode, CameraMode newMode)
     {
         // Get death status once
         bool isPlayerDead = NetworkClient.localPlayer?.GetComponent<PlayerDeath>()?.isDead ?? false;
-
-        if (oldMode != CameraMode.Cursor)
-        {
-            previousMode = oldMode;
-        }
 
         // If player is dead, only allow Spectator or Cursor modes
         if (isPlayerDead && newMode != CameraMode.Spectator && newMode != CameraMode.Cursor)
@@ -81,6 +79,7 @@ public class PlayerCamera : MonoBehaviour
             _currentMode = CameraMode.Spectator;
             return;
         }
+        Debug.Log($"Transitioning camera mode from {oldMode} to {newMode}");
 
         if (!CanTransitionTo(oldMode, newMode))
         {
@@ -247,7 +246,6 @@ public class PlayerCamera : MonoBehaviour
     public void EnterFPSMode()
     {
         CurrentMode = CameraMode.FirstPerson;
-        moveCamera.enabled = false;
         moveCamera.SetToPlayerCameraPosition();
     }
 
@@ -265,21 +263,23 @@ public class PlayerCamera : MonoBehaviour
             previousMode = CameraMode.Spectator;
             return;
         }
+        previousMode = CurrentMode;
         CurrentMode = CameraMode.Spectator;
     }
 
     public void EnterCrystalBallMode(Transform position)
     {
+        moveCamera.SetCameraPosition(position);
+        PlayerMovement.localInstance.FreezePlayerMovement();
         if (CurrentMode == CameraMode.Cursor)
         {
-            // Store the crystal ball mode and stay in cursor mode
+            // Store the crystal ball mode and set the camera position
+            // Set the previous mode to allow exiting later
             previousMode = CameraMode.CrystalBall;
             return;
         }
         previousMode = CurrentMode;
         CurrentMode = CameraMode.CrystalBall;
-        moveCamera.enabled = true;
-        moveCamera.currentCameraPosition = position;
     }
 
     public void ExitCursorMode()

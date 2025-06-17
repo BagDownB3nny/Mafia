@@ -188,7 +188,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
 
-        controller.Move(moveDirection * moveSpeed * Time.deltaTime * bunnyHopMultiplier);
+        controller.Move(bunnyHopMultiplier * moveSpeed * Time.deltaTime * moveDirection);
         // Apply gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
@@ -196,8 +196,8 @@ public class PlayerMovement : NetworkBehaviour
 
     private void MovePlayerLadder()
     {
-        Vector3 moveVector = new Vector3(0, vertical, 0);
-        controller.Move(moveVector * ladderMoveSpeed * Time.deltaTime);
+        Vector3 moveVector = new(0, vertical, 0);
+        controller.Move(ladderMoveSpeed * Time.deltaTime * moveVector);
     }
 
     [ClientRpc] // Possible to use [TargetRpc] if you want to lock movement for a specific player

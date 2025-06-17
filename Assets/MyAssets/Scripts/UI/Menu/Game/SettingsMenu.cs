@@ -42,18 +42,9 @@ public class SettingsMenu : Menu
 
     public override void Close()
     {
+        Debug.Log("Closing SettingsMenu");
         PlayerMovement.localInstance.UnlockPlayerMovement();
         base.Close();
-    }
-
-    public void OpenSettings()
-    {
-        settingsPanel.SetActive(true);
-    }
-
-    public void CloseSettings()
-    {
-        settingsPanel.SetActive(false);
     }
 
     public void OnClickBack()

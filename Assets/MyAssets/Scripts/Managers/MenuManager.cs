@@ -41,7 +41,6 @@ public class MenuManager : MonoBehaviour
         {
             if (currentMenu != null && currentMenu.IsOpen)
             {
-                Debug.Log("Closing current menu: " + currentMenu.name);
                 currentMenu.Close();
             }
             else
