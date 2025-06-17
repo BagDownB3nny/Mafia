@@ -119,7 +119,6 @@ public class MafiaActions : RoleActions
                 mafiaRole.EquipGun();
             }
         }
-        Debug.LogError("Role script is null");
         return;
     }
 }
