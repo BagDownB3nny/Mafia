@@ -59,7 +59,6 @@ public class PlayerInventory : NetworkBehaviour
     [Client]
     public void OnInventoryItemAdded(int key)
     {
-        Debug.Log("OnInventoryItemAdded: " + key);
         InventoryItem inventoryItem = itemsInInventory[key];
         Sprite itemSprite = inventoryItem.itemIcon;
         InventoryUI.instance.SetItemVisual(key, itemSprite);
@@ -68,14 +67,12 @@ public class PlayerInventory : NetworkBehaviour
     [Client]
     public void OnInventoryItemRemoved(int key, InventoryItem oldItem)
     {
-        Debug.Log("OnInventoryItemRemoved: " + key);
         InventoryUI.instance.ClearItemVisual(key);
     }
 
     [Client]
     public void OnInventoryItemSet(int key, InventoryItem oldItem)
     {
-        Debug.Log("OnInventoryItemSet: " + key);
         InventoryItem newItem = itemsInInventory[key];
         Sprite itemSprite = newItem?.itemIcon;
         InventoryUI.instance.SetItemVisual(key, itemSprite);
@@ -134,7 +131,7 @@ public class PlayerInventory : NetworkBehaviour
         CmdChangeActiveInventorySlot(newItemIndex);
     }
 
-    [Server]
+    [Command]
     public void CmdChangeActiveInventorySlot(int slotIndex)
     {
         InventoryItem newActiveItem = itemsInInventory[slotIndex];
@@ -159,6 +156,11 @@ public class PlayerInventory : NetworkBehaviour
             if (slot.Value.item == item)
             {
                 itemsInInventory[slot.Key] = null;
+                if (slot.Key == activeItemIndex)
+                {
+                    activeItem.ServerUnequip();
+                    activeItem = null;
+                }
                 return;
             }
         }
@@ -181,6 +183,11 @@ public class PlayerInventory : NetworkBehaviour
         }
         InventoryItem inventoryItem = GetItemReference(item);
         itemsInInventory[lowestEmptySlot] = inventoryItem;
+        if (lowestEmptySlot == activeItemIndex)
+        {
+            activeItem = inventoryItem;
+            activeItem.ServerEquip();
+        }
     }
 
     [Server]
@@ -193,6 +200,11 @@ public class PlayerInventory : NetworkBehaviour
         }
         InventoryItem inventoryItem = GetItemReference(item);
         itemsInInventory[slot] = inventoryItem;
+        if (slot == activeItemIndex)
+        {
+            activeItem = inventoryItem;
+            activeItem.ServerEquip();
+        }
     }
 
     public int GetLowestEmptySlot()
@@ -211,8 +223,14 @@ public class PlayerInventory : NetworkBehaviour
 
     public bool HasItem(Items item)
     {
-        bool hasItem = itemsInInventory.Values.Any(inventoryItem => inventoryItem.item == item);
-        return hasItem;
+        foreach (var slot in itemsInInventory)
+        {
+            if (slot.Value != null && slot.Value.item == item)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool HasInventorySpace()

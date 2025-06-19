@@ -24,7 +24,12 @@ public class InventoryUI : MonoBehaviour
 
     public void SetItemVisual(int slotIndex, Sprite itemSprite)
     {
-        inventorySlots[slotIndex].SetItemVisual(itemSprite);
+        if (itemSprite == null)
+        {
+            inventorySlots[slotIndex].ClearItemVisual();
+        } else {
+            inventorySlots[slotIndex].SetItemVisual(itemSprite);
+        }
     }
 
     public void ClearItemVisual(int slotIndex)

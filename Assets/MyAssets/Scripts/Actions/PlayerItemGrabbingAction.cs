@@ -45,9 +45,9 @@ public class PlayerItemGrabbingAction : NetworkBehaviour
     {
         if (interactable.isLocalPlayer) return;
 
-        bool isInteractable = interactable != null && interactable.GetRolesThatCanInteract().Contains(RoleName.Villager);
         bool isObtainableItem = interactable is ObtainableItem;
-        if (isInteractable && isObtainableItem)
+        bool canRoleInteract = CanRoleInteract(interactable); 
+        if (isObtainableItem && canRoleInteract)
         {
             string interactableText = interactable.GetInteractableText();
             if (interactableText == "NOT INTERACTABLE") return;
@@ -67,6 +67,13 @@ public class PlayerItemGrabbingAction : NetworkBehaviour
                 HandleInteractWithObtainableItem(obtainableItem);
             }
         }
+    }
+
+    public bool CanRoleInteract(Interactable interactable)
+    {
+        Player player = GetComponentInParent<Player>();
+        RoleName[] rolesThatCanInteract = interactable.GetRolesThatCanInteract();
+        return rolesThatCanInteract.Contains(player.role);
     }
 
     [Client]
