@@ -16,7 +16,7 @@ public abstract class Role : NetworkBehaviour
     }
 
     [Client]
-    protected virtual void OnDisable()
+    public virtual void OnDisable()
     {
         if (isLocalPlayer)
         {

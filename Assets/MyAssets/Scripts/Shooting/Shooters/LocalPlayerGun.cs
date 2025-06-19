@@ -1,7 +1,7 @@
 using UnityEngine;
 using Mirror;
 
-public class LocalPlayerGun : NetworkBehaviour
+public class LocalPlayerGun : InventoryItem
 {
 
     [SerializeField] private AudioSource pistolShotSound;
@@ -15,6 +15,7 @@ public class LocalPlayerGun : NetworkBehaviour
 
     public void Update()
     {
+        if (!isEquipped) return;
         HandleGunShooting();
     }
 

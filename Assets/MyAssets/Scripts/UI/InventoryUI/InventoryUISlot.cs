@@ -5,6 +5,7 @@ public class InventoryUISlot : MonoBehaviour
 {
     [SerializeField] private GameObject selectedVisual;
     [SerializeField] private Image itemVisual;
+    public bool isMafiaSlot = false;
         
     public void SetSelected(bool selected)
     {
@@ -21,5 +22,11 @@ public class InventoryUISlot : MonoBehaviour
     {
         itemVisual.sprite = null;
         itemVisual.enabled = false;
+    }
+
+    public void DisableSlot()
+    {
+        gameObject.SetActive(false);
+        // TODO: add a visual effect to indicate that the slot is disabled
     }
 }

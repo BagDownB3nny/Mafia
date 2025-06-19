@@ -35,6 +35,18 @@ public class PlayerInventory : NetworkBehaviour
         AddListenerToInventorySlots();
     }
 
+    [Server]
+    public void ServerDisableMafiaInventorySlots()
+    {
+        RpcDisableMafiaInventorySlots();
+    }
+
+    [ClientRpc]
+    public void RpcDisableMafiaInventorySlots()
+    {
+        InventoryUI.instance.DisableMafiaInventorySlots();
+    }
+
     [Client]
     public void SetupInventoryUI()
     {
@@ -46,6 +58,18 @@ public class PlayerInventory : NetworkBehaviour
                 InventoryUI.instance.SetItemVisual(slot.Key, slot.Value.itemIcon);
             }
         }
+    }
+
+    [Command]
+    public void CmdAddGunToInventory()
+    {
+        ServerAddItem(Items.Gun, 2);
+    }
+
+    [Command]
+    public void CmdRemoveGunFromInventory()
+    {
+        ServerRemoveItem(Items.Gun);
     }
 
     [Client]

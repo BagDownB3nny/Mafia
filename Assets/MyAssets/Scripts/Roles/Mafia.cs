@@ -4,52 +4,21 @@ using System.Collections.Generic;
 
 public class Mafia : Role
 {
+    [SerializeField] private PlayerInventory playerInventory;
     protected override List<LayerName> LayersAbleToSee => new() {LayerName.Mafia};
-
-    [SyncVar(hook = nameof(OnGunStatusChanged))]
-    private bool hasGun = false;
-
-    [Header("Gun")]
-
-    [SerializeField] private GameObject remoteGunVisual;
-    private GameObject localGunVisual;
-    [SerializeField] private LocalPlayerGun localGunScript;
-
-    private void Start()
+    public override void OnEnable()
     {
-        localGunVisual = Camera.main.transform.Find("Gun").gameObject;
+        base.OnEnable();
+        if (!isLocalPlayer) return;
+        playerInventory.CmdAddGunToInventory();
     }
 
-    public bool HasGun()
+    public override void OnDisable()
     {
-        return hasGun;
+        base.OnDisable();
+        if (!isLocalPlayer) return;
+        playerInventory.CmdRemoveGunFromInventory();
     }
-
-    public void OnGunStatusChanged(bool oldStatus, bool newStatus)
-    {
-        if (isLocalPlayer)
-        {
-            localGunVisual.SetActive(newStatus);
-            localGunScript.enabled = newStatus;
-        }
-        else
-        {
-            remoteGunVisual.SetActive(newStatus);
-        }
-    }
-
-    [Server]
-    public void EquipGun()
-    {
-        hasGun = true;
-    }
-
-    [Server]
-    public void UnequipGun()
-    {
-        hasGun = false;
-    }
-
 
     [Client]
     protected override void SetNameTags()
@@ -71,5 +40,11 @@ public class Mafia : Role
         {
             player.SetNameTagColor(Color.white);
         }
+    }
+
+    [Server]
+    public void ServerDisableMafiaInventorySlots()
+    {
+        playerInventory.ServerDisableMafiaInventorySlots();
     }
 }

@@ -36,4 +36,15 @@ public class InventoryUI : MonoBehaviour
     {
         inventorySlots[slotIndex].ClearItemVisual();
     }
+
+    public void DisableMafiaInventorySlots()
+    {
+        foreach (var slot in inventorySlots)
+        {
+            if (slot.isMafiaSlot)
+            {
+                slot.DisableSlot();
+            }
+        }
+    }
 }

@@ -17,11 +17,6 @@ public class ShootablePlayer : Shootable
         // Get the player's Mafia role component and remove gun if they are Mafia
         Player shotPlayer = gameObject.GetComponentInParent<Player>();
         Role roleScript = shotPlayer.GetRoleScript();
-        if (roleScript is Mafia mafiaRole)
-        {
-            mafiaRole.UnequipGun();
-        }
-
         // Mark the player as dead
         GetComponentInParent<PlayerDeath>().KillPlayer();
         return true;

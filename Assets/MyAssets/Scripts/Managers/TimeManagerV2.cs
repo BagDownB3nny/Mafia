@@ -149,8 +149,7 @@ public class TimeManagerV2 : NetworkBehaviour
                 Role roleScript = player.GetRoleScript();
                 if (roleScript is Mafia mafiaRole)
                 {
-                    mafiaRole.UnequipGun();
-                    player.house.LockTrapDoor();
+                    mafiaRole.ServerDisableMafiaInventorySlots();
                 }
             });
         }
