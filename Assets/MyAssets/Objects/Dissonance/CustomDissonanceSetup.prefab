@@ -109,7 +109,7 @@ MonoBehaviour:
   _tokens:
     _tokens: []
   _range: 10
-  _roomName: Proximity
+  _roomName: ProximityGlobal
   _useTrigger: 0
   _roomExpanded: 1
   _tokensExpanded: 1

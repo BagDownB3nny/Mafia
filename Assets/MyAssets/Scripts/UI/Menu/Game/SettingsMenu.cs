@@ -8,8 +8,8 @@ public class SettingsMenu : Menu
     public static SettingsMenu instance;
 
     [SerializeField] private GameObject settingsPanel;
-    [SerializeField] private GameObject quitToLobbyButton;
-    [SerializeField] private GameObject leaveGameButton;
+    // [SerializeField] private GameObject quitToLobbyButton;
+    // [SerializeField] private GameObject leaveGameButton;
 
     public void Awake()
     {
@@ -23,15 +23,15 @@ public class SettingsMenu : Menu
         }
     }
 
-    public override void OnStartServer()
-    {
-        string sceneName = SceneManager.GetActiveScene().name;
-        if (isServer && sceneName == "Game")
-        {
-            quitToLobbyButton.SetActive(true);
-            leaveGameButton.SetActive(false);
-        }
-    }
+    // public override void OnStartServer()
+    // {
+    //     string sceneName = SceneManager.GetActiveScene().name;
+    //     if (isServer && sceneName == "Game")
+    //     {
+    //         quitToLobbyButton.SetActive(true);
+    //         leaveGameButton.SetActive(false);
+    //     }
+    // }
 
     public override void Open()
     {
@@ -46,9 +46,22 @@ public class SettingsMenu : Menu
         base.Close();
     }
 
+    [Client]
     public void OnClickBack()
     {
         Close();
+    }
+
+    [Client]
+    public void OnClickOpenSettings()
+    {
+        settingsPanel.SetActive(true);
+    }
+
+    [Client]
+    public void OnClickCloseSettings()
+    {
+        settingsPanel.SetActive(false);
     }
 
     [Client]
@@ -57,9 +70,9 @@ public class SettingsMenu : Menu
         NetworkClient.Disconnect();
     }
 
-    [Server]
-    public void OnClickExitToLobby()
-    {
-        GameEndManager.instance.EndGame();
-    }
+    // [Server]
+    // public void OnClickExitToLobby()
+    // {
+    //     GameEndManager.instance.EndGame();
+    // }
 }

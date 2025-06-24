@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 744657798062779134, guid: e900532da24444178a67cb512d339cf6, type: 3}
       propertyPath: _playbackPrefab2
       value: 
-      objectReference: {fileID: 1817163597150658285, guid: 798876c2a40004ba68fb2bdd60dd46d1, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3747740245936166311, guid: e900532da24444178a67cb512d339cf6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7154982347216740145, guid: e900532da24444178a67cb512d339cf6, type: 3}
       propertyPath: m_Name
-      value: CustomDissonanceSetup Teams
+      value: CustomDissonanceSetup In-game
       objectReference: {fileID: 0}
     - target: {fileID: 8074681934329465557, guid: e900532da24444178a67cb512d339cf6, type: 3}
       propertyPath: _roomExpanded

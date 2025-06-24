@@ -14662,7 +14662,7 @@ MonoBehaviour:
   _tokens:
     _tokens:
     - ghostReceiptToken
-  _range: 15
+  _range: 10
   _roomName: ProximityGhost
   _useTrigger: 0
   _roomExpanded: 1
@@ -14683,7 +14683,7 @@ MonoBehaviour:
   _tokens:
     _tokens:
     - ghostBroadcastToken
-  _range: 15
+  _range: 10
   _roomName: ProximityGhost
   _useTrigger: 0
   _roomExpanded: 1
@@ -15529,8 +15529,6 @@ MonoBehaviour:
   syncInterval: 0
   root: {fileID: 776899278}
   settingsPanel: {fileID: 1134391603}
-  quitToLobbyButton: {fileID: 1430731152}
-  leaveGameButton: {fileID: 569765469}
 --- !u!1 &1235307761
 GameObject:
   m_ObjectHideFlags: 0
