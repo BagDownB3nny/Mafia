@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 3482948378410815386, guid: 4326b412d314c47059c19eaedb3b8bf6, type: 3}
       propertyPath: _playbackPrefab2
       value: 
-      objectReference: {fileID: 1041743830464418, guid: 957b9bc0376704897bbe1a5b3a2045c6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3482948378410815386, guid: 4326b412d314c47059c19eaedb3b8bf6, type: 3}
       propertyPath: _tokens._tokens.Array.size
       value: 4
@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8601762214382372606, guid: 4326b412d314c47059c19eaedb3b8bf6, type: 3}
       propertyPath: m_Name
-      value: CustomDissonanceSetup In-Game
+      value: CustomDissonanceSetup In-game
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -4,7 +4,6 @@ using System.Linq;
 
 public class MafiaActions : RoleActions
 {
-    private readonly KeyCode equipGunKey = KeyCode.Q;
 
     [Client]
     private void Update()
