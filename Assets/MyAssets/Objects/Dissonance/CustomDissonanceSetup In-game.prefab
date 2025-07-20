@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 3482948378410815386, guid: 4326b412d314c47059c19eaedb3b8bf6, type: 3}
       propertyPath: _playbackPrefab2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1041743830464418, guid: 957b9bc0376704897bbe1a5b3a2045c6, type: 3}
     - target: {fileID: 3482948378410815386, guid: 4326b412d314c47059c19eaedb3b8bf6, type: 3}
       propertyPath: _tokens._tokens.Array.size
       value: 4
