@@ -1,4 +1,5 @@
-using UnityEngine;
+using Dissonance;
+using Mirror;
 
 public class Microphone : Interactable
 {
@@ -6,8 +7,10 @@ public class Microphone : Interactable
         return GetAllRoles();
     }
 
+    [Client]
     public override void Interact() 
     {
-        //TODO: Increase voiceplayback range in all other clients
+        // Toggle between normal voice and loudspeaker mode (3x volume)
+        // DissonanceRoomManager.instance.CmdToggleLoudspeakerVoice();
     }
 }

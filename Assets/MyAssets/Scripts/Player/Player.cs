@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using Mirror;
 using TMPro;
 using UnityEngine;
+using Dissonance.Integrations.MirrorIgnorance;
 
-public class Player : NetworkBehaviour
+public class Player : MirrorIgnorancePlayer
 {
     [SyncVar(hook = nameof(OnRoleChanged))]
     public RoleName role;
@@ -43,6 +44,7 @@ public class Player : NetworkBehaviour
     }
     public override void OnStartLocalPlayer()
     {
+        base.OnStartLocalPlayer();
         StartCamera();
         GetSteamUsername();
         SetLocalPlayerLayer();

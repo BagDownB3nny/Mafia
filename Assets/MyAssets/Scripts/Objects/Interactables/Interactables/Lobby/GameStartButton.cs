@@ -31,7 +31,8 @@ public class GameStartButton : Interactable
     public override void Interact()
     {
         if (isServer)
-        {bool canStartGame = PlayerManager.instance.CanStartGame();
+        {
+            bool canStartGame = PlayerManager.instance.CanStartGame();
             if (canStartGame)
             {
                 LobbyManager.instance.StartGame();
